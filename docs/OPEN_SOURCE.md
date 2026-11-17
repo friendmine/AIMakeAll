@@ -34,6 +34,8 @@
 
 ## 参考读物与配套资料
 
+新增两组的来源保存在 [ARITH 算术电路](DIGITAL_DESIGN_TIMING.md#dd01dd02dd07-深化计算机算术与算术电路结构) 与 [RAS 数据完整性](ARCHITECTURE.md#领域-04-与-17-深化硬件数据完整性与故障处置)：MIT 6.004 算术结构/设计权衡，以及 OpenTitan ECC 工具与 OTBN 数据完整性说明。仅用于方法对照和原创实验规划；本项目教学 (13,8) 编码不等同上游 (39,32) 实现，检测后停止也不等同纠正后继续。未复制上游课件、图像或 RTL，实际引入代码时另锁提交与许可。知识覆盖图 V5 为本项目原创 SVG/PNG，图源与生成脚本一并保存。
+
 本轮四组深化来源分别保存于 [PERF-E](ENGINEERING_BRIDGES.md)、[MEM-E](ARCHITECTURE.md)、[PPA-E](DIGITAL_DESIGN_TIMING.md)、[AGQ-E](../agents/README.md)：MIT 6.172、LLVM 向量化、gem5 存储/Garnet、OpenSTA 功耗示例、信息检索评价与 ReAct 论文。只链接方法资料并编写原创实验计划；未引入 gem5、并行库、评判模型、工艺库或外部任务集。运行或复用具体实现时按本页要求锁定版本与许可，不把书籍/论文可读等同于可再分发。
 
 [Build a Large Language Model (From Scratch)](https://www.manning.com/books/build-a-large-language-model-from-scratch) 已纳入 [模型主线的章节与实验映射](../models/README.md)。本次核对官方仓库目录、部分源码与根 [LICENSE.txt](https://github.com/rasbt/LLMs-from-scratch/blob/main/LICENSE.txt)：该声明以 Apache-2.0 为基础，并明确排除相关书籍和图片，不能作为书稿或所有配套资产的统一授权。本轮仅保存原创规划与链接，未复制源码、数据、权重或插图；`main` 为阅读入口，实施时再锁定具体提交与依赖并逐项核验。

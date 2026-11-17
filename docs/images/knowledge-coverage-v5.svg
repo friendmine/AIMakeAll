@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1180" viewBox="0 0 1120 1180" role="img" aria-labelledby="title description">
+<title id="title">AIMakeAll 知识覆盖图 V5</title><desc id="description">十八个既有知识领域。新增 ARITH 算术电路与 RAS 数据完整性两组，各六项待实现实验，累计十组六十项。底部列出阶段安排与四项共同交付。覆盖不代表完成，不要求实板或流片。</desc>
+<g font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif">
+<rect x="0" y="0" width="1120" height="1180" rx="0" fill="#f5f7fb" stroke="none"/>
+<text x="36" y="48" font-size="32" fill="#14283f" font-weight="600">AIMakeAll · 知识覆盖图 V5</text>
+<text x="36" y="80" font-size="18" fill="#516278" font-weight="400">18 个领域 · 10 组 / 60 项深化实验计划 · 仿真优先，无需实板或流片</text>
+<rect x="36" y="108" width="238" height="48" rx="10" fill="#e6edf7" stroke="none"/>
+<text x="52" y="139" font-size="20" fill="#243e60" font-weight="500">RISC-V + NPU</text>
+<text x="283" y="139" font-size="22" fill="#61758e" font-weight="400">→</text>
+<rect x="306" y="108" width="238" height="48" rx="10" fill="#e6edf7" stroke="none"/>
+<text x="322" y="139" font-size="20" fill="#243e60" font-weight="500">QEMU + 运行时</text>
+<text x="553" y="139" font-size="22" fill="#61758e" font-weight="400">→</text>
+<rect x="576" y="108" width="238" height="48" rx="10" fill="#e6edf7" stroke="none"/>
+<text x="592" y="139" font-size="20" fill="#243e60" font-weight="500">从零 LLM + 编译</text>
+<text x="823" y="139" font-size="22" fill="#61758e" font-weight="400">→</text>
+<rect x="846" y="108" width="238" height="48" rx="10" fill="#e6edf7" stroke="none"/>
+<text x="862" y="139" font-size="20" fill="#243e60" font-weight="500">Agent + 任务评估</text>
+<text x="36" y="190" font-size="21" fill="#14283f" font-weight="600">知识范围</text>
+<text x="164" y="190" font-size="16" fill="#516278" font-weight="400">编号与原体系一致；色条标出本轮两组主要归属</text>
+<rect x="36" y="206" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<rect x="36" y="219" width="4" height="56" rx="2" fill="#3c70b4" stroke="none"/>
+<text x="52" y="237" font-size="20" fill="#20324a" font-weight="500">01  数学与数值</text>
+<text x="52" y="266" font-size="16" fill="#526276" font-weight="400">证明、线代、概率、数值与位宽</text>
+<rect x="392" y="206" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="408" y="237" font-size="20" fill="#20324a" font-weight="500">02  算法与数据结构</text>
+<text x="408" y="266" font-size="16" fill="#526276" font-weight="400">复杂度、容器、图与调度</text>
+<rect x="748" y="206" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="237" font-size="20" fill="#20324a" font-weight="500">03  编程与程序执行</text>
+<text x="764" y="266" font-size="16" fill="#526276" font-weight="400">C / ABI、内存、正确性与性能</text>
+<rect x="36" y="300" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<rect x="36" y="313" width="4" height="56" rx="2" fill="#7562aa" stroke="none"/>
+<text x="52" y="331" font-size="20" fill="#20324a" font-weight="500">04  体系结构与加速器</text>
+<text x="52" y="360" font-size="16" fill="#526276" font-weight="400">RISC-V / NPU、存储与算术结构</text>
+<rect x="392" y="300" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="408" y="331" font-size="20" fill="#20324a" font-weight="500">05  操作系统原理</text>
+<text x="408" y="360" font-size="16" fill="#526276" font-weight="400">调度、虚拟内存、并发与持久化</text>
+<rect x="748" y="300" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="331" font-size="20" fill="#20324a" font-weight="500">06  Linux 系统构建</text>
+<text x="764" y="360" font-size="16" fill="#526276" font-weight="400">工具链、用户态、内核与启动</text>
+<rect x="36" y="394" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="52" y="425" font-size="20" fill="#20324a" font-weight="500">07  模拟器与驱动</text>
+<text x="52" y="454" font-size="16" fill="#526276" font-weight="400">QEMU、MMIO、DMA 与设备</text>
+<rect x="392" y="394" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="408" y="425" font-size="20" fill="#20324a" font-weight="500">08  AI 编译</text>
+<text x="408" y="454" font-size="16" fill="#526276" font-weight="400">计算图、布局、量化与分块</text>
+<rect x="748" y="394" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="425" font-size="20" fill="#20324a" font-weight="500">09  深度学习基础</text>
+<text x="764" y="454" font-size="16" fill="#526276" font-weight="400">表达、梯度、优化与泛化</text>
+<rect x="36" y="488" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="52" y="519" font-size="20" fill="#20324a" font-weight="500">10  从零 LLM</text>
+<text x="52" y="548" font-size="16" fill="#526276" font-weight="400">文本、Transformer、训练与微调</text>
+<rect x="392" y="488" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="408" y="519" font-size="20" fill="#20324a" font-weight="500">11  推理运行时</text>
+<text x="408" y="548" font-size="16" fill="#526276" font-weight="400">模型加载、KV、分派与 CPU 回退</text>
+<rect x="748" y="488" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="519" font-size="20" fill="#20324a" font-weight="500">12  Agent 与检索</text>
+<text x="764" y="548" font-size="16" fill="#526276" font-weight="400">证据、决策、工具与状态恢复</text>
+<rect x="36" y="582" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="52" y="613" font-size="20" fill="#20324a" font-weight="500">13  网络与分布式通信</text>
+<text x="52" y="642" font-size="16" fill="#526276" font-weight="400">Socket / RPC、背压与重试</text>
+<rect x="392" y="582" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="408" y="613" font-size="20" fill="#20324a" font-weight="500">14  I/O 与 PCIe</text>
+<text x="408" y="642" font-size="16" fill="#526276" font-weight="400">片内互连、BAR、DMA 与中断</text>
+<rect x="748" y="582" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="613" font-size="20" fill="#20324a" font-weight="500">15  CXL 与异构内存</text>
+<text x="764" y="642" font-size="16" fill="#526276" font-weight="400">Type 3、译码、一致性与放置</text>
+<rect x="36" y="676" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<rect x="36" y="689" width="4" height="56" rx="2" fill="#3c70b4" stroke="none"/>
+<text x="52" y="707" font-size="20" fill="#20324a" font-weight="500">16  数字设计与时序</text>
+<text x="52" y="736" font-size="16" fill="#526276" font-weight="400">算术电路、流水线、CDC 与 PPA</text>
+<rect x="392" y="676" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<rect x="392" y="689" width="4" height="56" rx="2" fill="#238478" stroke="none"/>
+<text x="408" y="707" font-size="20" fill="#20324a" font-weight="500">17  系统化验证</text>
+<text x="408" y="736" font-size="16" fill="#526276" font-weight="400">参考、形式、ECC 与故障处置</text>
+<rect x="748" y="676" width="336" height="82" rx="10" fill="#ffffff" stroke="#dfe5ee"/>
+<text x="764" y="707" font-size="20" fill="#20324a" font-weight="500">18  仿真建模与可信度</text>
+<text x="764" y="736" font-size="16" fill="#526276" font-weight="400">事件、周期、重放与模型边界</text>
+<text x="36" y="799" font-size="21" fill="#14283f" font-weight="600">本轮深化 · 两组均待实现，不增加一级领域</text>
+<rect x="36" y="818" width="514" height="164" rx="10" fill="#e9f0fb" stroke="none"/>
+<text x="56" y="849" font-size="22" fill="#28558c" font-weight="600">ARITH · 计算机算术与算术电路结构</text>
+<text x="56" y="876" font-size="17" fill="#405b7d" font-weight="400">主要归属 01 / 04 / 16 · 连接验证与建模</text>
+<text x="56" y="906" font-size="18" fill="#20324a" font-weight="400">E1–E2  位宽与加法器</text>
+<text x="56" y="935" font-size="18" fill="#20324a" font-weight="400">E3–E4  迭代乘法与并行归约</text>
+<text x="56" y="964" font-size="18" fill="#20324a" font-weight="400">E5–E6  定点舍入与 MAC 集成</text>
+<rect x="570" y="818" width="514" height="164" rx="10" fill="#e6f3ef" stroke="none"/>
+<text x="590" y="849" font-size="22" fill="#216d63" font-weight="600">RAS · 硬件数据完整性与故障处置</text>
+<text x="590" y="876" font-size="17" fill="#416961" font-weight="400">主要归属 04 / 17 · 连接存储、驱动与运行时</text>
+<text x="590" y="906" font-size="18" fill="#20324a" font-weight="400">E1–E2  故障、奇偶校验与 SECDED</text>
+<text x="590" y="935" font-size="18" fill="#20324a" font-weight="400">E3–E4  受保护存储与错误上报</text>
+<text x="590" y="964" font-size="18" fill="#20324a" font-weight="400">E5–E6  故障注入与 GEMM 处置</text>
+<text x="36" y="1017" font-size="19" fill="#334b65" font-weight="400">推进：G0/G1 独立基础 → M1 电路与存储 → G2 MAC 对照 / G3 故障处置</text>
+<text x="36" y="1051" font-size="18" fill="#14283f" font-weight="500">四项共同交付贯穿所有阶段</text>
+<rect x="36" y="1066" width="247" height="44" rx="10" fill="#e8ecf2" stroke="none"/>
+<text x="52" y="1095" font-size="19" fill="#20324a" font-weight="400">跨层契约</text>
+<rect x="303" y="1066" width="247" height="44" rx="10" fill="#e8ecf2" stroke="none"/>
+<text x="319" y="1095" font-size="19" fill="#20324a" font-weight="400">资源预算</text>
+<rect x="570" y="1066" width="247" height="44" rx="10" fill="#e8ecf2" stroke="none"/>
+<text x="586" y="1095" font-size="19" fill="#20324a" font-weight="400">共同实验资产</text>
+<rect x="837" y="1066" width="247" height="44" rx="10" fill="#e8ecf2" stroke="none"/>
+<text x="853" y="1095" font-size="19" fill="#20324a" font-weight="400">教材学习者验证</text>
+<text x="36" y="1144" font-size="17" fill="#526276" font-weight="400">当前已验证起点：Python GEMM 与单 MAC；新增实验、跨层实现与学习者试读待执行。</text>
+</g></svg>
