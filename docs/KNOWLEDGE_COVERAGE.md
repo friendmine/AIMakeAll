@@ -1,6 +1,6 @@
 # AIMakeAll 知识覆盖范围
 
-更新：2026-11-17。V4 在已有十五个领域上，补入数字设计与时序、系统化验证、仿真建模与可信度，形成十八个领域。三条新课程共 24 个模块，以同步 FIFO 为共同起点，贯穿原有主线。覆盖表示已纳入学习规划，尚不代表实验完成。
+更新：2026-11-17。V4 的十八个领域保持不变；本轮在既有领域内补深体系结构与存储系统、数学基础、软件正确性与可复现工程、持久状态与安全，共 24 个子实验，详见下方映射。此前 DD/DV/SIM 的 24 个模块继续以同步 FIFO 为共同起点。覆盖表示已纳入学习规划，尚不代表实验完成。
 
 ![AIMakeAll 知识覆盖图 V4：十八个领域，新增数字设计、系统验证与仿真可信度](images/knowledge-coverage-v4.png)
 
@@ -10,28 +10,39 @@ V4 表示知识范围；交付方式统一按 [仿真优先原则](SIMULATION_FI
 
 | 图中编号 | 领域 | 主要学习内容 | 文档入口 |
 | --- | --- | --- | --- |
-| 01 | 数学与数值 | 线性代数、微积分、概率、稳定性和量化误差 | [UDL](UDL_FOUNDATIONS.md)、[ENG01](ENGINEERING_BRIDGES.md) |
+| 01 | 数学与数值 | 离散与证明、线性代数、微分、优化、概率信息量、数值与统计 | [UDL / MATH-E1–E6](UDL_FOUNDATIONS.md)、[ENG01](ENGINEERING_BRIDGES.md) |
 | 02 | 算法与数据结构 | 复杂度、容器、排序、图、动态规划与索引 | [AL01–AL10](ALGORITHMS_FOUNDATIONS.md) |
-| 03 | 编程与程序执行 | C、汇编、ABI、链接、调试和性能 | [CSAPP](CSAPP_FOUNDATIONS.md) |
-| 04 | 体系结构与加速器 | 数字逻辑、RISC-V、MAC/NPU、总线和存储 | [硬件](../hardware/README.md)、[架构](ARCHITECTURE.md) |
-| 05 | 操作系统原理 | 调度、虚拟内存、同步、文件系统和持久化 | [OS01–OS12](OSTEP_FOUNDATIONS.md) |
+| 03 | 编程与程序执行 | C、汇编、ABI、链接、内存与整数语义、所有权、调试和复现 | [CSAPP](CSAPP_FOUNDATIONS.md)、[SW-E1–E6](SYSTEMATIC_VERIFICATION.md) |
+| 04 | 体系结构与加速器 | RISC-V/NPU、数据流、bank、Cache/scratchpad、可见性与一致性模型 | [硬件](../hardware/README.md)、[ARCH-E1–E6](ARCHITECTURE.md) |
+| 05 | 操作系统原理 | 调度、虚拟内存、同步、文件系统、事务恢复与权限 | [OS01–OS12](OSTEP_FOUNDATIONS.md)、[状态实验](ENGINEERING_BRIDGES.md) |
 | 06 | Linux 系统构建 | 工具链、用户态、内核、rootfs、启动和服务 | [LFS](LFS_FOUNDATIONS.md) |
 | 07 | 模拟器与驱动 | QEMU、虚拟设备、MMIO、中断和 DMA | [模拟器](../simulator/README.md)、[NPU 规范](../specs/npu-v0.md) |
 | 08 | AI 编译 | 计算图、IR、布局/量化、分块、内存及执行计划 | [AC01–AC12](AI_COMPILATION.md) |
 | 09 | 深度学习基础 | 模型表达、损失、梯度、优化与泛化 | [UDL](UDL_FOUNDATIONS.md) |
 | 10 | 从零 LLM | 数据、分词、Transformer、预训练与 SFT | [模型](../models/README.md)、[MiniMind](MINIMIND_INTEGRATION.md)、[ENG02](ENGINEERING_BRIDGES.md) |
-| 11 | 推理运行时 | 计划执行、算子分派、内存、KV 与设备调用 | [运行时](../runtime/README.md)、[AI 编译](AI_COMPILATION.md) |
-| 12 | Agent 与检索 | 索引排序、工具协议、状态、重试与任务评估 | [Agent](../agents/README.md)、[ENG04](ENGINEERING_BRIDGES.md) |
+| 11 | 推理运行时 | 计划执行、输入校验、所有权、KV/存储预算与设备调用 | [运行时](../runtime/README.md)、[AI 编译](AI_COMPILATION.md) |
+| 12 | Agent 与检索 | 索引、工具权限、持久状态、幂等/未知结果、恢复与审计 | [Agent](../agents/README.md)、[STATE-E1–E6](ENGINEERING_BRIDGES.md) |
 | 13 | 网络与分布式通信 | Ethernet/TCP/IP、Socket/RPC、背压与重试、RDMA 进阶 | [NET01–NET06](NETWORKING_FOUNDATIONS.md) |
 | 14 | I/O 与 PCIe | 片内互连、枚举/BAR、DMA/IOMMU、中断与 Linux 驱动 | [IO01–IO06](PCIE_IO_FOUNDATIONS.md) |
 | 15 | CXL 与异构内存 | 协议与一致性、Type 3、地址译码、NUMA 与模型内存放置 | [CX01–CX06](CXL_MEMORY_FOUNDATIONS.md) |
 | 16 | 数字设计与时序 | HDL 语义、流水线/握手、FIFO、复位/CDC、综合与时序约束 | [DD01–DD08](DIGITAL_DESIGN_TIMING.md) |
-| 17 | 系统化验证 | 需求追溯、独立参考、断言/覆盖、形式/等价、故障与回归 | [DV01–DV08](SYSTEMATIC_VERIFICATION.md) |
+| 17 | 系统化验证 | 需求追溯、参考/断言、形式/等价、程序检测、故障/模糊测试与复现 | [DV01–DV08 / SW-E1–E6](SYSTEMATIC_VERIFICATION.md) |
 | 18 | 仿真建模与可信度 | 模型边界、事件调度、周期/事务、重放、校验/校准与敏感性 | [SIM01–SIM08](SIMULATION_CREDIBILITY.md) |
 
 图中中断、DMA、Linux 驱动等表示课程范围；当前 NPU v0 首版仍为同步轮询，不据图示扩大设备能力。CSAPP、OSTEP、LFS 分别侧重程序视角、系统机制和系统构建。
 
 网络连接节点，PCIe 连接主机与设备，CXL 连接扩展内存并引入一致性相关机制。新增模块按 [S0–S3 阶段](ROADMAP.md) 推进：S0 MMIO 闭环 → S1 PCI/PCIe → S3 CXL；S2 网络可先用 CPU 服务并行，远程 NPU 接入另需本地后端验收。
+
+## 四组深化内容如何归入现有体系
+
+| 深化内容 | 主要归属与实验入口 | 新增的验收证据 |
+| --- | --- | --- |
+| 体系结构与存储系统 | 04 → 05/08/11/14/15；[ARCH-E1–E6](ARCHITECTURE.md) | 访问/容量账本、周期与冲突、缓存轨迹、可见性反例、有限状态性质、设计空间报告 |
+| 数学基础 | 01 → 02/09/16/18；[MATH-E1–E6](UDL_FOUNDATIONS.md) | 推导与反例、残差/梯度对照、条件数与收敛、概率指标、误差与统计波动 |
+| 软件正确性与可复现工程 | 03/17 → 06/08/11/18；[SW-E1–E6](SYSTEMATIC_VERIFICATION.md) | C 数值语义、坏包拒绝、检测语料、资源回收、环境 manifest、跨层回归 |
+| 持久状态与安全 | 05/12/13；[STATE-E1–E6](ENGINEERING_BRIDGES.md) | 权限边界、任务状态、崩溃恢复、未知结果处理、攻击/资源限制用例、脱敏审计 |
+
+以上为四组各六项的待实现子实验。它们深化已有领域，不增加图中一级编号或仓库一级目录；详细实施顺序见 [整体规划](PROJECT_MAP.md) 和 [里程碑](ROADMAP.md)。领域覆盖图继续使用 V4，新增深度由本页文字索引表达。
 
 ## 方法课程与四个工程专项
 
@@ -51,4 +62,4 @@ DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) �
 
 ## 图片维护
 
-V4 使用内置图像生成工具在 [V3](images/knowledge-coverage-v3.png) 基础上更新，[提示词](images/knowledge-coverage-v4.prompt.txt)保留主题、编号和文案。V1–V3 保留为历史资产。上表作为可检索的文字索引；后续范围变化时同步更新图片、课程与里程碑。
+V4 使用内置图像生成工具在 [V3](images/knowledge-coverage-v3.png) 基础上更新，[提示词](images/knowledge-coverage-v4.prompt.txt)保留主题、编号和文案。V1–V3 保留为历史资产。本轮未重新生成图片；十八个领域及编号不变，课程深度以更新后的文字索引为准。后续一级范围变化时再同步更新图片、课程与里程碑。

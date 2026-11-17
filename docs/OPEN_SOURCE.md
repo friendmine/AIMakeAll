@@ -34,6 +34,8 @@
 
 ## 参考读物与配套资料
 
+四组深化实验的来源随原课程管理：[体系结构与存储](ARCHITECTURE.md) 链接 MIT 6.823、gem5 MSI 与 Linux DMA 文档；[数学](UDL_FOUNDATIONS.md) 继续连接 UDL/算法资料；[软件正确性](SYSTEMATIC_VERIFICATION.md) 链接 LLVM 检测器文档；[持久状态](ENGINEERING_BRIDGES.md) 链接 SQLite 原子提交/隔离说明。SQLite 只是本地状态库的候选，检测器与数值库须在实际引入时记录版本、平台与许可；本轮未下载上游实现或增加运行依赖，实验代码将由项目原创。
+
 新增三项参考入口：[MIT 6.006 Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)、[OSTEP 作者官网](https://pages.cs.wisc.edu/~remzi/OSTEP/)、[MLIR Toy 官方教程](https://mlir.llvm.org/docs/Tutorials/Toy/)。分别对应 [算法](ALGORITHMS_FOUNDATIONS.md)、[操作系统原理](OSTEP_FOUNDATIONS.md)、[AI 编译](AI_COMPILATION.md)。当前只收入原创知识组织、实验计划与链接；不复制课件、书籍、题库、答案或上游代码。MIT 课程名称不代表资料采用 MIT 软件许可；OSTEP 章节按作者建议链接；未来引入 LLVM/MLIR 或课程代码时固定版本并核验文件级声明。
 
 [CSAPP《深入理解计算机系统》](https://csapp.cs.cmu.edu/3e/) 作为系统基础参考，已建立 [12 章知识映射与原创实验计划](CSAPP_FOUNDATIONS.md)。书籍并非本项目的开源组件；官方自学实验、示例及配套资料也应按各自条款核验。当前只提供链接和原创规划，不收入原书全文、扫描件、题库或官方答案，不将仓库 MIT 许可用于这些外部材料。

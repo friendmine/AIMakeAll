@@ -52,6 +52,8 @@ flowchart LR
 
 ## 4. 第一个贯通实验
 
+深化实验复用此闭环：[ARCH-E1/E2/E6](ARCHITECTURE.md) 为 AC07–AC09 提供数据复用、bank/容量与成本证据；[MATH-E2/E3/E6](UDL_FOUNDATIONS.md) 解释矩阵、梯度与数值误差；[SW-E1–E6](SYSTEMATIC_VERIFICATION.md) 使 AC10/AC11 的 C 执行、模型包与回归具有明确语义、坏包拒绝、资源回收及可复现环境记录。完整缓存一致性模型、完整数学课程和大型编译框架都不是首个 Linear 的前置。
+
 建议使用原创的固定形状 `Linear`，例如 `M=5, K=257, N=7`：既跨越 K=256 设备边界，又覆盖未来 4×4 阵列的尾块。该形状是拟定用例，尚未运行。
 
 1. 保存浮点输入、权重与 bias，计算参考输出。

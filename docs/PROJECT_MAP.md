@@ -10,6 +10,8 @@
 
 这张图按十八个知识领域展示范围。V4 在原有算法、系统、模型与互连体系上，补入 DD 数字设计、DV 系统化验证和 SIM 仿真可信度；三条课程共用同步 FIFO，再贯穿单 Linear 和系统扩展。四个工程专项继续汇总数值、数据、性能和检索验收。覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v4.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
 
+本轮保持十八个领域和一级目录，深化体系结构与存储、数学、软件正确性与复现、持久状态与安全，共 24 个待实现子实验。V4 范围图保留，下方实施图在既有节点中标明对应实验；课程入口与顺序见图后的映射表。
+
 ## 项目实施依赖
 
 ```mermaid
@@ -21,7 +23,7 @@ flowchart TB
         OS[OSTEP OS01–OS12<br/>调度、内存、并发与持久化]
         CS[CSAPP 全书体系已映射<br/>CS01–CS12 实验待实现]
         LFS[Linux From Scratch<br/>11 章与附录已映射，实验待实现]
-        UDL[Understanding Deep Learning<br/>21 章与附录已映射，实验待实现]
+        UDL[Understanding Deep Learning<br/>21 章与附录 + MATH-E1–E6 数学基础]
         U1[模型核心<br/>表达、损失、梯度、优化、残差与注意力]
         U2[评估与能力边界<br/>泛化、消融、伦理；RL 后续扩展]
         U3[广度选修<br/>CNN、GNN、生成模型]
@@ -48,7 +50,7 @@ flowchart TB
 
     subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
         DD[DD01–DD08<br/>流水线、握手、FIFO、复位、CDC 与时序]
-        DV[DV01–DV08<br/>规格、参考、断言、覆盖、形式与故障]
+        DV[DV01–DV08 + SW-E1–E6<br/>验证、软件正确性与可复现工程]
         SCM[SIM01–SIM08<br/>事件、周期、重放、校验与敏感性]
         FIFO[G0 / G1 共同起点<br/>固定同步 FIFO 契约、模型、RTL 与证据]
         EVID[G2 / G3 证据报告<br/>正确性、支持范围、时间模型与可信度]
@@ -65,7 +67,7 @@ flowchart TB
 
     subgraph HARDWARE[M1 · RISC-V + NPU]
         MAC[已验证：Python GEMM 与单 MAC]
-        ARRAY[下一步：4×4 阵列<br/>分块、局部存储、随机对照]
+        ARRAY[下一步：4×4 阵列<br/>ARCH-E1/E2 数据流、局部存储与 bank]
         SOC[RISC-V + 总线 + NPU + 驱动]
         PHYS[扩展：综合、布局布线、SRAM 接入<br/>电脑内物理设计；实物独立可选]
         MAC --> ARRAY --> SOC --> PHYS
@@ -78,7 +80,7 @@ flowchart TB
 
     subgraph SIM[M2 · QEMU 与软件运行时]
         QEMU[RISC-V 虚拟平台与自定义 NPU 设备]
-        RT[C 运行时<br/>CPU / NPU 后端与错误处理]
+        RT[C 运行时<br/>SW-E 输入校验、所有权与错误恢复]
         QEMU --> RT
     end
 
@@ -88,6 +90,7 @@ flowchart TB
     SCM -.时间与重放契约.-> QEMU
     DV -.需求与测试追溯.-> QEMU
     SOC -.共同 ABI 与向量.-> QEMU
+    DV -.SW-E 软件与复现证据.-> RT
 
     subgraph CONNECT[互连、通信与内存系统 · 实验待实现]
         IOBASE[S0 · IO01 片内互连<br/>MMIO 闭环、握手与访问边界]
@@ -95,8 +98,8 @@ flowchart TB
         PCINPU[S1 · IO05<br/>虚拟 PCIe NPU 与独立传输 ABI]
         NETBASE[S2 · NET01–NET04 · 可并行<br/>网络协议、双节点 CPU 服务与故障]
         NETAPP[S2 · NET05<br/>远程推理与 Agent，设备后端另验]
-        CXL[S3 · CX01–CX05<br/>独立 q35 / Type 3 内存与放置]
-        ADV[进阶 IO06 / NET06 / CX06<br/>PCIe RTL、软件 RDMA、CXL 状态模型]
+        CXL[S3 · CX01–CX05<br/>Type 3 与 ARCH-E6 分层放置]
+        ADV[进阶 IO06 / NET06 / CX06<br/>PCIe RTL、软件 RDMA、CXL 状态模型<br/>连接 ARCH-E3–E5 缓存与可见性]
         IOBASE -.学习顺序.-> PCIBASE
         PCIBASE --> PCINPU
         PCIBASE -.PCI 与内存基础.-> CXL
@@ -165,7 +168,7 @@ flowchart TB
     U3 -.后续算子负载.-> ARRAY
 
     subgraph AGENT[M4 · Agent 与服务]
-        TOOL[受限工具、协议、进程与并发<br/>计算、检索、实验结果查询]
+        TOOL[受限工具、协议与任务状态<br/>STATE-E1–E6 持久化、恢复与安全]
         APP[自训练模型决策 + 工具执行<br/>加速后端接入与独立任务评测]
         TOOL --> APP
     end
@@ -187,6 +190,15 @@ flowchart TB
 ```
 
 ## 下一步与并行关系
+
+| 既有部分 | 深化实验与入口 | 推进关系 |
+| --- | --- | --- |
+| 体系结构 / NPU / 内存 | [ARCH-E1–E6](ARCHITECTURE.md) | 数据流与 bank 随阵列和单 Linear；Cache/一致性模型独立，Linux DMA/CXL 放置随后端条件推进 |
+| UDL 附录 / 算法 / 数值 | [MATH-E1–E6](UDL_FOUNDATIONS.md) | 不变量与矩阵先按需补齐，再梯度/优化/概率，数值与统计贯穿评估 |
+| CSAPP / DV08 / 运行时 | [SW-E1–E6](SYSTEMATIC_VERIFICATION.md) | C 参考和环境清单 → 模型包校验 → 故障/自动检测 → 独立重建与跨层回归 |
+| OSTEP / ENG04 / 网络与 Agent | [STATE-E1–E6](ENGINEERING_BRIDGES.md) | 规则 Agent + 权限 + 单机状态库 → 模拟副作用崩溃恢复 → 远端未知结果/安全故障 → 模型接入 |
+
+各组均待实现，详细阶段门槛见 [里程碑中的接入节奏](ROADMAP.md)。先形成一个可验收的小闭环，不要求学完全部新子实验才启动主线。
 
 1. DD/DV/SIM 先共用 G0/G1 同步 FIFO，形成接口、参考、RTL、覆盖、故障与重放模板；并行推进 4×4 阵列，结合 CS02/CS04/CS06 和 ENG03 学习数值、控制、存储与验证。
 2. 软件并行做 AL07 计算图检查、C 整数参考和单线性层的量化/分块计划；先有可检查的计划解释器，再考虑 MLIR。

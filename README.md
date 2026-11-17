@@ -23,6 +23,8 @@
 
 图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十八个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
 
+在现有十八个领域内进一步补充 [体系结构与存储系统](docs/ARCHITECTURE.md)、[数学基础](docs/UDL_FOUNDATIONS.md)、[软件正确性与可复现工程](docs/SYSTEMATIC_VERIFICATION.md)、[持久状态与安全](docs/ENGINEERING_BRIDGES.md)，每组六项子实验，共 24 项待实现计划。保持一级目录与知识领域不变；详细实验、产物、验收和接入顺序见 [课程目录](docs/CURRICULUM.md) 与 [里程碑](docs/ROADMAP.md)。
+
 ## 从这里开始
 
 先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：算法支撑组织与调度，CSAPP/OSTEP/LFS 分别连接程序、系统原理与构建，UDL/MiniMind 连接理论与训练，AI 编译将模型映射到运行时和 NPU。
