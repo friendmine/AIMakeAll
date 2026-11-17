@@ -1,0 +1,7 @@
+# 硬件主线
+
+当前只有 `rtl/mac_int8.sv`：带 enable 和同步 clear 的有符号 INT8 乘加单元，异步低有效复位，32 位回绕累加。这是 NPU 的基本组件，并非完整 NPU 或 SoC。
+
+运行 `make rtl-test`。下一步依次实现 4×4 阵列、局部存储、分块控制、MMIO 外设以及 Ibex 集成。对照 [算子规范](../specs/npu-v0.md) 和 [里程碑 M1](../docs/ROADMAP.md)。
+
+外部 CPU 源码尚未引入；引入时固定提交并保存许可声明。首版 CPU 裸机运行，不能据此声称支持 Linux。
