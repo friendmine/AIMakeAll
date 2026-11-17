@@ -1,16 +1,16 @@
 # AIMakeAll 全景规划图
 
-更新：2026-11-17。状态以本项目记录为准；外部实验成果不等于已经接入本项目，资料规划不等于功能实现。
+更新：2026-11-18。状态以本项目记录为准；外部实验成果不等于已经接入本项目，资料规划不等于功能实现。
 
 交付遵循 [仿真优先原则](SIMULATION_FIRST.md)：数字 RTL → 仿真 → 综合，系统与协议使用 QEMU/事务模型；可选数字物理设计仍在电脑内完成。核心验收不要求板卡或流片。
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图 V5：十八个领域与算术电路、数据完整性深化路线](images/knowledge-coverage-v5.png)
+![AIMakeAll 知识覆盖图 V6：十八个领域与十条全景补全路线](images/knowledge-coverage-v6.png)
 
-这张图按十八个知识领域展示范围。V5 在既有体系内突出 ARITH 算术电路和 RAS 数据完整性，图下方连接实验阶段与四项共同交付；DD/DV/SIM 仍以同步 FIFO 为共同起点。四个工程专项继续汇总数值、数据、性能和检索验收。覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v5.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
+V6 保留十八个知识领域，在下半部补齐十条跨领域路线：从信号/器件到物理产品，从经典 AI 到具身与规模工程，并突出数字设计、单 Linear、深度学习三条实践路径。查看 [原图](images/knowledge-coverage-v6.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 和 [完整课程与验收](CHIP_AI_COMPLETENESS.md)。
 
-本轮保持十八个领域和一级目录，在既有八组基础上补入 ARITH/RAS 两组，共十组、60 个待实现深化子实验。下方实施图将两组接到数字设计、存储与验证节点；课程入口与顺序见图后的映射表。
+原十组 60 项深化实验继续保留；本轮 30 个验收节点包含既有实验复用，不简单累加实验数。所有新增路线只完成规划。全景通识覆盖十条，核心实践优先 PRA/DEP/DLE，专题深入按前置与预算选择，一级目录不变。
 
 ## 项目实施依赖
 
@@ -48,12 +48,32 @@ flowchart TB
     ROOT --> EDA
     ROOT --> SPEC
 
+    subgraph BREADTH[全景补全 · 全部待实施]
+        SIG[SIG 数学与信号系统<br/>方程、采样、状态空间]
+        CIR[CIR 电路与半导体器件<br/>MOS、CMOS、寄生与噪声]
+        HET[HET CPU / GPU / DSP<br/>执行模型与数据流对照]
+        CHIP[CHIP 物理与产品流程<br/>供电、测试、封装、良率模型]
+        CLA[CLA 经典机器学习与 AI<br/>树、核、逻辑、概率与规划]
+        DLE[DLE 推导与模型比较<br/>梯度、结构性质、生成模型]
+        EMB[EMB 感知估计与控制<br/>视觉、音频、二维机器人]
+        SCALE[SCALE 规模工程<br/>训练、分片、服务与恢复]
+        SIG --> CIR --> CHIP
+        SIG --> EMB
+        CLA --> EMB
+        DLE --> EMB
+    end
+    ROOT --> SIG
+    ALG --> CLA
+    UDL --> DLE
+    ROOT --> HET
+    ROOT --> SCALE
+
     subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
         DD[DD01–DD08 + PPA / ARITH<br/>数字设计、算术结构、时序与面积能耗]
         DV[DV01–DV08 + SW-E1–E6<br/>验证、软件正确性与可复现工程]
         SCM[SIM01–SIM08<br/>事件、周期、重放、校验与敏感性]
-        FIFO[G0 / G1 共同起点<br/>固定同步 FIFO 契约、模型、RTL 与证据]
-        EVID[G2 / G3 证据报告<br/>正确性、支持范围、时间模型与可信度]
+        FIFO[G0 / G1 共同起点<br/>PRA-1/2 同步 FIFO、调试、综合与证据]
+        EVID[G2 / G3 证据报告<br/>DEP 单 Linear 对照、扩展与可信度]
         ARITH[ARITH-E1–E6 · 待实现<br/>位宽 → 加法器/乘法器 → 定点与 MAC]
         RAS[RAS-E1–E6 · 待实现<br/>校验/ECC → 受保护存储 → 故障处置]
         DD --> FIFO
@@ -85,6 +105,10 @@ flowchart TB
     FIFO -.复用握手与验证方法.-> ARRAY
     SPEC --> MAC
     EDA -.验证与物理基础.-> PHYS
+    CIR -.器件与负载基础.-> DD
+    DD -.已验模块.-> CHIP
+    CHIP -.电脑内物理实验.-> PHYS
+    HET -.架构对照.-> ARRAY
 
     subgraph SIM[M2 · QEMU 与软件运行时]
         QEMU[RISC-V 虚拟平台与自定义 NPU 设备]
@@ -188,6 +212,12 @@ flowchart TB
     DEPLOY --> APP
     NETAPP -.远程服务扩展.-> APP
     U2 --> APP
+    CLA -.推理与规划基线.-> APP
+    EMB -.具身专题独立验收.-> APP
+    DLE -.推导与比较证据.-> LEARN
+    NETBASE -.通信前置.-> SCALE
+    TRAIN -.训练前置.-> SCALE
+    SCALE -.分布式部署扩展.-> LXSVC
     LXSVC -.后续部署环境.-> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
     PHYS -.物理验收证据.-> DONE
@@ -196,6 +226,12 @@ flowchart TB
     ROOT --> ENG
     ENG -.贯穿 M1–M4 的验收.-> DONE
 ```
+
+## 全景补全如何接入主线
+
+课程顺序、30 个节点的产物与验收以 [全景课程补全](CHIP_AI_COMPLETENESS.md) 为准，阶段出口见 [里程碑](ROADMAP.md#十条全景补全路线的阶段安排)。SIG → CIR → CHIP 连起连续系统、器件、数字实现和产品认知；HET 与 ARCH/MEM/PERF 形成异构架构比较；CLA/DLE → EMB 连起感知、推断与行动；SCALE 接 M3 训练和 S2 网络进入服务工程。
+
+PRA 复用图中 FIFO/阵列，DEP 复用单 Linear 与模型部署，DLE 复用 UDL/训练路线。它们承担实际能力出口，其余专题可先通识后深入。SPICE、电源/封装/良率模型、CPU 多进程与二维机器人仿真各自注明抽象层，不要求购买设备，也不代替电气、量产或真实集群验收。
 
 ## 下一步与并行关系
 

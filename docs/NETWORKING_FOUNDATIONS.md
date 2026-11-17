@@ -44,3 +44,7 @@ QEMU 的虚拟网卡与网络后端可连接 guest、宿主网络或其他 QEMU 
 - RDMA 用户态组件与示例参考：[linux-rdma/rdma-core](https://github.com/linux-rdma/rdma-core)；NET06 为可选进阶，具体软 RDMA/硬件支持另验。
 
 只链接原始资料并编写原创实验；源码、标准文字和抓包数据分别核验许可。未来实现时锁定依赖提交，记录构建选项和访问日期。当前未安装网络工具、配置虚拟网络或运行服务。
+
+## 分布式 AI 与服务扩展
+
+[SCALE 三个节点](CHIP_AI_COMPLETENESS.md#scale-大规模-ai-工程) 在 NET/S2 之后加入训练聚合/恢复、张量与流水分片/多后端推理，以及服务负载/取消/回滚。先 CPU 多进程验语义，真实多 GPU 与多机性能独立验收；均待实施，CXL 不作为前置。

@@ -12,6 +12,8 @@
 
 数据去重/切分、检查点恢复与数值误差纳入 [ENG01/ENG02](../docs/ENGINEERING_BRIDGES.md)。模型部署增加 [AI 编译路线](../docs/AI_COMPILATION.md)，先用单 Linear 验证图到计划的转换，再接完整模型；不把计划解释器可运行等同于训练或硬件部署完成。
 
+[CLA/DLE/SCALE 全景扩展](../docs/CHIP_AI_COMPLETENESS.md) 补树/核/聚类、梯度与生成模型比较、分布式训练/推理；EMB 衔接视觉/音频与控制。先完成 DLE 小模型和 DEP 单 Linear，专题不全部前置于 LLM；新增实验均待实施。
+
 ## Build a Large Language Model (From Scratch) 参考线
 
 更新：2026-11-17。将 Sebastian Raschka 的 *Build a Large Language Model (From Scratch)* 作为领域 10“从零 LLM”的逐步实现参考，连接已有领域 01/09/08/11/12，不新增一级目录或知识领域。依据 [Manning 书目](https://www.manning.com/books/build-a-large-language-model-from-scratch) 与 [官方代码仓库](https://github.com/rasbt/LLMs-from-scratch) 的七章及附录 A–E 建立下列映射。这里只完成资料核对与原创实验规划，未复现书中训练、下载数据/权重或引入上游源码。

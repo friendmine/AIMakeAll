@@ -15,3 +15,7 @@
 按 [仿真优先与数字电路交付原则](../docs/SIMULATION_FIRST.md)，后续硬件交付包括可综合 RTL、独立测试模型、波形和综合报告；不以 FPGA 或流片为核心验收门槛。网络增加 MAC/FIFO/CRC 教学数据路径，PCIe 增加 TLP/BAR/NPU 桥子集，CXL 增加地址译码/队列/存储子模块。高速 PHY/SerDes 以接口模型替代，教学子集不等于完整标准控制器。数字 RTL 到 GDS 是独立可选扩展，仍可在电脑内完成。
 
 已有外部 `~/asic-lab` 提供仿真、形式验证、RTL 到 GDS、SRAM 和数模实验基础。本项目已纳入其 [软件依赖与接入分析](../docs/LOCAL_EDA_ENVIRONMENT.md)，可用 `make eda-doctor` 盘点。原实验尚未迁移至仓库；已有 PicoRV32 可作为联调候选，Ibex 主线仍保留。新 SRAM 的 RC 多工况验收尚未完成，禁止直接沿用旧时序库。
+
+## 全景硬件学习扩展
+
+[CIR/PRA/HET/CHIP](../docs/CHIP_AI_COMPLETENESS.md) 形成电路与器件 → 数字实现/调试/综合 → CPU/GPU/DSP 对照 → 物理与产品流程。模拟电路采用 SPICE，数字模块交付 RTL，供电/封装/良率用显式假设模型；只补规划，现有 MAC 和 NPU v0 不变。

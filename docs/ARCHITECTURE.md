@@ -2,6 +2,8 @@
 
 总体学习依赖见 [全景规划图](PROJECT_MAP.md)。CSAPP 的信息表示、处理器、存储、链接、异常、I/O 与并发组成跨层基础，详细映射见 [CSAPP 模块](CSAPP_FOUNDATIONS.md)。书中的 x86-64/Y86-64 教学示例与本项目 RISC-V 目标分别维护，不共享未经适配的二进制与 ABI 假设。
 
+体系结构广度增加 [HET CPU/GPU/DSP 对照与 CHIP 产品流程](CHIP_AI_COMPLETENESS.md)，从执行模型、数据流进入物理/供电/测试认知。实验采用教学模型、RTL 或开放物理流程，尚待实施，不改变本页首版 RISC-V/NPU 选择。
+
 ## 端到端数据流
 
 模型与学习方法由 [Understanding Deep Learning 基础](UDL_FOUNDATIONS.md) 支撑，连接损失、梯度、Transformer 与质量评估。训练保留在宿主机，首版 NPU 加速推理线性层；量化和设备接入是本项目独立的工程实验。
