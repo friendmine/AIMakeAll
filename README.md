@@ -36,6 +36,7 @@
 5. 复用已有芯片开发环境前，阅读 [本地 EDA 软件、依赖与接入分析](docs/LOCAL_EDA_ENVIRONMENT.md)。
 6. 整理重复工具安装时，按 [EDA 工具链统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md) 完成迁移与验收。
 7. 进入模型与 Agent 阶段时，阅读 [MiniMind 学习与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md)，对照完整训练流程。
+   从零实现先参考 [Build a Large Language Model (From Scratch) 的七章及附录映射](models/README.md)，逐步完成文本、注意力、GPT、训练与微调，再对照 MiniMind。
 8. 按阶段学习 [CSAPP 全书知识体系与项目实验](docs/CSAPP_FOUNDATIONS.md)，覆盖数值、处理器、存储、链接、异常、I/O、网络与并发。
 9. 学习 [Understanding Deep Learning 知识体系](docs/UDL_FOUNDATIONS.md)，覆盖 21 章与数学/概率附录，连接从零模型、MiniMind、NPU 部署和 Agent 评估。
 10. 学习 [Linux From Scratch 知识体系](docs/LFS_FOUNDATIONS.md)，从工具链自举到 Linux 启动，再扩展到 RV64 QEMU 与 AI 服务；首版 RV32 裸机主线独立推进。

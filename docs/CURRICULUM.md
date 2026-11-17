@@ -97,6 +97,8 @@ LLM 优先路线为数学按需补齐 → UDL01–UDL09 → UDL11/UDL12 → 自�
 
 ## MiniMind 阅读与复现参考
 
+先以 [Build a Large Language Model (From Scratch) 的七章与附录映射](../models/README.md) 细化单元 08–15：文本与标签 → 注意力 → GPT 组装 → 随机初始化预训练 → 指令微调；分类微调与 LoRA 为分支。UDL 提供原理，本书提供逐步实现路线，MiniMind 提供完整工程对照。LLMFS01–07 与附录条目均为待实现计划，归入现有领域 10，不新增一级课程或目录。
+
 单元 08–16 增加 [MiniMind 参考线](MINIMIND_INTEGRATION.md)：tokenizer 与数据 → 模型 → 预训练 → SFT → 导出与量化 → NPU 分块 → 工具调用。完整模型与基础自写模型分别记录配置、权重和结果。当前已完成固定源码的阅读索引与接入设计，未完成复现实验。
 
 ## 硬件扩展课程来源

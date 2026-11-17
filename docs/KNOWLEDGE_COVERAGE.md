@@ -19,7 +19,7 @@ V4 表示知识范围；交付方式统一按 [仿真优先原则](SIMULATION_FI
 | 07 | 模拟器与驱动 | QEMU、虚拟设备、MMIO、中断和 DMA | [模拟器](../simulator/README.md)、[NPU 规范](../specs/npu-v0.md) |
 | 08 | AI 编译 | 计算图、IR、布局/量化、分块、内存及执行计划 | [AC01–AC12](AI_COMPILATION.md) |
 | 09 | 深度学习基础 | 模型表达、损失、梯度、优化与泛化 | [UDL](UDL_FOUNDATIONS.md) |
-| 10 | 从零 LLM | 数据、分词、Transformer、预训练与 SFT | [模型](../models/README.md)、[MiniMind](MINIMIND_INTEGRATION.md)、[ENG02](ENGINEERING_BRIDGES.md) |
+| 10 | 从零 LLM | 数据、分词、GPT 逐层实现、预训练、分类/指令微调 | [模型 / LLMs From Scratch 七章映射](../models/README.md)、[MiniMind](MINIMIND_INTEGRATION.md)、[ENG02](ENGINEERING_BRIDGES.md) |
 | 11 | 推理运行时 | 计划执行、输入校验、所有权、KV/存储预算与设备调用 | [运行时](../runtime/README.md)、[AI 编译](AI_COMPILATION.md) |
 | 12 | Agent 与检索 | 索引、工具权限、持久状态、幂等/未知结果、恢复与审计 | [Agent](../agents/README.md)、[STATE-E1–E6](ENGINEERING_BRIDGES.md) |
 | 13 | 网络与分布式通信 | Ethernet/TCP/IP、Socket/RPC、背压与重试、RDMA 进阶 | [NET01–NET06](NETWORKING_FOUNDATIONS.md) |

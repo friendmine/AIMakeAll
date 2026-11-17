@@ -17,6 +17,8 @@ MiniMind 当前主线为 MiniMind3：Dense 约 64M 参数，也有 MoE 版本；
 
 采用两条互补学习线：先用自写的 1M–10M 级模型理解完整过程；再读 MiniMind，复现缩小配置，逐步推进默认 Dense 模型。MoE、强化学习和外部奖励模型放到后续选修。
 
+自写模型线新增 [Build a Large Language Model (From Scratch) 章节映射](../models/README.md)：以 GPT 风格注意力、模型组装与训练循环逐步入门，再对照这里的 RoPE/GQA/RMSNorm/门控 MLP。两者的 tokenizer、结构与权重分别管理；书中的外部预训练权重对照不计作本项目从随机权重训练的结果。
+
 ## 2. 源码阅读顺序
 
 阅读时对照 [Understanding Deep Learning 模块](UDL_FOUNDATIONS.md)：UDL04/UDL11/UDL12 支撑模型结构，UDL05 支撑标签与损失，UDL06/UDL07 支撑优化与初始化，UDL08/UDL09 支撑评估。具体的 RoPE、GQA、RMSNorm、门控 MLP 及训练算法继续以固定源码为准。

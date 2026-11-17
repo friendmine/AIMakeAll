@@ -215,6 +215,8 @@ SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验
 
 ## 详细路线
 
+模型学习分工进一步细化为：UDL 原理与数学 → [Build a Large Language Model (From Scratch) 逐步实现](../models/README.md) → MiniMind 工程对照 → AI 编译与 NPU 部署 → Agent 任务评估。本书归入既有领域 10 和图中自写小模型节点，七章/附录实验均待实现；一级领域与目录保持不变。
+
 - [知识覆盖文字索引](KNOWLEDGE_COVERAGE.md)
 - [数字设计 DD01–DD08](DIGITAL_DESIGN_TIMING.md) · [系统化验证 DV01–DV08](SYSTEMATIC_VERIFICATION.md) · [仿真可信度 SIM01–SIM08](SIMULATION_CREDIBILITY.md)
 - [算法与数据结构](ALGORITHMS_FOUNDATIONS.md) · [OSTEP 操作系统原理](OSTEP_FOUNDATIONS.md)

@@ -10,6 +10,7 @@ UDL 为 AIMakeAll 提供模型、学习算法和评估方法基础，与 [CSAPP 
 | --- | --- | --- |
 | CSAPP | 程序如何执行、管理内存、通信与并发 | RISC-V 固件、QEMU 设备、C 运行时、Agent 服务 |
 | UDL | 模型如何表示函数、学习参数、泛化与生成 | 自写神经网络、训练流程、质量评估与消融实验 |
+| Build a Large Language Model (From Scratch) | 如何逐层实现、训练和微调 GPT 风格模型 | [七章及附录的项目实验](../models/README.md)，承接 UDL 理论与数学基础 |
 | MiniMind | 完整 LLM 实现如何组织 | 固定源码阅读、预训练/SFT 复现与部署参考 |
 | AIMakeAll 集成实验 | 学到的模型如何在自建加速器上可靠执行 | 量化导出、算子分派、数值对照与端到端评测 |
 

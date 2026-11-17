@@ -70,6 +70,8 @@ SIM01–SIM04 定义设备模型边界、事件次序和重放，DV08 关联 gue
 
 参考线：[MiniMind 学习与接入](MINIMIND_INTEGRATION.md)。本项目自写小模型主线保留，MiniMind 用于完整训练流程对照和后续部署；已固定审阅提交，训练、量化和设备接入尚未实施。
 
+逐步实现参考：[Build a Large Language Model (From Scratch)](../models/README.md)。先 LLMFS-A/02 的 PyTorch、短序列与标签，再 LLMFS03/04 的注意力和 GPT，随后 LLMFS05 的随机初始化训练/恢复、LLMFS07 的指令微调。分类微调与 LoRA 后置；外部预训练权重只用于独立对照。量化/NPU 和 Agent 状态安全继续按本项目验收，不据书中示例宣称已打通。
+
 1. 用来源清晰的小型文本集完成 tokenizer、数据切分、bigram 基线。
 2. 自己实现 decoder-only Transformer：embedding、causal attention、MLP、残差和归一化；允许用 PyTorch 自动求导。
 3. 从随机权重训练约 1M–10M 参数的教学模型；保存随机种子、配置、训练曲线和独立验证集结果。
