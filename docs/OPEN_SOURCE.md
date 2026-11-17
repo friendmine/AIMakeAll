@@ -11,6 +11,7 @@
 | [Gemmini](https://github.com/ucb-bar/gemmini) | 阵列、存储层次与完整 SoC 对照 | 查看上游 LICENSE；Chipyard 依赖需单独登记 |
 | [PyTorch](https://github.com/pytorch/pytorch) | 自动求导和训练 | 查看上游 LICENSE 及第三方依赖 |
 | [llm.c](https://github.com/karpathy/llm.c) | 阅读训练、推理的底层实现 | 阅读参考，不直接纳入 CUDA 作为必需依赖 |
+| [MiniMind](https://github.com/jingyaogong/minimind) | 完整 LLM 训练、工具调用与 NPU 适配参考 | 固定提交根许可证 Apache-2.0；数据/权重单独核验；见 [来源记录](../models/minimind/source-lock.json) |
 
 ## 全开源的实际范围
 

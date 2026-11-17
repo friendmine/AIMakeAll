@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "233d00fa068ec2b8c0d4f07b703934d6391a5a73",
+  "source": "model/model_minimind.py",
+  "method": "Static arithmetic from default Dense config; tied embedding/lm_head counted once. Not instantiated or measured.",
+  "config": {
+    "hidden_size": 768,
+    "num_hidden_layers": 8,
+    "num_attention_heads": 8,
+    "num_key_value_heads": 4,
+    "head_dim": 96,
+    "vocab_size": 6400,
+    "intermediate_size": 2432,
+    "use_moe": false,
+    "tie_word_embeddings": true
+  },
+  "parameter_breakdown": {
+    "embedding_and_tied_lm_head": 4915200,
+    "attention_projections_per_layer": 1769472,
+    "mlp_projections_per_layer": 5603328,
+    "norm_weights_per_layer": 1728,
+    "final_norm": 768
+  },
+  "total_parameters": 63912192,
+  "weight_storage": {
+    "all_fp32": {
+      "bytes": 255648768,
+      "MiB": 243.8056640625
+    },
+    "all_fp16": {
+      "bytes": 127824384,
+      "MiB": 121.90283203125
+    },
+    "theoretical_one_byte_per_parameter": {
+      "bytes": 63912192,
+      "MiB": 60.951416015625
+    }
+  },
+  "kv_cache_example": {
+    "batch": 1,
+    "sequence": 512,
+    "bytes_per_element": 2,
+    "formula": "2 * layers * batch * sequence * kv_heads * head_dim * bytes_per_element",
+    "bytes": 6291456,
+    "MiB": 6.0
+  },
+  "exclusions": [
+    "Quantization scales and alignment",
+    "Floating-point exceptions in mixed precision",
+    "RoPE buffers and attention workspaces",
+    "Activations and optimizer states",
+    "Framework overhead",
+    "Extra copies of shared tensors in alternative export layouts"
+  ]
+}

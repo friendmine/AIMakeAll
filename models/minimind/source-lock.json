@@ -1,0 +1,125 @@
+{
+  "schema_version": 1,
+  "review_date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "repository": "https://github.com/jingyaogong/minimind",
+  "branch_observed": "master",
+  "commit": "233d00fa068ec2b8c0d4f07b703934d6391a5a73",
+  "license_at_commit": "Apache-2.0",
+  "scope": "Source review and original integration documentation; no vendored source, installed dependencies, weights, datasets or training run.",
+  "dependency_install_lock": false,
+  "root_notice_present_in_tree": false,
+  "files": [
+    {
+      "path": "LICENSE",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/LICENSE",
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "path": "README.md",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/README.md",
+      "bytes": 137968,
+      "sha256": "bb68777e391ec3ee0471a2df029df6ef634a84adf5e03a686aeb329b4ec9b4ba"
+    },
+    {
+      "path": "requirements.txt",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/requirements.txt",
+      "bytes": 592,
+      "sha256": "b6ee58a7ba35aa05846ca9fe4691b6e4562d508625715120707cbec8b7897ad9"
+    },
+    {
+      "path": "model/model_minimind.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/model/model_minimind.py",
+      "bytes": 18986,
+      "sha256": "548f1203282dccb3be43227b11463f469b976afbab614df52828bdd246c3786f"
+    },
+    {
+      "path": "model/tokenizer_config.json",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/model/tokenizer_config.json",
+      "bytes": 13308,
+      "sha256": "d7cd6a60c9f191c4f9ffec69b2eb289ad2f960366724f328b681ae1e46e4c110"
+    },
+    {
+      "path": "trainer/train_pretrain.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_pretrain.py",
+      "bytes": 9382,
+      "sha256": "103e4fdbe60e2adf6905fab899e8acba35128c0cec2de9f46831ebf98e288a9c"
+    },
+    {
+      "path": "trainer/train_full_sft.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_full_sft.py",
+      "bytes": 9406,
+      "sha256": "e4259c38677ea7b710aab60cd1ef75d3429499414aa76b8188154b8d0404accd"
+    },
+    {
+      "path": "trainer/trainer_utils.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/trainer_utils.py",
+      "bytes": 9433,
+      "sha256": "a994037fb4f3cb0ad8a86ebdcbe2620045d1ca128a4c7733cb90a26aa9c2942d"
+    },
+    {
+      "path": "trainer/train_agent.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_agent.py",
+      "bytes": 32138,
+      "sha256": "676e6c392636cc2a84ffc092a0246849497353b700bbc929beb9e534aad1438a"
+    },
+    {
+      "path": "trainer/rollout_engine.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/rollout_engine.py",
+      "bytes": 10419,
+      "sha256": "04ccde11243c17e992f1d7b1fc11483e437b20a1404099c3ccd9cff5850a8502"
+    },
+    {
+      "path": "dataset/lm_dataset.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/dataset/lm_dataset.py",
+      "bytes": 11438,
+      "sha256": "7e6eb82f760d2e7db3cfbc60a74bed9a179b7d8667fd8b49e4a3c010391707ab"
+    },
+    {
+      "path": "dataset/dataset.md",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/dataset/dataset.md",
+      "bytes": 141,
+      "sha256": "58362b12bfa72d4b8bcd1ac695ee764999115cdf40d6e7b4195ca8542842c3e2"
+    },
+    {
+      "path": "trainer/train_tokenizer.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_tokenizer.py",
+      "bytes": 15200,
+      "sha256": "0d6d6dcb21a066b7cc579d2be557fa8f266f3d6e6db0f665e0cc12ce8b6f0068"
+    },
+    {
+      "path": "scripts/convert_model.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/convert_model.py",
+      "bytes": 8122,
+      "sha256": "118df87620719bee7b22b1500017f668737a3037b0caceeb886575fee25fbc51"
+    },
+    {
+      "path": "scripts/serve_openai_api.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/serve_openai_api.py",
+      "bytes": 11957,
+      "sha256": "0bf94942af70ea01175dd324335b0d5ec91f221a377b2597fc4a4b2163a85499"
+    },
+    {
+      "path": "scripts/eval_toolcall.py",
+      "url": "https://raw.githubusercontent.com/jingyaogong/minimind/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/eval_toolcall.py",
+      "bytes": 15240,
+      "sha256": "54c29f5157520f44eaa364229ceaca9cf8887c35b3ca723753fa0f900c3b4739"
+    }
+  ],
+  "local_python_package_metadata": {
+    "python": "3.11.7",
+    "packages": {
+      "torch": "2.14.1",
+      "transformers": null,
+      "tokenizers": null,
+      "datasets": null,
+      "numpy": "2.4.2",
+      "swanlab": null,
+      "fastapi": "0.135.1",
+      "uvicorn": "0.41.0"
+    },
+    "scope": "Current interpreter metadata only; imports and compatibility not tested."
+  },
+  "data_and_weights_license_status": "not_reviewed_or_downloaded"
+}
