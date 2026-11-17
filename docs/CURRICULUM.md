@@ -2,6 +2,8 @@
 
 面向愿意从基础开始学习的开发者。先掌握 Python 基本语法、C 指针和数组、二进制补码、矩阵乘法；不要求先会芯片设计。除实验 00 外，下表是待逐章编写并实现的课程，不是已完成的实验列表。
 
+课程统一采用 [仿真优先与数字电路交付原则](SIMULATION_FIRST.md)：硬件实验做 RTL/波形/综合，系统实验做 QEMU/Linux/虚拟网络。板卡、PHY 电气验证和流片不列入核心验收。网络补 NET-H1–H3 数字数据路径，PCIe IO06 改为事务级/RTL 仿真，CXL 补 CX-H1/H2 子模块与一致性模型，均待实现。
+
 ## 贯穿课程的系统基础
 
 新增 [CSAPP 全书基础模块 CS01–CS12](CSAPP_FOUNDATIONS.md)，与下方 AI 单元 00–16 并行，保持编号独立。按第三版 12 章覆盖：系统概览、信息表示、机器级程序、处理器、性能优化、存储层次、链接、异常控制流、虚拟内存、系统 I/O、网络、并发；错误处理贯穿全部实验。
@@ -29,7 +31,7 @@ LLM 优先路线为数学按需补齐 → UDL01–UDL09 → UDL11/UDL12 → 自�
 | 课程 | 知识与实验 | 阶段与前置 |
 | --- | --- | --- |
 | [网络 NET01–NET06](NETWORKING_FOUNDATIONS.md) | 分层协议、Socket、RPC、并发/重试、远程 Agent、RDMA 进阶 | S2 可并行；先 CPU 服务，远程 NPU 另验后端 |
-| [I/O 与 PCIe IO01–IO06](PCIE_IO_FOUNDATIONS.md) | 片内握手、EDU 枚举/BAR、DMA/IOMMU、中断、PCIe NPU、实机进阶 | S0 随 M1/M2；S1 在独立 Linux guest 开展 |
+| [I/O 与 PCIe IO01–IO06](PCIE_IO_FOUNDATIONS.md) | 片内握手、EDU 枚举/BAR、DMA/IOMMU、中断、PCIe NPU、事务级/RTL 进阶 | S0 随 M1/M2；S1 在独立 Linux guest 开展 |
 | [CXL CX01–CX06](CXL_MEMORY_FOUNDATIONS.md) | 协议/一致性、Type 3、地址译码、Linux region、NUMA/模型放置、高级扩展 | S3 需 PCI/Linux 内存基础，先独立 q35 guest |
 
 18 个模块均为原创实验计划，包含产物与验收门槛，尚未实现；[S0–S3](ROADMAP.md) 明确推进顺序。联网服务无需等待 PCIe/CXL，CXL 不作为首版 NPU 的前置条件；NET06、IO06、CX06 属于进阶。原有课程编号与 NPU v0 接口保持稳定。

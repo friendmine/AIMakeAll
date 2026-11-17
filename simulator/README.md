@@ -2,6 +2,8 @@
 
 目标：让 RISC-V guest 使用与 RTL 相同的 MMIO 协议运行 NPU 算子。当前没有 QEMU 补丁或已验证的 guest 启动命令。
 
+遵循 [仿真优先原则](../docs/SIMULATION_FIRST.md)。QEMU 验证系统软件，Verilator 验证数字 RTL，协议模型提供主机/网口/内存事务；初期通过相同输入与轨迹离线对照。实时联合仿真的时钟、事件、内存与复位桥接是独立后续实现，不作为首个闭环前提。
+
 实施顺序：
 
 1. 选择并锁定 QEMU 提交，确认 RV32 裸机机器的 RAM、UART、入口与 CPU 扩展。

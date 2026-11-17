@@ -2,6 +2,8 @@
 
 更新：2026-11-17。状态以本项目记录为准；外部实验成果不等于已经接入本项目，资料规划不等于功能实现。
 
+交付遵循 [仿真优先原则](SIMULATION_FIRST.md)：数字 RTL → 仿真 → 综合，系统与协议使用 QEMU/事务模型；可选数字物理设计仍在电脑内完成。核心验收不要求板卡或流片。
+
 ## 知识覆盖范围
 
 ![AIMakeAll 知识覆盖图 V3：十五个领域，新增网络、PCIe 和 CXL](images/knowledge-coverage-v3.png)
@@ -48,7 +50,7 @@ flowchart TB
         MAC[已验证：Python GEMM 与单 MAC]
         ARRAY[下一步：4×4 阵列<br/>分块、局部存储、随机对照]
         SOC[RISC-V + 总线 + NPU + 驱动]
-        PHYS[扩展：综合、布局布线、SRAM 接入<br/>FPGA / 流片按后续目标推进]
+        PHYS[扩展：综合、布局布线、SRAM 接入<br/>电脑内物理设计；实物独立可选]
         MAC --> ARRAY --> SOC --> PHYS
     end
 
@@ -74,7 +76,7 @@ flowchart TB
         NETBASE[S2 · NET01–NET04 · 可并行<br/>网络协议、双节点 CPU 服务与故障]
         NETAPP[S2 · NET05<br/>远程推理与 Agent，设备后端另验]
         CXL[S3 · CX01–CX05<br/>独立 q35 / Type 3 内存与放置]
-        ADV[进阶 IO06 / NET06 / CX06<br/>实机 PCIe、RDMA、CXL 高级功能]
+        ADV[进阶 IO06 / NET06 / CX06<br/>PCIe RTL、软件 RDMA、CXL 状态模型]
         IOBASE -.学习顺序.-> PCIBASE
         PCIBASE --> PCINPU
         PCIBASE -.PCI 与内存基础.-> CXL
@@ -168,7 +170,7 @@ flowchart TB
 5. Agent 接入 AL04/AL06 的索引和队列、OSTEP 的并发与持久化、ENG04 的检索和故障评估。
 6. LFS/RV64 Linux 按独立系统扩展推进；OSTEP 原理实验不等待完整 LFS，Linux 扩展也不阻塞 RV32 裸机闭环。
 7. IO01 随主线补片内访问与握手；IO02–IO05 用独立 Linux 环境从 EDU 进入 PCIe NPU。NET01–NET04 可先用 CPU 服务并行，NET05 再接模型、Agent 与已验收的设备后端。
-8. CXL 在 PCI/Linux 内存基础之后，以独立 x86-64 q35 + Type 3 起步；先容量和放置，再研究 NPU 可寻址性、Type 2 或多设备。RDMA 和实机高速接口为后续进阶。
+8. CXL 在 PCI/Linux 内存基础之后，以独立 x86-64 q35 + Type 3 起步；先容量和放置，再研究 NPU 可寻址性、Type 2 或多设备。网络补帧级 MAC/FIFO/CRC 数字实验，PCIe 补事务模型与可综合桥接，CXL 补译码/队列 RTL；软件 RDMA 和一致性模型为进阶，实物不作前置。
 
 SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验可使用行为内存。QEMU 功能模拟、宿主机提速和真实硬件加速分开报告。
 

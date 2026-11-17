@@ -36,6 +36,8 @@ flowchart TD
 
 ## 首版选择
 
+全项目遵循 [仿真优先原则](SIMULATION_FIRST.md)：数字模块以参考模型 → RTL 仿真 → 逻辑综合交付，物理设计可选；QEMU/Linux 验证驱动和应用。网络、PCIe、CXL 分别配置协议/事务模型，PHY 与实板不是核心依赖。QEMU 功能模型、可综合 RTL、测试台和完整标准合规须分别标明。
+
 | 层 | 默认路线 | 原因与边界 |
 | --- | --- | --- |
 | RISC-V CPU | Ibex RV32IMC，裸机 | CPU 已开源；教学重点放在系统集成。不是 Linux 平台 |

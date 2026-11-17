@@ -4,6 +4,8 @@
 
 项目仓库：[friendmine/AIMakeAll](https://github.com/friendmine/AIMakeAll)。教材以中文原创讲解为主，引用上游原始资料；实验优先支持普通电脑，不要求购买 FPGA 或 GPU。
 
+**默认采用仿真与数字电路设计路线**：硬件模块交付可综合 RTL、测试台、波形与综合结果；系统功能通过 QEMU/Linux 和虚拟网络验证。核心课程不依赖板卡或流片，高速 PHY/SerDes 使用接口模型，详见 [仿真优先与数字电路交付原则](docs/SIMULATION_FIRST.md)。
+
 ## 四条主线
 
 | 阶段 | 要回答的问题 | 交付物 | 当前状态 |

@@ -2,6 +2,8 @@
 
 目标是建立一套能从数学参考结果追溯到硬件、模型和应用的学习资料。按验收门槛推进，不用尚未测量的速度或未训练的模型作为成果。
 
+默认按 [仿真优先原则](SIMULATION_FIRST.md) 完成全部核心学习验收：数字模块交付可综合 RTL 与仿真/综合证据，协议和系统用软件模型、QEMU/Linux 与虚拟网络。实板、PHY 电气测试和流片为独立可选项。
+
 总览见 [全景规划图](PROJECT_MAP.md)。[CSAPP 基础模块](CSAPP_FOUNDATIONS.md) 贯穿四阶段：M1 重点为数值、指令、处理器与存储；M2 为链接、异常和地址空间；M3 为精度、性能与内存/I/O；M4 为进程、网络与并发。全书知识已纳入规划，新增基础实验尚未完成。
 
 ## M0：项目与共同基准（当前阶段）
@@ -89,11 +91,11 @@ ENG04 增加本地索引/Top-k、检索独立评估、请求编号、持久状�
 | 阶段 | 前置条件与对应模块 | 实验安排 | 阶段交付与验收 |
 | --- | --- | --- | --- |
 | S0 片内数据路径 | M1/M2 的矩阵、地址与状态机；IO01 | 完成 MMIO 单请求 GEMM → 总线握手/错误与数据搬运分析；DMA/中断能力后加 | CPU 发起并取回正确矩阵，非法访问与复位有证据；不改变 v0 同步轮询契约 |
-| S1 Linux PCI/PCIe | 独立 Linux guest、C/驱动基础；IO02–IO05；IO06 为实机进阶 | EDU 枚举/BAR → DMA → INTx/MSI → 自定义 PCIe NPU → C 运行时 | 驱动资源生命周期与错误回收通过，独立 PCIe ABI、数值对照、后端轨迹与成本报告齐全 |
+| S1 Linux PCI/PCIe | 独立 Linux guest、C/驱动基础；IO02–IO05；IO06 为 RTL 进阶 | EDU 枚举/BAR → DMA → INTx/MSI → 自定义 PCIe NPU → C 运行时 | 驱动资源生命周期与错误回收通过，独立 PCIe ABI、数值对照、后端轨迹与成本报告齐全 |
 | S2 网络服务并行 | CSAPP 网络、OSTEP 并发；NET01–NET05 | 回环协议 → 双 guest CPU 服务 → 有界并发/故障 → 模型与 Agent → 可选远程 NPU | 消息边界、超时/重试、身份与权限检查通过；CPU/NPU 结果和后端分开；记录吞吐、尾延迟与任务成功率 |
 | S3 CXL 内存进阶 | IO02/IO03、OSTEP 内存原理与 Linux 环境；CX01–CX05 | 独立 q35 guest → 单 Type 3 发现/译码 → region 与可访问内存 → NUMA/放置 → CPU 模型 | 区域可访问、张量读写正确、容量账本及放置证据齐全；功能、参数估算与真实性能分开 |
 
-NET06 的 RDMA/RoCE、CX06 的多设备/热插拔/Type 2，以及 IO06 的真实板卡与 PHY 按条件单独推进，不列入首版完成条件。CXL 首个实验不默认支持当前 RV64 平台；RV64 移植与 NPU 直接访问 CXL 内存另做能力与地址验收。
+NET06 优先软件 RDMA/参数模型；IO06 开展 TLP/BAR/NPU 桥 RTL 仿真与综合；CX06 以 guest 拓扑和有限状态一致性模型推进。这些进阶不依赖实物，也不列入首版完成条件。网络另补 NET-H1–H3 的 MAC/FIFO/CRC，CXL 另补 CX-H1/H2 事务与数字子模块。CXL 首个实验不默认支持当前 RV64 平台；RV64 移植与 NPU 直接访问 CXL 内存另做能力与地址验收。
 
 三条课程：[网络与分布式通信](NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe](PCIE_IO_FOUNDATIONS.md) · [CXL 与异构内存](CXL_MEMORY_FOUNDATIONS.md)。每个模块都列出产物和失败用例；目前未创建虚拟机、驱动或服务，不勾选实验完成。
 
