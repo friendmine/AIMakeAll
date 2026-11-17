@@ -17,6 +17,8 @@
 
 ## 从这里开始
 
+先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：CSAPP 系统基础贯穿硬件、模拟器、模型与 Agent。
+
 1. 阅读 [项目路线与里程碑](docs/ROADMAP.md)。
 2. 阅读 [系统架构与加速边界](docs/ARCHITECTURE.md)。
 3. 完成 [实验 00：INT8 矩阵乘法与 MAC](labs/00-int8-matmul/README.md)。
@@ -24,6 +26,7 @@
 5. 复用已有芯片开发环境前，阅读 [本地 EDA 软件、依赖与接入分析](docs/LOCAL_EDA_ENVIRONMENT.md)。
 6. 整理重复工具安装时，按 [EDA 工具链统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md) 完成迁移与验收。
 7. 进入模型与 Agent 阶段时，阅读 [MiniMind 学习与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md)，对照完整训练流程。
+8. 按阶段学习 [CSAPP 全书知识体系与项目实验](docs/CSAPP_FOUNDATIONS.md)，覆盖数值、处理器、存储、链接、异常、I/O、网络与并发。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖
