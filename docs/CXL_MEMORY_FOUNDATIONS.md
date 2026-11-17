@@ -37,6 +37,8 @@ Linux 的配置涉及固件、内核、驱动和用户策略，DAX 与系统页�
 
 ## 与现有 NPU、编译器的连接
 
+CX-H2 的译码/队列使用 [DD](DIGITAL_DESIGN_TIMING.md) 方法；CX06 状态模型按 [DV03/DV05](SYSTEMATIC_VERIFICATION.md) 写安全性质、可达性及活性前提；容量/延迟模型按 [SIM05–SIM07](SIMULATION_CREDIBILITY.md) 做独立校验、敏感性与不确定性说明。教学状态模型证明不等同于完整 CXL.cache/CXL.mem 标准合规。
+
 当前 NPU v0 的 32 位设备地址不能自动覆盖任意 CXL 地址区域。CX05 先在 CPU 路径使用扩展内存；未来 NPU 要么通过明确的可寻址暂存区搬运，要么增加经过验证的地址映射/新 ABI，并检查 DMA/IOMMU 与平台访问支持。不能只把权重放入 CXL 就声称 NPU 已接入。
 
 [AI 编译](AI_COMPILATION.md) 后续可输出张量生命周期与内存类别提示；运行时负责实际放置、暂存/迁移与失败回退，必须报告新增搬运和同步开销。NUMA 或 CXL 并不自动提高 tokens/s。

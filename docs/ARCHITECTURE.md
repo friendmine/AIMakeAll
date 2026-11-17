@@ -81,6 +81,8 @@ flowchart LR
 
 ## QEMU 的职责
 
+新增的 [DD](DIGITAL_DESIGN_TIMING.md)、[DV](SYSTEMATIC_VERIFICATION.md)、[SIM](SIMULATION_CREDIBILITY.md) 在接口边界协同：DD 定义采样/复位/握手，DV 按需求验证实现，SIM 规定时间推进、事件顺序与模型适用性。功能参考只比较承诺的事务结果，周期模型与 RTL 才在共同采样规则下比较周期；QEMU/RTL 首先做离线对照。共享 FIFO 为独立教学实验，不更改现有 MAC 复位或 NPU v0 协议。
+
 QEMU 支持 32/64 位 RISC-V 系统模拟，但机器模型决定设备与内存映射；`virt` 并非某个真实硬件 SoC 的复制品。见 [QEMU 官方说明](https://www.qemu.org/docs/master/system/target-riscv.html)。
 
 本项目计划先建立可运行软件的虚拟平台，不宣称它精确复现 Ibex 的流水线、缓存或周期。裸机代码的 ISA、链接地址、UART 和 NPU 地址必须与所选机器一致。Linux + RV64 `virt` 属于后续扩展，不能复用 RV32 裸机映像直接启动。

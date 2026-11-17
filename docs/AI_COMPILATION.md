@@ -71,6 +71,8 @@ flowchart LR
 
 ## 6. 互连与异构内存的后续连接
 
+单 Linear 贯通实验增加 [DV08](SYSTEMATIC_VERIFICATION.md) 的需求/轨迹对照和 [SIM05–SIM07](SIMULATION_CREDIBILITY.md) 的模型校验、成本敏感性与重复实验。整数逐元素一致、量化质量、设备协议正确及性能解释是独立验收项；按 [G2](ROADMAP.md) 形成同一报告，不以一种 PASS 替代其余证据。
+
 [PCIe IO05](PCIE_IO_FOUNDATIONS.md) 为计划增加新的设备能力目标，但 BAR、DMA 地址和完成通知由驱动与运行时处理；不把具体地址固化进模型包。[CXL CX05](CXL_MEMORY_FOUNDATIONS.md) 可利用 AC08 的生命周期信息形成内存类别提示，运行时另验实际放置、可寻址范围和暂存成本。[网络 NET03–NET05](NETWORKING_FOUNDATIONS.md) 在服务层传输请求与结果，首版不把远程 RPC 自动当作可任意切分的图算子。这些属于待实现扩展，不改变首个单 Linear 实验范围。
 
 ## 7. 框架阅读与来源

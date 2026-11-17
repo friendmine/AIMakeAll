@@ -6,6 +6,8 @@
 
 协议标准、官方文档、开源实现和硬件 IP 分别核验许可。可阅读标准不等于可重新分发全文；QEMU 开源不表示实际 PCIe/CXL 控制器、PHY、板卡和固件均开源。实施时逐项锁定版本与文件级许可，项目 MIT 许可仅覆盖本项目原创部分。
 
+数字设计、验证和模型方法新增 [DD](DIGITAL_DESIGN_TIMING.md)、[DV](SYSTEMATIC_VERIFICATION.md)、[SIM](SIMULATION_CREDIBILITY.md) 原创课程。参考 Verilator/Yosys/OpenSTA、OpenTitan 验证方法、SBY 入门和 gem5 事件教程，各文档保留来源链接。当前没有复制官方实验、安装形式/时序工具或引入库；采用的方法不意味着采用上游全部工具，更不继承其验证结论。
+
 | 项目 | 用途 | 许可证概况/核验入口 |
 | --- | --- | --- |
 | [Ibex](https://github.com/lowRISC/ibex) | 首选 RV32 CPU 核 | Apache-2.0；以所选提交的 LICENSE/NOTICE 为准 |

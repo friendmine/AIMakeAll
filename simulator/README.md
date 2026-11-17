@@ -4,6 +4,8 @@
 
 遵循 [仿真优先原则](../docs/SIMULATION_FIRST.md)。QEMU 验证系统软件，Verilator 验证数字 RTL，协议模型提供主机/网口/内存事务；初期通过相同输入与轨迹离线对照。实时联合仿真的时钟、事件、内存与复位桥接是独立后续实现，不作为首个闭环前提。
 
+模型方法参考 [SIM01–SIM08](../docs/SIMULATION_CREDIBILITY.md)，验证参考 [DV01–DV08](../docs/SYSTEMATIC_VERIFICATION.md)：先记录抽象层次、接口假设、时间/事件和复位 epoch，保存可重放输入，再与独立参考/RTL 对照。周期模型与 QEMU 功能模型各报适用范围；未经实测校准的参数不作为硬件性能事实。
+
 实施顺序：
 
 1. 选择并锁定 QEMU 提交，确认 RV32 裸机机器的 RAM、UART、入口与 CPU 扩展。

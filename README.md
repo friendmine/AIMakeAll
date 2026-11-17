@@ -19,9 +19,9 @@
 
 ## 知识覆盖图
 
-![AIMakeAll 知识覆盖图 V3：十五个领域，新增网络、PCIe 和 CXL](docs/images/knowledge-coverage-v3.png)
+![AIMakeAll 知识覆盖图 V4：十八个领域，新增数字设计、系统验证与仿真可信度](docs/images/knowledge-coverage-v4.png)
 
-图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十五个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
+图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十八个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
 
 ## 从这里开始
 
@@ -44,6 +44,9 @@
 15. 学习 [网络与分布式通信](docs/NETWORKING_FOUNDATIONS.md)，从双节点 CPU 服务进入远程推理与 Agent；不等待 NPU 完成。
 16. 按 [I/O 与 PCIe](docs/PCIE_IO_FOUNDATIONS.md) 从片内 MMIO、EDU 驱动推进到 Linux 虚拟 PCIe NPU。
 17. 进阶学习 [CXL 与异构内存](docs/CXL_MEMORY_FOUNDATIONS.md)，从独立 Type 3 内存实验进入模型内存放置；阶段安排见 [S0–S3 路线](docs/ROADMAP.md)。
+18. 学习 [数字设计与时序](docs/DIGITAL_DESIGN_TIMING.md)，从同步 FIFO、流水线和复位进入综合、时序与按需开展的 CDC 实验。
+19. 按 [系统化验证](docs/SYSTEMATIC_VERIFICATION.md) 建立需求、独立参考、断言、覆盖、形式/等价和故障回归证据。
+20. 学习 [仿真建模与可信度](docs/SIMULATION_CREDIBILITY.md)，为同一实验建立功能/周期模型、确定性重放、校验与敏感性分析；三条课程按 G0–G3 贯穿项目。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖

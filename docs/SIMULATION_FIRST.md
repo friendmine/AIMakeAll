@@ -4,6 +4,8 @@
 
 ## 交付方式
 
+本原则由三条课程落实：[DD01–DD08 数字设计与时序](DIGITAL_DESIGN_TIMING.md) 负责电路与约束，[DV01–DV08 系统化验证](SYSTEMATIC_VERIFICATION.md) 负责正确性证据，[SIM01–SIM08 仿真建模与可信度](SIMULATION_CREDIBILITY.md) 负责模型边界、时间与结论。三者共用同步 FIFO，再迁移到单 Linear；按 [G0–G3](ROADMAP.md) 验收，均尚未实现。
+
 硬件模块以可综合的 Verilog/SystemVerilog 为目标，先通过软件参考和 RTL 仿真，再做综合与可选物理设计。高层协议与系统服务使用软件或事务级模型，不强求把 Linux、TCP/IP 协议栈和模型训练全部转换成电路。
 
 “生成数字电路”指从硬件描述到逻辑网表，进一步可生成布局布线结果；它不等于把任意 Python/C 模型自动转换成完整芯片。行为模型、测试台和 QEMU 设备代码通常不是可综合设计，必须与 DUT（被测硬件）分别标记。

@@ -28,6 +28,8 @@
 
 ## NPU 传输接口的演进契约
 
+IO06 的寄存器/队列设计复用 [DD](DIGITAL_DESIGN_TIMING.md)，TLP 请求/完成、DMA 边界与复位用 [DV](SYSTEMATIC_VERIFICATION.md) 的需求/参考/性质/故障矩阵验证；事务与周期轨迹按 [SIM](SIMULATION_CREDIBILITY.md) 对齐。只对选定数字接口内的子集形成证据，未建模的信用流控、重放或 PHY 不能据此通过。
+
 保留 v0 的行主序 INT8 × INT8 → INT32、每次命令清零、维度上限和错误语义。PCIe 版本必须单独规定 ABI 版本、寄存器偏移/宽度、DMA 地址位宽、能力发现、状态机和复位后的完成语义；它不是修改一个基地址就能直接复用的裸机驱动。
 
 用户态只提交受校验的形状、缓冲区句柄与范围。内核管理 DMA 映射与生命周期，设备使用 DMA 地址；不得传入宿主指针或假定 guest 物理地址总等于 DMA 地址。[Linux DMA API 指南](https://docs.kernel.org/core-api/dma-api-howto.html)

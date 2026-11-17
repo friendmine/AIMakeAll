@@ -6,9 +6,9 @@
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图 V3：十五个领域，新增网络、PCIe 和 CXL](images/knowledge-coverage-v3.png)
+![AIMakeAll 知识覆盖图 V4：十八个领域，新增数字设计、系统验证与仿真可信度](images/knowledge-coverage-v4.png)
 
-这张图按十五个知识领域展示范围，涵盖算法、CSAPP、OSTEP、LFS、UDL、MiniMind、AI 编译与项目实验，并新增互连、网络通信和异构内存。四个工程专项补数值、数据、性能验证和检索可靠性。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v3.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
+这张图按十八个知识领域展示范围。V4 在原有算法、系统、模型与互连体系上，补入 DD 数字设计、DV 系统化验证和 SIM 仿真可信度；三条课程共用同步 FIFO，再贯穿单 Linear 和系统扩展。四个工程专项继续汇总数值、数据、性能和检索验收。覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v4.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
 
 ## 项目实施依赖
 
@@ -46,6 +46,23 @@ flowchart TB
     ROOT --> EDA
     ROOT --> SPEC
 
+    subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
+        DD[DD01–DD08<br/>流水线、握手、FIFO、复位、CDC 与时序]
+        DV[DV01–DV08<br/>规格、参考、断言、覆盖、形式与故障]
+        SCM[SIM01–SIM08<br/>事件、周期、重放、校验与敏感性]
+        FIFO[G0 / G1 共同起点<br/>固定同步 FIFO 契约、模型、RTL 与证据]
+        EVID[G2 / G3 证据报告<br/>正确性、支持范围、时间模型与可信度]
+        DD --> FIFO
+        DV --> FIFO
+        SCM --> FIFO
+        FIFO --> EVID
+    end
+
+    ROOT --> DD
+    ROOT --> DV
+    ROOT --> SCM
+    SPEC -.数值与接口约束.-> DV
+
     subgraph HARDWARE[M1 · RISC-V + NPU]
         MAC[已验证：Python GEMM 与单 MAC]
         ARRAY[下一步：4×4 阵列<br/>分块、局部存储、随机对照]
@@ -55,6 +72,7 @@ flowchart TB
     end
 
     C1 --> ARRAY
+    FIFO -.复用握手与验证方法.-> ARRAY
     SPEC --> MAC
     EDA -.验证与物理基础.-> PHYS
 
@@ -67,6 +85,8 @@ flowchart TB
     C2 --> QEMU
     OS -.内存与请求生命周期.-> RT
     SPEC --> QEMU
+    SCM -.时间与重放契约.-> QEMU
+    DV -.需求与测试追溯.-> QEMU
     SOC -.共同 ABI 与向量.-> QEMU
 
     subgraph CONNECT[互连、通信与内存系统 · 实验待实现]
@@ -92,6 +112,9 @@ flowchart TB
     OS -.并发与恢复.-> NETBASE
     OS -.内存原理.-> CXL
     ROOT --> CONNECT
+    DD -.数字子模块.-> ADV
+    DV -.协议与故障验收.-> ADV
+    SCM -.模型边界与校验.-> ADV
 
     subgraph LINUX[系统扩展 · Linux 构建与服务，待实施]
         LXBASE[Linux x86-64 环境复现 LFS<br/>工具链 → 用户态 → 内核与启动]
@@ -135,6 +158,7 @@ flowchart TB
     DEPLOY[模型推理闭环<br/>CPU / QEMU / RTL 数值对照<br/>prefill 与 decode 分开评测]
     PLAN --> DEPLOY
     RT --> DEPLOY
+    EVID -.G2 验收.-> DEPLOY
     CXL -.CPU 模型内存放置扩展.-> DEPLOY
     SOC -.硬件对照.-> DEPLOY
     U2 -.质量评估.-> DEPLOY
@@ -156,6 +180,7 @@ flowchart TB
     LXSVC -.后续部署环境.-> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
     PHYS -.物理验收证据.-> DONE
+    EVID -.G3 分层证据.-> DONE
     ENG[四个工程专项 · 实验待实现<br/>数值量化、数据训练、性能验证、检索可靠性]
     ROOT --> ENG
     ENG -.贯穿 M1–M4 的验收.-> DONE
@@ -163,7 +188,7 @@ flowchart TB
 
 ## 下一步与并行关系
 
-1. 硬件推进 4×4 阵列，结合 CS02/CS04/CS06 和 ENG03 学习数值、控制、存储与验证。
+1. DD/DV/SIM 先共用 G0/G1 同步 FIFO，形成接口、参考、RTL、覆盖、故障与重放模板；并行推进 4×4 阵列，结合 CS02/CS04/CS06 和 ENG03 学习数值、控制、存储与验证。
 2. 软件并行做 AL07 计算图检查、C 整数参考和单线性层的量化/分块计划；先有可检查的计划解释器，再考虑 MLIR。
 3. 围绕 GEMM/MMIO 建立 QEMU 设备与运行时，打通单线性层的 CPU/QEMU/RTL 对照；ENG01/ENG03 分别验收数值和性能。
 4. UDL 与 MiniMind 小模型训练可并行，先补 ENG02 数据与恢复实验；模型成熟后复用同一编译与运行时路径。
@@ -174,9 +199,12 @@ flowchart TB
 
 SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验可使用行为内存。QEMU 功能模拟、宿主机提速和真实硬件加速分开报告。
 
+[G0–G3](ROADMAP.md) 是各阶段的证据门槛：契约 → FIFO → 单 Linear → 系统扩展。单时钟主线不等待 DD06 异步 FIFO 或 SIM08 实时联仿；工具尚未支持或尚未跑通的检查保留未验证状态。
+
 ## 详细路线
 
 - [知识覆盖文字索引](KNOWLEDGE_COVERAGE.md)
+- [数字设计 DD01–DD08](DIGITAL_DESIGN_TIMING.md) · [系统化验证 DV01–DV08](SYSTEMATIC_VERIFICATION.md) · [仿真可信度 SIM01–SIM08](SIMULATION_CREDIBILITY.md)
 - [算法与数据结构](ALGORITHMS_FOUNDATIONS.md) · [OSTEP 操作系统原理](OSTEP_FOUNDATIONS.md)
 - [AI 编译与单线性层贯通实验](AI_COMPILATION.md) · [四个工程专项](ENGINEERING_BRIDGES.md)
 - [网络 NET01–NET06](NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe IO01–IO06](PCIE_IO_FOUNDATIONS.md) · [CXL CX01–CX06](CXL_MEMORY_FOUNDATIONS.md)
