@@ -13,3 +13,7 @@
 必须覆盖复位、非法宽度、越界 DMA、形状错误、缓冲区重叠和状态机。参考 [ABI 草案](../specs/npu-v0.md)。若采用同步设备回调，须明确 guest 无法观察中间 BUSY 状态的限制；后续异步行为需增加时序与复位测试。
 
 QEMU 内部设备代码沿用对应上游文件的许可要求，不直接套用根目录 MIT 许可。功能设备不是周期精确模型，性能报告遵循 [架构文档](../docs/ARCHITECTURE.md)。
+
+## Linux 系统扩展
+
+新增 [LFS 与 RV64 Linux 路线](../docs/LFS_FOUNDATIONS.md)：先在独立 Linux 环境学习系统构建，再建立 RV64 `virt` 的固件、内核和 rootfs，最后接 NPU 设备描述与 Linux 驱动。极小 initramfs 启动检查与完整 LFS 系统分别验收；RV64 Linux 不替代首版 RV32 裸机实验。目前尚未构建镜像或验证启动。

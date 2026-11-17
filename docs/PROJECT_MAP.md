@@ -8,6 +8,7 @@ flowchart TB
 
     subgraph FOUNDATION[共同基础]
         CS[CSAPP 全书体系已映射<br/>CS01–CS12 实验待实现]
+        LFS[Linux From Scratch<br/>11 章与附录已映射，实验待实现]
         UDL[Understanding Deep Learning<br/>21 章与附录已映射，实验待实现]
         U1[模型核心<br/>表达、损失、梯度、优化、残差与注意力]
         U2[评估与能力边界<br/>泛化、消融、伦理；RL 后续扩展]
@@ -26,6 +27,7 @@ flowchart TB
     end
 
     ROOT --> CS
+    ROOT --> LFS
     ROOT --> UDL
     ROOT --> EDA
     ROOT --> SPEC
@@ -51,6 +53,20 @@ flowchart TB
     C2 --> QEMU
     SPEC --> QEMU
     SOC -.共同 ABI 与向量.-> QEMU
+
+    subgraph LINUX[系统扩展 · Linux 构建与服务，待实施]
+        LXBASE[Linux x86-64 环境复现 LFS<br/>工具链 → 用户态 → 内核与启动]
+        LXRV[独立 RV64 QEMU Linux<br/>固件、设备树与 rootfs 适配]
+        LXDRV[Linux NPU 驱动<br/>缓冲区、用户接口与错误回收]
+        LXSVC[推理与工具服务<br/>启动依赖、权限、日志与重启]
+        LXBASE -.构建方法迁移.-> LXRV
+        LXRV --> LXDRV --> LXSVC
+    end
+
+    LFS --> LXBASE
+    C2 -.系统原理.-> LXBASE
+    SPEC -.数值与设备语义.-> LXDRV
+    LXDRV -.Linux 后端.-> RT
 
     subgraph MODEL[M3 · 从零 LLM 与 MiniMind]
         LEARN[自写小模型 + MiniMind 参考<br/>资料已纳入，训练待实施]
@@ -80,6 +96,7 @@ flowchart TB
     C2 -.异常与取消.-> TOOL
     DEPLOY --> APP
     U2 --> APP
+    LXSVC -.后续部署环境.-> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
     PHYS -.物理验收证据.-> DONE
 ```
@@ -90,12 +107,14 @@ flowchart TB
 2. 同期建立 C 构建追踪与 UDL 线性回归/小 MLP 实验，再进入自写 Transformer 与 MiniMind 小模型 CPU 环境；两套基础按需学习，不等待全书读完。
 3. 围绕 GEMM/MMIO 接口逐步建立 QEMU 设备与运行时，再接量化模型。
 4. 最后把模型推理接入受限 Agent，补文件、网络、并发和故障处理。
+5. LFS 从独立 Linux 环境和工具链学习起步，后续扩展 RV64 Linux 与服务镜像；不阻塞 RV32 裸机闭环，也不将 x86-64 镜像直接用于 RISC-V。
 
 SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验可使用行为内存。QEMU 功能模拟、宿主机提速和真实硬件加速分开报告。
 
 ## 详细路线
 
 - [CSAPP 全书知识体系与项目实验](CSAPP_FOUNDATIONS.md)
+- [Linux From Scratch 知识体系与系统扩展](LFS_FOUNDATIONS.md)
 - [Understanding Deep Learning 知识体系与项目实验](UDL_FOUNDATIONS.md)
 - [课程目录](CURRICULUM.md) · [里程碑](ROADMAP.md) · [系统架构](ARCHITECTURE.md)
 - [本地 EDA 环境](LOCAL_EDA_ENVIRONMENT.md) · [工具统一方案](EDA_TOOLCHAIN_CONSOLIDATION.md)

@@ -40,6 +40,12 @@ Ibex 是面向嵌入式控制的开源 32 位 RISC-V 核，见 [上游项目](ht
 
 Gemmini 作为后续对照学习材料：它属于 Chipyard/Chisel 生态，其集成方式和指令接口与本项目 MMIO 路线不同，不能直接当作 Ibex 外设插入。见 [Gemmini 上游](https://github.com/ucb-bar/gemmini)。
 
+## Linux 系统构建扩展
+
+[Linux From Scratch](LFS_FOUNDATIONS.md) 补充工具链自举、用户态、内核与启动知识。基础复现采用独立 Linux x86-64 环境；RV64 Linux/QEMU 为后续适配线，单独配置固件、设备树、内核、rootfs 和 Linux NPU 驱动。初期裸机固件与 Linux 用户进程分别构建，共享数值规范，不共享未经适配的二进制和设备访问代码。
+
+Linux 路线中由内核驱动管理设备资源与缓冲区，用户态 C 运行时通过明确接口提交计算。模型训练留在宿主环境；guest 的推理与工具服务独立验收启动、权限、日志、停止和重启。目前尚无 LFS 镜像或 Linux 驱动实现。
+
 ## QEMU 的职责
 
 QEMU 支持 32/64 位 RISC-V 系统模拟，但机器模型决定设备与内存映射；`virt` 并非某个真实硬件 SoC 的复制品。见 [QEMU 官方说明](https://www.qemu.org/docs/master/system/target-riscv.html)。

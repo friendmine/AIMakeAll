@@ -12,6 +12,7 @@
 - [x] 盘点既有开源芯片开发环境，纳入 [工具依赖、版本隔离与接入方案](LOCAL_EDA_ENVIRONMENT.md)。
 - [x] 纳入 CSAPP 12 章的知识映射、原创实验计划与更新后的全景图。
 - [x] 纳入 [Understanding Deep Learning 的 21 章及附录](UDL_FOUNDATIONS.md)，建立模型理论、项目实验与 MiniMind/NPU/Agent 的连接。
+- [x] 纳入 [Linux From Scratch 的 11 章及附录](LFS_FOUNDATIONS.md)，建立工具链、Linux 构建和 RV64 系统扩展路线。
 - [ ] 在 GitHub 上运行首次 CI（需要将本地内容推送后才能触发）。
 
 验收：`make test`、`make demo`、`make rtl-test` 成功；这些命令不代表完整 RISC-V SoC 已完成。
@@ -36,6 +37,12 @@
 5. 最后加入可选宿主机优化后端，分别记录功能正确性和端到端耗时。
 
 验收：真实 guest 程序读写虚拟 NPU、获得结果并处理错误。必须记录 QEMU 提交、机器、CPU、guest 构建参数及宿主机配置。Python 参考函数不能充当 QEMU 集成完成的证据。
+
+### M2 扩展：LFS 与 RV64 Linux
+
+按 [LFS 阶段 LF1–LF5](LFS_FOUNDATIONS.md) 推进：独立 Linux 构建环境 → 工具链与临时系统 → 基础 LFS 冷启动 → RV64 Linux 适配 → NPU 驱动与 AI 服务。先在 x86-64 基准环境理解构建流程，再对 RV64 固件、内核、rootfs 和用户态 ABI 单独验收。
+
+该扩展不改变 M1/M2 的 Ibex RV32 裸机目标。只有 Linux 启动、设备驱动、GEMM 对照、模型推理和服务生命周期分别通过，才能宣称 Linux AI 系统接通；当前仅完成文档规划。
 
 ## M3：从零 LLM 与加速器部署
 
