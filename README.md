@@ -22,6 +22,7 @@
 3. 完成 [实验 00：INT8 矩阵乘法与 MAC](labs/00-int8-matmul/README.md)。
 4. 按 [课程目录](docs/CURRICULUM.md) 开始四阶段学习。
 5. 复用已有芯片开发环境前，阅读 [本地 EDA 软件、依赖与接入分析](docs/LOCAL_EDA_ENVIRONMENT.md)。
+6. 整理重复工具安装时，按 [EDA 工具链统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md) 完成迁移与验收。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖
