@@ -34,6 +34,8 @@
 
 ## 参考读物与配套资料
 
+本轮四组深化来源分别保存于 [PERF-E](ENGINEERING_BRIDGES.md)、[MEM-E](ARCHITECTURE.md)、[PPA-E](DIGITAL_DESIGN_TIMING.md)、[AGQ-E](../agents/README.md)：MIT 6.172、LLVM 向量化、gem5 存储/Garnet、OpenSTA 功耗示例、信息检索评价与 ReAct 论文。只链接方法资料并编写原创实验计划；未引入 gem5、并行库、评判模型、工艺库或外部任务集。运行或复用具体实现时按本页要求锁定版本与许可，不把书籍/论文可读等同于可再分发。
+
 [Build a Large Language Model (From Scratch)](https://www.manning.com/books/build-a-large-language-model-from-scratch) 已纳入 [模型主线的章节与实验映射](../models/README.md)。本次核对官方仓库目录、部分源码与根 [LICENSE.txt](https://github.com/rasbt/LLMs-from-scratch/blob/main/LICENSE.txt)：该声明以 Apache-2.0 为基础，并明确排除相关书籍和图片，不能作为书稿或所有配套资产的统一授权。本轮仅保存原创规划与链接，未复制源码、数据、权重或插图；`main` 为阅读入口，实施时再锁定具体提交与依赖并逐项核验。
 
 四组深化实验的来源随原课程管理：[体系结构与存储](ARCHITECTURE.md) 链接 MIT 6.823、gem5 MSI 与 Linux DMA 文档；[数学](UDL_FOUNDATIONS.md) 继续连接 UDL/算法资料；[软件正确性](SYSTEMATIC_VERIFICATION.md) 链接 LLVM 检测器文档；[持久状态](ENGINEERING_BRIDGES.md) 链接 SQLite 原子提交/隔离说明。SQLite 只是本地状态库的候选，检测器与数值库须在实际引入时记录版本、平台与许可；本轮未下载上游实现或增加运行依赖，实验代码将由项目原创。

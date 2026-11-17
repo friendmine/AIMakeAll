@@ -40,6 +40,8 @@ SIM03 复用 DD03 的接口与复位规格。周期模型每个上升沿先读�
 
 ## 工具与来源
 
+新增深化实验复用本课程证据规则：[PERF-E](ENGINEERING_BRIDGES.md) 区分计时、周期与重叠假设；[MEM-E](ARCHITECTURE.md) 对齐存储/互连请求、依赖与公平性；[PPA-E](DIGITAL_DESIGN_TIMING.md) 标明库、活动、设计范围及估算误差；[AGQ-E](../agents/README.md) 固定留出任务和比较预算。它们均待实现，共用原始输入与报告，不把重复运行、波形存在或参数来自文档当成真实性已获验证。
+
 - [gem5 事件驱动教程](https://www.gem5.org/documentation/learning_gem5/part2/events/)：事件、时间和调度的原始方法参考。首个调度器自写，不把 gem5 安装设为前置。
 - [Verilator 概述](https://verilator.org/guide/latest/overview.html)：RTL 模型执行与波形；仿真器墙钟速度与目标硬件周期区别记录。
 - [QEMU CXL 文档](https://www.qemu.org/docs/master/system/devices/cxl.html)：功能模型范围及一致性限制，配合 [CXL 课程](CXL_MEMORY_FOUNDATIONS.md) 使用。

@@ -23,7 +23,7 @@
 
 图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十八个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
 
-在现有十八个领域内进一步补充 [体系结构与存储系统](docs/ARCHITECTURE.md)、[数学基础](docs/UDL_FOUNDATIONS.md)、[软件正确性与可复现工程](docs/SYSTEMATIC_VERIFICATION.md)、[持久状态与安全](docs/ENGINEERING_BRIDGES.md)，每组六项子实验，共 24 项待实现计划。保持一级目录与知识领域不变；详细实验、产物、验收和接入顺序见 [课程目录](docs/CURRICULUM.md) 与 [里程碑](docs/ROADMAP.md)。
+现有十八个领域内的深化实验已扩展为八组、48 项待实现计划：体系结构与存储、数学、软件正确性与复现、持久状态与安全，以及本轮补充的 [并行计算与性能工程](docs/ENGINEERING_BRIDGES.md)、[存储控制器与片上互连](docs/ARCHITECTURE.md)、[功耗能耗与面积权衡](docs/DIGITAL_DESIGN_TIMING.md)、[Agent 检索与决策质量](agents/README.md)。保持一级目录与知识领域不变；详细实验、产物、验收和接入顺序见 [课程目录](docs/CURRICULUM.md) 与 [里程碑](docs/ROADMAP.md)。
 
 ## 从这里开始
 

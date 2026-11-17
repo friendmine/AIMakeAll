@@ -106,6 +106,8 @@ QEMU 设备处理的是 guest 地址，不能将其直接转为宿主机指针�
 
 ## 6. 学习顺序与四阶段依赖
 
+CS05/CS06/CS12 的性能与并发进一步接 [PERF-E1–E6](ENGINEERING_BRIDGES.md)：先正确标量与基线，再分块、向量化、线程和流水。CS06 的存储连接 [MEM-E1–E6](ARCHITECTURE.md) 的时序/调度/仲裁模型；宿主优化不推定目标 RISC-V 具有相同指令或线程能力。新增实验均待实现。
+
 现有模块增加两组深化入口：[ARCH-E1–E6](ARCHITECTURE.md) 展开 CS04–CS06 的数据流、存储层次、可见性和性能模型；[SW-E1–E6](SYSTEMATIC_VERIFICATION.md) 展开 CS02/CS03/CS09/CS10 的 C 语义、坏包校验、所有权、自动检测与可复现构建。CS10–CS12 的持久任务与权限实验接 [STATE-E1–E6](ENGINEERING_BRIDGES.md)。均为原创待实现计划，不是官方 Labs 答案或新增章节。
 
 | 项目阶段 | 优先学习 | 与现有课程的连接 |

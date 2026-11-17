@@ -10,7 +10,7 @@
 
 这张图按十八个知识领域展示范围。V4 在原有算法、系统、模型与互连体系上，补入 DD 数字设计、DV 系统化验证和 SIM 仿真可信度；三条课程共用同步 FIFO，再贯穿单 Linear 和系统扩展。四个工程专项继续汇总数值、数据、性能和检索验收。覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v4.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
 
-本轮保持十八个领域和一级目录，深化体系结构与存储、数学、软件正确性与复现、持久状态与安全，共 24 个待实现子实验。V4 范围图保留，下方实施图在既有节点中标明对应实验；课程入口与顺序见图后的映射表。
+本轮保持十八个领域和一级目录，在 ARCH/MATH/SW/STATE 四组之上补入 PERF/MEM/PPA/AGQ 四组，共八组、48 个待实现深化子实验。V4 范围图保留，下方实施图在既有节点中标明性能、存储互连、功耗面积和 Agent 质量的接入位置；课程入口与顺序见图后的映射表。
 
 ## 项目实施依赖
 
@@ -49,7 +49,7 @@ flowchart TB
     ROOT --> SPEC
 
     subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
-        DD[DD01–DD08<br/>流水线、握手、FIFO、复位、CDC 与时序]
+        DD[DD01–DD08 + PPA-E1–E6<br/>数字设计、时序、活动与面积能耗权衡]
         DV[DV01–DV08 + SW-E1–E6<br/>验证、软件正确性与可复现工程]
         SCM[SIM01–SIM08<br/>事件、周期、重放、校验与敏感性]
         FIFO[G0 / G1 共同起点<br/>固定同步 FIFO 契约、模型、RTL 与证据]
@@ -68,7 +68,7 @@ flowchart TB
     subgraph HARDWARE[M1 · RISC-V + NPU]
         MAC[已验证：Python GEMM 与单 MAC]
         ARRAY[下一步：4×4 阵列<br/>ARCH-E1/E2 数据流、局部存储与 bank]
-        SOC[RISC-V + 总线 + NPU + 驱动]
+        SOC[RISC-V + 总线 + NPU + 驱动<br/>MEM-E 事务、仲裁与存储模型扩展]
         PHYS[扩展：综合、布局布线、SRAM 接入<br/>电脑内物理设计；实物独立可选]
         MAC --> ARRAY --> SOC --> PHYS
     end
@@ -80,7 +80,7 @@ flowchart TB
 
     subgraph SIM[M2 · QEMU 与软件运行时]
         QEMU[RISC-V 虚拟平台与自定义 NPU 设备]
-        RT[C 运行时<br/>SW-E 输入校验、所有权与错误恢复]
+        RT[C 运行时<br/>SW-E 正确性与 PERF-E 性能基准]
         QEMU --> RT
     end
 
@@ -169,7 +169,7 @@ flowchart TB
 
     subgraph AGENT[M4 · Agent 与服务]
         TOOL[受限工具、协议与任务状态<br/>STATE-E1–E6 持久化、恢复与安全]
-        APP[自训练模型决策 + 工具执行<br/>加速后端接入与独立任务评测]
+        APP[自训练模型决策 + 工具执行<br/>AGQ-E1–E6 检索、决策与质量评测]
         TOOL --> APP
     end
 
@@ -197,8 +197,14 @@ flowchart TB
 | UDL 附录 / 算法 / 数值 | [MATH-E1–E6](UDL_FOUNDATIONS.md) | 不变量与矩阵先按需补齐，再梯度/优化/概率，数值与统计贯穿评估 |
 | CSAPP / DV08 / 运行时 | [SW-E1–E6](SYSTEMATIC_VERIFICATION.md) | C 参考和环境清单 → 模型包校验 → 故障/自动检测 → 独立重建与跨层回归 |
 | OSTEP / ENG04 / 网络与 Agent | [STATE-E1–E6](ENGINEERING_BRIDGES.md) | 规则 Agent + 权限 + 单机状态库 → 模拟副作用崩溃恢复 → 远端未知结果/安全故障 → 模型接入 |
+| CSAPP / ENG03 / 运行时 | [PERF-E1–E6](ENGINEERING_BRIDGES.md) | 正确 C 基线 → 分块/SIMD/线程 → 多层性能报告；流水重叠需独立机制 |
+| 体系结构 / S0 / 仿真 | [MEM-E1–E6](ARCHITECTURE.md) | 固定事务 → 两来源仲裁 → DRAM 调度 → 小 NoC 模型与联合瓶颈分析 |
+| DD07 / ENG03 / 物理扩展 | [PPA-E1–E6](DIGITAL_DESIGN_TIMING.md) | 比较契约/面积/时序 → 活动核验 → 功耗/任务能量 → 多目标选择；依证据分层 |
+| ENG04 / 模型评估 / Agent | [AGQ-E1–E6](../agents/README.md) | 标注/检索 → 上下文/动作/终止 → 多步策略 → 质量成本消融；规则先行 |
 
 各组均待实现，详细阶段门槛见 [里程碑中的接入节奏](ROADMAP.md)。先形成一个可验收的小闭环，不要求学完全部新子实验才启动主线。
+
+四组新增实验共用已有 GEMM、FIFO、模型与任务资产：PERF 提供公平基准，MEM 解释等待和搬运，PPA 在指定库/范围内比较资源与能耗，AGQ 判断计算与检索是否改善任务结果。第一批只补共同输入/计时/事务/设计范围和任务标注，随后沿下方原主线实现；无板卡和完整工艺分析也能推进功能闭环。
 
 1. DD/DV/SIM 先共用 G0/G1 同步 FIFO，形成接口、参考、RTL、覆盖、故障与重放模板；并行推进 4×4 阵列，结合 CS02/CS04/CS06 和 ENG03 学习数值、控制、存储与验证。
 2. 软件并行做 AL07 计算图检查、C 整数参考和单线性层的量化/分块计划；先有可检查的计划解释器，再考虑 MLIR。
