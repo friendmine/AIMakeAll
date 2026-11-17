@@ -17,7 +17,7 @@
 
 ## 从这里开始
 
-先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：CSAPP 系统基础贯穿硬件、模拟器、模型与 Agent。
+先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：CSAPP 提供计算机系统基础，Understanding Deep Learning 提供模型与学习理论，两者贯穿硬件、模拟器、模型与 Agent。
 
 1. 阅读 [项目路线与里程碑](docs/ROADMAP.md)。
 2. 阅读 [系统架构与加速边界](docs/ARCHITECTURE.md)。
@@ -27,6 +27,7 @@
 6. 整理重复工具安装时，按 [EDA 工具链统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md) 完成迁移与验收。
 7. 进入模型与 Agent 阶段时，阅读 [MiniMind 学习与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md)，对照完整训练流程。
 8. 按阶段学习 [CSAPP 全书知识体系与项目实验](docs/CSAPP_FOUNDATIONS.md)，覆盖数值、处理器、存储、链接、异常、I/O、网络与并发。
+9. 学习 [Understanding Deep Learning 知识体系](docs/UDL_FOUNDATIONS.md)，覆盖 21 章与数学/概率附录，连接从零模型、MiniMind、NPU 部署和 Agent 评估。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖

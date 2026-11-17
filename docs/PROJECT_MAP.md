@@ -8,6 +8,10 @@ flowchart TB
 
     subgraph FOUNDATION[共同基础]
         CS[CSAPP 全书体系已映射<br/>CS01–CS12 实验待实现]
+        UDL[Understanding Deep Learning<br/>21 章与附录已映射，实验待实现]
+        U1[模型核心<br/>表达、损失、梯度、优化、残差与注意力]
+        U2[评估与能力边界<br/>泛化、消融、伦理；RL 后续扩展]
+        U3[广度选修<br/>CNN、GNN、生成模型]
         C1[第 1–6 章<br/>数值、机器代码、处理器、性能、存储]
         C2[第 7–9 章<br/>链接、异常控制流、虚拟内存]
         C3[第 10–12 章<br/>I/O、网络、并发]
@@ -16,9 +20,13 @@ flowchart TB
         CS --> C1
         CS --> C2
         CS --> C3
+        UDL --> U1
+        UDL --> U2
+        UDL --> U3
     end
 
     ROOT --> CS
+    ROOT --> UDL
     ROOT --> EDA
     ROOT --> SPEC
 
@@ -52,11 +60,15 @@ flowchart TB
     end
 
     C1 --> LEARN
+    U1 --> LEARN
+    U1 --> TRAIN
     C2 -.内存与加载.-> QUANT
     DEPLOY[模型推理闭环<br/>CPU / QEMU / RTL 数值对照<br/>prefill 与 decode 分开评测]
     QUANT --> DEPLOY
     RT --> DEPLOY
     SOC -.硬件对照.-> DEPLOY
+    U2 -.质量评估.-> DEPLOY
+    U3 -.后续算子负载.-> ARRAY
 
     subgraph AGENT[M4 · Agent 与服务]
         TOOL[受限工具、协议、进程与并发<br/>计算、检索、实验结果查询]
@@ -67,6 +79,7 @@ flowchart TB
     C3 --> TOOL
     C2 -.异常与取消.-> TOOL
     DEPLOY --> APP
+    U2 --> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
     PHYS -.物理验收证据.-> DONE
 ```
@@ -74,7 +87,7 @@ flowchart TB
 ## 下一步与并行关系
 
 1. 硬件推进 4×4 阵列，结合 CS02/CS04/CS06 学习数值、控制与存储。
-2. 同期建立 C 构建追踪和 MiniMind 小模型 CPU 环境；CSAPP 基础按需学习，不等待全书读完。
+2. 同期建立 C 构建追踪与 UDL 线性回归/小 MLP 实验，再进入自写 Transformer 与 MiniMind 小模型 CPU 环境；两套基础按需学习，不等待全书读完。
 3. 围绕 GEMM/MMIO 接口逐步建立 QEMU 设备与运行时，再接量化模型。
 4. 最后把模型推理接入受限 Agent，补文件、网络、并发和故障处理。
 
@@ -83,6 +96,7 @@ SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验
 ## 详细路线
 
 - [CSAPP 全书知识体系与项目实验](CSAPP_FOUNDATIONS.md)
+- [Understanding Deep Learning 知识体系与项目实验](UDL_FOUNDATIONS.md)
 - [课程目录](CURRICULUM.md) · [里程碑](ROADMAP.md) · [系统架构](ARCHITECTURE.md)
 - [本地 EDA 环境](LOCAL_EDA_ENVIRONMENT.md) · [工具统一方案](EDA_TOOLCHAIN_CONSOLIDATION.md)
 - [MiniMind 学习与部署](MINIMIND_INTEGRATION.md)

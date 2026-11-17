@@ -11,6 +11,7 @@
 - [x] 提供纯 Python 参考实现、边界测试和单个 MAC RTL 实验。
 - [x] 盘点既有开源芯片开发环境，纳入 [工具依赖、版本隔离与接入方案](LOCAL_EDA_ENVIRONMENT.md)。
 - [x] 纳入 CSAPP 12 章的知识映射、原创实验计划与更新后的全景图。
+- [x] 纳入 [Understanding Deep Learning 的 21 章及附录](UDL_FOUNDATIONS.md)，建立模型理论、项目实验与 MiniMind/NPU/Agent 的连接。
 - [ ] 在 GitHub 上运行首次 CI（需要将本地内容推送后才能触发）。
 
 验收：`make test`、`make demo`、`make rtl-test` 成功；这些命令不代表完整 RISC-V SoC 已完成。
@@ -38,6 +39,8 @@
 
 ## M3：从零 LLM 与加速器部署
 
+理论基础：[UDL 学习路线](UDL_FOUNDATIONS.md)。先用小网络理解损失、梯度、优化和泛化，再进入残差与 Transformer；量化、导出及硬件算子映射为项目补充实验。
+
 参考线：[MiniMind 学习与接入](MINIMIND_INTEGRATION.md)。本项目自写小模型主线保留，MiniMind 用于完整训练流程对照和后续部署；已固定审阅提交，训练、量化和设备接入尚未实施。
 
 1. 用来源清晰的小型文本集完成 tokenizer、数据切分、bigram 基线。
@@ -49,6 +52,8 @@
 验收：可从公开配方重建权重；验证损失优于 bigram；量化相对困惑度增幅的初始目标不超过 10%，超标就记录失败并调整量化方案。必须实测 prefill 与 decode，报告搬运开销和 CPU 回退比例。
 
 ## M4：建立 Agent
+
+结合 UDL08/UDL21 建立独立评估和能力边界；UDL19 的强化学习作为后续扩展，不作为首版工具调用的前置条件。
 
 结合 MiniMind 的对话模板与工具调用示例学习协议，优先自有受限工具 SFT 与任务评测；其示例模拟数据和额外奖励模型须明确标记，Agent RL 为后续扩展。
 

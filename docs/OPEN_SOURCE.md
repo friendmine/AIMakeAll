@@ -29,3 +29,5 @@
 ## 参考读物与配套资料
 
 [CSAPP《深入理解计算机系统》](https://csapp.cs.cmu.edu/3e/) 作为系统基础参考，已建立 [12 章知识映射与原创实验计划](CSAPP_FOUNDATIONS.md)。书籍并非本项目的开源组件；官方自学实验、示例及配套资料也应按各自条款核验。当前只提供链接和原创规划，不收入原书全文、扫描件、题库或官方答案，不将仓库 MIT 许可用于这些外部材料。
+
+[Understanding Deep Learning](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) 作为模型理论参考，已建立 [21 章及附录映射](UDL_FOUNDATIONS.md)。出版社开放获取版标注 CC BY-NC-ND，官方资源仓库的[根许可证](https://github.com/udlbook/udlbook/blob/main/LICENSE)为 CC BY-NC-ND 4.0。本轮只加入原创学习组织、实验设计和链接；不收入或改编发布书稿、插图与官方 notebooks，不把可免费阅读视为 MIT 开源依赖。未来复用代码时逐文件核验许可。

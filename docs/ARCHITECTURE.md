@@ -4,6 +4,8 @@
 
 ## 端到端数据流
 
+模型与学习方法由 [Understanding Deep Learning 基础](UDL_FOUNDATIONS.md) 支撑，连接损失、梯度、Transformer 与质量评估。训练保留在宿主机，首版 NPU 加速推理线性层；量化和设备接入是本项目独立的工程实验。
+
 ```mermaid
 flowchart TD
     A[用户任务] --> B[Agent 循环与工具校验]

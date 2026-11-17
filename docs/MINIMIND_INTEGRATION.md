@@ -19,6 +19,8 @@ MiniMind 当前主线为 MiniMind3：Dense 约 64M 参数，也有 MoE 版本；
 
 ## 2. 源码阅读顺序
 
+阅读时对照 [Understanding Deep Learning 模块](UDL_FOUNDATIONS.md)：UDL04/UDL11/UDL12 支撑模型结构，UDL05 支撑标签与损失，UDL06/UDL07 支撑优化与初始化，UDL08/UDL09 支撑评估。具体的 RoPE、GQA、RMSNorm、门控 MLP 及训练算法继续以固定源码为准。
+
 以下路径均相对于固定版本的上游仓库。来源记录包含本次审阅文件的 URL、字节数和 SHA-256，见 [source-lock.json](../models/minimind/source-lock.json)。
 
 | 顺序 | 上游文件 | 学习任务与交付 |

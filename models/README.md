@@ -12,4 +12,6 @@
 
 ## MiniMind 参考线
 
+模型理论先读 [Understanding Deep Learning 项目映射](../docs/UDL_FOUNDATIONS.md)：损失、反向传播、优化与泛化 → 残差与注意力 → 自写模型与 MiniMind。数学附录按需补齐，广度选修不作为首版训练的前置门槛。
+
 已加入 [MiniMind 参考模块](minimind/README.md)，固定审阅 MiniMind3 源码，提供预训练/SFT 学习路线、依赖分析、资源预算、INT8 NPU 映射与 Agent 接入方案。它与本项目自写基础模型课程并行：先理解小模型，再参考完整训练流程。当前仅完成文档与来源登记，尚未训练或部署。详见 [接入文档](../docs/MINIMIND_INTEGRATION.md)。
