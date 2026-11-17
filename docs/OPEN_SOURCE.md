@@ -28,6 +28,8 @@
 
 ## 参考读物与配套资料
 
+新增三项参考入口：[MIT 6.006 Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/)、[OSTEP 作者官网](https://pages.cs.wisc.edu/~remzi/OSTEP/)、[MLIR Toy 官方教程](https://mlir.llvm.org/docs/Tutorials/Toy/)。分别对应 [算法](ALGORITHMS_FOUNDATIONS.md)、[操作系统原理](OSTEP_FOUNDATIONS.md)、[AI 编译](AI_COMPILATION.md)。当前只收入原创知识组织、实验计划与链接；不复制课件、书籍、题库、答案或上游代码。MIT 课程名称不代表资料采用 MIT 软件许可；OSTEP 章节按作者建议链接；未来引入 LLVM/MLIR 或课程代码时固定版本并核验文件级声明。
+
 [CSAPP《深入理解计算机系统》](https://csapp.cs.cmu.edu/3e/) 作为系统基础参考，已建立 [12 章知识映射与原创实验计划](CSAPP_FOUNDATIONS.md)。书籍并非本项目的开源组件；官方自学实验、示例及配套资料也应按各自条款核验。当前只提供链接和原创规划，不收入原书全文、扫描件、题库或官方答案，不将仓库 MIT 许可用于这些外部材料。
 
 [Understanding Deep Learning](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) 作为模型理论参考，已建立 [21 章及附录映射](UDL_FOUNDATIONS.md)。出版社开放获取版标注 CC BY-NC-ND，官方资源仓库的[根许可证](https://github.com/udlbook/udlbook/blob/main/LICENSE)为 CC BY-NC-ND 4.0。本轮只加入原创学习组织、实验设计和链接；不收入或改编发布书稿、插图与官方 notebooks，不把可免费阅读视为 MIT 开源依赖。未来复用代码时逐文件核验许可。

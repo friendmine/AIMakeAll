@@ -10,6 +10,8 @@
 
 第一套原创小语料用于验证训练过程；工具调用能力需要后续专门数据与评测。能够生成文本不等于能够稳定完成 Agent 任务。
 
+数据去重/切分、检查点恢复与数值误差纳入 [ENG01/ENG02](../docs/ENGINEERING_BRIDGES.md)。模型部署增加 [AI 编译路线](../docs/AI_COMPILATION.md)，先用单 Linear 验证图到计划的转换，再接完整模型；不把计划解释器可运行等同于训练或硬件部署完成。
+
 ## MiniMind 参考线
 
 模型理论先读 [Understanding Deep Learning 项目映射](../docs/UDL_FOUNDATIONS.md)：损失、反向传播、优化与泛化 → 残差与注意力 → 自写模型与 MiniMind。数学附录按需补齐，广度选修不作为首版训练的前置门槛。

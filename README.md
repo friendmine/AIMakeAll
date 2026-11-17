@@ -17,13 +17,13 @@
 
 ## 知识覆盖图
 
-![AIMakeAll 知识覆盖图：基础与硬件、系统与执行、模型与应用九个领域，以及扩展学习和贯穿全程的工程能力](docs/images/knowledge-coverage-v1.png)
+![AIMakeAll 知识覆盖图 V2：基础与硬件、系统与编译、模型与应用十二个领域，新增算法、OSTEP 与 AI 编译](docs/images/knowledge-coverage-v2.png)
 
-图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。各模块的学习顺序、依赖和实施状态见 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
+图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十二个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
 
 ## 从这里开始
 
-先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：CSAPP 提供计算机系统基础，Linux From Scratch 补上操作系统构建，Understanding Deep Learning 提供模型与学习理论，MiniMind 连接完整训练实践。
+先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：算法支撑组织与调度，CSAPP/OSTEP/LFS 分别连接程序、系统原理与构建，UDL/MiniMind 连接理论与训练，AI 编译将模型映射到运行时和 NPU。
 
 1. 阅读 [项目路线与里程碑](docs/ROADMAP.md)。
 2. 阅读 [系统架构与加速边界](docs/ARCHITECTURE.md)。
@@ -35,6 +35,10 @@
 8. 按阶段学习 [CSAPP 全书知识体系与项目实验](docs/CSAPP_FOUNDATIONS.md)，覆盖数值、处理器、存储、链接、异常、I/O、网络与并发。
 9. 学习 [Understanding Deep Learning 知识体系](docs/UDL_FOUNDATIONS.md)，覆盖 21 章与数学/概率附录，连接从零模型、MiniMind、NPU 部署和 Agent 评估。
 10. 学习 [Linux From Scratch 知识体系](docs/LFS_FOUNDATIONS.md)，从工具链自举到 Linux 启动，再扩展到 RV64 QEMU 与 AI 服务；首版 RV32 裸机主线独立推进。
+11. 补齐 [算法与数据结构](docs/ALGORITHMS_FOUNDATIONS.md)，实现计算图依赖、队列、内存索引和检索排序。
+12. 学习 [OSTEP 操作系统原理](docs/OSTEP_FOUNDATIONS.md)，连接调度、地址空间、并发与持久化。
+13. 完成 [AI 编译学习路线](docs/AI_COMPILATION.md)：有限计算图 → 量化/分块 → 内存规划 → 执行计划 → C/QEMU/RTL 对照。
+14. 按 [四个工程专项](docs/ENGINEERING_BRIDGES.md) 补数值、数据、性能验证和检索可靠性的实验与验收。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖

@@ -6,6 +6,16 @@
 
 模型与学习方法由 [Understanding Deep Learning 基础](UDL_FOUNDATIONS.md) 支撑，连接损失、梯度、Transformer 与质量评估。训练保留在宿主机，首版 NPU 加速推理线性层；量化和设备接入是本项目独立的工程实验。
 
+### 模型转换与运行时边界
+
+[AI 编译路线](AI_COMPILATION.md) 增加有限计算图检查 → 布局/量化 → GEMM 分块 → 缓冲区规划 → 执行计划。编译器决定静态计划，运行时绑定内存并处理动态输入，驱动执行设备协议。首版采用小型自写转换器，MLIR 为后续进阶；尚未实现通用模型导出。
+
+[算法](ALGORITHMS_FOUNDATIONS.md) 支撑图排序、索引和调度；[OSTEP](OSTEP_FOUNDATIONS.md) 支撑内存生命周期、同步和持久状态。所有新连接层目前属于设计。计划必须遵守 NPU v0 每次清零、最大维度 256、32 位地址与同步轮询等约束；K 分块部分和由运行时合并，CPU 承担 scale/bias 和其他回退。
+
+[工程专项](ENGINEERING_BRIDGES.md) 统一数值、数据、性能和检索验收。性能模型、硬件仿真周期和宿主墙钟时间分开记录，不用理论峰值代替实测。
+
+### 推理时的数据流
+
 ```mermaid
 flowchart TD
     A[用户任务] --> B[Agent 循环与工具校验]

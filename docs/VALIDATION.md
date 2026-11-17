@@ -9,7 +9,7 @@
 | `make rtl-test` | PASS | 每个 INT8 输入对的累加结果、enable 保持、clear 优先级、异步复位与 INT32 回绕 |
 | 本地 Markdown 相对链接 | PASS | 所有链接目标存在 |
 
-GitHub CI 配置已提供，但尚未在远程执行。完整 CPU 集成、矩阵 NPU、QEMU 设备、模型训练与 Agent 均未实现或验证。这里的结果不包含任何性能加速结论。
+GitHub CI 已在提交 `c0891ec` 通过，见 [远程基线记录](https://github.com/friendmine/AIMakeAll/actions/runs/44074780583)；本节保留初始本地验收结果。完整 CPU 集成、矩阵 NPU、QEMU 设备、模型训练与 Agent 均未实现或验证。这里的结果不包含任何性能加速结论。
 
 ## 本地 EDA 接入审计（2026-11-17）
 
@@ -53,3 +53,12 @@ GitHub CI 配置已提供，但尚未在远程执行。完整 CPU 集成、矩�
 - `make test demo` 通过：8 项测试及 INT8 示例结果正确。
 - 检查 23 份 Markdown 文档的 97 个本地链接和图片引用，目标均存在；`git diff --check` 通过。
 - 本轮未修改 RTL，不重复本地硬件编译；远程检查状态以对应提交的 GitHub Actions 记录为准。
+
+## 算法 OSTEP AI 编译与覆盖图 V2（2026-11-17）
+
+- 按 MIT 6.006 官方课程安排、OSTEP 作者目录、MLIR Toy/Bufferization/Quantization 官方文档核对学习主题；新增模块编号为本项目编号，不冒充官方章号。
+- 检查 AL01–AL10、OS01–OS12、AC01–AC12、ENG01–ENG04 顺序与覆盖，以及覆盖图文字索引的 12 个领域。
+- 检查全仓 28 份 Markdown 文档的 177 个本地链接/图片引用，目标均存在；代码围栏配对及 `git diff --check` 通过。
+- V2 图片为 1448×1086，已目视核对十二个领域、三个新增重点、四个专项及状态说明；保留 V1 和 V2 提示词，首页与规划页指向 V2。
+- AI 编译方案对照 NPU v0 的布局、维度上限、每命令清零、轮询和地址限制；K 分块由运行时合并，未知能力不计作已实现。
+- 本轮只更新文档和图片，未实现编译器/新实验、安装 MLIR 或修改代码，未重复代码与 RTL 测试。上述远程 CI 证据属于之前的基线提交。

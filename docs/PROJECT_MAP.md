@@ -4,9 +4,9 @@
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图：数学与数值、编程、体系结构、操作系统、模拟器、运行时、深度学习、LLM 与 Agent](images/knowledge-coverage-v1.png)
+![AIMakeAll 知识覆盖图 V2：十二个领域，重点补入算法、OSTEP 与 AI 编译](images/knowledge-coverage-v2.png)
 
-这张图按知识领域展示范围，涵盖 CSAPP、LFS、UDL、MiniMind 与项目实验；扩展学习和工程能力单独列出。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v1.png) 或继续阅读下方实施依赖。
+这张图按知识领域展示范围，涵盖算法、CSAPP、OSTEP、LFS、UDL、MiniMind、AI 编译与项目实验。四个工程专项补数值、数据、性能验证和检索可靠性。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v2.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
 
 ## 项目实施依赖
 
@@ -15,6 +15,8 @@ flowchart TB
     ROOT[AIMakeAll<br/>中文教材 + 开源实现 + 实验与验收]
 
     subgraph FOUNDATION[共同基础]
+        ALG[算法 AL01–AL10<br/>复杂度、容器、图与调度]
+        OS[OSTEP OS01–OS12<br/>调度、内存、并发与持久化]
         CS[CSAPP 全书体系已映射<br/>CS01–CS12 实验待实现]
         LFS[Linux From Scratch<br/>11 章与附录已映射，实验待实现]
         UDL[Understanding Deep Learning<br/>21 章与附录已映射，实验待实现]
@@ -35,6 +37,8 @@ flowchart TB
     end
 
     ROOT --> CS
+    ROOT --> ALG
+    ROOT --> OS
     ROOT --> LFS
     ROOT --> UDL
     ROOT --> EDA
@@ -59,6 +63,7 @@ flowchart TB
     end
 
     C2 --> QEMU
+    OS -.内存与请求生命周期.-> RT
     SPEC --> QEMU
     SOC -.共同 ABI 与向量.-> QEMU
 
@@ -72,6 +77,7 @@ flowchart TB
     end
 
     LFS --> LXBASE
+    OS -.系统机制.-> LXBASE
     C2 -.系统原理.-> LXBASE
     SPEC -.数值与设备语义.-> LXDRV
     LXDRV -.Linux 后端.-> RT
@@ -79,16 +85,27 @@ flowchart TB
     subgraph MODEL[M3 · 从零 LLM 与 MiniMind]
         LEARN[自写小模型 + MiniMind 参考<br/>资料已纳入，训练待实施]
         TRAIN[数据与 tokenizer → 预训练 → SFT<br/>随机权重、独立验证集]
-        QUANT[FP32 基线 → INT8 量化与导出<br/>权重、scale、分块与 KV 管理]
-        LEARN --> TRAIN --> QUANT
+        LEARN --> TRAIN
     end
+
+    subgraph COMPILE[AI 编译 AC01–AC12 · 待实现]
+        GRAPH[有限计算图<br/>依赖、形状、类型检查]
+        QUANT[FP32 基线 → INT8 量化<br/>权重布局、scale 与校准规则]
+        TILE[布局与 GEMM 分块<br/>K 部分和、CPU 回退]
+        MEMORY[生命周期与缓冲区规划]
+        PLAN[执行计划与模型包<br/>先单 Linear，再扩展模型]
+        GRAPH --> QUANT --> TILE --> MEMORY --> PLAN
+    end
+
+    TRAIN --> GRAPH
+    ALG --> GRAPH
 
     C1 --> LEARN
     U1 --> LEARN
     U1 --> TRAIN
     C2 -.内存与加载.-> QUANT
     DEPLOY[模型推理闭环<br/>CPU / QEMU / RTL 数值对照<br/>prefill 与 decode 分开评测]
-    QUANT --> DEPLOY
+    PLAN --> DEPLOY
     RT --> DEPLOY
     SOC -.硬件对照.-> DEPLOY
     U2 -.质量评估.-> DEPLOY
@@ -101,26 +118,35 @@ flowchart TB
     end
 
     C3 --> TOOL
+    ALG -.索引与任务队列.-> TOOL
+    OS -.并发与恢复.-> TOOL
     C2 -.异常与取消.-> TOOL
     DEPLOY --> APP
     U2 --> APP
     LXSVC -.后续部署环境.-> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
     PHYS -.物理验收证据.-> DONE
+    ENG[四个工程专项 · 实验待实现<br/>数值量化、数据训练、性能验证、检索可靠性]
+    ROOT --> ENG
+    ENG -.贯穿 M1–M4 的验收.-> DONE
 ```
 
 ## 下一步与并行关系
 
-1. 硬件推进 4×4 阵列，结合 CS02/CS04/CS06 学习数值、控制与存储。
-2. 同期建立 C 构建追踪与 UDL 线性回归/小 MLP 实验，再进入自写 Transformer 与 MiniMind 小模型 CPU 环境；两套基础按需学习，不等待全书读完。
-3. 围绕 GEMM/MMIO 接口逐步建立 QEMU 设备与运行时，再接量化模型。
-4. 最后把模型推理接入受限 Agent，补文件、网络、并发和故障处理。
-5. LFS 从独立 Linux 环境和工具链学习起步，后续扩展 RV64 Linux 与服务镜像；不阻塞 RV32 裸机闭环，也不将 x86-64 镜像直接用于 RISC-V。
+1. 硬件推进 4×4 阵列，结合 CS02/CS04/CS06 和 ENG03 学习数值、控制、存储与验证。
+2. 软件并行做 AL07 计算图检查、C 整数参考和单线性层的量化/分块计划；先有可检查的计划解释器，再考虑 MLIR。
+3. 围绕 GEMM/MMIO 建立 QEMU 设备与运行时，打通单线性层的 CPU/QEMU/RTL 对照；ENG01/ENG03 分别验收数值和性能。
+4. UDL 与 MiniMind 小模型训练可并行，先补 ENG02 数据与恢复实验；模型成熟后复用同一编译与运行时路径。
+5. Agent 接入 AL04/AL06 的索引和队列、OSTEP 的并发与持久化、ENG04 的检索和故障评估。
+6. LFS/RV64 Linux 按独立系统扩展推进；OSTEP 原理实验不等待完整 LFS，Linux 扩展也不阻塞 RV32 裸机闭环。
 
 SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验可使用行为内存。QEMU 功能模拟、宿主机提速和真实硬件加速分开报告。
 
 ## 详细路线
 
+- [知识覆盖文字索引](KNOWLEDGE_COVERAGE.md)
+- [算法与数据结构](ALGORITHMS_FOUNDATIONS.md) · [OSTEP 操作系统原理](OSTEP_FOUNDATIONS.md)
+- [AI 编译与单线性层贯通实验](AI_COMPILATION.md) · [四个工程专项](ENGINEERING_BRIDGES.md)
 - [CSAPP 全书知识体系与项目实验](CSAPP_FOUNDATIONS.md)
 - [Linux From Scratch 知识体系与系统扩展](LFS_FOUNDATIONS.md)
 - [Understanding Deep Learning 知识体系与项目实验](UDL_FOUNDATIONS.md)

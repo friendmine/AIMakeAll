@@ -1,0 +1,74 @@
+Edit the supplied AIMakeAll infographic into knowledge coverage version 2. Preserve the reference's tasteful warm background, navy typography, blue/green/orange three-column design, clear Chinese typesetting, simple flat editorial infographic style. Increase canvas height as needed for FOUR cards in each of three columns, twelve cards total. High resolution, landscape approximately 4:3, all Simplified Chinese legible and exact. This is curriculum scope, not completion status.
+
+Replace main title with "AIMakeAll 知识覆盖图 · V2".
+Subtitle: "算法与系统原理 → AI 编译与运行时 → 模型、加速器与 Agent".
+Three columns, four cards each, numbered sequentially down each column. Every card has heading, two lines and source tag. Highlight new cards 02,05,08 with a small "新增重点" badge, no percentages.
+
+LEFT COLUMN header "基础与硬件"
+01 数学与数值
+线性代数 · 微积分 · 概率 · 优化
+数值稳定性 · 量化与误差预算
+source: UDL + CSAPP + ENG01
+
+02 算法与数据结构
+复杂度 · 排序 · 哈希 · 树与堆
+图算法 · 动态规划 · 调度与索引
+source: MIT 6.006 + AL01–AL10
+
+03 编程与程序执行
+C · 汇编 · 指针 · ABI
+编译 · 链接 · 调试 · 性能分析
+source: CSAPP + 项目实验
+
+04 体系结构与加速器
+数字逻辑 · RISC-V · 流水线
+MAC · NPU · 总线 · 存储层次
+source: CSAPP + 自研硬件
+
+MIDDLE COLUMN header "系统与编译"
+05 操作系统原理
+进程调度 · 地址空间 · 并发同步
+文件系统 · 持久化 · 保护边界
+source: OSTEP + OS01–OS12
+
+06 Linux 系统构建
+工具链自举 · 用户态 · 内核
+根文件系统 · 启动 · 系统服务
+source: LFS + CSAPP
+
+07 模拟器与驱动
+QEMU · 虚拟平台 · 设备模型
+MMIO · 中断 · DMA · 驱动
+source: QEMU + 项目实验
+
+08 AI 编译
+计算图 · IR · 形状与布局 · 降级
+量化 · 分块 · 内存规划 · 执行计划
+source: AC01–AC12 · MLIR 进阶
+
+RIGHT COLUMN header "模型与应用"
+09 深度学习基础
+神经网络 · 损失 · 反向传播
+优化 · 泛化 · 正则化 · 评估
+source: Understanding Deep Learning
+
+10 从零 LLM
+数据 · tokenizer · Transformer
+随机初始化 · 预训练 · SFT
+source: UDL + MiniMind + ENG02
+
+11 推理运行时
+计划执行 · GEMM · CPU 回退
+缓冲区 · KV cache · 设备调用
+source: 自研运行时 + OSTEP
+
+12 Agent 与检索
+工具协议 · 索引排序 · 任务评测
+持久状态 · 幂等重试 · 故障恢复
+source: MiniMind + 算法 + OSTEP
+
+Below columns add a clear horizontal focal band labelled "贯通实验", text "单线性层 → 量化与分块计划 → C 运行时 → QEMU / RTL → 数值与性能对照".
+Then band labelled "四个工程专项", text "ENG01 数值量化 · ENG02 数据训练 · ENG03 性能验证 · ENG04 检索可靠性".
+Then one thinner band labelled "后续扩展", text "EDA 与物理实现 · RV64 Linux · CNN / GNN · 生成模型 · 强化学习".
+Footer, clear and not tiny: "已纳入规划 ≠ 实验全部完成 ｜ 已验证起点：Python INT8 GEMM 与单 MAC RTL".
+No extra text, no invented completed systems, no fake figures, no clipping. Keep all twelve fields and footer readable.

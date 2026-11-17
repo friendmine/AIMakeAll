@@ -84,6 +84,8 @@ CPU 首次试跑的建议参数是 hidden size 128、4 层、序列 128、batch 
 
 ## 6. 映射到 AIMakeAll NPU
 
+新增 [AI 编译课程](AI_COMPILATION.md)，承接固定源码中的线性层到布局、量化、分块及执行计划；先验证单 Linear，再扩展模型。[ENG01–ENG03](ENGINEERING_BRIDGES.md) 分别补数值、数据训练和性能验证。当前不存在已验证的 MiniMind 自动导出/NPU 编译后端。
+
 首版目标是 **Dense 模型的 INT8 线性层推理**。训练仍在宿主机进行。上游的模型格式转换不能替代我们的量化导出器、C 运行时和设备驱动。[上游转换实现](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/convert_model.py)
 
 | 计算 | 默认配置下的投影维度 | 首版执行位置 |
