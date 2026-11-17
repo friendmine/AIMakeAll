@@ -6,11 +6,11 @@
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图 V7：十八个领域、十条路线与六项跨层补强](images/knowledge-coverage-v7.png)
+![AIMakeAll 知识覆盖图 V8：十八个领域与实时、多模态、因果及需求驱动综合设计](images/knowledge-coverage-v8.png)
 
-V7 保留十八个知识领域与十条全景路线，在下部增加生命周期、信任、分布变化、方法比较、理论边界和混合信号六项补强；数字实践、单 Linear 和小模型继续作为核心路径。查看 [原图](images/knowledge-coverage-v7.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 和 [完整课程与验收](CHIP_AI_COMPLETENESS.md)。
+V8 保留十八个知识领域、十条全景路线和六项跨层补强，补入实时系统、多模态与表示学习、因果推断，以及从需求出发的综合设计实验。查看 [原图](images/knowledge-coverage-v8.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 和 [完整课程与验收](CHIP_AI_COMPLETENESS.md)。
 
-原十组 60 项深化实验继续保留；既有十路线 30 个节点与本轮六项 18 个节点包含实验复用，不简单累加实验数。所有新增路线只完成规划。全景通识覆盖十条路线及六项补强，核心实践优先 PRA/DEP/DLE，专题深入按前置与预算选择，一级目录不变。
+原十组 60 项、十路线 30 个节点、六项 18 个节点与新增三门 9 个节点、综合实验 4 个检查点存在复用，不简单累加。新增内容全部仅规划；核心实践继续优先 FIFO、单 Linear、小模型与受限 Agent，专题按需，一级目录不变。
 
 ## 项目实施依赖
 
@@ -85,6 +85,26 @@ flowchart TB
     CLA --> SELECT
     DLE --> SELECT
     DLE --> SHIFT
+
+    subgraph EXTENSIONS[实时 多模态 因果与综合设计 · 待实施]
+        RTCOURSE[RT 实时系统<br/>调度、阻塞、控制与推理分层]
+        MM[MM 多模态与表示学习<br/>配对、对齐、融合与部署]
+        CAUSE[CAUSE 因果推断<br/>干预、识别、反事实与决策]
+        DESIGN[DESIGN 综合实验<br/>需求 → 候选 → 证据 → 取舍与迁移]
+    end
+    OS --> RTCOURSE
+    RTCOURSE -.时限与数据年龄.-> EMB
+    DLE --> MM
+    MM -.跨模态检索.-> APP
+    CLA --> CAUSE
+    CAUSE -.模拟决策.-> APP
+    ROOT -.G0 冻结需求.-> DESIGN
+    SELECT -.方法与质量.-> DESIGN
+    EVID -.分层验证.-> DESIGN
+    SOC -.周期与资源.-> DESIGN
+    RTCOURSE -.按需时限合同.-> DESIGN
+    MM -.按需模态需求.-> DESIGN
+    CAUSE -.按需干预目标.-> DESIGN
 
     subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
         DD[DD01–DD08 + PPA / ARITH<br/>数字设计、算术结构、时序与面积能耗]
@@ -263,6 +283,14 @@ PRA 复用图中 FIFO/阵列，DEP 复用单 Linear 与模型部署，DLE 复用
 [六项实验规范](CHIP_AI_COMPLETENESS.md#六项跨层补强) 按 [阶段安排](ROADMAP.md#六项跨层补强的阶段安排) 接入：G0 先 LIMIT 命题分类、TRUST 资产边界；G1 随 FIFO 做 LIFE 独立启动模型；M1/M2 接生命周期与加载认证，休眠/更新恢复按 G3 深入；M3 冻结小模型后做 SHIFT，M4 用 SELECT 比较方法；MIX 在 SIG/CIR 后以离线向量连接数字计算。
 
 所有节点先完成最小正常案例，再边界/故障、迁移及独立学习者验收。原有十路线与六项补强复用共同资产，不同时铺开为必修；新的教学状态机/认证包/理想 ADC 不改变 NPU v0 或已有 MAC。当前只有规划与图文更新，尚无新增实验成果。
+
+## 新三门专题与需求驱动综合设计
+
+[RT/MM/CAUSE 与 DESIGN](CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) 在既有课程内补实时调度、表示与跨模态对齐、因果识别/干预，并以一个需求驱动综合实验连接模型、运行时与芯片取舍。三门专题各三个节点，综合实验四个检查点，均待实现；阶段见 [里程碑](ROADMAP.md#实时-多模态-因果与综合设计的阶段安排)。
+
+RT 把 OSTEP 调度/互斥和 EMB 控制连接起来；MM 把 DLE 的表示学习接到 AGQ 检索与 DEP 部署；CAUSE 在 CLA 概率基础上区分观察、干预与反事实。每条先独立小模型，再按需求接入应用，不作为全部主线的共同前置。
+
+DESIGN 从 G0 的任务/质量/内存/时限需求开始，G2 用单 Linear 核验数值与成本，M3 扩到模型，M4 比较完整任务。SELECT/PERF/PPA 提供方法、时间/资源与面积能耗证据；先筛满足硬约束的候选，再比较同证据层的 Pareto 取舍，并用预算减半或输入加倍检验迁移。允许选择 CPU，也允许结果是当前不可行；QEMU 功能正确不等于 NPU 性能已验证。
 
 ## 下一步与并行关系
 

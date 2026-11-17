@@ -61,3 +61,7 @@
 [Understanding Deep Learning](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) 作为模型理论参考，已建立 [21 章及附录映射](UDL_FOUNDATIONS.md)。出版社开放获取版标注 CC BY-NC-ND，官方资源仓库的[根许可证](https://github.com/udlbook/udlbook/blob/main/LICENSE)为 CC BY-NC-ND 4.0。本轮只加入原创学习组织、实验设计和链接；不收入或改编发布书稿、插图与官方 notebooks，不把可免费阅读视为 MIT 开源依赖。未来复用代码时逐文件核验许可。
 
 [Linux From Scratch 13.1-systemd](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/) 作为系统构建参考，已建立 [11 章与附录映射](LFS_FOUNDATIONS.md)。本次核对的[官方声明](https://www.linuxfromscratch.org/lfs/view/stable-systemd/legalnotice.html)将书籍文字与可提取的计算机指令分别许可，前者为 CC BY-NC-SA 2.0，后者按 MIT 条款；软件包遵循各自许可证。当前只加入原创规划和链接，没有收入原书、构建指令、源码包或系统镜像；未来引入时固定版本并保留适用声明。
+
+## 实时 多模态与因果的资料范围
+
+[RT/MM/CAUSE](CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) 分别保存 CMU 实时分析讲义、CLIP 原始论文和 Brady Neal 因果推断课程的原始入口，阅读资料不作为仓库统一开源许可的组件。仅据概念组织原创事件、图文配对和结构因果小实验，未复制课件/书稿、上游代码、数据或权重；实施时再锁依赖与许可。DESIGN 复用现有 PERF/PPA/SELECT/DEP 方法与资产。V8 图源与 PNG 为本项目原创，V1–V7 保留历史；本轮未增加实验运行依赖。

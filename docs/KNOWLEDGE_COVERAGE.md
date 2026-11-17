@@ -1,32 +1,32 @@
 # AIMakeAll 知识覆盖范围
 
-更新：2026-11-18。V7 保留十八个领域、十组 60 项深化实验和十条全景路线的 30 个节点，补入 LIFE/TRUST/SHIFT/SELECT/LIMIT/MIX 六项、18 个待实施验收节点。节点包含对既有实验的复用与贯通，不能将 60/30/18 简单相加为独立实验总数；交付状态见 [课程状态总表](CURRICULUM.md#课程状态总表)。跨层契约、预算、共同资产和学习者验证贯穿全部课程；覆盖表示已纳入规划，尚不代表实验完成。
+更新：2026-11-18。V8 保留十八个领域、十组深化实验、十条全景路线与六项跨层补强，新增 RT/MM/CAUSE 三门各三个节点及 DESIGN 综合实验四个检查点。节点复用既有实验，不合计为无重叠的实验总数；交付状态见 [课程状态总表](CURRICULUM.md#课程状态总表)。新增内容仅规划，跨层契约、预算、共同资产和学习者验证贯穿全部课程。
 
-![AIMakeAll 知识覆盖图 V7：十八个领域、十条路线与六项跨层补强及阶段](images/knowledge-coverage-v7.png)
+![AIMakeAll 知识覆盖图 V8：十八个领域与实时、多模态、因果及需求驱动综合设计](images/knowledge-coverage-v8.png)
 
 ## 十八个领域及阅读入口
 
-V7 上半部保留知识领域，中部展示十条全景路线，下部列出六项跨层补强；电路/器件与具身等新增广度通过多领域映射表达，编号不是学科全集。交付方式统一按 [仿真优先原则](SIMULATION_FIRST.md)：数字电路设计与综合、协议/RTL 仿真、QEMU 系统模拟。实板与流片不作为核心要求；新增教学数字子模块不等于完整 PCIe/CXL 标准实现。
+V8 上半部保留知识领域，中部展示十条全景路线与六项补强，下部突出实时、多模态、因果及需求驱动设计；电路/器件与具身等新增广度通过多领域映射表达，编号不是学科全集。交付方式统一按 [仿真优先原则](SIMULATION_FIRST.md)：数字电路设计与综合、协议/RTL 仿真、QEMU 系统模拟。实板与流片不作为核心要求；新增教学数字子模块不等于完整 PCIe/CXL 标准实现。
 
 | 图中编号 | 领域 | 主要学习内容 | 文档入口 |
 | --- | --- | --- | --- |
-| 01 | 数学与数值 | 离散与证明、线性代数、微分、优化、概率信息量、数值统计、位宽与舍入、微分方程、信号与系统、有限样本保证 | [SIG](CHIP_AI_COMPLETENESS.md#sig-数学与信号系统)、[LIMIT/MIX](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[UDL / MATH-E1–E6](UDL_FOUNDATIONS.md)、[ENG01](ENGINEERING_BRIDGES.md)、[ARITH](DIGITAL_DESIGN_TIMING.md) |
+| 01 | 数学与数值 | 离散与证明、线性代数、微分、优化、概率信息量、数值统计、位宽与舍入、微分方程、信号与系统、有限样本保证、因果识别与估计 | [CAUSE](CHIP_AI_COMPLETENESS.md#cause-因果推断)、[SIG](CHIP_AI_COMPLETENESS.md#sig-数学与信号系统)、[LIMIT/MIX](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[UDL / MATH-E1–E6](UDL_FOUNDATIONS.md)、[ENG01](ENGINEERING_BRIDGES.md)、[ARITH](DIGITAL_DESIGN_TIMING.md) |
 | 02 | 算法与数据结构 | 复杂度、容器、排序、图、动态规划、搜索与约束规划、可计算性边界 | [CLA](CHIP_AI_COMPLETENESS.md#cla-传统机器学习与经典-ai)、[AL01–AL10](ALGORITHMS_FOUNDATIONS.md)、[LIMIT/SELECT](CHIP_AI_COMPLETENESS.md#六项跨层补强) |
 | 03 | 编程与程序执行 | C/ABI、内存语义、所有权、复现、SIMD 与线程性能 | [CSAPP](CSAPP_FOUNDATIONS.md)、[SW-E](SYSTEMATIC_VERIFICATION.md)、[PERF-E](ENGINEERING_BRIDGES.md) |
 | 04 | 体系结构与加速器 | RISC-V/NPU、算术结构、缓存/一致性、DRAM/互连、数据完整性、CPU/GPU/DSP 对照、生命周期与面积/能耗 | [HET](CHIP_AI_COMPLETENESS.md#het-cpu-gpu-dsp-对照)、[LIFE](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[硬件](../hardware/README.md)、[ARCH / MEM / RAS](ARCHITECTURE.md)、[ARITH / PPA](DIGITAL_DESIGN_TIMING.md) |
-| 05 | 操作系统原理 | 调度、虚拟内存、同步、文件系统、事务恢复与权限 | [OS01–OS12](OSTEP_FOUNDATIONS.md)、[状态实验](ENGINEERING_BRIDGES.md) |
+| 05 | 操作系统原理 | 调度、虚拟内存、同步、文件系统、事务恢复与权限、实时调度/阻塞/时限 | [RT](CHIP_AI_COMPLETENESS.md#rt-实时系统)、[OS01–OS12](OSTEP_FOUNDATIONS.md)、[状态实验](ENGINEERING_BRIDGES.md) |
 | 06 | Linux 系统构建 | 工具链、用户态、内核、rootfs、启动和服务；连接恢复与信任链 | [LFS](LFS_FOUNDATIONS.md)、[LIFE/TRUST](CHIP_AI_COMPLETENESS.md#六项跨层补强) |
 | 07 | 模拟器与驱动 | QEMU、虚拟设备、MMIO、中断和 DMA | [模拟器](../simulator/README.md)、[NPU 规范](../specs/npu-v0.md) |
 | 08 | AI 编译 | 计算图、IR、布局/量化、分块、内存及执行计划、设备贯通 | [DEP](CHIP_AI_COMPLETENESS.md#dep-编译运行时设备贯通)、[AC01–AC12](AI_COMPILATION.md) |
-| 09 | 深度学习基础 | 模型表达、损失、梯度、泛化；扩展树/核/聚类、生成比较、分布变化与感知 | [UDL](UDL_FOUNDATIONS.md)、[CLA / DLE / EMB](CHIP_AI_COMPLETENESS.md)、[SHIFT/SELECT/LIMIT](CHIP_AI_COMPLETENESS.md#六项跨层补强) |
+| 09 | 深度学习基础 | 模型表达、损失、梯度、泛化；扩展树/核/聚类、生成比较、分布变化、表示与多模态融合 | [MM](CHIP_AI_COMPLETENESS.md#mm-多模态与表示学习)、[UDL](UDL_FOUNDATIONS.md)、[CLA / DLE / EMB](CHIP_AI_COMPLETENESS.md)、[SHIFT/SELECT/LIMIT](CHIP_AI_COMPLETENESS.md#六项跨层补强) |
 | 10 | 从零 LLM | 数据、分词、GPT 逐层实现、预训练、分类/指令微调 | [模型 / LLMs From Scratch 七章映射](../models/README.md)、[MiniMind](MINIMIND_INTEGRATION.md)、[ENG02](ENGINEERING_BRIDGES.md) |
 | 11 | 推理运行时 | 计划、校验/所有权、KV、优化 CPU 后端、并行开销、设备调用、包认证与版本切换 | [运行时](../runtime/README.md)、[AI 编译](AI_COMPILATION.md)、[PERF-E](ENGINEERING_BRIDGES.md)、[TRUST/SHIFT](CHIP_AI_COMPLETENESS.md#六项跨层补强) |
-| 12 | Agent 与检索 | 排序/上下文、计划/终止、质量消融、权限、持久状态与恢复、逻辑/概率推理、方法比较、具身决策 | [CLA / EMB](CHIP_AI_COMPLETENESS.md)、[SELECT/TRUST](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[Agent / AGQ-E](../agents/README.md)、[STATE-E1–E6](ENGINEERING_BRIDGES.md) |
+| 12 | Agent 与检索 | 排序/上下文、计划/终止、质量消融、权限、持久状态与恢复、逻辑/概率推理、方法比较、具身决策、跨模态检索与干预决策 | [MM/CAUSE](CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程)、[CLA / EMB](CHIP_AI_COMPLETENESS.md)、[SELECT/TRUST](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[Agent / AGQ-E](../agents/README.md)、[STATE-E1–E6](ENGINEERING_BRIDGES.md) |
 | 13 | 网络与分布式通信 | Ethernet/TCP/IP、Socket/RPC、背压与重试、分布式训练/推理/服务、RDMA 进阶 | [SCALE](CHIP_AI_COMPLETENESS.md#scale-大规模-ai-工程)、[NET01–NET06](NETWORKING_FOUNDATIONS.md) |
 | 14 | I/O 与 PCIe | 片内互连、枚举/BAR、DMA/IOMMU、中断与 Linux 驱动 | [IO01–IO06](PCIE_IO_FOUNDATIONS.md) |
 | 15 | CXL 与异构内存 | 协议与一致性、Type 3、地址译码、NUMA 与模型内存放置 | [CX01–CX06](CXL_MEMORY_FOUNDATIONS.md) |
 | 16 | 数字设计与时序 | HDL、加法器/乘法器/MAC、定点舍入、流水线/FIFO、CDC、综合/STA/PPA；连接器件、混合信号、生命周期与产品流程 | [CIR / PRA / CHIP](CHIP_AI_COMPLETENESS.md)、[LIFE/MIX](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[DD / ARITH / PPA](DIGITAL_DESIGN_TIMING.md) |
-| 17 | 系统化验证 | 需求追溯、参考/断言、形式/等价、程序检测、ECC/故障处置、DFT、信任与证明范围、部署差分与复现 | [PRA / DEP / CHIP](CHIP_AI_COMPLETENESS.md)、[TRUST/LIMIT](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[DV / SW / 算术与故障验证](SYSTEMATIC_VERIFICATION.md)、[RAS](ARCHITECTURE.md) |
+| 17 | 系统化验证 | 需求追溯、参考/断言、形式/等价、程序检测、ECC/故障处置、DFT、信任与证明范围、部署差分与复现、需求追溯与设计取舍 | [DESIGN](CHIP_AI_COMPLETENESS.md#design-从需求出发的整体设计取舍)、[PRA / DEP / CHIP](CHIP_AI_COMPLETENESS.md)、[TRUST/LIMIT](CHIP_AI_COMPLETENESS.md#六项跨层补强)、[DV / SW / 算术与故障验证](SYSTEMATIC_VERIFICATION.md)、[RAS](ARCHITECTURE.md) |
 | 18 | 仿真建模与可信度 | 模型边界、事件调度、周期/事务、重放、校验/校准、连续系统与具身仿真 | [SIG / CIR / EMB](CHIP_AI_COMPLETENESS.md)、[SIM01–SIM08](SIMULATION_CREDIBILITY.md) |
 
 图中中断、DMA、Linux 驱动等表示课程范围；当前 NPU v0 首版仍为同步轮询，不据图示扩大设备能力。CSAPP、OSTEP、LFS 分别侧重程序视角、系统机制和系统构建。
@@ -48,7 +48,7 @@ V7 上半部保留知识领域，中部展示十条全景路线，下部列出�
 | 计算机算术与算术电路结构 | 01/04/16 → 17/18；[ARITH-E1–E6](DIGITAL_DESIGN_TIMING.md#dd01dd02dd07-深化计算机算术与算术电路结构) | 位宽/舍入、加法器/乘法器穷举、事务等价、MAC 集成、同约束结构比较 |
 | 硬件数据完整性与故障处置 | 04/17 → 07/11/14/15/16/18；[RAS-E1–E6](ARCHITECTURE.md#领域-04-与-17-深化硬件数据完整性与故障处置) | 奇偶漏检反例、SECDED、受保护存储、CE/UE 上报、故障重放与结果失效 |
 
-以上为十组各六项的待实现子实验，不是十个新增一级领域。它们深化已有领域，不增加图中一级编号或仓库一级目录；详细实施顺序见 [整体规划](PROJECT_MAP.md) 和 [里程碑](ROADMAP.md)。V7 展示十八个领域、十条全景路线与六项跨层补强；原十组深化实验仍以本表为准。
+以上为十组各六项的待实现子实验，不是十个新增一级领域。它们深化已有领域，不增加图中一级编号或仓库一级目录；详细实施顺序见 [整体规划](PROJECT_MAP.md) 和 [里程碑](ROADMAP.md)。V8 展示原领域与路线，并加入三门专题和综合设计；原十组深化实验仍以本表为准。
 
 ## 十条全景补全路线
 
@@ -84,6 +84,19 @@ V7 上半部保留知识领域，中部展示十条全景路线，下部列出�
 
 先通识再按需实践；独立状态模型、标准签名工具、合成数据和信号仿真均可在电脑内完成。物理信任根、真实低功耗/转换器与抗攻击能力需另行证据。
 
+## 实时 多模态 因果与需求驱动设计
+
+[三门课程与综合实验的完整交付和验收](CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) 复用既有知识领域；RT/MM/CAUSE 各三个节点，DESIGN 是一个实验的四个检查点，全部待实施。
+
+| 内容 | 归属与已有连接 | 实验与证据 |
+| --- | --- | --- |
+| RT 实时系统 | 02/04/05/07/11/12/17/18；OSTEP、SIM、LIFE、EMB | RM/EDF/响应分析 → 优先级反转/继承 → 控制与推理分层；时限、错期、队列/数据年龄与降级 |
+| MM 多模态与表示学习 | 01/08/09/10/11/12/17；DLE、ENG02、EMB、AGQ、DEP | 表示/配对 → 对比对齐/检索 → 融合/缺失/部署；划分、正例关系、质量/误差与成本 |
+| CAUSE 因果推断 | 01/02/09/12/17/18；MATH、CLA、SHIFT | 观察与干预 → 识别/估计 → 反事实/决策；DAG/SCM、调整假设、重叠与不可识别反例 |
+| DESIGN 需求驱动综合实验 | 04/08/09/11/12/16/17/18，按需 05/13/14/15；契约、预算、SELECT/PERF/PPA/DEP | 需求 → 候选 → 分层证据 → 取舍/迁移；REQ 追溯、质量/内存/时限、Pareto 与不可行结论 |
+
+三门专题通过通识和小案例建立边界；主线用 DESIGN 验证“为什么选择这种模型/精度/后端/存储”。模拟器和小合成数据即可起步；真实硬实时、真实芯片能耗及开放世界多模态/因果能力须另行验证。
+
 ## 方法课程与四个工程专项
 
 DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) 组织：契约 → 同步 FIFO → 单 Linear → 系统扩展。领域 04 关注计算体系结构与 NPU，领域 16 负责可复用数字设计基本功；领域 07 关注 QEMU/驱动，领域 18 负责模型适用性与结论可信度。两两连接，不重复计算实现进度。
@@ -99,14 +112,14 @@ DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) �
 | 共同实验资产 | 各领域共用输入、期望、数据划分和故障轨迹 | [资产 ID/哈希、独立参考与重放](ENGINEERING_BRIDGES.md#共同实验资产的实施与验收) |
 | 教材学习者验证 | 贯穿全部章节，按学习路线逐章验收 | [作者复现、独立试读与迁移排错任务](CURRICULUM.md#教材学习者验证的实施与验收) |
 
-这四项是既有课程的交付方法，尚待实施；不计为新增四个一级领域，也不计入十组深化实验的数量。V7 底部展示四项共同交付，详细实施关系由 [全景规划](PROJECT_MAP.md#贯穿全景的四项共同交付) 与 [阶段安排](ROADMAP.md#四项共同交付的阶段安排) 补充。
+这四项是既有课程的交付方法，尚待实施；不计为新增四个一级领域，也不计入十组深化实验的数量。V8 底部展示四项共同交付，详细实施关系由 [全景规划](PROJECT_MAP.md#贯穿全景的四项共同交付) 与 [阶段安排](ROADMAP.md#四项共同交付的阶段安排) 补充。
 
 ## 范围与当前深度
 
 - **主线规划**：算法与系统基础、RISC-V/NPU、QEMU、自写模型、AI 编译、运行时和受限 Agent。
 - **并行与系统扩展**：网络 CPU 服务可独立起步；Linux PCI/PCIe NPU、CXL Type 3 内存与放置实验逐阶段验收，RDMA 为进阶。
 - **其他后续扩展**：LFS/RV64 Linux 实践、外部 EDA/SRAM/物理实现迁移、CNN/GNN、其他生成模型、Agent RL。
-- **全景与跨层规划**：既有电路/器件、信号/控制、异构架构、经典 AI、具身、规模与产品流程继续保留；本轮补生命周期、信任、分布变化、方法比较、理论边界与混合信号。
+- **全景与跨层规划**：既有电路/器件、信号/控制、异构架构、经典 AI、具身、规模与产品流程继续保留；六项跨层连接继续保留，本轮补实时、多模态、因果与需求驱动取舍。
 - **仍超出核心范围**：完整数据库内核、先进工艺与模拟/RF 全领域、工业量产签核、真实大集群性能和真实机器人部署；后续按专题与证据拓展。
 - **当前已验证起点**：Python INT8 GEMM、单 MAC RTL 及已有基线测试；新模块属于文档和实验规划。
 
@@ -114,6 +127,6 @@ DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) �
 
 ## 图片维护
 
-V7 使用可编辑的 [SVG 图源](images/knowledge-coverage-v7.svg) 和 [生成脚本](images/render-knowledge-coverage-v7.cjs)，导出 [PNG](images/knowledge-coverage-v7.png) 供仓库展示。十八个领域按 01–18 排列，图下方保留十条全景路线，突出六项补强的归属与顺序；图表示范围，不表示完成比例。脚本需 Node.js，PNG 导出另需 Sharp；它们仅用于文档图片维护，不是实验学习依赖。运行 `node docs/images/render-knowledge-coverage-v7.cjs` 生成 SVG，运行时追加 `--png` 同步导出 PNG；已有 Sharp 可通过 `NODE_PATH` 指向，不要求全局安装。
+V8 使用可编辑的 [SVG 图源](images/knowledge-coverage-v8.svg) 和 [生成脚本](images/render-knowledge-coverage-v8.cjs)，导出 [PNG](images/knowledge-coverage-v8.png) 供仓库展示。十八个领域按 01–18 排列，图下方保留十条全景路线，保留六项补强，并突出新三门专题及 DESIGN 的归属与顺序；图表示范围，不表示完成比例。脚本需 Node.js，PNG 导出另需 Sharp；它们仅用于文档图片维护，不是实验学习依赖。运行 `node docs/images/render-knowledge-coverage-v8.cjs` 生成 SVG，运行时追加 `--png` 同步导出 PNG；已有 Sharp 可通过 `NODE_PATH` 指向，不要求全局安装。
 
-[V6](images/knowledge-coverage-v6.png)、[V5](images/knowledge-coverage-v5.png)、[V4](images/knowledge-coverage-v4.png) 及其 [提示词](images/knowledge-coverage-v4.prompt.txt)、V1–V3 保留为历史资产。后续修改同步图源、PNG、文字索引和里程碑，避免图片范围与实验状态脱节。
+[V7](images/knowledge-coverage-v7.png)、[V6](images/knowledge-coverage-v6.png)、[V5](images/knowledge-coverage-v5.png)、[V4](images/knowledge-coverage-v4.png) 及其 [提示词](images/knowledge-coverage-v4.prompt.txt)、V1–V3 保留为历史资产。后续修改同步图源、PNG、文字索引和里程碑，避免图片范围与实验状态脱节。
