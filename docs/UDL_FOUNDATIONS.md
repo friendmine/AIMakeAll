@@ -1,6 +1,6 @@
 # Understanding Deep Learning 知识体系与项目实验
 
-更新：2026-11-17。参考 Simon J. D. Prince 的 *Understanding Deep Learning*，以 MIT Press 2023 年版的 **21 章及附录 A–C** 为基准。[出版社介绍](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) · [官方目录](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf)
+更新：2026-11-18。参考 Simon J. D. Prince 的 *Understanding Deep Learning*，以 MIT Press 2023 年版的 **21 章及附录 A–C** 为基准。[出版社介绍](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) · [官方目录](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf)
 
 UDL 为 AIMakeAll 提供模型、学习算法和评估方法基础，与 [CSAPP 系统基础](CSAPP_FOUNDATIONS.md) 并行：理解模型为什么能学习，再把计算图交给运行时、QEMU 和 NPU。下文是原创学习组织与实验设计，不是原书翻译或官方习题解答。**当前完成章节级知识映射，新增实验均待实现。**
 
@@ -139,3 +139,7 @@ Agent 主线先走规则协议验证、工具调用 SFT 和独立任务评估，
 - [官方资源仓库](https://github.com/udlbook/udlbook)及[根许可证](https://github.com/udlbook/udlbook/blob/main/LICENSE)：实际引入文件前检查提交、文件级声明及使用范围。
 
 出版社标注开放获取版本使用 CC BY-NC-ND，所检查仓库根许可证为 CC BY-NC-ND 4.0。免费阅读不等于可将原书、插图或改编内容按本项目 MIT 许可发布。本轮仅加入原创知识映射、实验方案和官方链接；没有收录原书、图片、官方 notebooks 或答案。后续代码复用逐文件核验，不把书籍许可或仓库根声明自动替代文件级审查。
+
+## 分布变化 方法比较与学习保证
+
+[SHIFT/SELECT/LIMIT](CHIP_AI_COMPLETENESS.md#六项跨层补强) 接 UDL08/20/21 与 MATH：区分分布变化和校准，建立拒答/监测/更新路径；在同任务比较不同 AI 方法；推导有限 H 的概率界并检查适用条件。MIX 可为 EMB 提供带物理误差的感知输入。新增实验均待实施。

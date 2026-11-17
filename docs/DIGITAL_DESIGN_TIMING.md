@@ -1,6 +1,6 @@
 # 数字设计与时序：从同步逻辑到可综合模块
 
-更新：2026-11-17。DD01–DD08 是本项目原创课程编号，全部为待实现实验。与 [系统化验证](SYSTEMATIC_VERIFICATION.md)、[仿真建模与可信度](SIMULATION_CREDIBILITY.md) 共用小型实验，按 [仿真优先原则](SIMULATION_FIRST.md) 在电脑内完成；不以板卡或流片为前置。
+更新：2026-11-18。DD01–DD08 是本项目原创课程编号，全部为待实现实验。与 [系统化验证](SYSTEMATIC_VERIFICATION.md)、[仿真建模与可信度](SIMULATION_CREDIBILITY.md) 共用小型实验，按 [仿真优先原则](SIMULATION_FIRST.md) 在电脑内完成；不以板卡或流片为前置。
 
 ## 知识与实验
 
@@ -88,3 +88,7 @@ ARITH-E1–E6 归入领域 01/04/16，连接 17/18、CS02、MATH-E2/E6、ENG01 �
 ## 电路基础与实践产品路线
 
 [全景补全的 CIR/PRA/HET/CHIP](CHIP_AI_COMPLETENESS.md) 增加电路/MOS/CMOS/寄生与噪声、FIFO 调试综合、DSP 数据通路，以及工艺/标准单元/供电/测试/封装/良率认知。PRA 复用本页 DD03 合同；CHIP 从已验小模块进入物理扩展。所有新增节点待实施，SPICE 与工艺模型不当作可综合 RTL。
+
+## 生命周期与混合信号角色
+
+[LIFE/MIX](CHIP_AI_COMPLETENESS.md#六项跨层补强) 接 DD 复位/FSM、PPA 低活动和 CIR/SIG：先用控制 RTL/事件模型验证启动与排空，再用模拟前端/ADC/DAC/抖动模型解释数字误差。真实门控、隔离、保持、PLL/ADC 电路分别后置；不更改单 MAC 异步复位或 v0 回绕语义，新增节点待实施。

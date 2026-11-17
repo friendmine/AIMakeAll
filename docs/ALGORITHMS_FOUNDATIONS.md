@@ -1,6 +1,6 @@
 # 算法与数据结构知识体系
 
-更新：2026-11-17。以 [MIT 6.006 Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 为基础参考，连接编译器、运行时、操作系统和 Agent。`AL01–AL10` 是本项目模块编号，不对应课程讲次。**当前完成知识与实验规划，新增实现均待完成。**
+更新：2026-11-18。以 [MIT 6.006 Spring 2020](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) 为基础参考，连接编译器、运行时、操作系统和 Agent。`AL01–AL10` 是本项目模块编号，不对应课程讲次。**当前完成知识与实验规划，新增实现均待完成。**
 
 ## 学习目标与知识地图
 
@@ -41,3 +41,7 @@
 - 本项目只收入原创组织、应用实验和链接，不复制课件、题库或答案；使用官方材料时核对其页面条款和文件级声明，MIT 校名不表示资料采用 MIT 软件许可证。
 
 后续学习入口：[AI 编译](AI_COMPILATION.md) · [OSTEP](OSTEP_FOUNDATIONS.md) · [课程目录](CURRICULUM.md)。
+
+## 理论边界与方法选择
+
+[LIMIT/SELECT](CHIP_AI_COMPLETENESS.md#六项跨层补强) 接 AL10 的复杂度/归约与 CLA 的规划：有界检查和 UNKNOWN、精确/启发式证书、有限样本界，再在共同任务上比较规则/学习/检索/规划。全部为待实施计划，复杂度与概率命题须说明假设，不从小样本速度或分数推出通用结论。

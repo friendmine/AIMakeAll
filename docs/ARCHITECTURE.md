@@ -168,3 +168,7 @@ CE 表示可纠正事件，UE 表示检测到但不可纠正事件。E3 的整�
 阶段安排为 E1/E2 可在 G1 基础具备后独立开展，E3/E4 随 M1/S0 存储接口接入，E5 贯穿回归，E6 在正常 GEMM 路径完成后进入 G3 扩展。ECC 不作为首个 G2 的前置。每项交付规范/参考、RTL 或明确标为模型的实现、测试/覆盖/轨迹、错误处置说明、资源开销和实验正文；码字位数开销可直接核算，实际面积/时序需同库综合，故障注入通过不等同真实器件故障率或安全认证。
 
 参考 [OpenTitan ECC 生成与验证工具](https://opentitan.org/book/util/design/index.html#ecc-generator-tool) 的产物组织方式；其 [OTBN 数据完整性说明](https://opentitan.org/book/hw/ip/otbn/doc/theory_of_operation.html#data-integrity-protection) 展示检测与处置的边界。OTBN 使用的 (39,32) 码与本实验 (13,8) 不同，且 OTBN 采用检测后停止而非纠正继续；不把该策略当作本项目 CE 恢复的验证证据。当前只引用资料，没有复制上游代码或运行生成器。
+
+## SoC 生命周期与信任扩展
+
+[LIFE/TRUST](CHIP_AI_COMPLETENESS.md#六项跨层补强) 将启动、时钟/复位、静止/唤醒、看门狗/调试与固件/模型认证接成连续路线；先独立状态模型，再按 M1/M2/G3 接系统。MIX 补模拟信号到数字计算的接口认知。实验均待实施，NPU v0 不增加电源/安全寄存器或状态保持承诺。

@@ -54,3 +54,7 @@ AGQ-E6 可用人工指定正确证据作诊断对照，以区分检索失败与�
 新增 [ENG04 检索与可靠性专项](../docs/ENGINEERING_BRIDGES.md)：先做本地词项索引和 Top-k，独立评估检索命中与回答依据；再以请求编号、状态日志和故障注入验证重试、幂等与恢复。[算法](../docs/ALGORITHMS_FOUNDATIONS.md) 支撑索引与队列，[OSTEP](../docs/OSTEP_FOUNDATIONS.md) 支撑并发、持久化与权限。新增实验仍待实现。
 
 [MiniMind 接入文档](../docs/MINIMIND_INTEGRATION.md) 提供对话模板、工具调用与 Agent RL 的源码阅读入口。先将工具格式适配到本项目内部协议，完成计算、资料检索和实验结果查询；上游固定模拟数据不能作为实时信息。模型推理是否经 NPU 必须由运行时路径与实测记录证明。
+
+## 信任 变化与方法对照
+
+[TRUST/SHIFT/SELECT](../docs/CHIP_AI_COMPLETENESS.md#六项跨层补强) 接 STATE/AGQ：模型认证不提升工具权限，数据变化后的拒答同时报告覆盖率，共同任务比较规则/经典 ML/小网络/LLM/检索/规划。先验证确定性执行器和非模型策略，再接自训练模型；当前均为规划。

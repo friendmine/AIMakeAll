@@ -1,6 +1,6 @@
 # 系统化验证：从规格到可追溯证据
 
-更新：2026-11-17。DV01–DV08 是本项目原创课程编号，全部待实现。首个对象为 [DD03 同步 FIFO 契约](DIGITAL_DESIGN_TIMING.md)，然后扩展至 GEMM/MMIO、网络与 PCIe/CXL 教学子集。验证与设计同步推进，不等到系统集成后才补测试。
+更新：2026-11-18。DV01–DV08 是本项目原创课程编号，全部待实现。首个对象为 [DD03 同步 FIFO 契约](DIGITAL_DESIGN_TIMING.md)，然后扩展至 GEMM/MMIO、网络与 PCIe/CXL 教学子集。验证与设计同步推进，不等到系统集成后才补测试。
 
 ## 知识与实验
 
@@ -87,3 +87,7 @@ SW-E5 的 manifest 至少记录提交、宿主/目标架构与 OS、编译器和
 - [Yosys 文档入口](https://yosyshq.readthedocs.io/projects/yosys/en/latest/)：实现阶段再选定等价流程、版本和受支持设计范围。
 
 计划交付：需求—测试—性质—覆盖矩阵、独立参考、测试台、回归配置、断言/形式文件、错误变体、失败轨迹与报告。当前只有路线，没有运行新验证或证明；与 [ENG03](ENGINEERING_BRIDGES.md) 衔接时，由 DV 提供正确性证据，ENG03 汇总系统性能与结果。
+
+## 六项补强的验证连接
+
+[LIFE/TRUST/SHIFT/SELECT/LIMIT/MIX](CHIP_AI_COMPLETENESS.md#六项跨层补强) 分别增加启动/恢复轨迹、认证/授权反例、分布变化、共同任务比较、证明假设与信号误差证据。沿用 DV 的独立参考和故障回归；实验通过只覆盖声明的有限模型、平台与数据。课程状态统一见 [总表](CURRICULUM.md#课程状态总表)，全部新增节点待实施。
