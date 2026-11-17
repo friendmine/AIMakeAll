@@ -56,6 +56,27 @@ Gemmini 作为后续对照学习材料：它属于 Chipyard/Chisel 生态，其�
 
 Linux 路线中由内核驱动管理设备资源与缓冲区，用户态 C 运行时通过明确接口提交计算。模型训练留在宿主环境；guest 的推理与工具服务独立验收启动、权限、日志、停止和重启。目前尚无 LFS 镜像或 Linux 驱动实现。
 
+## 互连、通信与内存扩展
+
+新增 [网络](NETWORKING_FOUNDATIONS.md)、[I/O 与 PCIe](PCIE_IO_FOUNDATIONS.md)、[CXL](CXL_MEMORY_FOUNDATIONS.md) 三条课程，全部待实现。互连负责连接不同层次，不能把三者视为线性的接口替换。
+
+```mermaid
+flowchart LR
+    AG[远程 Agent 客户端] -->|网络 RPC| SVC[Linux 推理服务]
+    SVC --> RUN[运行时与 CPU 后端]
+    RUN -->|驱动提交| PCI[PCIe NPU 扩展]
+    RUN -->|内存分配与放置| MEM[本地内存 / CXL Type 3 扩展]
+    BARE[RV32 裸机 CPU] -->|片内 MMIO| NPU[首版教学 NPU]
+```
+
+上图为目标连接关系，CXL 与 PCIe NPU 尚未集成在同一验证平台。首个 CXL 实验用独立 x86-64 q35 guest，RV64 迁移另验；不直接扩大首版裸机 NPU 的能力。
+
+- **设备路径**：保留 GEMM 数值语义，新增独立 PCIe 传输 ABI。Linux 驱动管理 BAR、DMA 映射、中断与资源生命周期，用户态提交缓冲区句柄；不复用裸机地址假设。
+- **网络路径**：协议传输经过校验的输入与结果，不传可解引用地址。先 CPU 服务，再接真实 NPU 后端；超时、取消、重试及背压贯穿 Agent 与服务端。
+- **内存路径**：CXL 初期解决可访问容量与放置问题。NPU v0 只有 32 位地址，访问扩展内存需额外证明映射能力或使用暂存搬运；编译器的放置提示由运行时兑现。
+
+按 [S0–S3](ROADMAP.md) 分阶段验收，网络可并行。QEMU 的功能结果、网络服务墙钟、参数化带宽/延迟估算、真实 PCIe/CXL/RDMA 性能分别报告。
+
 ## QEMU 的职责
 
 QEMU 支持 32/64 位 RISC-V 系统模拟，但机器模型决定设备与内存映射；`virt` 并非某个真实硬件 SoC 的复制品。见 [QEMU 官方说明](https://www.qemu.org/docs/master/system/target-riscv.html)。

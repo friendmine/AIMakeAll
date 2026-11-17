@@ -69,7 +69,11 @@ flowchart LR
 
 先采用容易检查的计划和解释执行；等语义稳定再优化编码或生成代码。新增字段与 [运行时方案](../runtime/README.md) 一起审查，未知能力不得静默降级成看似成功的结果。
 
-## 6. 框架阅读与来源
+## 6. 互连与异构内存的后续连接
+
+[PCIe IO05](PCIE_IO_FOUNDATIONS.md) 为计划增加新的设备能力目标，但 BAR、DMA 地址和完成通知由驱动与运行时处理；不把具体地址固化进模型包。[CXL CX05](CXL_MEMORY_FOUNDATIONS.md) 可利用 AC08 的生命周期信息形成内存类别提示，运行时另验实际放置、可寻址范围和暂存成本。[网络 NET03–NET05](NETWORKING_FOUNDATIONS.md) 在服务层传输请求与结果，首版不把远程 RPC 自动当作可任意切分的图算子。这些属于待实现扩展，不改变首个单 Linear 实验范围。
+
+## 7. 框架阅读与来源
 
 - [MLIR Toy](https://mlir.llvm.org/docs/Tutorials/Toy/)：从 AST、IR 和变换到逐级降级、LLVM 代码生成，再到类型扩展。作为概念与框架学习，不声称提供本项目硬件后端。
 - [MLIR Bufferization](https://mlir.llvm.org/docs/Bufferization/)：阅读张量语义如何映射到内存缓冲区，以及复用时的别名和读写约束。

@@ -17,9 +17,9 @@
 
 ## 知识覆盖图
 
-![AIMakeAll 知识覆盖图 V2：基础与硬件、系统与编译、模型与应用十二个领域，新增算法、OSTEP 与 AI 编译](docs/images/knowledge-coverage-v2.png)
+![AIMakeAll 知识覆盖图 V3：十五个领域，新增网络、PCIe 和 CXL](docs/images/knowledge-coverage-v3.png)
 
-图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十二个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
+图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。查看 [十五个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
 
 ## 从这里开始
 
@@ -39,6 +39,9 @@
 12. 学习 [OSTEP 操作系统原理](docs/OSTEP_FOUNDATIONS.md)，连接调度、地址空间、并发与持久化。
 13. 完成 [AI 编译学习路线](docs/AI_COMPILATION.md)：有限计算图 → 量化/分块 → 内存规划 → 执行计划 → C/QEMU/RTL 对照。
 14. 按 [四个工程专项](docs/ENGINEERING_BRIDGES.md) 补数值、数据、性能验证和检索可靠性的实验与验收。
+15. 学习 [网络与分布式通信](docs/NETWORKING_FOUNDATIONS.md)，从双节点 CPU 服务进入远程推理与 Agent；不等待 NPU 完成。
+16. 按 [I/O 与 PCIe](docs/PCIE_IO_FOUNDATIONS.md) 从片内 MMIO、EDU 驱动推进到 Linux 虚拟 PCIe NPU。
+17. 进阶学习 [CXL 与异构内存](docs/CXL_MEMORY_FOUNDATIONS.md)，从独立 Type 3 内存实验进入模型内存放置；阶段安排见 [S0–S3 路线](docs/ROADMAP.md)。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖

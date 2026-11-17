@@ -14,6 +14,7 @@
 - [x] 纳入 [Understanding Deep Learning 的 21 章及附录](UDL_FOUNDATIONS.md)，建立模型理论、项目实验与 MiniMind/NPU/Agent 的连接。
 - [x] 纳入 [Linux From Scratch 的 11 章及附录](LFS_FOUNDATIONS.md)，建立工具链、Linux 构建和 RV64 系统扩展路线。
 - [x] 建立算法、OSTEP、AI 编译三条课程与 ENG01–ENG04 工程专项，更新知识覆盖图 V2；新增实验待实现。
+- [x] 建立 NET01–NET06、IO01–IO06、CX01–CX06 三条课程与 S0–S3 实验安排，更新知识覆盖图 V3；仅完成文档规划。
 - [x] GitHub 基线 CI 已通过，证据为提交 `c0891ec` 的 [运行记录](https://github.com/friendmine/AIMakeAll/actions/runs/44074780583)；新版本另行验证。
 
 验收：`make test`、`make demo`、`make rtl-test` 成功；这些命令不代表完整 RISC-V SoC 已完成。
@@ -81,8 +82,25 @@ ENG04 增加本地索引/Top-k、检索独立评估、请求编号、持久状�
 
 验收：固定 30 个以上独立任务，公开成功率、调用合法率、超时率、模型耗时与总耗时。规则策略与模型策略结果必须分开；教学小模型若尚不能可靠调用工具，应保留失败记录，不宣称通用 Agent 已完成。
 
+## 互连、通信与内存系统：S0–S3 扩展阶段
+
+这些阶段沿用 M1–M4 的数值、性能与任务验收规则，不替代原有四条主线。S2 是并行网络路线，编号不表示必须在 S1 之后开始；S3 的 CXL 实验只要求相关 PCI/Linux 内存基础，不等待完整模型或完整 PCIe NPU。
+
+| 阶段 | 前置条件与对应模块 | 实验安排 | 阶段交付与验收 |
+| --- | --- | --- | --- |
+| S0 片内数据路径 | M1/M2 的矩阵、地址与状态机；IO01 | 完成 MMIO 单请求 GEMM → 总线握手/错误与数据搬运分析；DMA/中断能力后加 | CPU 发起并取回正确矩阵，非法访问与复位有证据；不改变 v0 同步轮询契约 |
+| S1 Linux PCI/PCIe | 独立 Linux guest、C/驱动基础；IO02–IO05；IO06 为实机进阶 | EDU 枚举/BAR → DMA → INTx/MSI → 自定义 PCIe NPU → C 运行时 | 驱动资源生命周期与错误回收通过，独立 PCIe ABI、数值对照、后端轨迹与成本报告齐全 |
+| S2 网络服务并行 | CSAPP 网络、OSTEP 并发；NET01–NET05 | 回环协议 → 双 guest CPU 服务 → 有界并发/故障 → 模型与 Agent → 可选远程 NPU | 消息边界、超时/重试、身份与权限检查通过；CPU/NPU 结果和后端分开；记录吞吐、尾延迟与任务成功率 |
+| S3 CXL 内存进阶 | IO02/IO03、OSTEP 内存原理与 Linux 环境；CX01–CX05 | 独立 q35 guest → 单 Type 3 发现/译码 → region 与可访问内存 → NUMA/放置 → CPU 模型 | 区域可访问、张量读写正确、容量账本及放置证据齐全；功能、参数估算与真实性能分开 |
+
+NET06 的 RDMA/RoCE、CX06 的多设备/热插拔/Type 2，以及 IO06 的真实板卡与 PHY 按条件单独推进，不列入首版完成条件。CXL 首个实验不默认支持当前 RV64 平台；RV64 移植与 NPU 直接访问 CXL 内存另做能力与地址验收。
+
+三条课程：[网络与分布式通信](NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe](PCIE_IO_FOUNDATIONS.md) · [CXL 与异构内存](CXL_MEMORY_FOUNDATIONS.md)。每个模块都列出产物和失败用例；目前未创建虚拟机、驱动或服务，不勾选实验完成。
+
 ## 下一次开发的具体范围
 
 硬件继续推进 M1 的“4×4 INT8 阵列与 Python 随机对照”，随后再集成 CPU。软件并行实现 AL07 计算图检查、C 整数参考及固定形状 Linear 的计划解释器；按 [单线性层贯通实验](AI_COMPILATION.md) 接 QEMU/RTL，再扩大到完整 LLM。
 
 推进门槛：图检查和量化参考 → C 计划执行与数值对照 → 设备 GEMM 与分块 → 单线性层端到端报告 → 模型集成。首个演示可使用原创固定权重，不等待完整模型训练；OSTEP 小实验和 LFS 系统扩展按需求并行。首次引入外部项目时固定不可变提交与许可证，每项实现同时补实验正文。
+
+互连扩展的首项工作为 IO01 的地址/握手用例，以及可并行的 NET02 回环消息协议和 NET03 CPU 确定性计算服务；先验证它们，再建立 IO02 的 Linux/EDU 驱动环境。CXL 保留为满足前置条件后的 S3 实验。

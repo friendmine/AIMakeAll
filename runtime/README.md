@@ -13,3 +13,5 @@
 与 [NPU 规范](../specs/npu-v0.md) 对齐，并将 CPU 标量、设备结果、模型误差与性能分别验收。
 
 后续 [LFS/Linux 扩展](../docs/LFS_FOUNDATIONS.md) 增加 Linux 设备后端：通过驱动接口提交 GEMM，由内核管理缓冲区、地址与完成通知；不在普通进程中直接复用裸机 MMIO 指针。Linux C 运行时、模型文件加载与服务生命周期分别验收，当前仅为设计。
+
+互连扩展分三条：通过 [IO05](../docs/PCIE_IO_FOUNDATIONS.md) 新增独立 PCIe 设备后端；通过 [NET03–NET05](../docs/NETWORKING_FOUNDATIONS.md) 在运行时外层提供有界 RPC 服务；通过 [CX05](../docs/CXL_MEMORY_FOUNDATIONS.md) 探索权重/KV 的内存放置。网络消息和编译计划均不携带未经绑定的设备地址；CXL 内存不自动成为 NPU 可寻址内存，必要暂存与搬运计入开销。所有新后端与放置策略仍待实现。

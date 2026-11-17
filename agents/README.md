@@ -18,6 +18,12 @@
 
 公开独立任务集、正确答案/成功判据、模型配置、成功率、工具调用合法率与总耗时。最终对照相同模型的 CPU 和 NPU 路径，观察计算加速对整个任务的贡献。详见 [M4 验收](../docs/ROADMAP.md)。
 
+## 网络服务扩展（待实现）
+
+按 [NET03–NET05](../docs/NETWORKING_FOUNDATIONS.md) 把本地调用扩展为远程推理与受限工具服务：先 CPU/规则策略验证协议，再接模型和已验收的 NPU 后端。加入请求编号、deadline、身份与权限检查、有界队列、重试和结果查询；对模拟副作用做断连/重启测试，不承诺仅凭重试实现恰好一次执行。远端返回内容仍是 observation，不能改变本地权限。
+
+网络延迟、排队、模型计算、工具耗时和总任务耗时分别记录；远程 NPU 使用情况必须由服务端运行时轨迹证明。阶段安排见 [S2](../docs/ROADMAP.md)，不依赖 CXL 或 RDMA。
+
 ## MiniMind 参考
 
 新增 [ENG04 检索与可靠性专项](../docs/ENGINEERING_BRIDGES.md)：先做本地词项索引和 Top-k，独立评估检索命中与回答依据；再以请求编号、状态日志和故障注入验证重试、幂等与恢复。[算法](../docs/ALGORITHMS_FOUNDATIONS.md) 支撑索引与队列，[OSTEP](../docs/OSTEP_FOUNDATIONS.md) 支撑并发、持久化与权限。新增实验仍待实现。

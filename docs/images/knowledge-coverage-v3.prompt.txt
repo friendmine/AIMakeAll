@@ -1,0 +1,25 @@
+Use case: infographic-diagram, edit existing project knowledge map.
+Edit target: attached AIMakeAll V2 knowledge coverage graphic. Produce a polished high resolution Chinese V3 map for repository documentation. Retain its cream background, navy typography, blue/green/orange three-column structure and all existing domain numbers 01–12; reflow vertically to make enough space. Use landscape 4:3 or near-square canvas, at least 1800 pixels wide if possible. Clear legible Simplified Chinese, no cropped text. Remove old orange “新增重点” badges from 02/05/08. Title exactly "AIMakeAll 知识覆盖图 · V3". Subtitle "算法与系统 → 模型与加速器 → 互连、通信与 Agent".
+Top grid 3 columns with 4 cards each. Use these short exact titles and descriptions:
+Column "基础与硬件": "01 数学与数值" / "线性代数 · 概率 · 数值稳定 · 量化" / "UDL · CSAPP · ENG01";
+"02 算法与数据结构" / "复杂度 · 图 · 队列 · 动态规划" / "AL01–AL10";
+"03 编程与程序执行" / "C · 汇编 · ABI · 链接 · 调试" / "CSAPP";
+"04 体系结构与加速器" / "RISC-V · MAC/NPU · 总线 · 存储" / "自研硬件 · 项目实验".
+Column "系统与编译": "05 操作系统原理" / "调度 · 内存 · 同步 · 持久化" / "OSTEP · OS01–OS12";
+"06 Linux 系统构建" / "工具链 · 内核 · rootfs · 启动" / "LFS · RV64 扩展";
+"07 模拟器与驱动" / "QEMU · MMIO · 中断 · DMA" / "设备模型 · Linux 驱动";
+"08 AI 编译" / "计算图 · 量化 · 分块 · 内存规划" / "AC01–AC12".
+Column "模型与应用": "09 深度学习基础" / "损失 · 梯度 · 优化 · 泛化" / "Understanding Deep Learning";
+"10 从零 LLM" / "数据 · Transformer · 预训练 · SFT" / "自写模型 · MiniMind";
+"11 推理运行时" / "计划执行 · CPU 回退 · KV Cache" / "自研运行时";
+"12 Agent 与检索" / "工具 · 检索 · 幂等 · 故障恢复" / "任务评测 · ENG04".
+Below top grid add prominent full-width violet section header "新增主线：互连、通信与内存系统" and exactly 3 equal cards:
+"13 网络与分布式通信" / "Ethernet · TCP/IP · Socket · RPC" / "双节点服务 · 重试与背压" / "NET01–NET06 · RDMA 进阶".
+"14 I/O 与 PCIe" / "片内互连 · BAR · DMA · IOMMU" / "EDU 驱动 → 虚拟 PCIe NPU" / "IO01–IO06 · Linux 扩展".
+"15 CXL 与异构内存" / "Type 3 · 地址映射 · NUMA" / "内存扩展 · 权重与 KV 放置" / "CX01–CX06 · 后续进阶".
+Under that use 3 compact full-width rows:
+"实施顺序" / "S0 MMIO 闭环 → S1 PCI/PCIe → S3 CXL；S2 网络并行"
+"贯通实验" / "单 Linear → 量化与计划 → C / QEMU / RTL → 推理与 Agent"
+"工程专项" / "ENG01 数值 · ENG02 数据 · ENG03 性能 · ENG04 可靠性"
+Footer navy bar text exactly: "已纳入规划 ≠ 实验完成；已验证：Python INT8 GEMM 与单 MAC RTL".
+Avoid extra arrows suggesting CXL replaces PCIe or networking needs CXL. No fabricated scores or completion marks. Preserve conceptual content, the new modules are planned, not implemented.

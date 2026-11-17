@@ -14,7 +14,7 @@
 
 LLM 优先路线为数学按需补齐 → UDL01–UDL09 → UDL11/UDL12 → 自写 Transformer 与 MiniMind → 项目量化部署专项。UDL08/UDL21 贯穿评估，UDL19 用于后续 Agent RL；CNN、GNN 和生成模型保留为扩展实验，不阻塞首版四阶段闭环。
 
-## 新增的三条连接课程
+## 算法、操作系统与编译连接课程
 
 | 课程 | 重点与首项实验 | 接入位置 |
 | --- | --- | --- |
@@ -23,6 +23,16 @@ LLM 优先路线为数学按需补齐 → UDL01–UDL09 → UDL11/UDL12 → 自�
 | [AI 编译 AC01–AC12](AI_COMPILATION.md) | 有限图、类型/布局、降级、量化、分块、内存与计划；先做单线性层转换 | 连接单元 07、12–13；MLIR 为后续进阶 |
 
 这些编号为项目模块，不对应参考资料的章号。三条课程目前均为知识与实验设计，尚未实现。算法和 OSTEP 按需进入；首版转换器先自写，不把完整 MLIR 或 LFS 构建设为前置门槛。
+
+## 互连、通信与内存系统课程
+
+| 课程 | 知识与实验 | 阶段与前置 |
+| --- | --- | --- |
+| [网络 NET01–NET06](NETWORKING_FOUNDATIONS.md) | 分层协议、Socket、RPC、并发/重试、远程 Agent、RDMA 进阶 | S2 可并行；先 CPU 服务，远程 NPU 另验后端 |
+| [I/O 与 PCIe IO01–IO06](PCIE_IO_FOUNDATIONS.md) | 片内握手、EDU 枚举/BAR、DMA/IOMMU、中断、PCIe NPU、实机进阶 | S0 随 M1/M2；S1 在独立 Linux guest 开展 |
+| [CXL CX01–CX06](CXL_MEMORY_FOUNDATIONS.md) | 协议/一致性、Type 3、地址译码、Linux region、NUMA/模型放置、高级扩展 | S3 需 PCI/Linux 内存基础，先独立 q35 guest |
+
+18 个模块均为原创实验计划，包含产物与验收门槛，尚未实现；[S0–S3](ROADMAP.md) 明确推进顺序。联网服务无需等待 PCIe/CXL，CXL 不作为首版 NPU 的前置条件；NET06、IO06、CX06 属于进阶。原有课程编号与 NPU v0 接口保持稳定。
 
 ## AI 主线单元与专项
 

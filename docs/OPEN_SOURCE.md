@@ -2,6 +2,10 @@
 
 2026-11-17 建立。以下为上游候选清单，目前没有把这些项目的源码复制进仓库。链接用于追溯；实际引入时必须锁定提交，并核对对应版本 LICENSE、NOTICE 与文件级声明。
 
+网络、PCIe 和 CXL 的新增课程见 [NET](NETWORKING_FOUNDATIONS.md)、[IO](PCIE_IO_FOUNDATIONS.md)、[CX](CXL_MEMORY_FOUNDATIONS.md)。参考 QEMU EDU/网络/CXL、Linux PCI/DMA/CXL 文档、IETF RFC 9293/9110，以及 RDMA 用户态上游；原始链接收录于各课程。当前只纳入原创实验设计与链接，没有引入源码、标准全文或配置好的虚拟机。
+
+协议标准、官方文档、开源实现和硬件 IP 分别核验许可。可阅读标准不等于可重新分发全文；QEMU 开源不表示实际 PCIe/CXL 控制器、PHY、板卡和固件均开源。实施时逐项锁定版本与文件级许可，项目 MIT 许可仅覆盖本项目原创部分。
+
 | 项目 | 用途 | 许可证概况/核验入口 |
 | --- | --- | --- |
 | [Ibex](https://github.com/lowRISC/ibex) | 首选 RV32 CPU 核 | Apache-2.0；以所选提交的 LICENSE/NOTICE 为准 |

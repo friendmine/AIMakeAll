@@ -4,9 +4,9 @@
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图 V2：十二个领域，重点补入算法、OSTEP 与 AI 编译](images/knowledge-coverage-v2.png)
+![AIMakeAll 知识覆盖图 V3：十五个领域，新增网络、PCIe 和 CXL](images/knowledge-coverage-v3.png)
 
-这张图按知识领域展示范围，涵盖算法、CSAPP、OSTEP、LFS、UDL、MiniMind、AI 编译与项目实验。四个工程专项补数值、数据、性能验证和检索可靠性。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v2.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
+这张图按十五个知识领域展示范围，涵盖算法、CSAPP、OSTEP、LFS、UDL、MiniMind、AI 编译与项目实验，并新增互连、网络通信和异构内存。四个工程专项补数值、数据、性能验证和检索可靠性。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v3.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 或下方实施依赖。
 
 ## 项目实施依赖
 
@@ -67,6 +67,30 @@ flowchart TB
     SPEC --> QEMU
     SOC -.共同 ABI 与向量.-> QEMU
 
+    subgraph CONNECT[互连、通信与内存系统 · 实验待实现]
+        IOBASE[S0 · IO01 片内互连<br/>MMIO 闭环、握手与访问边界]
+        PCIBASE[S1 · IO02–IO04<br/>Linux EDU、BAR、DMA 与中断]
+        PCINPU[S1 · IO05<br/>虚拟 PCIe NPU 与独立传输 ABI]
+        NETBASE[S2 · NET01–NET04 · 可并行<br/>网络协议、双节点 CPU 服务与故障]
+        NETAPP[S2 · NET05<br/>远程推理与 Agent，设备后端另验]
+        CXL[S3 · CX01–CX05<br/>独立 q35 / Type 3 内存与放置]
+        ADV[进阶 IO06 / NET06 / CX06<br/>实机 PCIe、RDMA、CXL 高级功能]
+        IOBASE -.学习顺序.-> PCIBASE
+        PCIBASE --> PCINPU
+        PCIBASE -.PCI 与内存基础.-> CXL
+        NETBASE --> NETAPP
+        PCINPU -.可选远程 NPU 后端.-> NETAPP
+        PCINPU --> ADV
+        CXL --> ADV
+        NETAPP --> ADV
+    end
+
+    SOC -.S0 验收.-> IOBASE
+    C3 --> NETBASE
+    OS -.并发与恢复.-> NETBASE
+    OS -.内存原理.-> CXL
+    ROOT --> CONNECT
+
     subgraph LINUX[系统扩展 · Linux 构建与服务，待实施]
         LXBASE[Linux x86-64 环境复现 LFS<br/>工具链 → 用户态 → 内核与启动]
         LXRV[独立 RV64 QEMU Linux<br/>固件、设备树与 rootfs 适配]
@@ -81,6 +105,8 @@ flowchart TB
     C2 -.系统原理.-> LXBASE
     SPEC -.数值与设备语义.-> LXDRV
     LXDRV -.Linux 后端.-> RT
+    LXRV -.独立 Linux PCIe 环境.-> PCINPU
+    PCINPU -.设备后端.-> RT
 
     subgraph MODEL[M3 · 从零 LLM 与 MiniMind]
         LEARN[自写小模型 + MiniMind 参考<br/>资料已纳入，训练待实施]
@@ -107,6 +133,7 @@ flowchart TB
     DEPLOY[模型推理闭环<br/>CPU / QEMU / RTL 数值对照<br/>prefill 与 decode 分开评测]
     PLAN --> DEPLOY
     RT --> DEPLOY
+    CXL -.CPU 模型内存放置扩展.-> DEPLOY
     SOC -.硬件对照.-> DEPLOY
     U2 -.质量评估.-> DEPLOY
     U3 -.后续算子负载.-> ARRAY
@@ -122,6 +149,7 @@ flowchart TB
     OS -.并发与恢复.-> TOOL
     C2 -.异常与取消.-> TOOL
     DEPLOY --> APP
+    NETAPP -.远程服务扩展.-> APP
     U2 --> APP
     LXSVC -.后续部署环境.-> APP
     APP --> DONE[最终交付<br/>教材、源码、可复现实验与结果<br/>数值 / 质量 / 性能 / 任务成功率]
@@ -139,6 +167,8 @@ flowchart TB
 4. UDL 与 MiniMind 小模型训练可并行，先补 ENG02 数据与恢复实验；模型成熟后复用同一编译与运行时路径。
 5. Agent 接入 AL04/AL06 的索引和队列、OSTEP 的并发与持久化、ENG04 的检索和故障评估。
 6. LFS/RV64 Linux 按独立系统扩展推进；OSTEP 原理实验不等待完整 LFS，Linux 扩展也不阻塞 RV32 裸机闭环。
+7. IO01 随主线补片内访问与握手；IO02–IO05 用独立 Linux 环境从 EDU 进入 PCIe NPU。NET01–NET04 可先用 CPU 服务并行，NET05 再接模型、Agent 与已验收的设备后端。
+8. CXL 在 PCI/Linux 内存基础之后，以独立 x86-64 q35 + Type 3 起步；先容量和放置，再研究 NPU 可寻址性、Type 2 或多设备。RDMA 和实机高速接口为后续进阶。
 
 SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验可使用行为内存。QEMU 功能模拟、宿主机提速和真实硬件加速分开报告。
 
@@ -147,6 +177,7 @@ SRAM 与物理实现为扩展线，其状态需独立核验；早期功能实验
 - [知识覆盖文字索引](KNOWLEDGE_COVERAGE.md)
 - [算法与数据结构](ALGORITHMS_FOUNDATIONS.md) · [OSTEP 操作系统原理](OSTEP_FOUNDATIONS.md)
 - [AI 编译与单线性层贯通实验](AI_COMPILATION.md) · [四个工程专项](ENGINEERING_BRIDGES.md)
+- [网络 NET01–NET06](NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe IO01–IO06](PCIE_IO_FOUNDATIONS.md) · [CXL CX01–CX06](CXL_MEMORY_FOUNDATIONS.md)
 - [CSAPP 全书知识体系与项目实验](CSAPP_FOUNDATIONS.md)
 - [Linux From Scratch 知识体系与系统扩展](LFS_FOUNDATIONS.md)
 - [Understanding Deep Learning 知识体系与项目实验](UDL_FOUNDATIONS.md)
