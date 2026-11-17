@@ -15,6 +15,12 @@
 
 这里的“从零”是自己实现并训练模型，从随机权重开始，不以下载预训练权重作为主线。教学模型首先追求可解释、可复现，不承诺达到通用商业助手水平。
 
+## 知识覆盖图
+
+![AIMakeAll 知识覆盖图：基础与硬件、系统与执行、模型与应用九个领域，以及扩展学习和贯穿全程的工程能力](docs/images/knowledge-coverage-v1.png)
+
+图中展示已纳入规划的知识范围，当前已验证起点为 Python INT8 GEMM 与单 MAC RTL。各模块的学习顺序、依赖和实施状态见 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
+
 ## 从这里开始
 
 先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：CSAPP 提供计算机系统基础，Linux From Scratch 补上操作系统构建，Understanding Deep Learning 提供模型与学习理论，MiniMind 连接完整训练实践。

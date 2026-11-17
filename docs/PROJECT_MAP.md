@@ -2,6 +2,14 @@
 
 更新：2026-11-17。状态以本项目记录为准；外部实验成果不等于已经接入本项目，资料规划不等于功能实现。
 
+## 知识覆盖范围
+
+![AIMakeAll 知识覆盖图：数学与数值、编程、体系结构、操作系统、模拟器、运行时、深度学习、LLM 与 Agent](images/knowledge-coverage-v1.png)
+
+这张图按知识领域展示范围，涵盖 CSAPP、LFS、UDL、MiniMind 与项目实验；扩展学习和工程能力单独列出。图中的覆盖范围不等于已完成实验。查看 [原图](images/knowledge-coverage-v1.png) 或继续阅读下方实施依赖。
+
+## 项目实施依赖
+
 ```mermaid
 flowchart TB
     ROOT[AIMakeAll<br/>中文教材 + 开源实现 + 实验与验收]
