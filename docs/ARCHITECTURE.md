@@ -18,6 +18,8 @@ flowchart TD
 
 这是目标架构，目前只有 Python GEMM 和独立 MAC RTL 实验落地。QEMU 与 RTL 是两种执行环境，共享算子语义和驱动协议；QEMU 不会自动执行 Verilog，也不会自动拥有自定义 NPU。
 
+已有独立芯片实验环境现已作为项目的外部基础设施登记，详见 [本地 EDA 依赖与接入分析](LOCAL_EDA_ENVIRONMENT.md)。这些工具和历史案例尚未组成 AIMakeAll 的 SoC；两套 PDK、不同仿真器版本及 SRAM 交付物必须分别管理。
+
 ## 首版选择
 
 | 层 | 默认路线 | 原因与边界 |

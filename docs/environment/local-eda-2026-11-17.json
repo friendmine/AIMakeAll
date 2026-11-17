@@ -1,0 +1,642 @@
+{
+  "schema_version": 1,
+  "observed_at": "2026-11-17T16:54:44.785615+08:00",
+  "scope": "Version/file probes and historical report snapshots; not flow acceptance",
+  "host": {
+    "system": "Darwin",
+    "machine": "arm64",
+    "macos": "27.2.1"
+  },
+  "asic_lab": "/Users/zhangyadong/asic-lab",
+  "asic_lab_exists": true,
+  "tools": [
+    {
+      "name": "python",
+      "category": "baseline",
+      "candidates": [
+        "/Users/zhangyadong/.pyenv/versions/3.11.7/bin/python3"
+      ],
+      "path": "/Users/zhangyadong/.pyenv/versions/3.11.7/bin/python3",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Python 3.11.7"
+    },
+    {
+      "name": "clang",
+      "category": "baseline",
+      "candidates": [
+        "/usr/bin/clang"
+      ],
+      "path": "/usr/bin/clang",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.2.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin"
+    },
+    {
+      "name": "make",
+      "category": "baseline",
+      "candidates": [
+        "/usr/bin/make"
+      ],
+      "path": "/usr/bin/make",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "GNU Make 3.81\nCopyright (C) 2006  Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.\nThere is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A\nPARTICULAR PURPOSE.\n\nThis program built for i386-apple-darwin11.3.0"
+    },
+    {
+      "name": "iverilog",
+      "category": "rtl",
+      "candidates": [
+        "/opt/homebrew/bin/iverilog"
+      ],
+      "path": "/opt/homebrew/bin/iverilog",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Icarus Verilog version 12.0 (stable) ()\n\nCopyright (c) 2000-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed in the hope that it will be useful,\n  but WITHOUT ANY WARRANTY; without even the implied warranty of\n  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n  GNU General Public License for more details.\n\n  You should have received a copy of the GNU General Public License along\n  with this program; if not, write to the Free Software Foundation, Inc.,\n  51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.\n\nIcarus Verilog Preprocessor version 12.0 (stable) ()\n\nCopyright (c) 1999-2021 Stephen Williams (steve@icarus.com)\n\n  This program is free software; you can redistribute it and/or modify\n  it under the terms of the GNU General Public License as published by\n  the Free Software Foundation; either version 2 of the License, or\n  (at your option) any later version.\n\n  This program is distributed "
+    },
+    {
+      "name": "verilator-base",
+      "category": "rtl",
+      "candidates": [
+        "/opt/homebrew/bin/verilator"
+      ],
+      "path": "/opt/homebrew/bin/verilator",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101"
+    },
+    {
+      "name": "verilator-uvm",
+      "category": "uvm",
+      "candidates": [
+        "/Users/zhangyadong/asic-lab/tools/uvm-env/verilator/bin/verilator"
+      ],
+      "path": "/Users/zhangyadong/asic-lab/tools/uvm-env/verilator/bin/verilator",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Verilator 5.054 2026-11-01 rev vUNKNOWN-built20261116"
+    },
+    {
+      "name": "verible",
+      "category": "verification",
+      "candidates": [
+        "/Users/zhangyadong/asic-lab/tools/verible/bin/verible-verilog-lint"
+      ],
+      "path": "/Users/zhangyadong/asic-lab/tools/verible/bin/verible-verilog-lint",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Version\tv0.0-4300-ga832669d\nCommit-Timestamp\t2026-11-16T06:35:41Z\nBuilt\t2026-11-16T06:36:13Z"
+    },
+    {
+      "name": "yosys-path",
+      "category": "rtl",
+      "candidates": [
+        "/opt/homebrew/bin/yosys"
+      ],
+      "path": "/opt/homebrew/bin/yosys",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Yosys 0.60 (git sha1 5bafeb77dc71e054fa331ab9efa613e6fb0a1c49, clang++ 17.0.0 -fPIC -O3)"
+    },
+    {
+      "name": "yosys-pinned",
+      "category": "verification",
+      "candidates": [
+        "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/yosys"
+      ],
+      "path": "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/yosys",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Yosys 0.62 (git sha1 7326bb7d6641500ecb285c291a54a662cb1e76cf, clang++ 21.1.2 -fPIC -O3)"
+    },
+    {
+      "name": "sby",
+      "category": "verification",
+      "candidates": [
+        "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/sby"
+      ],
+      "path": "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/sby",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "SBY v0.62"
+    },
+    {
+      "name": "eqy",
+      "category": "verification",
+      "candidates": [
+        "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/eqy"
+      ],
+      "path": "/nix/store/b9f9g62x56z7da7jwqv8ry7b0qhmpbwf-yosys-with-plugins-0.62-python3-3.13.9-env/bin/eqy",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "EQY v0.62"
+    },
+    {
+      "name": "z3",
+      "category": "verification",
+      "candidates": [
+        "/opt/homebrew/bin/z3"
+      ],
+      "path": "/opt/homebrew/bin/z3",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "Z3 version 4.15.4 - 64 bit"
+    },
+    {
+      "name": "surfer",
+      "category": "viewer",
+      "candidates": [
+        "/opt/homebrew/bin/surfer"
+      ],
+      "path": "/opt/homebrew/bin/surfer",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "surfer 0.7.0 (git: v0.7.0)"
+    },
+    {
+      "name": "riscv-gcc",
+      "category": "firmware",
+      "candidates": [
+        "/opt/homebrew/bin/riscv64-unknown-elf-gcc"
+      ],
+      "path": "/opt/homebrew/bin/riscv64-unknown-elf-gcc",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "riscv64-unknown-elf-gcc (g1b306039a) 15.1.0\nCopyright (C) 2025 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    {
+      "name": "nix",
+      "category": "physical",
+      "candidates": [
+        "/nix/var/nix/profiles/default/bin/nix"
+      ],
+      "path": "/nix/var/nix/profiles/default/bin/nix",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "nix (Nix) 2.35.4"
+    },
+    {
+      "name": "librelane",
+      "category": "physical",
+      "candidates": [
+        "/Users/zhangyadong/asic-lab/toolchain/bin/librelane"
+      ],
+      "path": "/Users/zhangyadong/asic-lab/toolchain/bin/librelane",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "LibreLane v3.0.17\n\nCopyright ©2025-2026 LibreLane Contributors\n\nAdapted from OpenLane 2.0\nCopyright ©2020-2025 Efabless Corporation\n\nAvailable under the Apache License, version 2. Included with the source code,\nbut you can also get a copy at https://www.apache.org/licenses/LICENSE-2.0\n\nIncluded tools and utilities may be distributed under stricter licenses."
+    },
+    {
+      "name": "openroad",
+      "category": "physical",
+      "candidates": [
+        "/nix/store/icn6jlv55q9rjxl95ks7anlf82kjw422-openroad-2026-02-17/bin/openroad"
+      ],
+      "path": "/nix/store/icn6jlv55q9rjxl95ks7anlf82kjw422-openroad-2026-02-17/bin/openroad",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "dcf36133a369abc8f3c5e5738cd4d82e4903c0e0"
+    },
+    {
+      "name": "opensta",
+      "category": "physical",
+      "candidates": [
+        "/nix/store/sc7lam0v6gsfzzcn993qcnkdzkzvnsk9-opensta/bin/sta"
+      ],
+      "path": "/nix/store/sc7lam0v6gsfzzcn993qcnkdzkzvnsk9-opensta/bin/sta",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "2.7.0"
+    },
+    {
+      "name": "magic-base",
+      "category": "physical",
+      "candidates": [
+        "/nix/store/m1z1rkwkswjlawv256521grn230mrkvy-magic-vlsi-8.3.623/bin/magic"
+      ],
+      "path": "/nix/store/m1z1rkwkswjlawv256521grn230mrkvy-magic-vlsi-8.3.623/bin/magic",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "8.3.623"
+    },
+    {
+      "name": "magic-rc",
+      "category": "sram",
+      "candidates": [
+        "/Users/zhangyadong/asic-lab/tools/magic-rc/bin/magic"
+      ],
+      "path": "/Users/zhangyadong/asic-lab/tools/magic-rc/bin/magic",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "8.3.703"
+    },
+    {
+      "name": "netgen",
+      "category": "physical",
+      "candidates": [
+        "/nix/store/zz2606k9v9qi05qfrg07akn42b9753rg-netgen-1.5.316/bin/netgen"
+      ],
+      "path": "/nix/store/zz2606k9v9qi05qfrg07akn42b9753rg-netgen-1.5.316/bin/netgen",
+      "status": "file_present_not_executed"
+    },
+    {
+      "name": "klayout",
+      "category": "viewer",
+      "candidates": [
+        "/nix/store/6g8zj2r2jya457979pxzjw9h7y34i6vz-klayout-0.30.7/bin/klayout"
+      ],
+      "path": "/nix/store/6g8zj2r2jya457979pxzjw9h7y34i6vz-klayout-0.30.7/bin/klayout",
+      "status": "file_present_not_executed"
+    },
+    {
+      "name": "ngspice",
+      "category": "analog",
+      "candidates": [
+        "/opt/homebrew/bin/ngspice"
+      ],
+      "path": "/opt/homebrew/bin/ngspice",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "******\n** ngspice-47 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2026, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n******"
+    },
+    {
+      "name": "xschem",
+      "category": "analog",
+      "candidates": [
+        "/Users/zhangyadong/asic-lab/tools/xschem/bin/xschem"
+      ],
+      "path": "/Users/zhangyadong/asic-lab/tools/xschem/bin/xschem",
+      "status": "version_ok",
+      "exit_code": 0,
+      "output": "XSCHEM V3.4.8RC\nCopyright (C) 1998-2026 Stefan Schippers\n\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+    },
+    {
+      "name": "qemu-rv32",
+      "category": "simulator",
+      "candidates": [],
+      "status": "not_found_in_checked_locations"
+    },
+    {
+      "name": "qemu-rv64",
+      "category": "simulator",
+      "candidates": [],
+      "status": "not_found_in_checked_locations"
+    }
+  ],
+  "python_environments": [
+    {
+      "status": "version_ok",
+      "exit_code": 0,
+      "metadata": {
+        "python": "3.11.7",
+        "packages": {
+          "numpy": "2.4.2",
+          "scipy": null,
+          "cocotb": null,
+          "pytest": "9.0.2",
+          "cocotbext-axi": null,
+          "ciel": null,
+          "torch": "2.14.1"
+        }
+      },
+      "name": "current"
+    },
+    {
+      "status": "version_ok",
+      "exit_code": 0,
+      "metadata": {
+        "python": "3.12.13",
+        "packages": {
+          "numpy": null,
+          "scipy": null,
+          "cocotb": "2.1.0",
+          "pytest": "9.2.0",
+          "cocotbext-axi": "0.1.28",
+          "ciel": null,
+          "torch": null
+        }
+      },
+      "name": "verification"
+    },
+    {
+      "status": "version_ok",
+      "exit_code": 0,
+      "metadata": {
+        "python": "3.12.13",
+        "packages": {
+          "numpy": "2.5.5",
+          "scipy": "1.18.1",
+          "cocotb": null,
+          "pytest": null,
+          "cocotbext-axi": null,
+          "ciel": "3.2.0",
+          "torch": null
+        }
+      },
+      "name": "openram"
+    }
+  ],
+  "locks_and_environment_files": [
+    {
+      "path": "tools/librelane-3.0.17/flake.lock",
+      "sha256": "a805d3278c3d6da9661f39219b389b8fe595351cc4b728b9114ae2e7c246537e",
+      "bytes": 2704,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/verification-requirements.lock",
+      "sha256": "c09c35c33fa750507e175eb30dfad9bd3944253a23080538b194c887b1d429f8",
+      "bytes": 167,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/openram-env/requirements.lock.txt",
+      "sha256": "e5083a07eca0a517ffc4e528b4ab837e698b506c8580074b9323011f55510990",
+      "bytes": 500,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/openram-env/sources/openram.lock.json",
+      "sha256": "f9e01992960872bcac8cfae828c7288f289dafdd28d2f909020108ab472b6f09",
+      "bytes": 297,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/openram-env/sources/cells.lock.json",
+      "sha256": "e4b62758c7a62ed8f5f490786696ae59cf6be99d001aa5d26d41f066c5f7b365",
+      "bytes": 195,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/openram-env/sources/pdk.lock.json",
+      "sha256": "d9f8ec0375bccb5340e63f5ee0852991a48c8935e63edfc370c2636a06eb78f8",
+      "bytes": 436,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/uvm-env/sources/sources.lock.json",
+      "sha256": "4ec23c1eb4832b4983c0f19a9b45f13e7d66a0de532d8a8837d9c602b998d2f3",
+      "bytes": 739,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "preparation/sources/downloads.lock.json",
+      "sha256": "96ff2895482dd1a1b217ba2a3cecfc6fd649d2c57b39db2926857916d436c4c9",
+      "bytes": 692,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "preparation/ip/picorv32/SOURCE.json",
+      "sha256": "cd51426026fb32b1f4f3574b11ef9daa57bbf402fd1523e011be7a0c78450a23",
+      "bytes": 1372,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/uvm-env/macos-dpi.patch",
+      "sha256": "4c7a006e1f010a1a82334743ef4b4a19be6910cd9c22185faf8a38fc88f36300",
+      "bytes": 545,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "tools/openram-env/ngspice-runtime.patch",
+      "sha256": "0b97cbafd6b67434314d779b893b11ee8aa87f378a5b7ee2991b776ead426349",
+      "bytes": 840,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "verification-env.sh",
+      "sha256": "ba74a99e60ff47cfa29d93aeb2c7f1e05a0ce37b43565cdca6c351830313e905",
+      "bytes": 532,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "uvm-env.sh",
+      "sha256": "f9068fbfe6a8d85ff87dec9d601d455fd0549bb06571892692ab3cbcd31f21fc",
+      "bytes": 420,
+      "status": "recorded_not_rerun"
+    },
+    {
+      "path": "openram-env.sh",
+      "sha256": "d99e10c5ddaea15363b9e6f3e6b87d705c543dcbcecd9ac1e8540fd959758704",
+      "bytes": 522,
+      "status": "recorded_not_rerun"
+    }
+  ],
+  "historical_evidence": [
+    {
+      "path": "logs/status.json",
+      "sha256": "0f98f3eefaffb046b21e248dfe67498cee3799b649a244a3af66c836d63db2da",
+      "bytes": 902,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "passed",
+        "pdk_revision": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+        "limitations": [
+          "Module-level example; no top-level pad ring/package",
+          "No specified board or package voltage source locations for final IR-drop signoff",
+          "No wire-length threshold configured"
+        ],
+        "checks": {
+          "timing__setup_vio__count": 0,
+          "timing__hold_vio__count": 0,
+          "route__drc_errors": 0,
+          "magic__drc_error__count": 0,
+          "klayout__drc_error__count": 0,
+          "design__lvs_error__count": 0,
+          "antenna__violating__nets": 0
+        },
+        "pdk": "sky130A"
+      }
+    },
+    {
+      "path": "logs/verification-status.json",
+      "sha256": "0a33a38dace34ed454dccc40e8a86a422cc17247b0a30abb48706ffcc40f412f",
+      "bytes": 142,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "complete"
+      }
+    },
+    {
+      "path": "logs/analog-status.json",
+      "sha256": "bae7fd34300258da1bf742979137d3cb94484d66a8aa3baf3f1d49f1e7d48b29",
+      "bytes": 157,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "complete"
+      }
+    },
+    {
+      "path": "preparation/status.json",
+      "sha256": "7c603cceddc20e98f86827b5a09148e71e334feaaa50d6cd6fe45efeae25c6d9",
+      "bytes": 1601,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "PASS",
+        "scope": "Preparation and smoke tests; not integrated SoC or tapeout signoff",
+        "pdk_revision": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+        "cpu_commit": "ef203c2b0a3fb793280f5114941416c425c5b461",
+        "limitations": [
+          "IO native mag view excluded due to case-insensitive filesystem filename collision; complete archive retained; GDS available",
+          "selected 1KB SRAM Liberty only covers TT 1.8V 25C",
+          "SDF setup/hold checks not fully supported by installed Icarus",
+          "CPU smoke test uses behavioral RAM, not the SRAM macro",
+          "No integrated SoC, pad ring, ATPG or manufacturing signoff completed"
+        ]
+      }
+    },
+    {
+      "path": "results/uvm_cdc/results.json",
+      "sha256": "22a271198ddbc408477f6af9da85cc670b04bdc1987f134d87e9cebcac96cd28",
+      "bytes": 5438,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "PASS",
+        "scope": "Real SystemVerilog UVM example with constrained randomization and coverage; design-scoped CDC/RDC checks with bundled-data waiver",
+        "run_count": 8,
+        "limitations": [
+          "Not complete UVM feature qualification: RAL/backdoor/VIP/UCIS interoperability not tested",
+          "CDC/RDC checker is a project-specific Yosys netlist analysis, not an industrial signoff engine",
+          "No metastability or MTBF model; no independent domain resets; protocol waiver requires review"
+        ]
+      }
+    },
+    {
+      "path": "results/mixed_signal/results.json",
+      "sha256": "e98918631fb620512800763cb27eba26ea5bd3a44bbb091e4c4070da7bcb9876",
+      "bytes": 2284,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "PASS",
+        "pdk": "SKY130 TT"
+      }
+    },
+    {
+      "path": "results/openram_generic/results.json",
+      "sha256": "b11e94644ce3a2c5ab36c20485552d202b00d84ee25f8cb6425ced79fdfebfd8",
+      "bytes": 9646,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "PASS_FOR_STATED_SCOPE",
+        "date": "2026-11-17T01:33:32.979942+08:00",
+        "scope": "16 words × 8 bits, 1RW1R; ordinary-device bitcells; public full Magic DRC and strict Netgen LVS",
+        "limitations": [
+          "No new Liberty timing/power characterization; previous special-bitcell Liberty is not valid for this macro",
+          "Extracted smoke test includes devices/diffusion geometry, not interconnect R/C",
+          "Functional tests only at TT 1.8 V 25 C, 5 ns period and 13.78 fF output load; no minimum-period claim",
+          "No multi-corner/mismatch/SNM/yield or foundry-specific tapeout signoff; not a general-purpose compiler qualification"
+        ],
+        "macro_um": [
+          360.11,
+          267.57
+        ]
+      }
+    },
+    {
+      "path": "results/openram_pex/acceptance.json",
+      "sha256": "1cdca45611dd78cb4e34a0eb22dabfd9d9d6edd5a3e7422b0cd257602d857332",
+      "bytes": 150768,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "INCOMPLETE",
+        "updated": "2026-11-17T16:54:19.616739+08:00",
+        "characterization_ready": false,
+        "gates": [
+          {
+            "name": "Physical DRC/LVS",
+            "status": "PASS"
+          },
+          {
+            "name": "GDS identity",
+            "status": "PASS"
+          },
+          {
+            "name": "Raw RC identity",
+            "status": "PASS"
+          },
+          {
+            "name": "connectivity/results",
+            "status": "PASS"
+          },
+          {
+            "name": "capacitance_audit",
+            "status": "PASS"
+          },
+          {
+            "name": "compact",
+            "status": "PASS"
+          },
+          {
+            "name": "reduction",
+            "status": "PASS"
+          },
+          {
+            "name": "ground_fold",
+            "status": "PASS"
+          },
+          {
+            "name": "liberty_format_test/results",
+            "status": "PASS"
+          },
+          {
+            "name": "negative_measurements/results",
+            "status": "PASS"
+          },
+          {
+            "name": "Equivalent-netlist hash chain",
+            "status": "PASS"
+          },
+          {
+            "name": "rtl",
+            "status": "PASS"
+          },
+          {
+            "name": "negative_lvs/results",
+            "status": "PASS"
+          },
+          {
+            "name": "Measurement negative controls",
+            "status": "PASS"
+          },
+          {
+            "name": "Steady standby TT",
+            "status": "PASS"
+          },
+          {
+            "name": "Steady standby SS",
+            "status": "PENDING"
+          },
+          {
+            "name": "Steady standby FF",
+            "status": "PENDING"
+          },
+          {
+            "name": "Numerical convergence",
+            "status": "PENDING"
+          },
+          {
+            "name": "Joint-port power envelope",
+            "status": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "path": "results/openram_pex/extraction.json",
+      "sha256": "d121787a61dafd7fa7e0fc7443baedd21a466be6c920b200a6c3df7c259264eb",
+      "bytes": 796,
+      "status": "recorded_not_rerun",
+      "summary": {
+        "status": "EXTRACTED_PENDING_CONNECTIVITY_AND_SIMULATION",
+        "scope": "Substrate tied to VSS; all nets including power; distributed resistance, ground and coupling capacitance; nominal public PDK RC",
+        "counts": {
+          "R": 26510,
+          "C": 51857,
+          "X": 4118
+        },
+        "magic_version": "8.3.703",
+        "pdk": "e8294524e5f67c533c5d0c3afa0bcc5b2a5fa066"
+      }
+    }
+  ]
+}

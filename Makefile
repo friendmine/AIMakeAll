@@ -1,13 +1,16 @@
 PYTHON ?= python3
 VERILATOR ?= verilator
 
-.PHONY: test demo rtl-test
+.PHONY: test demo rtl-test eda-doctor
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
 
 demo:
 	$(PYTHON) -m reference.int8
+
+eda-doctor:
+	$(PYTHON) tools/eda/inspect_environment.py --output build/eda-environment.json
 
 rtl-test:
 	mkdir -p build/mac

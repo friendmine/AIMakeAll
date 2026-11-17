@@ -21,11 +21,13 @@
 2. 阅读 [系统架构与加速边界](docs/ARCHITECTURE.md)。
 3. 完成 [实验 00：INT8 矩阵乘法与 MAC](labs/00-int8-matmul/README.md)。
 4. 按 [课程目录](docs/CURRICULUM.md) 开始四阶段学习。
+5. 复用已有芯片开发环境前，阅读 [本地 EDA 软件、依赖与接入分析](docs/LOCAL_EDA_ENVIRONMENT.md)。
 
 ```sh
 make test       # Python 3.10+，无第三方 Python 依赖
 make demo       # 输出确定性的 INT8 矩阵乘法结果
 make rtl-test   # 可选：需要 Verilator、C++ 编译器和 make
+make eda-doctor # 可选：只读盘点本地芯片开发环境与历史验收状态
 ```
 
 ## 目录
@@ -41,6 +43,7 @@ specs/              各层共同遵循的接口草案
 reference/          无第三方依赖的数学参考实现
 labs/               可执行实验及讲解
 tests/              参考实现测试与 RTL 测试台
+tools/eda/          本地开源芯片工具链检查；不自动安装或运行外部实验
 ```
 
 ## 关于“加速”

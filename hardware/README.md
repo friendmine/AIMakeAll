@@ -5,3 +5,5 @@
 运行 `make rtl-test`。下一步依次实现 4×4 阵列、局部存储、分块控制、MMIO 外设以及 Ibex 集成。对照 [算子规范](../specs/npu-v0.md) 和 [里程碑 M1](../docs/ROADMAP.md)。
 
 外部 CPU 源码尚未引入；引入时固定提交并保存许可声明。首版 CPU 裸机运行，不能据此声称支持 Linux。
+
+已有外部 `~/asic-lab` 提供仿真、形式验证、RTL 到 GDS、SRAM 和数模实验基础。本项目已纳入其 [软件依赖与接入分析](../docs/LOCAL_EDA_ENVIRONMENT.md)，可用 `make eda-doctor` 盘点。原实验尚未迁移至仓库；已有 PicoRV32 可作为联调候选，Ibex 主线仍保留。新 SRAM 的 RC 多工况验收尚未完成，禁止直接沿用旧时序库。
