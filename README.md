@@ -25,6 +25,8 @@
 
 现有十八个领域内的深化实验已扩展为八组、48 项待实现计划：体系结构与存储、数学、软件正确性与复现、持久状态与安全，以及本轮补充的 [并行计算与性能工程](docs/ENGINEERING_BRIDGES.md)、[存储控制器与片上互连](docs/ARCHITECTURE.md)、[功耗能耗与面积权衡](docs/DIGITAL_DESIGN_TIMING.md)、[Agent 检索与决策质量](agents/README.md)。保持一级目录与知识领域不变；详细实验、产物、验收和接入顺序见 [课程目录](docs/CURRICULUM.md) 与 [里程碑](docs/ROADMAP.md)。
 
+另将 [跨层契约、资源预算、共同实验资产和教材学习者验证](docs/ROADMAP.md#四项共同交付的阶段安排) 贯穿现有课程：明确分阶段步骤、交付物和验收，首批从实验 00/FIFO 起步，再接单 Linear、模型和 Agent。本轮完成规划，相关工具、测量与独立试读均待执行。
+
 ## 从这里开始
 
 先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：算法支撑组织与调度，CSAPP/OSTEP/LFS 分别连接程序、系统原理与构建，UDL/MiniMind 连接理论与训练，AI 编译将模型映射到运行时和 NPU。
