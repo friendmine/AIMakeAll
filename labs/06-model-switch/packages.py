@@ -17,8 +17,8 @@ def floats(tensor):
     return struct.pack(f"<{len(values)}f", *values)
 
 
-def package(width, payload):
-    return HEADER.pack(b"AMP1", 1, width, len(payload), zlib.crc32(payload)) + payload
+def package(width, payload, version=1):
+    return HEADER.pack(b"AMP1", version, width, len(payload), zlib.crc32(payload)) + payload
 
 
 def export_package(model, quant):
@@ -30,20 +30,23 @@ def export_package(model, quant):
     return package(len(quant.sw), b"".join(parts))
 
 
-def make_inputs(prompt, a, b):
+def make_inputs(prompt, a, b, *, version=1, extra_invalid=()):
     # A-copy has its own address. Truncated B ends inside a real, shorter span.
     bad_crc = bytearray(a)  # Same width as the resident A, with one damaged weight byte.
     bad_crc[-1] ^= 1
     bad_scale = bytearray(b[HEADER.size:])
     struct.pack_into("<I", bad_scale, 4 * 24, 0x7fc00000)  # final channel, valid CRC
     blobs = {"A": a, "A-copy": a, "B": b, "flipped": bad_crc, "truncated": b[:-1],
-             "bad-width": package(28, b[HEADER.size:]), "nan-scale": package(24, bad_scale)}
+             "bad-width": package(28, b[HEADER.size:], version), "nan-scale": package(24, bad_scale, version)}
     # (input copy, expected model, expected loader status, expected cache hit)
     cases = [
         ("A", 32, 0, False), ("A-copy", 32, 0, True), ("B", 24, 0, False),
         ("A", 32, 0, False), ("flipped", None, 3, None), ("truncated", None, 1, None),
         ("bad-width", None, 2, None), ("nan-scale", None, 4, None), ("A", 32, 0, True),
     ]
+    for name, blob, status in extra_invalid:
+        blobs[name] = blob
+        cases.insert(-1, (name, None, status, None))
     inputs = bytearray(struct.pack("<5BB2x", *prompt, len(cases)))
     inputs.extend(bytes(8 * len(cases)))
     spans = {}

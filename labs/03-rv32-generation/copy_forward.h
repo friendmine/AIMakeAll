@@ -35,9 +35,16 @@ static void norm(const float *x, const float *w, const float *b, float *y)
     for (unsigned i = 0; i < D; ++i) y[i] = (x[i]-mean)*inv*w[i]+b[i];
 }
 
+#ifdef COPY_BATCHED_QKV
+#define quantize(v) quantize_scaled((v), activation_scale)
+static int8_t quantize_scaled(float v, float scale)
+{
+    float x = v / scale;
+#else
 static int8_t quantize(float v)
 {
     float x = v / activation_scale;
+#endif
     if (x >= 127) return 127;
     if (x <= -127) return -127;
     int z = (int)x;
@@ -46,15 +53,30 @@ static int8_t quantize(float v)
     return (int8_t)z;
 }
 
+/* The batched caller projects up to five normalized inputs before running causal
+ * attention row by row. Keep the original scalar schedule for the timed labs. */
+#ifdef COPY_BATCHED_QKV
+static void input_norm(unsigned token, unsigned pos, unsigned row, float h[D])
+{
+#else
 static void features(unsigned token, unsigned pos, unsigned row)
 {
     float h[D], qkv[3*D], scores[CTX], context[D] = {0}, attn[D];
+#endif
     MODEL_PHASE(INPUT_NORM);
     for (unsigned i = 0; i < D; ++i)
         residual[row][i] = tokens_weight[token*D+i] + positions_weight[pos*D+i];
     norm(residual[row], attn_norm_weight, attn_norm_bias, h);
+#ifdef COPY_BATCHED_QKV
+}
+
+static void attend(const float qkv[3*D], unsigned pos, unsigned row)
+{
+    float h[D], scores[CTX], context[D] = {0}, attn[D];
+#else
     MODEL_PHASE(QKV);
     linear(h, qkv_weight, qkv_bias, qkv, D, 3*D);
+#endif
     MODEL_PHASE(ATTENTION);
     for (unsigned i = 0; i < D; ++i) {
         keys[pos][i] = qkv[D+i];

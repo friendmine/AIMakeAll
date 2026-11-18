@@ -115,3 +115,8 @@ $(PROJ_BUILD)/copy-24.pt: | $(PROJ_BUILD)/copy-32.pt
 .PHONY: model-switch
 model-switch: $(GEN_SOC) $(GEN_CHECKPOINT) $(SWITCH_CHECKPOINT_B)
 	$(PYTHON) labs/06-model-switch/run_switch.py --model-a $(GEN_CHECKPOINT) --model-b $(SWITCH_CHECKPOINT_B) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(SWITCH_BUILD)/sample-$(GEN_SAMPLE)
+
+QKV_BUILD ?= build/fused-qkv
+.PHONY: fused-qkv
+fused-qkv: $(GEN_SOC) $(PROJ_BANKED) $(GEN_CHECKPOINT) $(SWITCH_CHECKPOINT_B)
+	$(PYTHON) labs/07-fused-qkv/run_qkv.py --model-a $(GEN_CHECKPOINT) --model-b $(SWITCH_CHECKPOINT_B) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --tile $(PROJ_BANKED) --output $(QKV_BUILD)/sample-$(GEN_SAMPLE)

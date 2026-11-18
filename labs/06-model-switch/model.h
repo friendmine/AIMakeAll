@@ -45,16 +45,17 @@ static uint32_t payload_crc(const uint8_t *p, uint32_t bytes)
     return ~crc;
 }
 
-static enum load_status inspect_package(const uint8_t *data, uint32_t bytes, struct model_view *view)
+static inline enum load_status inspect_format(const uint8_t *data, uint32_t bytes, struct model_view *view,
+                                             uint32_t version, uint32_t extension_bytes)
 {
     struct package_header h;
     if (bytes < sizeof h || ((uintptr_t)data & 3)) return BAD_LENGTH;
     memcpy(&h, data, sizeof h);
-    if (h.magic != 0x31504d41 || h.version != 1 || (h.width != 32 && h.width != 24))
+    if (h.magic != 0x31504d41 || h.version != version || (h.width != 32 && h.width != 24))
         return BAD_HEADER;
     const uint32_t w = h.width, weight_bytes = w*16;
     const uint32_t float_bytes = sizeof(struct shared_tensors) + (1 + w + w + 16*w)*4;
-    if (h.payload_bytes != float_bytes + weight_bytes || bytes - sizeof h != h.payload_bytes)
+    if (h.payload_bytes != float_bytes + weight_bytes + extension_bytes || bytes - sizeof h != h.payload_bytes)
         return BAD_LENGTH;
     const uint8_t *payload = data + sizeof h;
     if (payload_crc(payload, h.payload_bytes) != h.crc32) return BAD_CRC;
@@ -73,6 +74,11 @@ static enum load_status inspect_package(const uint8_t *data, uint32_t bytes, str
         .weights = (const int8_t *)(payload + float_bytes)
     };
     return LOAD_OK;
+}
+
+static inline enum load_status inspect_package(const uint8_t *data, uint32_t bytes, struct model_view *view)
+{
+    return inspect_format(data, bytes, view, 1, 0);
 }
 
 /* Names consumed by the shared experiment 03 forward pass. */

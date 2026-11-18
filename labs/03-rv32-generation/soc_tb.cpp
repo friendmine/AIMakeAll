@@ -27,14 +27,17 @@ struct Ram {
 
 int main(int argc, char **argv) {
     try {
-        if (argc != 4 && argc != 5 && argc != 7 && argc != 8)
-            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu|prepacked [weight_base stores.txt [models.bin]]]");
+        if (argc != 4 && argc != 5 && argc != 7 && argc != 8 && argc != 9)
+            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [backend [weight_base stores.txt [models.bin [watch_bytes]]]]");
         const bool benchmark = argc >= 5;
         unsigned backend = 0;
         if (benchmark) {
             const std::string name(argv[4]);
             if (name == "npu") backend = 1;
             else if (name == "prepacked") backend = 2;
+            else if (name == "qkv-fp32") backend = 3;
+            else if (name == "qkv-int8") backend = 4;
+            else if (name == "qkv-npu") backend = 5;
             else if (name != "cpu") throw std::runtime_error("unknown projection backend");
         }
         constexpr uint32_t backend_port = 0x10001000;
@@ -49,7 +52,7 @@ int main(int argc, char **argv) {
         std::ofstream mmio(argv[3]);
         if (!counts || !mmio) throw std::runtime_error("cannot open trace files");
         // An optional read-only RAM region holds request data independently of the ELF.
-        const bool package_run = argc == 8;
+        const bool package_run = argc >= 8;
         constexpr uint32_t input_offset = 1u << 20;
         if (package_run) {
             std::ifstream inputs(argv[7], std::ios::binary | std::ios::ate);
@@ -62,11 +65,12 @@ int main(int argc, char **argv) {
                 throw std::runtime_error("incomplete model inputs");
         }
         const bool watch_weights = argc >= 7;
+        const auto watch_bytes = argc == 9 ? std::stoull(argv[8], nullptr, 0) : 512u;
         uint32_t weight_base = 0;
         std::ofstream stores;
         if (watch_weights) {
             auto addr = std::stoull(argv[5], nullptr, 0);
-            if (addr < base || addr > base + size - 512 || (addr & 3))
+            if (addr < base || !watch_bytes || watch_bytes > size || addr > base + size - watch_bytes || (addr & 3))
                 throw std::runtime_error("weight buffer outside aligned guest RAM");
             weight_base = uint32_t(addr);
             stores.open(argv[6]);
@@ -118,7 +122,7 @@ int main(int argc, char **argv) {
                             throw std::runtime_error("CPU write to read-only model inputs");
                         ram.write(addr, value, dut.mem_wstrb);
                         uint32_t offset = (addr & ~3u) - weight_base;
-                        if (watch_weights && offset < 512)
+                        if (watch_weights && offset < watch_bytes)
                             stores << cycle << ' ' << offset << ' ' << unsigned(dut.mem_wstrb)
                                    << ' ' << value << '\n';
                     }

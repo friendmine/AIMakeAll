@@ -20,9 +20,10 @@ sys.path.insert(0, str(HERE.parent / "03-rv32-generation"))
 from run import build, load_model, reference, run_backend, sha
 
 
-def buffer_symbols(elf, cc):
+def buffer_symbols(elf, cc, sizes=None):
     nm = subprocess.check_output([cc, "-print-prog-name=nm"], text=True).strip()
-    sizes = {"packed_weights": 512, "tile_a": 64, "tile_c": 64}
+    if sizes is None:
+        sizes = {"packed_weights": 512, "tile_a": 64, "tile_c": 64}
     symbols = {}
     stack = None
     for line in subprocess.check_output([nm, "-S", elf], text=True).splitlines():
