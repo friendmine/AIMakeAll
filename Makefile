@@ -134,3 +134,76 @@ $(BYTE_MODELS)/baseline/byte-%.pt: $(BYTE_LAB)/train_byte.py $(BYTE_LAB)/corpus.
 .PHONY: byte-transfer
 byte-transfer: $(GEN_SOC) $(PROJ_BANKED) $(BYTE_MODELS)/byte-32.pt $(BYTE_MODELS)/byte-24.pt $(BYTE_MODELS)/baseline/byte-32.pt $(BYTE_MODELS)/baseline/byte-24.pt
 	$(PYTHON) $(BYTE_LAB)/run_byte.py --models $(BYTE_MODELS) --rtl $(GEN_SOC) --tile $(PROJ_BANKED) --pair $(BYTE_PAIR) --output $(BYTE_BUILD)/pair-$(BYTE_PAIR)
+
+.PHONY: lab09
+lab09: $(GEN_SOC) $(PROJ_BANKED) build/byte-transfer/models/byte-32.pt
+	$(PYTHON) labs/09-vocabulary-head/quality.py
+	$(PYTHON) labs/09-vocabulary-head/timing.py
+	$(PYTHON) labs/09-vocabulary-head/check_bus.py
+	$(PYTHON) labs/09-vocabulary-head/reject.py
+	$(PYTHON) labs/09-vocabulary-head/summarize.py
+
+LM_TRAIN := labs/10-language-model/train.py
+build/language/width-%.pt: $(LM_TRAIN) models/byte_lm.py labs/10-language-model/python-help.json.gz
+	$(PYTHON) $(LM_TRAIN) --width $*
+.PHONY: lab10 lab11
+lab10: build/language/width-48.pt
+lab11: lab10 build/language/width-40.pt
+	$(PYTHON) labs/11-model-width/compare.py
+
+.PHONY: lab12
+lab12: lab10 $(PROJ_BANKED)
+	$(PYTHON) labs/12-matrix-tiles/run.py
+
+build/dma-arbiter/Vdma_arbiter: hardware/rtl/dma_arbiter.sv labs/13-dma-fifo/bench.cpp
+	mkdir -p $(@D)
+	$(VERILATOR) --cc --exe --build --assert --trace --top-module dma_arbiter --Mdir $(@D) $< $(CURDIR)/labs/13-dma-fifo/bench.cpp
+.PHONY: lab13
+lab13: build/dma-arbiter/Vdma_arbiter
+	$< build/dma-arbiter/trace.vcd > build/dma-arbiter/report.json
+
+STREAM_TILE := build/array-design/stream/Vprojection_stream
+$(STREAM_TILE): hardware/rtl/projection_stream.sv hardware/rtl/mac_int8.sv $(PROJ_LAB)/tile_tb.cpp
+	mkdir -p $(@D)
+	$(VERILATOR) --cc --exe --build --trace --top-module projection_stream --Mdir $(@D) -CFLAGS -DSTREAM_TILE $< hardware/rtl/mac_int8.sv $(CURDIR)/$(PROJ_LAB)/tile_tb.cpp
+.PHONY: lab14
+lab14: lab10 $(STREAM_TILE) $(PROJ_BANKED)
+	$(PYTHON) labs/14-streaming-array/compare.py
+
+.PHONY: lab15 lab16
+lab15: lab11 $(PROJ_BANKED)
+	$(PYTHON) labs/15-execution-plan/compiler.py
+	$(PYTHON) labs/15-execution-plan/check_plan.py
+lab16: lab15
+	$(PYTHON) labs/16-kv-cache/run.py
+
+.PHONY: lab17
+lab17: lab15 $(GEN_SOC)
+	LINEAR_QEMU=$(abspath $(LINEAR_QEMU)) $(PYTHON) labs/17-language-soc/execute.py
+
+STREAM_SOC := build/array-design/soc/Vgeneration_soc
+$(STREAM_SOC): $(GEN_RTL) hardware/rtl/projection_stream.sv $(GEN_LAB)/soc_tb.cpp
+	mkdir -p $(@D)
+	$(VERILATOR) --cc --exe --build --timescale 1ns/1ps -DAIM_STREAM_SOC --top-module generation_soc --Mdir $(@D) $(GEN_RTL) hardware/rtl/projection_stream.sv $(CURDIR)/$(GEN_LAB)/soc_tb.cpp
+.PHONY: lab18 lab19
+lab18: lab15 $(GEN_SOC) $(STREAM_SOC)
+	$(PYTHON) labs/18-joint-selection/select_model.py
+lab19: lab18
+	$(PYTHON) labs/19-transfer/run.py
+
+.PHONY: lab20
+lab20: lab18
+	$(PYTHON) labs/20-tool-agent/run.py
+
+.PHONY: course-linux-qemu lab21 lab22 lab23 labs09-23
+course-linux-qemu:
+	sh labs/21-linux-driver/build.sh
+lab21: lab15 course-linux-qemu
+	$(PYTHON) labs/21-linux-driver/boot.py 21
+lab22: lab15 course-linux-qemu
+	$(PYTHON) labs/21-linux-driver/boot.py 22
+	$(PYTHON) labs/22-network-pcie/peers.py
+lab23: lab15 course-linux-qemu
+	$(PYTHON) labs/23-cxl-placement/run.py
+
+labs09-23: lab09 lab10 lab11 lab12 lab13 lab14 lab15 lab16 lab17 lab18 lab19 lab20 lab21 lab22 lab23

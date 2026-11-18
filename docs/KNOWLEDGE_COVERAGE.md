@@ -4,7 +4,7 @@
 
 更新：2026-11-18。V9 沿用十八个领域、十组深化实验、十条全景路线与六项跨层补强，包括 RT/MM/CAUSE 三门各三个节点及 DESIGN 综合实验四个检查点。节点复用既有实验，不合计为无重叠的实验总数；交付状态见 [课程状态总表](CURRICULUM.md#课程状态总表)。固定形状 Linear 已交付可运行教材和预算迁移任务，独立学习者验证待执行。
 
-![AIMakeAll 知识覆盖图 V9，十八个领域、已运行的单层实验与下一阶段](images/knowledge-coverage-v9.png)
+![AIMakeAll 知识覆盖图 V9，十八个领域、单层算术、整模型部署和系统扩展](images/knowledge-coverage-v9.png)
 
 ## 十八个领域及阅读入口
 
@@ -136,12 +136,12 @@ DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) �
 - **其他后续扩展**：LFS/RV64 Linux 实践、外部 EDA/SRAM/物理实现迁移、CNN/GNN、其他生成模型、Agent RL。
 - **全景与跨层规划**：既有电路/器件、信号/控制、异构架构、经典 AI、具身、规模与产品流程继续保留；六项跨层连接、实时、多模态、因果与需求驱动取舍仍列入课程。
 - **仍超出核心范围**：完整数据库内核、先进工艺与模拟/RF 全领域、工业量产签核、真实大集群性能和真实机器人部署；后续按专题与证据拓展。
-- **已运行的核心**包括实验 00、实验 01 的四条数值路径与设备检查、四个配套练习，以及实验 02 的微型 Transformer 训练、前馈投影 RTL 回放与混合生成，以及实验 03 的同固件整机生成、实验 04 的同机性能对照、实验 05 的权重预打包、实验 06 的双模型加载和缓存验证，实验 07 的融合 Q/K/V、量化质量与冷/热请求周期，以及实验 08 的字节任务、跨任务选型与分阶段计时。
+- **已运行的核心**包括实验 00、实验 01 的四条数值路径与设备检查、四个配套练习，以及实验 02 的微型 Transformer 训练、前馈投影 RTL 回放与混合生成，以及实验 03 的同固件整机生成、实验 04 的同机性能对照、实验 05 的权重预打包、实验 06 的双模型加载和缓存验证，实验 07 的融合 Q/K/V、量化质量与冷/热请求周期，以及实验 08 的字节任务。09–23 把训练、设计与部署扩展到自然语言整机、跨层选型、Linux、网络与 CXL。[逐项实验证据](EXPERIMENTS_09_23.md)
 
 首先打通一个线性层的量化与分块计划、C 运行时、QEMU/RTL 对照，再扩大到完整模型与 Agent。[整体规划](PROJECT_MAP.md) 给出依赖，[里程碑](ROADMAP.md) 给出验收顺序。
 
 ## 图片维护
 
-V9 使用可编辑的 [SVG 图源](images/knowledge-coverage-v9.svg) 和 [生成脚本](images/render-knowledge-coverage-v9.cjs)，导出 [PNG](images/knowledge-coverage-v9.png) 供仓库展示。十八个领域按 01–18 排列，图下方显示单层闭环、已运行练习与后续路线；图表示范围，不表示完成比例。脚本需 Node.js，PNG 导出另需 Sharp；它们仅用于文档图片维护，不是实验学习依赖。运行 `node docs/images/render-knowledge-coverage-v9.cjs` 生成 SVG，运行时追加 `--png` 同步导出 PNG；已有 Sharp 可通过 `NODE_PATH` 指向，不要求全局安装。
+V9 使用可编辑的 [SVG 图源](images/knowledge-coverage-v9.svg) 和 [生成脚本](images/render-knowledge-coverage-v9.cjs)，导出 [PNG](images/knowledge-coverage-v9.png) 供仓库展示。十八个领域按 01–18 排列，图下方显示单层闭环、原理练习及已运行的芯模与系统路线；图表示范围，不表示完成比例。脚本需 Node.js，PNG 导出另需 Sharp；它们仅用于文档图片维护，不是实验学习依赖。运行 `node docs/images/render-knowledge-coverage-v9.cjs` 生成 SVG，运行时追加 `--png` 同步导出 PNG；已有 Sharp 可通过 `NODE_PATH` 指向，不要求全局安装。
 
 [V8](images/knowledge-coverage-v8.png)、[V7](images/knowledge-coverage-v7.png)、[V6](images/knowledge-coverage-v6.png)、[V5](images/knowledge-coverage-v5.png)、[V4](images/knowledge-coverage-v4.png) 及其 [提示词](images/knowledge-coverage-v4.prompt.txt)、V1–V3 保留为历史资产。后续修改同步图源、PNG、文字索引和里程碑，避免图片范围与实验状态脱节。

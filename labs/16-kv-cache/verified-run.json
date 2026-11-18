@@ -1,0 +1,166 @@
+[
+  {
+    "prefix": 4,
+    "cached": false,
+    "peak_valid_kv_bytes": 0,
+    "processed_linear_rows": 245,
+    "generated": [
+      32,
+      116,
+      111,
+      32,
+      99
+    ],
+    "median_host_ns": [
+      274208,
+      260666,
+      261833,
+      267167,
+      273833
+    ]
+  },
+  {
+    "prefix": 4,
+    "cached": true,
+    "peak_valid_kv_bytes": 4096,
+    "processed_linear_rows": 69,
+    "generated": [
+      32,
+      116,
+      111,
+      32,
+      99
+    ],
+    "median_host_ns": [
+      262083,
+      255500,
+      249709,
+      253417,
+      248792
+    ],
+    "max_logit_delta": 0.0
+  },
+  {
+    "prefix": 16,
+    "cached": false,
+    "peak_valid_kv_bytes": 0,
+    "processed_linear_rows": 725,
+    "generated": [
+      116,
+      104,
+      101,
+      32,
+      99
+    ],
+    "median_host_ns": [
+      309250,
+      301041,
+      301167,
+      311458,
+      314833
+    ]
+  },
+  {
+    "prefix": 16,
+    "cached": true,
+    "peak_valid_kv_bytes": 10240,
+    "processed_linear_rows": 165,
+    "generated": [
+      116,
+      104,
+      101,
+      32,
+      99
+    ],
+    "median_host_ns": [
+      302166,
+      252291,
+      248709,
+      246583,
+      244458
+    ],
+    "max_logit_delta": 0.0
+  },
+  {
+    "prefix": 48,
+    "cached": false,
+    "peak_valid_kv_bytes": 0,
+    "processed_linear_rows": 2005,
+    "generated": [
+      42,
+      42,
+      42,
+      42,
+      42
+    ],
+    "median_host_ns": [
+      411291,
+      424167,
+      418583,
+      423250,
+      418875
+    ]
+  },
+  {
+    "prefix": 48,
+    "cached": true,
+    "peak_valid_kv_bytes": 26624,
+    "processed_linear_rows": 421,
+    "generated": [
+      42,
+      42,
+      42,
+      42,
+      42
+    ],
+    "median_host_ns": [
+      418125,
+      253292,
+      261541,
+      255250,
+      258667
+    ],
+    "max_logit_delta": 2.86102294921875e-06
+  },
+  {
+    "prefix": 88,
+    "cached": false,
+    "peak_valid_kv_bytes": 0,
+    "processed_linear_rows": 3605,
+    "generated": [
+      110,
+      32,
+      42,
+      42,
+      42
+    ],
+    "median_host_ns": [
+      571667,
+      573458,
+      576083,
+      580833,
+      571250
+    ]
+  },
+  {
+    "prefix": 88,
+    "cached": true,
+    "peak_valid_kv_bytes": 47104,
+    "processed_linear_rows": 741,
+    "generated": [
+      110,
+      32,
+      42,
+      42,
+      42
+    ],
+    "median_host_ns": [
+      559833,
+      260250,
+      253958,
+      259666,
+      253250
+    ],
+    "max_logit_delta": 0.0
+  }
+]

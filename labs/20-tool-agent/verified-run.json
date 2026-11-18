@@ -1,0 +1,1322 @@
+{
+  "tasks": 30,
+  "baseline_model_sha256": "1e3c446a14e1773c18739d9f7a8618080c9e8feb9f4bada117e2717dff31940a",
+  "tool_model_sha256": "8c3a266b036020a32bd2e73651ed81e9c36c11930d7d6ebe0ee2a3fcdb8451ad",
+  "elf_sha256": "254453076f8c07045ee278f06ee12f66c79a75a0b6b256e2d917c8e3a480b387",
+  "training_numbers": "10..69",
+  "heldout_numbers": "80..89",
+  "dispatch_limit": 1,
+  "max_simulator_seconds_per_request": 180,
+  "summary": {
+    "rule": {
+      "correct": 30,
+      "legal": 30,
+      "timeouts": 0,
+      "mean_model_cycles": 0.0
+    },
+    "cpu": {
+      "correct": 30,
+      "legal": 30,
+      "timeouts": 0,
+      "mean_model_cycles": 35760621.63333333
+    },
+    "npu": {
+      "correct": 30,
+      "legal": 30,
+      "timeouts": 0,
+      "mean_model_cycles": 30941652.033333335
+    }
+  },
+  "records": [
+    {
+      "prompt": "plus 80 9",
+      "expected_tool": "C",
+      "expected": 89,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 89,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6292
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 89,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40162668,
+          "elapsed_host_ns": 3970773625
+        },
+        "npu": {
+          "tool": "C",
+          "result": 89,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34884380,
+          "elapsed_host_ns": 3533680625
+        }
+      }
+    },
+    {
+      "prompt": "lookup 80",
+      "expected_tool": "D",
+      "expected": "entry-80: matrix",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-80: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 2375
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-80: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40111494,
+          "elapsed_host_ns": 3965282541
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-80: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34832950,
+          "elapsed_host_ns": 3543288000
+        }
+      }
+    },
+    {
+      "prompt": "score 80",
+      "expected_tool": "M",
+      "expected": 15161564,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 2125
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34789547,
+          "elapsed_host_ns": 3435160458
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30062475,
+          "elapsed_host_ns": 3063367000
+        }
+      }
+    },
+    {
+      "prompt": "sum 81 1",
+      "expected_tool": "C",
+      "expected": 82,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 82,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 3750
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 82,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 35197911,
+          "elapsed_host_ns": 3477749625
+        },
+        "npu": {
+          "tool": "C",
+          "result": 82,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30470807,
+          "elapsed_host_ns": 3107148417
+        }
+      }
+    },
+    {
+      "prompt": "find 81",
+      "expected_tool": "D",
+      "expected": "entry-81: cache",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-81: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 7250
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-81: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29737025,
+          "elapsed_host_ns": 2953021875
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-81: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25561265,
+          "elapsed_host_ns": 2600273458
+        }
+      }
+    },
+    {
+      "prompt": "metric 81",
+      "expected_tool": "M",
+      "expected": 15139708,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 7000
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 39698791,
+          "elapsed_host_ns": 3974861334
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34420487,
+          "elapsed_host_ns": 3510923208
+        }
+      }
+    },
+    {
+      "prompt": "add 82 2",
+      "expected_tool": "C",
+      "expected": 84,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 84,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6958
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 84,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34884628,
+          "elapsed_host_ns": 3469769416
+        },
+        "npu": {
+          "tool": "C",
+          "result": 84,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30157732,
+          "elapsed_host_ns": 3062404417
+        }
+      }
+    },
+    {
+      "prompt": "read 82",
+      "expected_tool": "D",
+      "expected": "entry-82: array",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-82: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 8917
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-82: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29957670,
+          "elapsed_host_ns": 2975319583
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-82: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25782006,
+          "elapsed_host_ns": 2627533459
+        }
+      }
+    },
+    {
+      "prompt": "bench 82",
+      "expected_tool": "M",
+      "expected": 13704449,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6208
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34764152,
+          "elapsed_host_ns": 3439935416
+        },
+        "npu": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30036904,
+          "elapsed_host_ns": 3055677292
+        }
+      }
+    },
+    {
+      "prompt": "plus 83 3",
+      "expected_tool": "C",
+      "expected": 86,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 86,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5500
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 86,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40134099,
+          "elapsed_host_ns": 3968670083
+        },
+        "npu": {
+          "tool": "C",
+          "result": 86,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34855523,
+          "elapsed_host_ns": 3519904583
+        }
+      }
+    },
+    {
+      "prompt": "lookup 83",
+      "expected_tool": "D",
+      "expected": "entry-83: model",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-83: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5917
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-83: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40251335,
+          "elapsed_host_ns": 4009544792
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-83: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34972711,
+          "elapsed_host_ns": 3546293041
+        }
+      }
+    },
+    {
+      "prompt": "score 83",
+      "expected_tool": "M",
+      "expected": 13684241,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6084
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34804638,
+          "elapsed_host_ns": 3478634458
+        },
+        "npu": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30077566,
+          "elapsed_host_ns": 3046123541
+        }
+      }
+    },
+    {
+      "prompt": "sum 84 4",
+      "expected_tool": "C",
+      "expected": 88,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 88,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5625
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 88,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34936603,
+          "elapsed_host_ns": 3454414792
+        },
+        "npu": {
+          "tool": "C",
+          "result": 88,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30209515,
+          "elapsed_host_ns": 3053969458
+        }
+      }
+    },
+    {
+      "prompt": "find 84",
+      "expected_tool": "D",
+      "expected": "entry-84: matrix",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-84: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 7667
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-84: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29689951,
+          "elapsed_host_ns": 2971290458
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-84: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25514063,
+          "elapsed_host_ns": 2593988958
+        }
+      }
+    },
+    {
+      "prompt": "metric 84",
+      "expected_tool": "M",
+      "expected": 15161564,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 10208
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 39761437,
+          "elapsed_host_ns": 3944498625
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34483373,
+          "elapsed_host_ns": 3497266791
+        }
+      }
+    },
+    {
+      "prompt": "add 85 5",
+      "expected_tool": "C",
+      "expected": 90,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 90,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6541
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 90,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34820688,
+          "elapsed_host_ns": 3452890458
+        },
+        "npu": {
+          "tool": "C",
+          "result": 90,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30093648,
+          "elapsed_host_ns": 3074777500
+        }
+      }
+    },
+    {
+      "prompt": "read 85",
+      "expected_tool": "D",
+      "expected": "entry-85: cache",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-85: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6334
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-85: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30092694,
+          "elapsed_host_ns": 2990316583
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-85: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25916950,
+          "elapsed_host_ns": 2622509250
+        }
+      }
+    },
+    {
+      "prompt": "bench 85",
+      "expected_tool": "M",
+      "expected": 15139708,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5250
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34677811,
+          "elapsed_host_ns": 3446002500
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29950547,
+          "elapsed_host_ns": 3032762542
+        }
+      }
+    },
+    {
+      "prompt": "plus 86 6",
+      "expected_tool": "C",
+      "expected": 92,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 92,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5833
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 92,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40237191,
+          "elapsed_host_ns": 3982494500
+        },
+        "npu": {
+          "tool": "C",
+          "result": 92,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34958839,
+          "elapsed_host_ns": 3540159250
+        }
+      }
+    },
+    {
+      "prompt": "lookup 86",
+      "expected_tool": "D",
+      "expected": "entry-86: array",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-86: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5500
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-86: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40239518,
+          "elapsed_host_ns": 3966879625
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-86: array",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34961134,
+          "elapsed_host_ns": 3559277916
+        }
+      }
+    },
+    {
+      "prompt": "score 86",
+      "expected_tool": "M",
+      "expected": 13704449,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5584
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34817136,
+          "elapsed_host_ns": 3453317541
+        },
+        "npu": {
+          "tool": "M",
+          "result": 13704449,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30090096,
+          "elapsed_host_ns": 3051910250
+        }
+      }
+    },
+    {
+      "prompt": "sum 87 7",
+      "expected_tool": "C",
+      "expected": 94,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 94,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6042
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 94,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34836198,
+          "elapsed_host_ns": 3456631375
+        },
+        "npu": {
+          "tool": "C",
+          "result": 94,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30109158,
+          "elapsed_host_ns": 3069043708
+        }
+      }
+    },
+    {
+      "prompt": "find 87",
+      "expected_tool": "D",
+      "expected": "entry-87: model",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-87: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5500
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-87: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29577085,
+          "elapsed_host_ns": 2936684833
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-87: model",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25401293,
+          "elapsed_host_ns": 2588429709
+        }
+      }
+    },
+    {
+      "prompt": "metric 87",
+      "expected_tool": "M",
+      "expected": 13684241,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6625
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 39733656,
+          "elapsed_host_ns": 3938412042
+        },
+        "npu": {
+          "tool": "M",
+          "result": 13684241,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34455304,
+          "elapsed_host_ns": 3495105500
+        }
+      }
+    },
+    {
+      "prompt": "add 88 8",
+      "expected_tool": "C",
+      "expected": 96,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 96,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6333
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 96,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34866446,
+          "elapsed_host_ns": 3929926416
+        },
+        "npu": {
+          "tool": "C",
+          "result": 96,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30139342,
+          "elapsed_host_ns": 3072068333
+        }
+      }
+    },
+    {
+      "prompt": "read 88",
+      "expected_tool": "D",
+      "expected": "entry-88: matrix",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-88: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5916
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-88: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29891407,
+          "elapsed_host_ns": 2937950167
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-88: matrix",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 25715743,
+          "elapsed_host_ns": 2636800375
+        }
+      }
+    },
+    {
+      "prompt": "bench 88",
+      "expected_tool": "M",
+      "expected": 15161564,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6000
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34671960,
+          "elapsed_host_ns": 3442390375
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15161564,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 29944712,
+          "elapsed_host_ns": 3085820459
+        }
+      }
+    },
+    {
+      "prompt": "plus 89 9",
+      "expected_tool": "C",
+      "expected": 98,
+      "paths": {
+        "rule": {
+          "tool": "C",
+          "result": 98,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5625
+        },
+        "cpu": {
+          "tool": "C",
+          "result": 98,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40273137,
+          "elapsed_host_ns": 4060188167
+        },
+        "npu": {
+          "tool": "C",
+          "result": 98,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34994865,
+          "elapsed_host_ns": 3555563875
+        }
+      }
+    },
+    {
+      "prompt": "lookup 89",
+      "expected_tool": "D",
+      "expected": "entry-89: cache",
+      "paths": {
+        "rule": {
+          "tool": "D",
+          "result": "entry-89: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 5625
+        },
+        "cpu": {
+          "tool": "D",
+          "result": "entry-89: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 40339866,
+          "elapsed_host_ns": 4043480834
+        },
+        "npu": {
+          "tool": "D",
+          "result": "entry-89: cache",
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 35061418,
+          "elapsed_host_ns": 3543667291
+        }
+      }
+    },
+    {
+      "prompt": "score 89",
+      "expected_tool": "M",
+      "expected": 15139708,
+      "paths": {
+        "rule": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 0,
+          "elapsed_host_ns": 6000
+        },
+        "cpu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 34861907,
+          "elapsed_host_ns": 3479565292
+        },
+        "npu": {
+          "tool": "M",
+          "result": 15139708,
+          "state": "completed",
+          "trace": [
+            "select",
+            "dispatch",
+            "completed"
+          ],
+          "model_cycles": 30134755,
+          "elapsed_host_ns": 3087577708
+        }
+      }
+    }
+  ]
+}

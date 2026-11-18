@@ -1,0 +1,118 @@
+{
+  "format": 1,
+  "width": 48,
+  "dim": 32,
+  "heads": 4,
+  "blocks": 2,
+  "context": 96,
+  "vocab": 256,
+  "floats": {
+    "tokens.weight": 0,
+    "positions.weight": 32768,
+    "blocks.0.norm1.weight": 45056,
+    "blocks.0.norm1.bias": 45184,
+    "blocks.0.norm2.weight": 45312,
+    "blocks.0.norm2.bias": 45440,
+    "blocks.1.norm1.weight": 45568,
+    "blocks.1.norm1.bias": 45696,
+    "blocks.1.norm2.weight": 45824,
+    "blocks.1.norm2.bias": 45952,
+    "norm.weight": 46080,
+    "norm.bias": 46208
+  },
+  "ops": [
+    {
+      "name": "blocks.0.qkv",
+      "k": 32,
+      "n": 96,
+      "w": 46336,
+      "scale": 49408,
+      "bias": 49792,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.0.out",
+      "k": 32,
+      "n": 32,
+      "w": 50176,
+      "scale": 51200,
+      "bias": 51328,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.0.up",
+      "k": 32,
+      "n": 48,
+      "w": 51456,
+      "scale": 52992,
+      "bias": 53184,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.0.down",
+      "k": 48,
+      "n": 32,
+      "w": 53376,
+      "scale": 54912,
+      "bias": 55040,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.1.qkv",
+      "k": 32,
+      "n": 96,
+      "w": 55168,
+      "scale": 58240,
+      "bias": 58624,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.1.out",
+      "k": 32,
+      "n": 32,
+      "w": 59008,
+      "scale": 60032,
+      "bias": 60160,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.1.up",
+      "k": 32,
+      "n": 48,
+      "w": 60288,
+      "scale": 61824,
+      "bias": 62016,
+      "max_k": 32
+    },
+    {
+      "name": "blocks.1.down",
+      "k": 48,
+      "n": 32,
+      "w": 62208,
+      "scale": 63744,
+      "bias": 63872,
+      "max_k": 32
+    },
+    {
+      "name": "head",
+      "k": 32,
+      "n": 256,
+      "w": 64000,
+      "scale": 72192,
+      "bias": 73216,
+      "max_k": 32
+    }
+  ],
+  "cpu_ops": [
+    "embedding",
+    "layer_norm",
+    "causal_attention",
+    "softmax",
+    "GELU",
+    "residual",
+    "rescale",
+    "argmax"
+  ],
+  "payload_bytes": 74240,
+  "sha256": "1e3c446a14e1773c18739d9f7a8618080c9e8feb9f4bada117e2717dff31940a"
+}

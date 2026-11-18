@@ -13,6 +13,11 @@ static uint32_t qkv_cycles[STEPS], head_cycles[STEPS];
 static inline void record_logit(unsigned index, uint32_t value) { logits[step_index][index] = value; }
 #define COPY_BATCHED_QKV
 #define MODEL_PHASE(name) ((void)0)
+#ifdef VOCAB_HEAD_BACKENDS
+static unsigned head_mode;
+static const float *head_scales;
+static const int8_t *head_packed;
+#endif /* VOCAB_HEAD_BACKENDS */
 #include "../03-rv32-generation/copy_forward.h"
 
 struct qkv_parameters {
@@ -37,8 +42,15 @@ static enum load_status inspect_fused(const uint8_t *data, unsigned bytes, struc
 #if FUSED_PACKAGE_VERSION == 3
     const uint32_t expected[] = {COPY_VOCAB, COPY_CONTEXT, COPY_PROMPT, COPY_STEPS};
     tail_size += sizeof expected;
+#ifdef VOCAB_HEAD_BACKENDS
+    if (head_mode != FP32) tail_size += 257*4 + 4096;
+#endif /* VOCAB_HEAD_BACKENDS */
 #endif
+#ifndef VOCAB_HEAD_BACKENDS
     enum load_status status = inspect_format(data, bytes, &next->base, FUSED_PACKAGE_VERSION, tail_size);
+#else /* VOCAB_HEAD_BACKENDS */
+    enum load_status status = inspect_format(data, bytes, &next->base, head_mode == FP32 ? 3 : 4, tail_size);
+#endif /* VOCAB_HEAD_BACKENDS */
     if (status != LOAD_OK) return status;
 #if FUSED_PACKAGE_VERSION == 3
     if (memcmp(data + bytes - sizeof expected, expected, sizeof expected)) return BAD_HEADER;
@@ -50,6 +62,14 @@ static enum load_status inspect_fused(const uint8_t *data, unsigned bytes, struc
     }
     next->qkv.scales = scales;
     next->qkv.weights = (const int8_t *)(scales + QKV_SCALES);
+#ifdef VOCAB_HEAD_BACKENDS
+    if (head_mode != FP32) {
+        const float *sc = (const float *)(next->qkv.weights + QKV_BYTES);
+        for (unsigned i=0; i<257; ++i) {
+            uint32_t b=float_bits(sc[i]); if (!b || b>=0x7f800000u) return BAD_SCALE;
+        }
+    }
+#endif /* VOCAB_HEAD_BACKENDS */
     return LOAD_OK;
 }
 
@@ -72,6 +92,12 @@ static unsigned select_model(const struct fused_model *next, enum backend mode)
         ++generation;
     }
     resident = next->qkv;
+#ifdef VOCAB_HEAD_BACKENDS
+    if (head_mode != FP32) {
+        head_scales = (const float *)(resident.weights+QKV_BYTES);
+        head_packed = (const int8_t *)(head_scales+257);
+    }
+#endif /* VOCAB_HEAD_BACKENDS */
     active = *v;
     return hit;
 }
@@ -176,7 +202,13 @@ void guest_main(void)
 {
     enum backend mode = *(const volatile unsigned *)0x10001000u;
     if (mode < FP32 || mode > NPU_INT8) stop(20);
+#ifndef VOCAB_HEAD_BACKENDS
     word('M', mode);
+#else /* VOCAB_HEAD_BACKENDS */
+    head_mode = mode;
+    word('M', head_mode);
+    mode = NPU_INT8;
+#endif /* VOCAB_HEAD_BACKENDS */
     const uint32_t *region = (const uint32_t *)0x80100000u;
     uint32_t length = *region;
     const uint8_t *input = (const uint8_t *)(region+1);

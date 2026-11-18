@@ -1,5 +1,7 @@
 # AIMakeAll 全景规划图
 
+**当前可运行的芯模路径**　技术语料 → 两层四头检查点 → 九个量化投影和 CPU 回退 → RISC-V 固件 → QEMU / PicoRV32 RTL → 完整生成与选型。应用与系统分支分别通向工具选择、Linux PCIe、双客体网络和 CXL 内存。实验 19 在新约束下检验个人迁移。[实验全景与证据](EXPERIMENTS_09_23.md)
+
 更新：2026-11-18。状态以 [课程状态总表](CURRICULUM.md#课程状态总表) 及对应验证记录为准；外部实验成果不等于已经接入本项目，资料规划不等于功能实现。
 
 交付遵循 [仿真优先原则](SIMULATION_FIRST.md)：数字 RTL → 仿真 → 综合，系统与协议使用 QEMU/事务模型；可选数字物理设计仍在电脑内完成。核心验收不要求板卡或流片。
@@ -31,13 +33,13 @@ flowchart LR
 | 用模型比较硬件 | 增加计算单元或提高片上存储带宽，哪项能缓解当前模型层的瓶颈？ | 固定模型、输入、时钟约束和外存假设，每次改变一个硬件参数。比较有效 MAC 占比、停顿周期与跨存储边界的字节数。面积比较使用同一目标库 |
 | 用硬件反馈调整模型 | 如果权重搬运主导逐 token 生成，缩小前馈层宽度是否值得？ | 固定硬件、数据划分和训练预算，重新训练候选宽度的模型并导出。用同一验证集比较困惑度，用同一 RTL 重放新形状，比较周期和字节数。依预先约定的质量门槛决定是否采用 |
 
-**当前可以做到代表层的联合设计。** 实验 01 用固定 Linear 把 RV32/QEMU 和独立单 MAC 的整数结果对齐。实验 02 用随机初始化后训练的两个微型 Transformer 对照两套 4×4 阵列，测量模型质量、局部访存和提示词／生成两种投影的周期。实验 03 已用同一份裸机程序在 QEMU 与 PicoRV32 RTL 生成符号，保留每步模型、总线和设备证据。实验 04 用同一台 PicoRV32 对照纯 CPU 和 NPU，分别量到提示词收益与单行开销。实验 05 追踪权重缓冲的实际写入，用两次重复请求复验预打包的回本点。实验 06 已验证单槽权重缓存随运行时模型切换而重建，坏包在提交前被拒绝。实验 07 已在同一固件比较融合 Q/K/V 的三种后端，并量到包校验、热命中与整步生成的成本。实验 08 将同一阵列迁移到字节状态生成，从两种宽度、三种后端中选出满足质量与内存门槛的最快配置。[实验 08](../labs/08-byte-transfer/README.md) · [实验 07](../labs/07-fused-qkv/README.md) · [实验 06](../labs/06-model-switch/README.md) · [实验 05](../labs/05-weight-prepack/README.md) · [实验 04 与试读入口](../labs/04-rv32-performance/README.md) · [实验 01](../labs/01-linear257/README.md) · [实验 02](../labs/02-trained-projection/README.md) · [实施顺序](ROADMAP.md)
+**00–08 建立了代表层和结构化生成基线。** 实验 01 用固定 Linear 把 RV32/QEMU 和独立单 MAC 的整数结果对齐。实验 02 用随机初始化后训练的两个微型 Transformer 对照两套 4×4 阵列，测量模型质量、局部访存和提示词／生成两种投影的周期。实验 03 已用同一份裸机程序在 QEMU 与 PicoRV32 RTL 生成符号，保留每步模型、总线和设备证据。实验 04 用同一台 PicoRV32 对照纯 CPU 和 NPU，分别量到提示词收益与单行开销。实验 05 追踪权重缓冲的实际写入，用两次重复请求复验预打包的回本点。实验 06 已验证单槽权重缓存随运行时模型切换而重建，坏包在提交前被拒绝。实验 07 已在同一固件比较融合 Q/K/V 的三种后端，并量到包校验、热命中与整步生成的成本。实验 08 将同一阵列迁移到字节状态生成，从两种宽度、三种后端中选出满足质量与内存门槛的最快配置。[实验 08](../labs/08-byte-transfer/README.md) · [实验 07](../labs/07-fused-qkv/README.md) · [实验 06](../labs/06-model-switch/README.md) · [实验 05](../labs/05-weight-prepack/README.md) · [实验 04 与试读入口](../labs/04-rv32-performance/README.md) · [实验 01](../labs/01-linear257/README.md) · [实验 02](../labs/02-trained-projection/README.md) · [实施顺序](ROADMAP.md)
 
 [实验 03 学生手册](../labs/03-rv32-generation/README.md) · [阶段验收](ROADMAP.md#实验-03-从设备命令追到生成符号)
 
 ## 知识覆盖范围
 
-![AIMakeAll 知识覆盖图 V9，十八个领域、已运行的单层实验与下一阶段](images/knowledge-coverage-v9.png)
+![AIMakeAll 知识覆盖图 V9，十八个领域、单层算术、整模型部署和系统扩展](images/knowledge-coverage-v9.png)
 
 V9 沿用十八个知识领域、十条全景路线和六项跨层补强，保留实时系统、多模态与表示学习、因果推断，以及从需求出发的综合设计实验。查看 [原图](images/knowledge-coverage-v9.png)、[文字索引](KNOWLEDGE_COVERAGE.md) 和 [完整课程与验收](CHIP_AI_COMPLETENESS.md)。
 
@@ -141,7 +143,7 @@ flowchart TB
     MM -.按需模态需求.-> DESIGN
     CAUSE -.按需干预目标.-> DESIGN
 
-    subgraph METHODS[设计、验证与仿真方法 · 实验待实现]
+    subgraph METHODS[设计、验证与仿真方法 · 12–14 已验证硬件实例]
         DD[DD01–DD08 + PPA / ARITH<br/>数字设计、算术结构、时序与面积能耗]
         DV[DV01–DV08 + SW-E1–E6<br/>验证、软件正确性与可复现工程]
         SCM[SIM01–SIM08<br/>事件、周期、重放、校验与敏感性]
@@ -218,7 +220,7 @@ flowchart TB
     QEMU -.功能设备.-> GEN03
     SOC -.PicoRV32 微块接口.-> GEN03
 
-    subgraph CONNECT[互连、通信与内存系统 · 实验待实现]
+    subgraph CONNECT[互连、通信与内存系统 · 21–23 已验证系统实例]
         IOBASE[S0 · IO01 片内互连<br/>MMIO 闭环、握手与访问边界]
         PCIBASE[S1 · IO02–IO04<br/>Linux EDU、BAR、DMA 与中断]
         PCINPU[S1 · IO05<br/>虚拟 PCIe NPU 与独立传输 ABI]

@@ -1,0 +1,40 @@
+{
+  "train_bytes_per_candidate": 1228800,
+  "validation_choice": 48,
+  "candidates": [
+    {
+      "width": 48,
+      "parameters": 34784,
+      "metrics": {
+        "validation": {
+          "target_bytes": 97872,
+          "ppl": 7.762421716991775,
+          "bigram_ppl": 12.23891722843407
+        },
+        "test": {
+          "target_bytes": 8772,
+          "ppl": 8.368545296450744,
+          "bigram_ppl": 13.248682664058817
+        }
+      },
+      "sample": "The argument is the called t"
+    },
+    {
+      "width": 40,
+      "parameters": 33744,
+      "metrics": {
+        "validation": {
+          "target_bytes": 97872,
+          "ppl": 8.110466087923545,
+          "bigram_ppl": 12.23891722843407
+        },
+        "test": {
+          "target_bytes": 8772,
+          "ppl": 8.60222334155877,
+          "bigram_ppl": 13.248682664058817
+        }
+      },
+      "sample": "The assignment in the sundec"
+    }
+  ]
+}

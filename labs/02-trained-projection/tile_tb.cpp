@@ -1,5 +1,13 @@
 // SPDX-License-Identifier: MIT
+#ifdef STREAM_TILE
+#include "Vprojection_stream.h"
+using Tile = Vprojection_stream;
+static constexpr bool streaming = true;
+#else
 #include "Vprojection_tile.h"
+using Tile = Vprojection_tile;
+static constexpr bool streaming = false;
+#endif
 #include "verilated_vcd_c.h"
 #include <cstdint>
 #include <cstdlib>
@@ -12,7 +20,7 @@ static void require(bool condition, const char *message) {
 }
 
 struct Bench {
-    Vprojection_tile dut;
+    Tile dut;
     VerilatedVcdC trace;
     uint64_t time = 0;
 
@@ -54,9 +62,9 @@ struct Bench {
             command(2, 2, 3);
             dut.in_valid = 1;
             dut.in_data = 0x7f8081ff;
-            for (int i = 0; i < (phase == 0 ? 3 : 6); ++i) tick();
+            for (int i = 0; i < (phase == 0 ? 3 : (streaming && phase == 1 ? 5 : 6)); ++i) tick();
             dut.in_valid = 0;
-            if (phase == 1) {
+            if (phase == 1 && !streaming) {
                 for (int i = 0; i < 3 && !dut.mac_fire; ++i) tick();
                 require(dut.mac_fire, "read pipeline has no pending MAC");
             }
@@ -108,7 +116,7 @@ struct Bench {
             tick();
             ++cycles;
         }
-        require(dut.cmd_ready && words == 2*k && reads == 2*k && macs == k, "transaction count mismatch");
+        require(dut.cmd_ready && words == 2*k && reads == (streaming ? 0 : 2*k) && macs == k, "transaction count mismatch");
         std::cout << cycles << ' ' << reads << ' ' << macs << ' ' << waits << '\n';
     }
 };

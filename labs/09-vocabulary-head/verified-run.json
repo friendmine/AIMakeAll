@@ -1,0 +1,173 @@
+{
+  "scope": "Experiment 09. Lab 08 checkpoint, FFN and QKV INT8 on H1 throughout. Each prompt starts from reset and then repeats at the same address.",
+  "corpus": {
+    "train": {
+      "documents": 384,
+      "sha256": "de3bf283741bb6a4fe203c73e5ce1169bfcdb7952ee3e6357ac9cf582ec44cc4"
+    },
+    "validation": {
+      "documents": 64,
+      "sha256": "8969e7cc98df18f136c08fe62467e447f59e352b24665846d4bd884f20590081"
+    },
+    "test": {
+      "documents": 64,
+      "sha256": "2286ecb308df9f6c57f913bc56d848b0abd0f9a3a34e32bdfc968fb763b102f8"
+    }
+  },
+  "checkpoint_tensor_sha256": "762a9adcfc876b80edf2bce5c9912b32e7a75bd8f6c567d74bab3952f1d6069e",
+  "elf_sha256": "fa9a46e60bacd9eca93f1dc04c1cdcc4d96454c3f8402b48fd6c9a65184e2e53",
+  "tools": {
+    "python": "3.11.7",
+    "torch": "2.14.1",
+    "gcc": "riscv64-unknown-elf-gcc (g1b306039a) 15.1.0",
+    "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101"
+  },
+  "n_unique_requests": 64,
+  "deployment_package_bytes": {
+    "fp32": 42988,
+    "int8": 31728
+  },
+  "compact_package_sha256": "4fac2c9eb4645059daf05be31d5be516349ce383b7d735c25744c117ec86fa7f",
+  "ram": {
+    "sections": {
+      ".data": {
+        "start": 2147504128,
+        "bytes": 292
+      },
+      ".bss": {
+        "start": 2147504420,
+        "bytes": 12220
+      }
+    },
+    "stack_top": 2147520736,
+    "stack_reservation_bytes": 4096,
+    "linked_writable_bytes": 16608
+  },
+  "quality": {
+    "validation": {
+      "baseline": {
+        "exact": 64,
+        "ppl": 1.0017445087432861
+      },
+      "quantized": {
+        "exact": 64,
+        "ppl": 1.0017396211624146
+      },
+      "array_replay": {
+        "exact": 64,
+        "ppl": 1.0017396211624146
+      },
+      "min_top_two_margin": 7.123293876647949,
+      "max_quant_vs_float_head_abs_error": 0.04675811529159546
+    },
+    "test": {
+      "baseline": {
+        "exact": 64,
+        "ppl": 1.0017454624176025
+      },
+      "quantized": {
+        "exact": 64,
+        "ppl": 1.00174081325531
+      },
+      "array_replay": {
+        "exact": 64,
+        "ppl": 1.00174081325531
+      },
+      "min_top_two_margin": 7.123293876647949,
+      "max_quant_vs_float_head_abs_error": 0.04805803298950195
+    }
+  },
+  "cold": {
+    "fp32": {
+      "prefill": 7156395.34375,
+      "decode1": 4169337.359375,
+      "decode2": 4240782,
+      "decode": 8410119.359375,
+      "ttft": 17388810.34375,
+      "full": 25799197.703125,
+      "validation": 10199965,
+      "head": 8054853.609375
+    },
+    "int8": {
+      "prefill": 4948281.90625,
+      "decode1": 1932407.875,
+      "decode2": 2016670.703125,
+      "decode": 3949078.578125,
+      "ttft": 12340084.90625,
+      "full": 16289431.484375,
+      "validation": 7359339,
+      "head": 1385696.34375
+    },
+    "npu": {
+      "prefill": 4847033.90625,
+      "decode1": 1831159.875,
+      "decode2": 1915422.703125,
+      "decode": 3746582.578125,
+      "ttft": 12238836.90625,
+      "full": 15985687.484375,
+      "validation": 7359339,
+      "head": 1081952.34375
+    }
+  },
+  "warm": {
+    "fp32": {
+      "prefill": 7156395.34375,
+      "decode1": 4169337.359375,
+      "decode2": 4240782,
+      "decode": 8410119.359375,
+      "ttft": 17356677.34375,
+      "full": 25767064.703125,
+      "validation": 10199965,
+      "head": 8054853.609375
+    },
+    "int8": {
+      "prefill": 4948281.90625,
+      "decode1": 1932407.875,
+      "decode2": 2016670.703125,
+      "decode": 3949078.578125,
+      "ttft": 12307951.90625,
+      "full": 16257298.484375,
+      "validation": 7359339,
+      "head": 1385696.34375
+    },
+    "npu": {
+      "prefill": 4847033.90625,
+      "decode1": 1831159.875,
+      "decode2": 1915422.703125,
+      "decode": 3746582.578125,
+      "ttft": 12206703.90625,
+      "full": 15953554.484375,
+      "validation": 7359339,
+      "head": 1081952.34375
+    }
+  },
+  "bus_verified_head_commands": 24576,
+  "package_faults_and_recovery": {
+    "crc": {
+      "status": 3,
+      "tiles": 0,
+      "prepack_stores": 0,
+      "mmio_writes": 0,
+      "dma_beats": 0
+    },
+    "scale": {
+      "status": 4,
+      "tiles": 0,
+      "prepack_stores": 0,
+      "mmio_writes": 0,
+      "dma_beats": 0
+    },
+    "valid": {
+      "status": 0,
+      "tiles": 272,
+      "prepack_stores": 1280,
+      "mmio_writes": 2176,
+      "dma_beats": 24848
+    }
+  },
+  "actual_tokens_correct": {
+    "fp32": 64,
+    "int8": 64,
+    "npu": 64
+  }
+}

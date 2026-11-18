@@ -14,7 +14,9 @@ struct shared_tensors {
     float tokens[COPY_VOCAB*16], positions[COPY_CONTEXT*16], attn_gain[16], attn_bias[16];
     float qkv[48*16], qkv_b[48], out[16*16], out_b[16];
     float ffn_gain[16], ffn_bias[16], down_b[16], final_gain[16], final_bias[16];
+#ifndef VOCAB_HEAD_BACKENDS
     float head[COPY_VOCAB*16], head_b[COPY_VOCAB];
+#endif
 };
 
 struct model_view {
@@ -24,6 +26,9 @@ struct model_view {
     const float *sw, *up_b, *down;
     const struct shared_tensors *common;
     const int8_t *weights;
+#ifdef VOCAB_HEAD_BACKENDS
+    const float *head_w, *head_b;
+#endif /* VOCAB_HEAD_BACKENDS */
 };
 
 enum load_status { LOAD_OK, BAD_LENGTH, BAD_HEADER, BAD_CRC, BAD_SCALE, BAD_FLOAT };
@@ -55,7 +60,12 @@ static inline enum load_status inspect_format(const uint8_t *data, uint32_t byte
     if (h.magic != 0x31504d41 || h.version != version || (h.width != 32 && h.width != 24))
         return BAD_HEADER;
     const uint32_t w = h.width, weight_bytes = w*16;
+#ifndef VOCAB_HEAD_BACKENDS
     const uint32_t float_bytes = sizeof(struct shared_tensors) + (1 + w + w + 16*w)*4;
+#else /* VOCAB_HEAD_BACKENDS */
+    const uint32_t head_bytes = 4*COPY_VOCAB*(1+(version==3 ? 16:0));
+    const uint32_t float_bytes = head_bytes + sizeof(struct shared_tensors) + (1 + w + w + 16*w)*4;
+#endif /* VOCAB_HEAD_BACKENDS */
     if (h.payload_bytes != float_bytes + weight_bytes + extension_bytes || bytes - sizeof h != h.payload_bytes)
         return BAD_LENGTH;
     const uint8_t *payload = data + sizeof h;
@@ -68,10 +78,19 @@ static inline enum load_status inspect_format(const uint8_t *data, uint32_t byte
     }
     const float *f = (const float *)payload;
     const struct shared_tensors *common = (const struct shared_tensors *)(payload + (1+w)*4);
+#ifndef VOCAB_HEAD_BACKENDS
     const float *up_b = (const float *)(payload + (1+w)*4 + sizeof *common);
+#else /* VOCAB_HEAD_BACKENDS */
+    const float *head = (const float *)(payload + (1+w)*4 + sizeof *common);
+    const float *up_b = head + head_bytes/4;
+#endif /* VOCAB_HEAD_BACKENDS */
     *view = (struct model_view){
         .package = data, .bytes = bytes, .width = w, .sx = f[0], .sw = f+1,
+#ifndef VOCAB_HEAD_BACKENDS
         .common = common, .up_b = up_b, .down = up_b+w,
+#else /* VOCAB_HEAD_BACKENDS */
+        .head_w = head, .head_b = up_b-COPY_VOCAB, .common = common, .up_b = up_b, .down = up_b+w,
+#endif /* VOCAB_HEAD_BACKENDS */
         .weights = (const int8_t *)(payload + float_bytes)
     };
     return LOAD_OK;
@@ -102,6 +121,11 @@ static struct model_view active;
 #define down_bias        active.common->down_b
 #define final_norm_weight active.common->final_gain
 #define final_norm_bias  active.common->final_bias
+#ifndef VOCAB_HEAD_BACKENDS
 #define head_weight      active.common->head
 #define head_bias        active.common->head_b
+#else /* VOCAB_HEAD_BACKENDS */
+#define head_weight      active.head_w
+#define head_bias        active.head_b
+#endif /* VOCAB_HEAD_BACKENDS */
 #endif

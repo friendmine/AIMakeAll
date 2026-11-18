@@ -1,0 +1,159 @@
+{
+  "bad_command_accepted": false,
+  "bdf": "0000:01:00.0",
+  "dma_read_bytes": 10240,
+  "dma_write_bytes": 1024,
+  "expected_sha256": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+  "injected_timeout_recovered": true,
+  "invalid_dma_rejected": true,
+  "outputs_per_request": 256,
+  "reset_recovered": true,
+  "response_int32_bytes": 1024,
+  "rows": {
+    "direct": [
+      {
+        "CopyNS": 97000,
+        "DeviceNS": 78001,
+        "QueueNS": 1122003,
+        "ServiceNS": 460001,
+        "ClientNS": 1957006,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 0
+      },
+      {
+        "CopyNS": 20000,
+        "DeviceNS": 66000,
+        "QueueNS": 118000,
+        "ServiceNS": 134001,
+        "ClientNS": 260001,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 1
+      },
+      {
+        "CopyNS": 22000,
+        "DeviceNS": 52000,
+        "QueueNS": 9000,
+        "ServiceNS": 118000,
+        "ClientNS": 133000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 2
+      },
+      {
+        "CopyNS": 30000,
+        "DeviceNS": 43000,
+        "QueueNS": 22000,
+        "ServiceNS": 100000,
+        "ClientNS": 125000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 3
+      },
+      {
+        "CopyNS": 37000,
+        "DeviceNS": 228000,
+        "QueueNS": 6001,
+        "ServiceNS": 308000,
+        "ClientNS": 319001,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 4
+      },
+      {
+        "CopyNS": 13000,
+        "DeviceNS": 40000,
+        "QueueNS": 8000,
+        "ServiceNS": 107000,
+        "ClientNS": 120000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 5
+      },
+      {
+        "CopyNS": 18000,
+        "DeviceNS": 40000,
+        "QueueNS": 6000,
+        "ServiceNS": 108000,
+        "ClientNS": 121000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 6
+      },
+      {
+        "CopyNS": 19000,
+        "DeviceNS": 36001,
+        "QueueNS": 5000,
+        "ServiceNS": 100001,
+        "ClientNS": 107001,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 7
+      },
+      {
+        "CopyNS": 30000,
+        "DeviceNS": 36000,
+        "QueueNS": 4000,
+        "ServiceNS": 158000,
+        "ClientNS": 166000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 8
+      },
+      {
+        "CopyNS": 34000,
+        "DeviceNS": 43000,
+        "QueueNS": 5000,
+        "ServiceNS": 100000,
+        "ClientNS": 109000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 9
+      },
+      {
+        "CopyNS": 31000,
+        "DeviceNS": 41000,
+        "QueueNS": 7000,
+        "ServiceNS": 113000,
+        "ClientNS": 123000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 10
+      },
+      {
+        "CopyNS": 17000,
+        "DeviceNS": 42000,
+        "QueueNS": 4000,
+        "ServiceNS": 108000,
+        "ClientNS": 117000,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 11
+      }
+    ]
+  },
+  "tcp_request_bytes": 36,
+  "kernel_sha256": "8ce908a8cb28d55adcacacf8a16609fa400e07a8826f0084ae5b13b8cb91b9ab",
+  "kernel": "Alpine Linux 6.12.115-0-virt x86_64",
+  "timing": "TCG guest monotonic nanoseconds; median excludes first request of each path",
+  "direct_median_ns": {
+    "QueueNS": 6001,
+    "CopyNS": 22000,
+    "DeviceNS": 42000,
+    "ServiceNS": 108000,
+    "ClientNS": 123000
+  }
+}

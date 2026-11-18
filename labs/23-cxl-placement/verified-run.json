@@ -1,0 +1,133 @@
+{
+  "model_width": 48,
+  "prompt": "The argument is ",
+  "steps": 4,
+  "window_hpa": "0x110000000",
+  "hdm_decoder_control": "0x600",
+  "uncommitted_write_blocked": true,
+  "type3_capacity_bytes": 268435456,
+  "local_budget_bytes": 81920,
+  "runs": [
+    {
+      "weights": "local",
+      "kv": "local",
+      "capacity": {
+        "local": 83968
+      },
+      "fits_80_KiB": false,
+      "setup_bytes": {
+        "local_write": 74240
+      },
+      "request_bytes": {
+        "local_read": 323072,
+        "local_write": 9728
+      },
+      "generated": [
+        116,
+        104,
+        101,
+        32
+      ],
+      "logits_sha256": "6400b265d0652475fd5c8dc4254da1714a2f61ef83016a3afc4c583a094128d4",
+      "scores_checked": 1024,
+      "bounds_rejected": true,
+      "remote_transfer_lower_bound_ns": {
+        "8": 0.0,
+        "16": 0.0,
+        "32": 0.0
+      }
+    },
+    {
+      "weights": "local",
+      "kv": "cxl",
+      "capacity": {
+        "local": 74240,
+        "cxl": 9728
+      },
+      "fits_80_KiB": true,
+      "setup_bytes": {
+        "local_write": 74240
+      },
+      "request_bytes": {
+        "local_read": 296960,
+        "cxl_write": 9728,
+        "cxl_read": 26112
+      },
+      "generated": [
+        116,
+        104,
+        101,
+        32
+      ],
+      "logits_sha256": "6400b265d0652475fd5c8dc4254da1714a2f61ef83016a3afc4c583a094128d4",
+      "scores_checked": 1024,
+      "bounds_rejected": true,
+      "remote_transfer_lower_bound_ns": {
+        "8": 4480.0,
+        "16": 2240.0,
+        "32": 1120.0
+      }
+    },
+    {
+      "weights": "cxl",
+      "kv": "local",
+      "capacity": {
+        "cxl": 74240,
+        "local": 9728
+      },
+      "fits_80_KiB": true,
+      "setup_bytes": {
+        "cxl_write": 74240
+      },
+      "request_bytes": {
+        "cxl_read": 296960,
+        "local_write": 9728,
+        "local_read": 26112
+      },
+      "generated": [
+        116,
+        104,
+        101,
+        32
+      ],
+      "logits_sha256": "6400b265d0652475fd5c8dc4254da1714a2f61ef83016a3afc4c583a094128d4",
+      "scores_checked": 1024,
+      "bounds_rejected": true,
+      "remote_transfer_lower_bound_ns": {
+        "8": 37120.0,
+        "16": 18560.0,
+        "32": 9280.0
+      }
+    },
+    {
+      "weights": "cxl",
+      "kv": "cxl",
+      "capacity": {
+        "cxl": 83968
+      },
+      "fits_80_KiB": true,
+      "setup_bytes": {
+        "cxl_write": 74240
+      },
+      "request_bytes": {
+        "cxl_read": 323072,
+        "cxl_write": 9728
+      },
+      "generated": [
+        116,
+        104,
+        101,
+        32
+      ],
+      "logits_sha256": "6400b265d0652475fd5c8dc4254da1714a2f61ef83016a3afc4c583a094128d4",
+      "scores_checked": 1024,
+      "bounds_rejected": true,
+      "remote_transfer_lower_bound_ns": {
+        "8": 41600.0,
+        "16": 20800.0,
+        "32": 10400.0
+      }
+    }
+  ],
+  "accounting": "Per-step full weight fetch, incremental KV append; bandwidth-only estimate for decimal GB/s."
+}

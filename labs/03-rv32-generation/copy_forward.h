@@ -105,6 +105,10 @@ static void attend(const float qkv[3*D], unsigned pos, unsigned row)
     for (unsigned i = 0; i < D; ++i) activation[row][i] = quantize(h[i]);
 }
 
+#ifdef VOCAB_HEAD_BACKENDS
+#include "../09-vocabulary-head/head.h"
+#endif
+
 static unsigned next_token(unsigned row)
 {
     float hidden[D], h[D], logits[V];
@@ -120,7 +124,11 @@ static unsigned next_token(unsigned row)
 #ifdef MEASURE_BYTE_STAGES
     uint32_t head_begin = cycle_after(0);
 #endif
-    linear(h, head_weight, head_bias, logits, D, V);
+#ifdef VOCAB_HEAD_BACKENDS
+    if (head_mode != FP32) quantized_head(h, logits);
+    else
+#endif
+        linear(h, head_weight, head_bias, logits, D, V);
 #ifdef MEASURE_BYTE_STAGES
     head_cycles[step_index] = cycle_after(float_bits(logits[0])) - head_begin;
 #endif

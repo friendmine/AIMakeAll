@@ -1,8 +1,10 @@
 # I/O 与 PCIe：从片内 MMIO 到 Linux 加速设备
 
+[相应系统实验、命令与本机验证记录](EXPERIMENTS_09_23.md)
+
 物理层可先做[无实板的传输线练习](../labs/01-linear257/README.md)。改变负载、采样相位和衰减，比较接收眼图，再回到本课程的事务、驱动和协议验收。
 
-更新：2026-11-17。IO01–IO06 为本项目原创模块编号，实验全部待实现。路线为 [S0 片内闭环 → S1 PCI/PCIe](ROADMAP.md)，连接 CSAPP 的地址与 I/O、OSTEP 的并发与生命周期、NPU 数值规范及 Linux 驱动。
+更新：2026-11-17。IO01–IO06 为本项目原创模块编号，已有实验 21 的 BAR 枚举、DMA 与超时恢复样例，其余按专题验收。路线为 [S0 片内闭环 → S1 PCI/PCIe](ROADMAP.md)，连接 CSAPP 的地址与 I/O、OSTEP 的并发与生命周期、NPU 数值规范及 Linux 驱动。
 
 ## 仿真与数字电路路线
 

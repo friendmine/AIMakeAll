@@ -1,6 +1,6 @@
 # AIMakeAll · 从数字 NPU 到模型推理
 
-在自己的电脑上，用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再用 RISC-V 固件让阵列执行前馈升维和融合 Q/K/V 投影，实测它们对生成质量和请求延迟的影响。
+在自己的电脑上，用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再用同一份 RISC-V 固件执行两层语言模型。你可以沿着一个生成字节，追到量化权重、设备命令和 RTL 周期，也可以把同一模型的投影接到 Linux PCIe 设备与网络服务。
 
 **实验 02 · 同一层投影，从 1216 拍降到 960 拍。** 固定训练好的权重和前馈宽度 32，把激活与权重从分两拍读取改为同拍并行读取。处理同样 5 个提示符号，这一层少用 256 拍，整数输出逐项相同。[两种电路的实测对照](labs/02-trained-projection/README.md#第三步--读懂两次取舍)
 
@@ -8,7 +8,7 @@
 
 [![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
 
-[按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [实验 05 权重预打包](#实验-05-权重预打包) · [实验 06 连续切换模型](#实验-06-连续切换模型) · [实验 07 融合 Q/K/V](#实验-07-融合-qkv-投影) · [实验 08 字节任务](#实验-08-换一个生成任务) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
+[09–23 实验总览与复现](docs/EXPERIMENTS_09_23.md) · [按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [实验 05 权重预打包](#实验-05-权重预打包) · [实验 06 连续切换模型](#实验-06-连续切换模型) · [实验 07 融合 Q/K/V](#实验-07-融合-qkv-投影) · [实验 08 字节任务](#实验-08-换一个生成任务) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
 
 ## 从一个乘加到一次生成
 
@@ -97,6 +97,17 @@
 
 三条路径的前馈升维均由 NPU 执行。对 `R152=0>`，Q/K/V 从浮点迁到 NPU 后，提示计算少 **29.68%**，后两个字节合计少 **9.26%**。此时解码计算的 **64.10%** 花在 RV32 的 256 路词表投影上。若把单包预算从 42 KiB 减至 41.5 KiB，六种配置均无法同时满足质量与容量要求。[实验手册与验收](labs/08-byte-transfer/README.md) · [默认成绩单](labs/08-byte-transfer/verified-run.json) · [独立试读任务单](labs/08-byte-transfer/reader-task.md)
 
+## 从词表投影到整机部署
+
+| 走到哪一步 | 能亲手验证的结果 |
+| --- | --- |
+| [09 · 输出层](labs/09-vocabulary-head/README.md) | 256 路输出层量化后仍答对 64/64。以相同前馈和 Q/K/V 后端对比，词表 FP32 → CPU INT8 → NPU INT8 的冷完整请求为 **25.80M → 16.29M → 15.99M 拍**。 |
+| [10–16 · 模型、数字电路与执行计划](docs/EXPERIMENTS_09_23.md) | 在技术文本上训练两层四头模型；用同一 Q/K/V 负载比较两种 RTL，九行投影 **7,920 → 5,544 拍**，同时记录面积、时序、尾块与 KV 容量。 |
+| [17 · 整模型生成](labs/17-language-soc/README.md) · [18–19 · 芯模选型](labs/18-joint-selection/README.md) | QEMU 与 PicoRV32 四路径的 768 个分数逐位一致。按质量选中前馈宽度 48；在另一组质量与容量约束下改选 40，并定位一次通道顺序错误。 |
+| [20 · 工具选择](labs/20-tool-agent/README.md) · [21–23 · 系统扩展](docs/EXPERIMENTS_09_23.md) | 模型在 30 个留出工具任务上答对 30 个；Linux 驱动、跨虚拟机 TCP 服务和 QEMU Type 3 内存放置分别有可重放的实测记录。 |
+
+配齐工具后运行 `make -j1 labs09-23` 可按顺序重建验收结果。每项实验也有单独命令、验收标准与原始计时口径。[按环境选入口](docs/EXPERIMENTS_09_23.md#复现环境)
+
 ## 个人学习目标
 
 **给你一个新的输入形状，或把可用缓冲空间减半，你能独立决定该改电路、模型还是推理程序，并用实验解释为什么。** 先预测影响，再固定模型比较电路、固定电路比较模型。用波形找出阵列在哪一拍等待数据，用生成记录定位第一个有偏差的输出。最后用同一批输入比较模型质量和投影周期，写下选择理由，再换一组输入复验。[个人毕业任务](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [芯模联合实验](docs/PROJECT_MAP.md#芯模联动的实验与验收)
@@ -115,7 +126,9 @@
 | [Build a Large Language Model (From Scratch) · Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch) | 自己写注意力、组装 GPT、训练和生成时 | [七章与附录的项目映射](models/README.md) |
 | [MiniMind · jingyaogong/minimind](https://github.com/jingyaogong/minimind) | 已能训练小模型，准备对照完整工程的数据、训练、推理和工具调用时 | [源码导读与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md) |
 
-实验 02、03 使用 AIMakeAll 自己训练的符号模型，实验 08 使用自训练的结构化字节模型。MiniMind 和下列框架提供工程对照，自然语言 LLM 与模型驱动的 Agent 属于后续阶段。[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+实验 02、03 使用 AIMakeAll 自己训练的符号模型，实验 08 使用自训练的结构化字节模型。MiniMind 和下列框架提供工程对照，实验 10 的自然语言模型和实验 20 的工具选择器使用项目自己的训练配方。技术语料来自 CPython 3.11.7 的帮助主题。[语料来源与许可](labs/10-language-model/README.md) · [两层模型实现](models/byte_lm.py)[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+
+实验 21–22 使用 Alpine 3.22.8 x86_64 的 virt 内核与配套网卡模块。版本、哈希与可执行入口随实验保存。[Alpine 固定镜像目录](https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot-3.22.8/) · [系统实验环境](docs/EXPERIMENTS_09_23.md#复现环境)
 
 ### 按问题查原始资料
 
@@ -176,7 +189,7 @@
 
 [![AIMakeAll 知识覆盖图，含十八个领域及实验 01–03 的联系](docs/images/knowledge-coverage-v9.png)](docs/KNOWLEDGE_COVERAGE.md)
 
-图中的十八个领域可以按问题查阅。自然语言模型、更大范围的算子部署、模型驱动的 Agent 各有后续验收。[里程碑](docs/ROADMAP.md)
+图中的十八个领域可以按问题查阅。自然语言模型、九个线性算子的部署、工具选择与三种系统扩展已有逐项证据。[实验 09–23](docs/EXPERIMENTS_09_23.md)[里程碑](docs/ROADMAP.md)
 
 按计划推进时，可以查看十组深化实验、十条补全路线和六项跨层补强各自的交付物与验收条件。[课程目录](docs/CURRICULUM.md) · [全景规划](docs/PROJECT_MAP.md) · [十条补全路线](docs/CHIP_AI_COMPLETENESS.md) · [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)
 
@@ -190,4 +203,4 @@
 | 电路、模型与运行时 | [数字 RTL](hardware/rtl/) · [模型实现](models/) · [仿真设备](simulator/) · [运行时与驱动](runtime/) · [Agent](agents/) |
 | 规范、参考与工具 | [接口规范](specs/) · [数学参考](reference/) · [回归测试](tests/) · [EDA 环境盘点](tools/eda/) |
 
-本仓库原创教材和一般代码采用 MIT 许可。PicoRV32 核保留 ISC 许可，QEMU 教学设备、头文件与集成补丁采用 GPL-2.0-or-later。外部教材、课件、代码、数据和权重分别遵循各自的许可。[MIT](LICENSE) · [PicoRV32 许可](hardware/ip/picorv32/COPYING) · [QEMU 设备许可](simulator/qemu-v0/COPYING) · [来源与引入规则](docs/OPEN_SOURCE.md) · [贡献约定](CONTRIBUTING.md)
+本仓库原创教材和一般代码采用 MIT 许可。PicoRV32 核保留 ISC 许可，QEMU 教学设备（含实验 21 的 PCIe 端点）、头文件与集成补丁采用 GPL-2.0-or-later。实验 10 的 CPython 帮助语料保留随附的 [Python 许可](labs/10-language-model/PYTHON-LICENSE.txt)。外部教材、课件、代码、数据和权重分别遵循各自的许可。[MIT](LICENSE) · [PicoRV32 许可](hardware/ip/picorv32/COPYING) · [QEMU 设备许可](simulator/qemu-v0/COPYING) · [来源与引入规则](docs/OPEN_SOURCE.md) · [贡献约定](CONTRIBUTING.md)

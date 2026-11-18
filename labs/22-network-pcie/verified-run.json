@@ -1,0 +1,451 @@
+{
+  "bad_command_accepted": false,
+  "bdf": "0000:01:00.0",
+  "dma_read_bytes": 10240,
+  "dma_write_bytes": 1024,
+  "expected_sha256": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+  "injected_timeout_recovered": true,
+  "invalid_dma_rejected": true,
+  "outputs_per_request": 256,
+  "reset_recovered": true,
+  "response_int32_bytes": 1024,
+  "rows": {
+    "direct": [
+      {
+        "CopyNS": 112993,
+        "DeviceNS": 78998,
+        "QueueNS": 2051890,
+        "ServiceNS": 376979,
+        "ClientNS": 2899843,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 0
+      },
+      {
+        "CopyNS": 15000,
+        "DeviceNS": 32997,
+        "QueueNS": 11999,
+        "ServiceNS": 107995,
+        "ClientNS": 126993,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 1
+      },
+      {
+        "CopyNS": 32998,
+        "DeviceNS": 36998,
+        "QueueNS": 8000,
+        "ServiceNS": 117993,
+        "ClientNS": 131993,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 2
+      },
+      {
+        "CopyNS": 19000,
+        "DeviceNS": 38998,
+        "QueueNS": 7999,
+        "ServiceNS": 99995,
+        "ClientNS": 114994,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 3
+      },
+      {
+        "CopyNS": 32999,
+        "DeviceNS": 37998,
+        "QueueNS": 5999,
+        "ServiceNS": 128993,
+        "ClientNS": 140992,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 4
+      },
+      {
+        "CopyNS": 12998,
+        "DeviceNS": 33999,
+        "QueueNS": 7000,
+        "ServiceNS": 99994,
+        "ClientNS": 110994,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 5
+      },
+      {
+        "CopyNS": 27999,
+        "DeviceNS": 38997,
+        "QueueNS": 6000,
+        "ServiceNS": 109994,
+        "ClientNS": 120993,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 6
+      },
+      {
+        "CopyNS": 2000,
+        "DeviceNS": 32998,
+        "QueueNS": 7000,
+        "ServiceNS": 98995,
+        "ClientNS": 111994,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 7
+      },
+      {
+        "CopyNS": 26998,
+        "DeviceNS": 38998,
+        "QueueNS": 5000,
+        "ServiceNS": 115994,
+        "ClientNS": 125994,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 8
+      },
+      {
+        "CopyNS": 24998,
+        "DeviceNS": 36999,
+        "QueueNS": 6999,
+        "ServiceNS": 105994,
+        "ClientNS": 116993,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 9
+      },
+      {
+        "CopyNS": 29998,
+        "DeviceNS": 37997,
+        "QueueNS": 6000,
+        "ServiceNS": 117993,
+        "ClientNS": 126993,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 10
+      },
+      {
+        "CopyNS": 19000,
+        "DeviceNS": 36995,
+        "QueueNS": 7000,
+        "ServiceNS": 99994,
+        "ClientNS": 110994,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 11
+      }
+    ],
+    "tcp": [
+      {
+        "CopyNS": 16999,
+        "DeviceNS": 39997,
+        "QueueNS": 73996,
+        "ServiceNS": 118993,
+        "ClientNS": 10465435,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 0
+      },
+      {
+        "CopyNS": 19998,
+        "DeviceNS": 37998,
+        "QueueNS": 85995,
+        "ServiceNS": 117993,
+        "ClientNS": 856954,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 1
+      },
+      {
+        "CopyNS": 7999,
+        "DeviceNS": 33998,
+        "QueueNS": 9000,
+        "ServiceNS": 99994,
+        "ClientNS": 604967,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 2
+      },
+      {
+        "CopyNS": 5999,
+        "DeviceNS": 34998,
+        "QueueNS": 9000,
+        "ServiceNS": 105994,
+        "ClientNS": 309983,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 3
+      },
+      {
+        "CopyNS": 14999,
+        "DeviceNS": 39998,
+        "QueueNS": 8999,
+        "ServiceNS": 189990,
+        "ClientNS": 406978,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 4
+      },
+      {
+        "CopyNS": 15999,
+        "DeviceNS": 36999,
+        "QueueNS": 7000,
+        "ServiceNS": 100994,
+        "ClientNS": 298984,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 5
+      },
+      {
+        "CopyNS": 24999,
+        "DeviceNS": 38997,
+        "QueueNS": 7000,
+        "ServiceNS": 106994,
+        "ClientNS": 296984,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 6
+      },
+      {
+        "CopyNS": 19997,
+        "DeviceNS": 38999,
+        "QueueNS": 7000,
+        "ServiceNS": 98994,
+        "ClientNS": 327983,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 7
+      },
+      {
+        "CopyNS": 11999,
+        "DeviceNS": 35998,
+        "QueueNS": 7000,
+        "ServiceNS": 98994,
+        "ClientNS": 287985,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 8
+      },
+      {
+        "CopyNS": 18998,
+        "DeviceNS": 38999,
+        "QueueNS": 6999,
+        "ServiceNS": 102995,
+        "ClientNS": 278985,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 9
+      },
+      {
+        "CopyNS": 14999,
+        "DeviceNS": 35997,
+        "QueueNS": 6000,
+        "ServiceNS": 158991,
+        "ClientNS": 331982,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 10
+      },
+      {
+        "CopyNS": 25998,
+        "DeviceNS": 37999,
+        "QueueNS": 7000,
+        "ServiceNS": 98995,
+        "ClientNS": 260986,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 11
+      }
+    ],
+    "peer_tcp": [
+      {
+        "CopyNS": 192001,
+        "DeviceNS": 96000,
+        "QueueNS": 1465007,
+        "ServiceNS": 557003,
+        "ClientNS": 22865114,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 0
+      },
+      {
+        "CopyNS": 34000,
+        "DeviceNS": 48000,
+        "QueueNS": 61000,
+        "ServiceNS": 151001,
+        "ClientNS": 1542007,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 1
+      },
+      {
+        "CopyNS": 33000,
+        "DeviceNS": 53000,
+        "QueueNS": 27001,
+        "ServiceNS": 131000,
+        "ClientNS": 724004,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 2
+      },
+      {
+        "CopyNS": 24000,
+        "DeviceNS": 45001,
+        "QueueNS": 11000,
+        "ServiceNS": 126001,
+        "ClientNS": 685003,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 3
+      },
+      {
+        "CopyNS": 70000,
+        "DeviceNS": 50000,
+        "QueueNS": 17001,
+        "ServiceNS": 179000,
+        "ClientNS": 745004,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 4
+      },
+      {
+        "CopyNS": 23000,
+        "DeviceNS": 50000,
+        "QueueNS": 13001,
+        "ServiceNS": 126000,
+        "ClientNS": 719004,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 5
+      },
+      {
+        "CopyNS": 26000,
+        "DeviceNS": 50000,
+        "QueueNS": 17000,
+        "ServiceNS": 131001,
+        "ClientNS": 659003,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 6
+      },
+      {
+        "CopyNS": 35000,
+        "DeviceNS": 49000,
+        "QueueNS": 13000,
+        "ServiceNS": 140001,
+        "ClientNS": 650004,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 7
+      },
+      {
+        "CopyNS": 56000,
+        "DeviceNS": 49000,
+        "QueueNS": 11000,
+        "ServiceNS": 177000,
+        "ClientNS": 610003,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 8
+      },
+      {
+        "CopyNS": 21001,
+        "DeviceNS": 47000,
+        "QueueNS": 11000,
+        "ServiceNS": 117001,
+        "ClientNS": 1690008,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 9
+      },
+      {
+        "CopyNS": 23001,
+        "DeviceNS": 48000,
+        "QueueNS": 9000,
+        "ServiceNS": 115001,
+        "ClientNS": 500003,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 10
+      },
+      {
+        "CopyNS": 14000,
+        "DeviceNS": 52000,
+        "QueueNS": 15000,
+        "ServiceNS": 121000,
+        "ClientNS": 1724008,
+        "Commands": 64,
+        "Digest": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+        "Results": null,
+        "ID": 11
+      }
+    ]
+  },
+  "tcp_request_bytes": 36,
+  "kernel_sha256": "8ce908a8cb28d55adcacacf8a16609fa400e07a8826f0084ae5b13b8cb91b9ab",
+  "kernel": "Alpine Linux 6.12.115-0-virt x86_64",
+  "timing": "TCG guest monotonic nanoseconds; median excludes first request of each path",
+  "direct_median_ns": {
+    "QueueNS": 7000,
+    "CopyNS": 24998,
+    "DeviceNS": 36999,
+    "ServiceNS": 107995,
+    "ClientNS": 120993
+  },
+  "tcp_median_ns": {
+    "QueueNS": 7000,
+    "CopyNS": 15999,
+    "DeviceNS": 37998,
+    "ServiceNS": 102995,
+    "ClientNS": 309983
+  },
+  "peer_tcp_median_ns": {
+    "QueueNS": 13001,
+    "CopyNS": 26000,
+    "DeviceNS": 49000,
+    "ServiceNS": 131000,
+    "ClientNS": 719004
+  },
+  "peer_link": {
+    "transport": "two Linux guests, isolated QEMU e1000 Ethernet pair, persistent TCP",
+    "server": {
+      "bdf": "0000:01:00.0",
+      "commands": 768,
+      "expected_sha256": "4cea7bf8606d4041cc34cb26626240d35de91b13ba17299e7a39e5e090bb5ce7",
+      "served": 12
+    },
+    "initramfs_sha256": "6dde230b0e49d80c54337e2854d7cff6e8c9aa8cfa37588eaf9df4dd325a87a9"
+  }
+}

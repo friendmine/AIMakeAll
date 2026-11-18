@@ -87,8 +87,8 @@
 <text x="52" y="1011" font-size="20" font-weight="650" fill="#086a68">人机协作</text>
 <text x="210" y="1011" font-size="20" font-weight="400" fill="#172b3a">复核助手引用、纠正预算、确认或接管终止</text>
 <rect x="48" y="1056" width="1024" height="221" rx="8" fill="#f4ebd9"/>
-<text x="69" y="1095" font-size="25" font-weight="700" fill="#86531a">实验 02　训练小模型，把前馈投影接入 4×4 阵列</text>
-<text x="69" y="1132" font-size="19" font-weight="400" fill="#172b3a">模型研发　同一复制任务，宽度 32 / 24 从零训练；量化后测试困惑度 2.2080 / 2.2194</text>
-<text x="69" y="1168" font-size="17" font-weight="400" fill="#172b3a">电路设计　16 个 MAC、256 B 局部存储；分库并行读使宽度 32 的提示词投影从 1216 降至 960 拍</text>
-<text x="69" y="1203" font-size="18" font-weight="400" fill="#172b3a">推理部署　RTL 返回整数，CPU 继续运行模型；每种组合的 5632 个输出分数与量化参考相符</text>
-<text x="69" y="1243" font-size="18" font-weight="400" fill="#86531a">实验 03　同一 RV32 固件在 QEMU 与 PicoRV32 阵列上生成，逐块核对 256 个整数</text></g></svg>
+<text x="69" y="1095" font-size="25" font-weight="700" fill="#86531a">实验 02–23　从一个投影到自然语言整机与系统接口</text>
+<text x="69" y="1132" font-size="19" font-weight="400" fill="#172b3a">02–09　微型模型、数字阵列与词表投影　｜　量化、缓存、64 条回复和逐步周期</text>
+<text x="69" y="1168" font-size="19" font-weight="400" fill="#172b3a">10–16　两层四头模型、共享 DMA 队列与执行计划　｜　训练、时序、面积和 KV 容量</text>
+<text x="69" y="1203" font-size="18" font-weight="400" fill="#172b3a">17–19　同一固件跑 QEMU 与 PicoRV32　｜　两种模型 × 两种电路，在新预算下复验</text>
+<text x="69" y="1243" font-size="18" font-weight="400" fill="#86531a">20–23　工具选择、Linux PCIe、双虚拟机 TCP 与 CXL Type 3 内存放置</text></g></svg>

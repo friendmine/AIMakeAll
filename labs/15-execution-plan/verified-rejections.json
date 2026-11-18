@@ -1,0 +1,9 @@
+{
+  "digest": "invalid plan payload",
+  "truncated": "invalid plan payload",
+  "missing layer": "incomplete or reordered execution plan",
+  "wrong shape": "invalid projection",
+  "overlap": "overlapping tensor span",
+  "bad offset": "invalid tensor span",
+  "missing norm": "incomplete or reordered execution plan"
+}

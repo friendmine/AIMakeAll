@@ -1,0 +1,77 @@
+{
+  "liberty_sha256": "8e78e14442062dba34d414fca6490b2f6b96038d4510d1438ca44fee31487135",
+  "clock_ns": 50,
+  "input_output_delay_ns": 1,
+  "projection_tile": {
+    "cell_area_um2": 149768.64,
+    "setup_slack_ns": 30.85,
+    "prefill": {
+      "shape_mkn": [
+        9,
+        32,
+        96
+      ],
+      "commands": 72,
+      "cells": 864,
+      "cycles": 7920,
+      "useful_macs": 27648,
+      "mac_edges": 2304,
+      "local_read_bytes": 18432,
+      "input_bytes": 18432,
+      "output_bytes": 3456,
+      "handshake_wait_cycles": 0
+    },
+    "decode": {
+      "shape_mkn": [
+        1,
+        32,
+        96
+      ],
+      "commands": 24,
+      "cells": 96,
+      "cycles": 2448,
+      "useful_macs": 3072,
+      "mac_edges": 768,
+      "local_read_bytes": 6144,
+      "input_bytes": 6144,
+      "output_bytes": 384,
+      "handshake_wait_cycles": 0
+    }
+  },
+  "projection_stream": {
+    "cell_area_um2": 75537.4464,
+    "setup_slack_ns": 39.52,
+    "prefill": {
+      "shape_mkn": [
+        9,
+        32,
+        96
+      ],
+      "commands": 72,
+      "cells": 864,
+      "cycles": 5544,
+      "useful_macs": 27648,
+      "mac_edges": 2304,
+      "local_read_bytes": 0,
+      "input_bytes": 18432,
+      "output_bytes": 3456,
+      "handshake_wait_cycles": 0
+    },
+    "decode": {
+      "shape_mkn": [
+        1,
+        32,
+        96
+      ],
+      "commands": 24,
+      "cells": 96,
+      "cycles": 1656,
+      "useful_macs": 3072,
+      "mac_edges": 768,
+      "local_read_bytes": 0,
+      "input_bytes": 6144,
+      "output_bytes": 384,
+      "handshake_wait_cycles": 0
+    }
+  }
+}

@@ -1,0 +1,218 @@
+[
+  {
+    "layer": "blocks.0.qkv",
+    "shape": [
+      5,
+      32,
+      96
+    ],
+    "max_k": 13,
+    "commands": 144,
+    "cells": 1440,
+    "cycles": 6336,
+    "useful_macs": 15360,
+    "mac_edges": 1536,
+    "local_read_bytes": 12288,
+    "input_bytes": 12288,
+    "output_bytes": 5760,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.qkv",
+    "shape": [
+      5,
+      32,
+      96
+    ],
+    "max_k": 32,
+    "commands": 48,
+    "cells": 480,
+    "cycles": 5184,
+    "useful_macs": 15360,
+    "mac_edges": 1536,
+    "local_read_bytes": 12288,
+    "input_bytes": 12288,
+    "output_bytes": 1920,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.qkv",
+    "shape": [
+      1,
+      32,
+      7
+    ],
+    "max_k": 13,
+    "commands": 6,
+    "cells": 21,
+    "cycles": 225,
+    "useful_macs": 224,
+    "mac_edges": 64,
+    "local_read_bytes": 512,
+    "input_bytes": 512,
+    "output_bytes": 84,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.qkv",
+    "shape": [
+      1,
+      32,
+      7
+    ],
+    "max_k": 32,
+    "commands": 2,
+    "cells": 7,
+    "cycles": 203,
+    "useful_macs": 224,
+    "mac_edges": 64,
+    "local_read_bytes": 512,
+    "input_bytes": 512,
+    "output_bytes": 28,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.down",
+    "shape": [
+      5,
+      48,
+      32
+    ],
+    "max_k": 13,
+    "commands": 64,
+    "cells": 640,
+    "cycles": 3072,
+    "useful_macs": 7680,
+    "mac_edges": 768,
+    "local_read_bytes": 6144,
+    "input_bytes": 6144,
+    "output_bytes": 2560,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.down",
+    "shape": [
+      5,
+      48,
+      32
+    ],
+    "max_k": 32,
+    "commands": 32,
+    "cells": 320,
+    "cycles": 2688,
+    "useful_macs": 7680,
+    "mac_edges": 768,
+    "local_read_bytes": 6144,
+    "input_bytes": 6144,
+    "output_bytes": 1280,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.down",
+    "shape": [
+      1,
+      48,
+      7
+    ],
+    "max_k": 13,
+    "commands": 8,
+    "cells": 28,
+    "cycles": 332,
+    "useful_macs": 336,
+    "mac_edges": 96,
+    "local_read_bytes": 768,
+    "input_bytes": 768,
+    "output_bytes": 112,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "blocks.0.down",
+    "shape": [
+      1,
+      48,
+      7
+    ],
+    "max_k": 32,
+    "commands": 4,
+    "cells": 14,
+    "cycles": 310,
+    "useful_macs": 336,
+    "mac_edges": 96,
+    "local_read_bytes": 768,
+    "input_bytes": 768,
+    "output_bytes": 56,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "head",
+    "shape": [
+      5,
+      32,
+      256
+    ],
+    "max_k": 13,
+    "commands": 384,
+    "cells": 3840,
+    "cycles": 16896,
+    "useful_macs": 40960,
+    "mac_edges": 4096,
+    "local_read_bytes": 32768,
+    "input_bytes": 32768,
+    "output_bytes": 15360,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "head",
+    "shape": [
+      5,
+      32,
+      256
+    ],
+    "max_k": 32,
+    "commands": 128,
+    "cells": 1280,
+    "cycles": 13824,
+    "useful_macs": 40960,
+    "mac_edges": 4096,
+    "local_read_bytes": 32768,
+    "input_bytes": 32768,
+    "output_bytes": 5120,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "head",
+    "shape": [
+      1,
+      32,
+      7
+    ],
+    "max_k": 13,
+    "commands": 6,
+    "cells": 21,
+    "cycles": 225,
+    "useful_macs": 224,
+    "mac_edges": 64,
+    "local_read_bytes": 512,
+    "input_bytes": 512,
+    "output_bytes": 84,
+    "handshake_wait_cycles": 0
+  },
+  {
+    "layer": "head",
+    "shape": [
+      1,
+      32,
+      7
+    ],
+    "max_k": 32,
+    "commands": 2,
+    "cells": 7,
+    "cycles": 203,
+    "useful_macs": 224,
+    "mac_edges": 64,
+    "local_read_bytes": 512,
+    "input_bytes": 512,
+    "output_bytes": 28,
+    "handshake_wait_cycles": 0
+  }
+]

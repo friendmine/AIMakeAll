@@ -1,0 +1,1 @@
+{"max_validation_ppl":8.5,"max_weight_payload_bytes":73500,"prompt":"We ","steps":3,"prediction":"The payload excludes width 48. Width 40 must pass task quality; removing tile operand readback should reduce cycles."}

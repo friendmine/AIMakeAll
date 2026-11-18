@@ -1,0 +1,80 @@
+{
+  "contract": {
+    "max_validation_ppl": 8.5,
+    "max_weight_payload_bytes": 73500,
+    "prompt": "We ",
+    "steps": 3,
+    "prediction": "The payload excludes width 48. Width 40 must pass task quality; removing tile operand readback should reduce cycles."
+  },
+  "selection": {
+    "width": 40,
+    "hardware": "stream"
+  },
+  "validation_ppl": 8.114477173708124,
+  "payload_bytes": 73088,
+  "rejected_wide_bytes": 74240,
+  "runs": {
+    "banked": {
+      "cycles": [
+        9233946,
+        3920129,
+        4129151
+      ],
+      "total": 17283496,
+      "commands": [
+        412,
+        180,
+        180
+      ],
+      "tokens": [
+        97,
+        115,
+        115
+      ],
+      "sums": [
+        1186678822,
+        1131297571,
+        809791015
+      ]
+    },
+    "stream": {
+      "cycles": [
+        9221738,
+        3914545,
+        4123503
+      ],
+      "total": 17260056,
+      "commands": [
+        412,
+        180,
+        180
+      ],
+      "tokens": [
+        97,
+        115,
+        115
+      ],
+      "sums": [
+        1186678822,
+        1131297571,
+        809791015
+      ]
+    }
+  },
+  "first_divergence": {
+    "layer": "blocks.0.qkv",
+    "index": [
+      0,
+      0,
+      0
+    ],
+    "expected": 0.08234798908233643,
+    "found": 0.8961281776428223
+  },
+  "reference": [
+    97,
+    115,
+    115
+  ],
+  "independent_reader": "pending"
+}

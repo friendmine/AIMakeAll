@@ -1,5 +1,7 @@
 # 硬件主线
 
+实验 12–14 已在训练张量上验证跨 K 分块、独立双源共享队列，以及流式阵列的面积、时序与周期。实验 18 把流式阵列接入 PicoRV32 整机。[阵列与映射网表](../labs/14-streaming-array/README.md) · [整机的四个候选](../labs/18-joint-selection/README.md)
+
 [单 MAC](rtl/mac_int8.sv)执行有符号 INT8 乘加与 32 位回绕累加，支持 enable、同步 clear 和低有效异步复位。[4×4 阵列](rtl/projection_tile.sv)复用 16 个 MAC，以握手接口装载并逐项输出。它提供共享读端口、A/B 分库存储两种等容量实现，每次最多计算 4×4 个输出和 32 个归约项。
 
 运行 `make rtl-test` 检查单 MAC，`make projection-rtl` 重放训练张量并检查阵列握手和复位，`make projection-synth` 比较两种电路结构。实验 03 已接入微块 MMIO 控制器和 PicoRV32。运行 `make generation-rtl` 编译教学系统，再以 `make generation` 核对两台机器的输出。[实验 03](../labs/03-rv32-generation/README.md) [实验 02](../labs/02-trained-projection/README.md) · [算子规范](../specs/npu-v0.md) · [里程碑 M1](../docs/ROADMAP.md)

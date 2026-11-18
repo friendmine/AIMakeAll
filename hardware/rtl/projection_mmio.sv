@@ -69,7 +69,11 @@ module projection_mmio (
 
     assign tile_start = state == START_TILE && tile_ready;
     assign tile_finish = dma_write && dma_ready && row_idx == m[1:0]-2'd1 && col_idx == n[1:0]-2'd1;
+`ifdef AIM_STREAM_SOC
+    projection_stream array4 (
+`else
     projection_tile #(.BANKED(1'b1)) array4 (
+`endif
         .clk, .rst_n, .cmd_valid(state == START_TILE), .cmd_ready(tile_ready),
         .cmd_last_row(m[1:0]-2'd1), .cmd_last_col(n[1:0]-2'd1), .cmd_last_k(k[4:0]-5'd1),
         .in_valid(state == FEED), .in_ready, .in_data(packed_word),
