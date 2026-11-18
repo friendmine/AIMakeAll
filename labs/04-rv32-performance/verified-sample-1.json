@@ -1,0 +1,431 @@
+{
+  "task": "copy-three-v1",
+  "sample": 1,
+  "prompt": [
+    8,
+    0,
+    4,
+    1,
+    9
+  ],
+  "tokens": [
+    0,
+    4,
+    1,
+    10
+  ],
+  "model_tensor_sha256": "49e2c3907c1b8b6e0e449ee31c56cde3eabe964e77741b2dea1a07f26950f87b",
+  "rtl_simulator_sha256": "ef124d2f5057b9e8e429b7ea52b3b5760465b3911bbbe23c547b3d28d03165e8",
+  "checkpoint_sha256": "da9723cfbf5fa4d85afdf8a242c3d27e00f0d67a4f1649d6b4a221d095ad64dd",
+  "configuration": {
+    "isa": "RV32IM",
+    "npu": "H1-4x4",
+    "ram_mib": 32,
+    "dma_wait_period_cycles": 7,
+    "width": 32,
+    "hidden": 16
+  },
+  "tools": {
+    "python": "3.11.7",
+    "torch": "2.14.1",
+    "gcc": "riscv64-unknown-elf-gcc (g1b306039a) 15.1.0",
+    "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101"
+  },
+  "logit_absolute_tolerance": 0.0001,
+  "runs": {
+    "timing": {
+      "elf_sha256": "20a85c3626f8344a8a5327e7bb44187a749b8422229877ec0078ba141597bc80",
+      "image_sha256": "411de23f9ca5d082e4a0816ab77bd8aa7b9186b05d87a93de7af1cf6dc3ad605",
+      "trace_sha256": {
+        "cpu": {
+          "uart": "8fb4787a586e93ea9f7105da5caefb28af78a11c73b4b310b6a08ae9936433ca",
+          "counters": "2c3a9795993d73a41a77935ad87fc9668c254ebc88539d56a10094fd71aa0bac",
+          "mmio": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "npu": {
+          "uart": "00ccc4ba42b651a21d19281ab31b13c4396c61aae946a81dad0ff1eef949cb74",
+          "counters": "6a579fa4e67136b4ec6b50952db02e4a6cb1ff64264adfe21d5982a12efab1e5",
+          "mmio": "3df4e076f86263ebb2fed066547fe21e238d719ae51021fd82aff437b91e3ba2"
+        }
+      },
+      "cpu": [
+        {
+          "step": 0,
+          "token": 0,
+          "cycles": 5584184,
+          "integers": 160,
+          "logits": 11,
+          "max_logit_error": 1.1920928955078125e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0
+        },
+        {
+          "step": 1,
+          "token": 4,
+          "cycles": 1904633,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 9.5367431640625e-07,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0
+        },
+        {
+          "step": 2,
+          "token": 1,
+          "cycles": 1982183,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.430511474609375e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0
+        },
+        {
+          "step": 3,
+          "token": 10,
+          "cycles": 2245599,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.9073486328125e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0
+        }
+      ],
+      "npu": [
+        {
+          "step": 0,
+          "token": 0,
+          "cycles": 5543041,
+          "integers": 160,
+          "logits": 11,
+          "max_logit_error": 1.1920928955078125e-06,
+          "commands": 16,
+          "device_cycles": 2813,
+          "dma_read_bytes": 1664,
+          "dma_write_bytes": 640,
+          "dma_stall_cycles": 189
+        },
+        {
+          "step": 1,
+          "token": 4,
+          "cycles": 1905540,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 9.5367431640625e-07,
+          "commands": 8,
+          "device_cycles": 1086,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 14
+        },
+        {
+          "step": 2,
+          "token": 1,
+          "cycles": 1983090,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.430511474609375e-06,
+          "commands": 8,
+          "device_cycles": 1088,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 16
+        },
+        {
+          "step": 3,
+          "token": 10,
+          "cycles": 2246506,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.9073486328125e-06,
+          "commands": 8,
+          "device_cycles": 1087,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 15
+        }
+      ]
+    },
+    "profile": {
+      "elf_sha256": "d8bf6fc29565bbf903d81eed1dcab74e5b879b6fd82f293d882c5c3b6d40422f",
+      "image_sha256": "5c58925dbac1b4820244fc70062b2d8507ff60732ef4e078137ce5aaf615c02a",
+      "trace_sha256": {
+        "cpu": {
+          "uart": "02636cff6522c857a3f7b259581834adff3b2d8852ad1462078c7ff7def22ed8",
+          "counters": "170230276af4399b0869158ca788d3ae6643fbf767c3451d5c65cffc82939abe",
+          "mmio": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "npu": {
+          "uart": "ccd18f1adf1c7a8a2256a6be87af5154389b7b1190248ed9e3b539b9c0b46964",
+          "counters": "118bddad34a526b7b63334013bb02afab936f9f4bce3f365aa4adc628b26f257",
+          "mmio": "d53dcb86cab140238e7814c353f4242d84444bea6183e891747c535b67691fbb"
+        }
+      },
+      "cpu": [
+        {
+          "step": 0,
+          "token": 0,
+          "cycles": 5586777,
+          "integers": 160,
+          "logits": 11,
+          "max_logit_error": 1.1920928955078125e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0,
+          "phase_cycles": {
+            "input_norm": 239801,
+            "qkv": 2560272,
+            "attention": 417208,
+            "attention_out": 852544,
+            "ffn_norm_quant": 362356,
+            "cpu_dot": 81633,
+            "pack": 0,
+            "driver": 0,
+            "gather": 0,
+            "rescale": 192992,
+            "gelu": 378387,
+            "down": 335120,
+            "final_norm_head": 166464
+          }
+        },
+        {
+          "step": 1,
+          "token": 4,
+          "cycles": 1905575,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 9.5367431640625e-07,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0,
+          "phase_cycles": {
+            "input_norm": 48080,
+            "qkv": 511457,
+            "attention": 174211,
+            "attention_out": 171717,
+            "ffn_norm_quant": 72859,
+            "cpu_dot": 16397,
+            "pack": 0,
+            "driver": 0,
+            "gather": 0,
+            "rescale": 39034,
+            "gelu": 367987,
+            "down": 336960,
+            "final_norm_head": 166873
+          }
+        },
+        {
+          "step": 2,
+          "token": 1,
+          "cycles": 1983140,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.430511474609375e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0,
+          "phase_cycles": {
+            "input_norm": 48344,
+            "qkv": 512561,
+            "attention": 205680,
+            "attention_out": 171562,
+            "ffn_norm_quant": 73161,
+            "cpu_dot": 16397,
+            "pack": 0,
+            "driver": 0,
+            "gather": 0,
+            "rescale": 39191,
+            "gelu": 412168,
+            "down": 335206,
+            "final_norm_head": 168870
+          }
+        },
+        {
+          "step": 3,
+          "token": 10,
+          "cycles": 2246571,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.9073486328125e-06,
+          "commands": 0,
+          "device_cycles": 0,
+          "dma_read_bytes": 0,
+          "dma_write_bytes": 0,
+          "dma_stall_cycles": 0,
+          "phase_cycles": {
+            "input_norm": 48091,
+            "qkv": 513616,
+            "attention": 238351,
+            "attention_out": 171542,
+            "ffn_norm_quant": 72425,
+            "cpu_dot": 16397,
+            "pack": 0,
+            "driver": 0,
+            "gather": 0,
+            "rescale": 38730,
+            "gelu": 650544,
+            "down": 331150,
+            "final_norm_head": 165725
+          }
+        }
+      ],
+      "npu": [
+        {
+          "step": 0,
+          "token": 0,
+          "cycles": 5549161,
+          "integers": 160,
+          "logits": 11,
+          "max_logit_error": 1.1920928955078125e-06,
+          "commands": 16,
+          "device_cycles": 2814,
+          "dma_read_bytes": 1664,
+          "dma_write_bytes": 640,
+          "dma_stall_cycles": 190,
+          "phase_cycles": {
+            "input_norm": 239801,
+            "qkv": 2560272,
+            "attention": 417208,
+            "attention_out": 852544,
+            "ffn_norm_quant": 362550,
+            "cpu_dot": 0,
+            "pack": 30848,
+            "driver": 6464,
+            "gather": 6511,
+            "rescale": 192992,
+            "gelu": 378387,
+            "down": 335120,
+            "final_norm_head": 166464
+          }
+        },
+        {
+          "step": 1,
+          "token": 4,
+          "cycles": 1908203,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 9.5367431640625e-07,
+          "commands": 8,
+          "device_cycles": 1089,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 17,
+          "phase_cycles": {
+            "input_norm": 48080,
+            "qkv": 511457,
+            "attention": 174211,
+            "attention_out": 171717,
+            "ffn_norm_quant": 73052,
+            "cpu_dot": 0,
+            "pack": 14200,
+            "driver": 2912,
+            "gather": 1720,
+            "rescale": 39034,
+            "gelu": 367987,
+            "down": 336960,
+            "final_norm_head": 166873
+          }
+        },
+        {
+          "step": 2,
+          "token": 1,
+          "cycles": 1985768,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.430511474609375e-06,
+          "commands": 8,
+          "device_cycles": 1086,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 14,
+          "phase_cycles": {
+            "input_norm": 48344,
+            "qkv": 512561,
+            "attention": 205680,
+            "attention_out": 171562,
+            "ffn_norm_quant": 73354,
+            "cpu_dot": 0,
+            "pack": 14200,
+            "driver": 2912,
+            "gather": 1720,
+            "rescale": 39191,
+            "gelu": 412168,
+            "down": 335206,
+            "final_norm_head": 168870
+          }
+        },
+        {
+          "step": 3,
+          "token": 10,
+          "cycles": 2249199,
+          "integers": 32,
+          "logits": 11,
+          "max_logit_error": 1.9073486328125e-06,
+          "commands": 8,
+          "device_cycles": 1086,
+          "dma_read_bytes": 640,
+          "dma_write_bytes": 128,
+          "dma_stall_cycles": 14,
+          "phase_cycles": {
+            "input_norm": 48091,
+            "qkv": 513616,
+            "attention": 238351,
+            "attention_out": 171542,
+            "ffn_norm_quant": 72618,
+            "cpu_dot": 0,
+            "pack": 14200,
+            "driver": 2912,
+            "gather": 1720,
+            "rescale": 38730,
+            "gelu": 650544,
+            "down": 331150,
+            "final_norm_head": 165725
+          }
+        }
+      ]
+    }
+  },
+  "comparison": [
+    {
+      "step": 0,
+      "token": 0,
+      "cpu_minus_npu_cycles": 41143,
+      "speedup_cpu_over_npu": 1.0074224599818042
+    },
+    {
+      "step": 1,
+      "token": 4,
+      "cpu_minus_npu_cycles": -907,
+      "speedup_cpu_over_npu": 0.9995240194380596
+    },
+    {
+      "step": 2,
+      "token": 1,
+      "cpu_minus_npu_cycles": -907,
+      "speedup_cpu_over_npu": 0.9995426329616911
+    },
+    {
+      "step": 3,
+      "token": 10,
+      "cpu_minus_npu_cycles": -907,
+      "speedup_cpu_over_npu": 0.9995962619285237
+    }
+  ]
+}

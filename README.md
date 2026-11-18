@@ -8,7 +8,7 @@
 
 [![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
 
-[按本机环境选实验](#从一个乘加到一次生成) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
+[按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
 
 ## 从一个乘加到一次生成
 
@@ -21,6 +21,7 @@
 | Verilator、C++ 编译器 | [02 · 重放已训练模型的投影](labs/02-trained-projection/README.md) · `make projection-rtl` | 用仓库自带的张量复现 1216 拍和 960 拍，在波形里找到同一拍发出的两次读请求 |
 | Verilator、C++ 编译器、CPU 版 PyTorch | [02 · 从随机权重重训](labs/02-trained-projection/README.md) · `make projection-train` | 在同一电路上把前馈宽度从 32 改为 24，比较留出集困惑度和投影周期 |
 | 实验 02 的重训环境，加 RV32IM 裸机工具链和[项目版 QEMU 9.2.4](simulator/qemu-v0/README.md) | [03 · 用同一固件追踪生成](labs/03-rv32-generation/README.md) · `make generation` | 对照两端的投影整数和生成符号。默认样本首个整数为 **−18069**，首个生成符号为 **2** |
+| 实验 02 的重训环境，加 RV32IM 裸机工具链 | [04 · 同一台 PicoRV32 的性能对照](labs/04-rv32-performance/README.md) · `make performance` | 分别核对提示词和每个生成步的纯 CPU / NPU 周期、数值和瓶颈 |
 
 <details>
 <summary><strong>实验环境与常用检查</strong></summary>
@@ -28,9 +29,22 @@
 - **软件起步**　`make test` 运行 Python 回归，部分用例需要宿主 C 编译器。`make connections` 运行梯度核对、编码、链路与助手纠错练习。[实验 01 手册](labs/01-linear257/README.md)
 - **仿真与综合**　有 Verilator 和 C++ 编译器时，可用 `make rtl-test` 核验实验 00 的单个乘加器。有 Yosys 时，`make projection-synth` 可综合实验 02 的两种局部存储配置。`make eda-doctor` 可盘点已有工具。[本地 EDA 环境](docs/LOCAL_EDA_ENVIRONMENT.md) · [重复工具的统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md)
 - **设备与裸机生成**　构建带教学 NPU 的 QEMU 后，运行 `make device-test` 检查设备协议。实验 01 的两档预算对照用 `make design-trial`。实验 03 首次缺少检查点时会按实验 02 的配方重训，换一组提示符号用 `make generation GEN_SAMPLE=1`。[QEMU 构建说明](simulator/qemu-v0/README.md) · [实验 03 工具链与数学库要求](labs/03-rv32-generation/README.md#运行)
-- **计时口径**　实验 03 将前馈升维投影交给设备，RV32 负责注意力、KV 缓存和符号选择。QEMU 核验设备行为和命令顺序，RTL 报告分别给出阵列周期和含软件浮点、轮询、串口诊断的整步周期。整机加速比仍待同口径纯 CPU 对照。[仿真原则](docs/SIMULATION_FIRST.md) · [系统架构](docs/ARCHITECTURE.md)
+- **计时口径**　实验 03 将前馈升维投影交给设备，RV32 负责注意力、KV 缓存和符号选择。QEMU 核验设备行为和命令顺序，RTL 报告分别给出阵列周期和含软件浮点、轮询、串口诊断的整步周期。实验 04 用同一台 PicoRV32 的周期计数器做纯 CPU 对照，生成结束后统一输出日志。[仿真原则](docs/SIMULATION_FIRST.md) · [系统架构](docs/ARCHITECTURE.md)
 
 </details>
+
+## 实验 04 整机成绩单
+
+同一个实验 03 检查点、同一份计时固件，只切换前馈升维投影的执行者。两种路径都将默认提示复述为 `2 → 5 → 6 → EOS`。
+
+| 生成阶段 | 纯 CPU 周期 | CPU + NPU 周期 | 差异 |
+| --- | ---: | ---: | --- |
+| 处理 5 个提示符号，选出第一个符号 | 5,632,515 | 5,591,372 | 少 41,143 拍（0.73%） |
+| 后续逐符号生成，三步合计 | 6,065,899 | 6,068,620 | 每步多 907 拍 |
+
+提示词阶段，CPU 上的 Q/K/V 投影占 NPU 路径分段计时的 **45.73%**。逐符号时每步仍须打包 8 个块，生成 EOS 时 GELU 成为最大单项。另一组留出提示也复现了两阶段的收益方向。[逐步周期与瓶颈](labs/04-rv32-performance/README.md) · [实测报告](labs/04-rv32-performance/verified-sample-0.json)
+
+**验收**要求四次运行各核对 256 个投影整数、44 个输出分数和 4 个生成符号，CPU 路径的设备命令为零。独立读者还需换一个留出提示，先预测、再用周期解释一项设计选择。试读任务已备好，待真人执行。[独立试读任务单](labs/04-rv32-performance/reader-task.md)
 
 ## 个人学习目标
 

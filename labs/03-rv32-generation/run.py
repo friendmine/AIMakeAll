@@ -93,7 +93,7 @@ def export(model, q, prompt, folder):
     return sha(tensor_bytes)
 
 
-def build(folder):
+def build(folder, source=HERE / "generate.c", extra_cflags=()):
     gcc = os.environ.get("RISCV_CC", "riscv64-unknown-elf-gcc")
     objcopy = (
         os.environ.get("RISCV_OBJCOPY")
@@ -119,7 +119,8 @@ def build(folder):
             "-T",
             lab01 / "guest.ld",
             lab01 / "start.S",
-            HERE / "generate.c",
+            *extra_cflags,
+            source,
             "-Wl,--gc-sections,--start-group",
             "-lm",
             "-lc",

@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <string>
 #include <vector>
 
 static constexpr uint32_t base = 0x80000000, size = 32u << 20;
@@ -26,7 +27,13 @@ struct Ram {
 
 int main(int argc, char **argv) {
     try {
-        if (argc != 4) throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt");
+        if (argc != 4 && argc != 5)
+            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu]");
+        const bool benchmark = argc == 5;
+        const bool use_npu = benchmark && std::string(argv[4]) == "npu";
+        if (benchmark && !use_npu && std::string(argv[4]) != "cpu")
+            throw std::runtime_error("unknown projection backend");
+        constexpr uint32_t backend_port = 0x10001000;
         Ram ram;
         std::ifstream image(argv[1], std::ios::binary | std::ios::ate);
         auto bytes = image.tellg();
@@ -52,8 +59,12 @@ int main(int argc, char **argv) {
                 dut.mem_rdata = ram.read(dut.mem_addr);
             else if (dut.mem_addr == 0x10000004)
                 dut.mem_rdata = 0x2000;  // UART LSR[5] in byte lane 1.
+            else if (benchmark && dut.mem_addr == backend_port)
+                dut.mem_rdata = use_npu;
             dut.eval();
             if (dut.trap || dut.bus_error) throw std::runtime_error("CPU trap or unsupported MMIO");
+            if (benchmark && !use_npu && dut.dma_valid)
+                throw std::runtime_error("unexpected DMA on the CPU-only path");
             if (dut.mmio_write) mmio << std::hex << dut.mem_addr << ' ' << dut.mem_wdata << '\n';
             if (dut.tile_start) { began = cycle; reads = writes = stalls = 0; }
             if (dut.dma_valid) {
@@ -77,7 +88,7 @@ int main(int argc, char **argv) {
                     dut.final();
                     if (value != 0x5555) throw std::runtime_error("guest failure " + std::to_string(value >> 16));
                     return 0;
-                } else if (addr != 0x10000004 || dut.mem_wstrb) {
+                } else if (dut.mem_wstrb || (addr != 0x10000004 && !(benchmark && addr == backend_port))) {
                     throw std::runtime_error("unmapped CPU transaction " + std::to_string(addr));
                 }
             }

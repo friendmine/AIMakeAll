@@ -93,3 +93,9 @@ generation-synth:
 
 generation: $(GEN_SOC) $(GEN_CHECKPOINT)
 	$(PYTHON) $(GEN_LAB)/run.py --checkpoint $(GEN_CHECKPOINT) --sample $(GEN_SAMPLE) --qemu $(LINEAR_QEMU) --rtl $(GEN_SOC) --output $(GEN_BUILD)/sample-$(GEN_SAMPLE)
+
+PERF_LAB := labs/04-rv32-performance
+PERF_BUILD ?= build/performance
+.PHONY: performance
+performance: $(GEN_SOC) $(GEN_CHECKPOINT)
+	$(PYTHON) $(PERF_LAB)/compare.py --checkpoint $(GEN_CHECKPOINT) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(PERF_BUILD)/sample-$(GEN_SAMPLE)
