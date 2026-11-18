@@ -1,33 +1,40 @@
 # AIMakeAll · 从数字 NPU 到模型推理
 
-用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再让同一份 RISC-V 固件调用阵列完成生成。这是一套面向个人的中文实训，硬件设计、模型训练和系统仿真都能在电脑上完成。
+在自己的电脑上，用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再用 RISC-V 固件把模型的前馈升维投影交给阵列。
 
-[开始实验](#从一个乘加到一次生成) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [个人培养规划](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [验证记录](docs/VALIDATION.md)
+**实验 02 · 同一层投影，从 1216 拍降到 960 拍。** 固定训练好的权重和前馈宽度 32，把激活与权重从分两拍读取改为同拍并行读取。处理同样 5 个提示符号，这一层少用 256 拍，整数输出逐项相同。[两种电路的实测对照](labs/02-trained-projection/README.md#第三步--读懂两次取舍)
+
+**实验 03 · 同一份固件，两端都生成 `2 → 5 → 6 → EOS`。** 把实验 02 的模型编入 RV32 固件，分别在带教学 NPU 的 QEMU 和连接 RTL 阵列的 PicoRV32 上运行。两端各执行 40 条投影命令，256 个整数都与参考实现一致。[实测报告](labs/03-rv32-generation/verified-run.json) · [逐步串口记录](labs/03-rv32-generation/sample-0.uart)
 
 [![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
 
-给模型输入「开始、2、5、6、分隔」，可以顺着一次设备提交，找到第一块返回的整数 **−18069**，再追到模型自己选出的下一个符号 **2**。实验 03 的两条路径各执行了 40 条投影命令，得到的 256 个整数都与参考实现逐项一致。前馈升维投影在设备上执行，注意力、KV 缓存和符号选择在 RV32 上执行。[实测报告](labs/03-rv32-generation/verified-run.json) · [逐步串口记录](labs/03-rv32-generation/sample-0.uart)
+[按本机环境选实验](#从一个乘加到一次生成) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
 
 ## 从一个乘加到一次生成
 
-第一次来，在仓库根目录运行 `make demo`。只需 Python 3.10+ 和 make。输出矩阵的第一个元素应为 **11**，用 `1 × 2 + (−2) × (−3) + 3 × 1 = 11` 就能手算核对。
+以下命令都在仓库根目录运行。基础环境只需 **Python 3.10+ 和 make**，表中列出每个入口额外用到的工具。
 
-| 实验 | 动手解决的问题 | 运行入口 |
+| 本机另需的工具 | 实验入口 | 运行后可以核对什么 |
 | --- | --- | --- |
-| [00 · 从 INT8 到单个 MAC](labs/00-int8-matmul/README.md) | 怎样表示负数、累加部分和，并观察溢出、保持和复位？ | `make demo`，电路仿真用 `make rtl-test` |
-| [01 · 找到第 257 个乘积](labs/01-linear257/README.md) | 如何把一个线性层拆成多条设备命令？把内存预算减半，35 个输出应如何还原？ | `make linear`，设备对照用 `make design-trial` |
-| [02 · 给训练出的模型设计阵列](labs/02-trained-projection/README.md) | 固定权重改存储端口，再固定电路改前馈宽度。模型质量、周期和读取量各变多少？ | `make projection-rtl` 重放，`make projection-train` 重训 |
-| [03 · 用同一固件追踪生成](labs/03-rv32-generation/README.md) | 同一提示词在 QEMU 与 PicoRV32 上能否逐块、逐符号对齐？ | `make generation`，换提示用 `make generation GEN_SAMPLE=1` |
+| 基础环境即可 | [00 · 手算一个乘加](labs/00-int8-matmul/README.md) · `make demo` | 输出矩阵左上角应为 **11**，即 `1 × 2 + (−2) × (−3) + 3 × 1` |
+| 宿主 C 编译器 | [01 · 找到第 257 个乘积](labs/01-linear257/README.md) · `make linear` | 257 项拆为 256 + 1，合并部分和后，35 个整数与 Python 参考逐项一致 |
+| Verilator、C++ 编译器 | [02 · 重放已训练模型的投影](labs/02-trained-projection/README.md) · `make projection-rtl` | 用仓库自带的张量复现 1216 拍和 960 拍，在波形里找到同一拍发出的两次读请求 |
+| Verilator、C++ 编译器、CPU 版 PyTorch | [02 · 从随机权重重训](labs/02-trained-projection/README.md) · `make projection-train` | 在同一电路上把前馈宽度从 32 改为 24，比较留出集困惑度和投影周期 |
+| 实验 02 的重训环境，加 RV32IM 裸机工具链和[项目版 QEMU 9.2.4](simulator/qemu-v0/README.md) | [03 · 用同一固件追踪生成](labs/03-rv32-generation/README.md) · `make generation` | 对照两端的投影整数和生成符号。默认样本首个整数为 **−18069**，首个生成符号为 **2** |
 
 <details>
 <summary><strong>实验环境与常用检查</strong></summary>
 
 - **软件起步**　`make test` 运行 Python 回归，部分用例需要宿主 C 编译器。`make connections` 运行梯度核对、编码、链路与助手纠错练习。[实验 01 手册](labs/01-linear257/README.md)
-- **仿真与综合**　RTL 仿真需要 Verilator 和 C++ 编译器。`make projection-synth` 用 Yosys 综合两种局部存储配置。`make eda-doctor` 可盘点已有工具。[本地 EDA 环境](docs/LOCAL_EDA_ENVIRONMENT.md) · [重复工具的统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md)
-- **训练与裸机生成**　实验 02 从头训练需要 CPU 版 PyTorch。实验 03 还需要 RV32IM 交叉工具链及带教学 NPU 的 QEMU 9.2.4。可先运行 `make device-test` 检查设备协议。[QEMU 构建说明](simulator/qemu-v0/README.md) · [实验 03 依赖与命令](labs/03-rv32-generation/README.md)
-- **计时口径**　QEMU 核验设备行为和命令顺序。RTL 报告分别给出阵列周期和含软件浮点、轮询、串口诊断的整步周期。整机加速比仍待同口径纯 CPU 对照。[仿真原则](docs/SIMULATION_FIRST.md) · [系统架构](docs/ARCHITECTURE.md)
+- **仿真与综合**　有 Verilator 和 C++ 编译器时，可用 `make rtl-test` 核验实验 00 的单个乘加器。有 Yosys 时，`make projection-synth` 可综合实验 02 的两种局部存储配置。`make eda-doctor` 可盘点已有工具。[本地 EDA 环境](docs/LOCAL_EDA_ENVIRONMENT.md) · [重复工具的统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md)
+- **设备与裸机生成**　构建带教学 NPU 的 QEMU 后，运行 `make device-test` 检查设备协议。实验 01 的两档预算对照用 `make design-trial`。实验 03 首次缺少检查点时会按实验 02 的配方重训，换一组提示符号用 `make generation GEN_SAMPLE=1`。[QEMU 构建说明](simulator/qemu-v0/README.md) · [实验 03 工具链与数学库要求](labs/03-rv32-generation/README.md#运行)
+- **计时口径**　实验 03 将前馈升维投影交给设备，RV32 负责注意力、KV 缓存和符号选择。QEMU 核验设备行为和命令顺序，RTL 报告分别给出阵列周期和含软件浮点、轮询、串口诊断的整步周期。整机加速比仍待同口径纯 CPU 对照。[仿真原则](docs/SIMULATION_FIRST.md) · [系统架构](docs/ARCHITECTURE.md)
 
 </details>
+
+## 个人学习目标
+
+**给你一个新的输入形状，或把可用缓冲空间减半，你能独立决定该改电路、模型还是推理程序，并用实验解释为什么。** 先预测影响，再固定模型比较电路、固定电路比较模型。用波形找出阵列在哪一拍等待数据，用生成记录定位第一个有偏差的输出。最后用同一批输入比较模型质量和投影周期，写下选择理由，再换一组输入复验。[个人毕业任务](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [芯模联合实验](docs/PROJECT_MAP.md#芯模联动的实验与验收)
 
 ## 参考材料
 
@@ -104,7 +111,7 @@
 
 [![AIMakeAll 知识覆盖图，含十八个领域及实验 01–03 的联系](docs/images/knowledge-coverage-v9.png)](docs/KNOWLEDGE_COVERAGE.md)
 
-**学习目标是独立作出一次设计选择。** 给定新的输入形状或更紧的资源预算，先预测哪一层受影响，再用波形、模型质量和完整生成记录解释选择。图中的十八个领域可以按问题查阅。自然语言模型、更大范围的算子部署、模型驱动的 Agent 各有后续验收。[个人毕业任务](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [芯模联合实验](docs/PROJECT_MAP.md#芯模联动的实验与验收) · [里程碑](docs/ROADMAP.md)
+图中的十八个领域可以按问题查阅。自然语言模型、更大范围的算子部署、模型驱动的 Agent 各有后续验收。[里程碑](docs/ROADMAP.md)
 
 按计划推进时，可以查看十组深化实验、十条补全路线和六项跨层补强各自的交付物与验收条件。[课程目录](docs/CURRICULUM.md) · [全景规划](docs/PROJECT_MAP.md) · [十条补全路线](docs/CHIP_AI_COMPLETENESS.md) · [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)
 
