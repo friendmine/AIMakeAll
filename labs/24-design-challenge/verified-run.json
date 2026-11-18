@@ -1,0 +1,1638 @@
+{
+  "contract_sha256": "98e3898c9f29e72a970e6a42643f8e088b7823349a008c487405558fff7c20cc",
+  "firmware_sha256": {
+    "qkv4=0,profile=0": "b5975a9eee52db76fa25bae25336d087de574b67198ae77abf546639d20b1604",
+    "qkv4=0,profile=1": "a20e0976db5963eac57fe29bc9f70386cc297b81aee8e7f9c71b3bc46abdce99",
+    "qkv4=1,profile=0": "de7aab8130ddad5d82dd5eb53622022ae2770647a4b1a60252719ca342f795d9",
+    "qkv4=1,profile=1": "70cc321d694a3ad805b6745d14307f1c5932adcc067d57df17e277257c6c2146"
+  },
+  "compiler": "15.1.0",
+  "tail_check": {
+    "baseline": [
+      {
+        "prompt": "Shape",
+        "tokens": [
+          32,
+          115,
+          101
+        ],
+        "logits_sha256": "d9f115cfbd909125946bb7a0ebcb1b2e88db7186da7f58f6704e5cd3c01b6d61",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 27041469,
+        "steps": [
+          {
+            "cycles": 17581624,
+            "commands": 664,
+            "device_busy_cycles": 143965,
+            "configuration_cycles": 41832,
+            "finish_to_clear_cycles": 27019,
+            "read_beats": 99840,
+            "write_beats": 2656,
+            "rows_per_command": {
+              "1": 664
+            }
+          },
+          {
+            "cycles": 4620798,
+            "commands": 184,
+            "device_busy_cycles": 40587,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7485,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4838777,
+            "commands": 184,
+            "device_busy_cycles": 40592,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7480,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3584,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      }
+    ],
+    "combined": [
+      {
+        "prompt": "Shape",
+        "tokens": [
+          32,
+          115,
+          101
+        ],
+        "logits_sha256": "d9f115cfbd909125946bb7a0ebcb1b2e88db7186da7f58f6704e5cd3c01b6d61",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 26955734,
+        "steps": [
+          {
+            "cycles": 17527506,
+            "commands": 592,
+            "device_busy_cycles": 86936,
+            "configuration_cycles": 38304,
+            "finish_to_clear_cycles": 25827,
+            "read_beats": 37632,
+            "write_beats": 2656,
+            "rows_per_command": {
+              "4": 24,
+              "1": 568
+            }
+          },
+          {
+            "cycles": 4605028,
+            "commands": 184,
+            "device_busy_cycles": 26990,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7570,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4822964,
+            "commands": 184,
+            "device_busy_cycles": 27003,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7493,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3584,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      }
+    ]
+  },
+  "model_sha256": "1e3c446a14e1773c18739d9f7a8618080c9e8feb9f4bada117e2717dff31940a",
+  "validation_byte_ppl": 7.761862765306361,
+  "payload_bytes": 74240,
+  "allocated_kv_bytes": 49152,
+  "development": {
+    "baseline": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22941553,
+        "steps": [
+          {
+            "cycles": 13785928,
+            "commands": 544,
+            "device_busy_cycles": 118140,
+            "configuration_cycles": 34272,
+            "finish_to_clear_cycles": 22116,
+            "read_beats": 81920,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "1": 544
+            }
+          },
+          {
+            "cycles": 4507040,
+            "commands": 184,
+            "device_busy_cycles": 40607,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7465,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4648315,
+            "commands": 184,
+            "device_busy_cycles": 40593,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7479,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63374507,
+        "steps": [
+          {
+            "cycles": 50757056,
+            "commands": 1504,
+            "device_busy_cycles": 324906,
+            "configuration_cycles": 94752,
+            "finish_to_clear_cycles": 61174,
+            "read_beats": 225280,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "1": 1504
+            }
+          },
+          {
+            "cycles": 6177424,
+            "commands": 184,
+            "device_busy_cycles": 40588,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7484,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6439757,
+            "commands": 184,
+            "device_busy_cycles": 40582,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7490,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 150041615,
+        "steps": [
+          {
+            "cycles": 132545978,
+            "commands": 2944,
+            "device_busy_cycles": 634945,
+            "configuration_cycles": 185472,
+            "finish_to_clear_cycles": 119871,
+            "read_beats": 440320,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "1": 2944
+            }
+          },
+          {
+            "cycles": 8668569,
+            "commands": 184,
+            "device_busy_cycles": 40578,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7494,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8826798,
+            "commands": 184,
+            "device_busy_cycles": 40594,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7478,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      }
+    ],
+    "qkv4": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22918196,
+        "steps": [
+          {
+            "cycles": 13768341,
+            "commands": 472,
+            "device_busy_cycles": 104972,
+            "configuration_cycles": 30240,
+            "finish_to_clear_cycles": 18412,
+            "read_beats": 72704,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "4": 24,
+              "1": 448
+            }
+          },
+          {
+            "cycles": 4504109,
+            "commands": 184,
+            "device_busy_cycles": 40554,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6966,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4645510,
+            "commands": 184,
+            "device_busy_cycles": 40647,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6873,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63317724,
+        "steps": [
+          {
+            "cycles": 50705687,
+            "commands": 1288,
+            "device_busy_cycles": 285687,
+            "configuration_cycles": 82656,
+            "finish_to_clear_cycles": 50161,
+            "read_beats": 197632,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "4": 72,
+              "1": 1216
+            }
+          },
+          {
+            "cycles": 6174701,
+            "commands": 184,
+            "device_busy_cycles": 40605,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6915,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6437100,
+            "commands": 184,
+            "device_busy_cycles": 40580,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6940,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 149937252,
+        "steps": [
+          {
+            "cycles": 132446770,
+            "commands": 2512,
+            "device_busy_cycles": 556692,
+            "configuration_cycles": 161280,
+            "finish_to_clear_cycles": 97852,
+            "read_beats": 385024,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "4": 144,
+              "1": 2368
+            }
+          },
+          {
+            "cycles": 8666048,
+            "commands": 184,
+            "device_busy_cycles": 40611,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6909,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8824198,
+            "commands": 184,
+            "device_busy_cycles": 40563,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 6957,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      }
+    ],
+    "word_dma": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22878897,
+        "steps": [
+          {
+            "cycles": 13748824,
+            "commands": 544,
+            "device_busy_cycles": 78610,
+            "configuration_cycles": 34272,
+            "finish_to_clear_cycles": 24542,
+            "read_beats": 32768,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "1": 544
+            }
+          },
+          {
+            "cycles": 4494224,
+            "commands": 184,
+            "device_busy_cycles": 27002,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8254,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4635579,
+            "commands": 184,
+            "device_busy_cycles": 27015,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8321,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63247467,
+        "steps": [
+          {
+            "cycles": 50655456,
+            "commands": 1504,
+            "device_busy_cycles": 216218,
+            "configuration_cycles": 94752,
+            "finish_to_clear_cycles": 68262,
+            "read_beats": 90112,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "1": 1504
+            }
+          },
+          {
+            "cycles": 6164704,
+            "commands": 184,
+            "device_busy_cycles": 27018,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8334,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6427037,
+            "commands": 184,
+            "device_busy_cycles": 27011,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8341,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 149816271,
+        "steps": [
+          {
+            "cycles": 132346266,
+            "commands": 2944,
+            "device_busy_cycles": 422593,
+            "configuration_cycles": 185472,
+            "finish_to_clear_cycles": 132511,
+            "read_beats": 176128,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "1": 2944
+            }
+          },
+          {
+            "cycles": 8655705,
+            "commands": 184,
+            "device_busy_cycles": 27013,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8195,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8814030,
+            "commands": 184,
+            "device_busy_cycles": 27016,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 8288,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      }
+    ],
+    "combined": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22859420,
+        "steps": [
+          {
+            "cycles": 13735293,
+            "commands": 472,
+            "device_busy_cycles": 69744,
+            "configuration_cycles": 30240,
+            "finish_to_clear_cycles": 20592,
+            "read_beats": 30464,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "4": 24,
+              "1": 448
+            }
+          },
+          {
+            "cycles": 4491229,
+            "commands": 184,
+            "device_busy_cycles": 27002,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7638,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4632662,
+            "commands": 184,
+            "device_busy_cycles": 27006,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7666,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63201543,
+        "steps": [
+          {
+            "cycles": 50615010,
+            "commands": 1288,
+            "device_busy_cycles": 189547,
+            "configuration_cycles": 82656,
+            "finish_to_clear_cycles": 55624,
+            "read_beats": 83200,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "4": 72,
+              "1": 1216
+            }
+          },
+          {
+            "cycles": 6161837,
+            "commands": 184,
+            "device_busy_cycles": 26994,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7662,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6424460,
+            "commands": 184,
+            "device_busy_cycles": 27023,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7857,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 149735584,
+        "steps": [
+          {
+            "cycles": 132270494,
+            "commands": 2512,
+            "device_busy_cycles": 369332,
+            "configuration_cycles": 161280,
+            "finish_to_clear_cycles": 108936,
+            "read_beats": 162304,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "4": 144,
+              "1": 2368
+            }
+          },
+          {
+            "cycles": 8653344,
+            "commands": 184,
+            "device_busy_cycles": 27019,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7797,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8811510,
+            "commands": 184,
+            "device_busy_cycles": 27016,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7816,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      }
+    ]
+  },
+  "development_total_cycles": {
+    "baseline": 236357675,
+    "qkv4": 236173172,
+    "word_dma": 235942635,
+    "combined": 235796547
+  },
+  "selection": "combined",
+  "confirmation": {
+    "baseline": [
+      {
+        "prompt": "Next",
+        "tokens": [
+          101,
+          100,
+          32
+        ],
+        "logits_sha256": "c0a424af77303c8fc276224a6c8ea521f3c9b8d8e814871b5a95daf809b63d1e",
+        "max_abs_error": 0.0,
+        "request_cycles": 22513999,
+        "steps": [
+          {
+            "cycles": 13623732,
+            "commands": 544,
+            "device_busy_cycles": 118117,
+            "configuration_cycles": 34272,
+            "finish_to_clear_cycles": 22139,
+            "read_beats": 81920,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "1": 544
+            }
+          },
+          {
+            "cycles": 4266584,
+            "commands": 184,
+            "device_busy_cycles": 40600,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7472,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4623413,
+            "commands": 184,
+            "device_busy_cycles": 40561,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7511,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "Read a value",
+        "tokens": [
+          32,
+          111,
+          102
+        ],
+        "logits_sha256": "67677183f7b0ffc5a537af579749e5d7de349ac2194a5c65aa987566b3710acf",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63467790,
+        "steps": [
+          {
+            "cycles": 51001835,
+            "commands": 1504,
+            "device_busy_cycles": 324825,
+            "configuration_cycles": 94752,
+            "finish_to_clear_cycles": 61255,
+            "read_beats": 225280,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "1": 1504
+            }
+          },
+          {
+            "cycles": 6174355,
+            "commands": 184,
+            "device_busy_cycles": 40592,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7480,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6291330,
+            "commands": 184,
+            "device_busy_cycles": 40583,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7489,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      },
+      {
+        "prompt": "A sequence of arguments ",
+        "tokens": [
+          116,
+          111,
+          32
+        ],
+        "logits_sha256": "b38c2a2a9ec13ae5d6c39a8b059631b36c54aa52d6093a8c36436f3706d32be3",
+        "max_abs_error": 1.430511474609375e-06,
+        "request_cycles": 148773764,
+        "steps": [
+          {
+            "cycles": 131187329,
+            "commands": 2944,
+            "device_busy_cycles": 635018,
+            "configuration_cycles": 185472,
+            "finish_to_clear_cycles": 119798,
+            "read_beats": 440320,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "1": 2944
+            }
+          },
+          {
+            "cycles": 8663620,
+            "commands": 184,
+            "device_busy_cycles": 40599,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7473,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8922545,
+            "commands": 184,
+            "device_busy_cycles": 40586,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7486,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 62144,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 59888
+      }
+    ],
+    "combined": [
+      {
+        "prompt": "Next",
+        "tokens": [
+          101,
+          100,
+          32
+        ],
+        "logits_sha256": "c0a424af77303c8fc276224a6c8ea521f3c9b8d8e814871b5a95daf809b63d1e",
+        "max_abs_error": 0.0,
+        "request_cycles": 22431522,
+        "steps": [
+          {
+            "cycles": 13572490,
+            "commands": 472,
+            "device_busy_cycles": 69748,
+            "configuration_cycles": 30240,
+            "finish_to_clear_cycles": 20432,
+            "read_beats": 30464,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "4": 24,
+              "1": 448
+            }
+          },
+          {
+            "cycles": 4250986,
+            "commands": 184,
+            "device_busy_cycles": 27010,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7758,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 4607810,
+            "commands": 184,
+            "device_busy_cycles": 27000,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7672,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "Read a value",
+        "tokens": [
+          32,
+          111,
+          102
+        ],
+        "logits_sha256": "67677183f7b0ffc5a537af579749e5d7de349ac2194a5c65aa987566b3710acf",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63295595,
+        "steps": [
+          {
+            "cycles": 50860677,
+            "commands": 1288,
+            "device_busy_cycles": 189576,
+            "configuration_cycles": 82656,
+            "finish_to_clear_cycles": 56127,
+            "read_beats": 83200,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "4": 72,
+              "1": 1216
+            }
+          },
+          {
+            "cycles": 6158710,
+            "commands": 184,
+            "device_busy_cycles": 26999,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7609,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 6275972,
+            "commands": 184,
+            "device_busy_cycles": 27013,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7851,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      },
+      {
+        "prompt": "A sequence of arguments ",
+        "tokens": [
+          116,
+          111,
+          32
+        ],
+        "logits_sha256": "b38c2a2a9ec13ae5d6c39a8b059631b36c54aa52d6093a8c36436f3706d32be3",
+        "max_abs_error": 1.430511474609375e-06,
+        "request_cycles": 148466264,
+        "steps": [
+          {
+            "cycles": 130910638,
+            "commands": 2512,
+            "device_busy_cycles": 369356,
+            "configuration_cycles": 161280,
+            "finish_to_clear_cycles": 109395,
+            "read_beats": 162304,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "4": 144,
+              "1": 2368
+            }
+          },
+          {
+            "cycles": 8648271,
+            "commands": 184,
+            "device_busy_cycles": 27003,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7669,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          },
+          {
+            "cycles": 8907119,
+            "commands": 184,
+            "device_busy_cycles": 26994,
+            "configuration_cycles": 11592,
+            "finish_to_clear_cycles": 7550,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 63872,
+        "peak_stack_bytes": 2016,
+        "static_plus_peak_stack_bytes": 61792
+      }
+    ]
+  },
+  "profile": {
+    "baseline": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22986996,
+        "steps": [
+          {
+            "cycles": 13812153,
+            "commands": 544,
+            "device_busy_cycles": 118081,
+            "configuration_cycles": 31552,
+            "finish_to_clear_cycles": 23807,
+            "read_beats": 81920,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "1": 544
+            },
+            "exclusive_cycles": {
+              "device_busy": 118081,
+              "driver_config": 31552,
+              "driver_finish": 23807,
+              "driver_other": 23936,
+              "linear_cpu": 4307719,
+              "norm": 1388881,
+              "attention_kv": 1820621,
+              "gelu": 5864685,
+              "other": 232871
+            }
+          },
+          {
+            "cycles": 4516229,
+            "commands": 184,
+            "device_busy_cycles": 40533,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8091,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40533,
+              "driver_config": 10672,
+              "driver_finish": 8091,
+              "driver_other": 8096,
+              "linear_cpu": 1366234,
+              "norm": 409289,
+              "attention_kv": 974068,
+              "gelu": 1613744,
+              "other": 85502
+            }
+          },
+          {
+            "cycles": 4657504,
+            "commands": 184,
+            "device_busy_cycles": 40586,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8038,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40586,
+              "driver_config": 10672,
+              "driver_finish": 8038,
+              "driver_other": 8096,
+              "linear_cpu": 1363164,
+              "norm": 413048,
+              "attention_kv": 1182764,
+              "gelu": 1546667,
+              "other": 84469
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 62320,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 60064
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63465358,
+        "steps": [
+          {
+            "cycles": 50828689,
+            "commands": 1504,
+            "device_busy_cycles": 324797,
+            "configuration_cycles": 87232,
+            "finish_to_clear_cycles": 65795,
+            "read_beats": 225280,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "1": 1504
+            },
+            "exclusive_cycles": {
+              "device_busy": 324797,
+              "driver_config": 87232,
+              "driver_finish": 65795,
+              "driver_other": 66176,
+              "linear_cpu": 12153793,
+              "norm": 4010973,
+              "attention_kv": 15336735,
+              "gelu": 18154211,
+              "other": 628977
+            }
+          },
+          {
+            "cycles": 6186613,
+            "commands": 184,
+            "device_busy_cycles": 40571,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8053,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40571,
+              "driver_config": 10672,
+              "driver_finish": 8053,
+              "driver_other": 8096,
+              "linear_cpu": 1365221,
+              "norm": 411934,
+              "attention_kv": 2634707,
+              "gelu": 1622899,
+              "other": 84460
+            }
+          },
+          {
+            "cycles": 6448946,
+            "commands": 184,
+            "device_busy_cycles": 40574,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8050,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40574,
+              "driver_config": 10672,
+              "driver_finish": 8050,
+              "driver_other": 8096,
+              "linear_cpu": 1366027,
+              "norm": 410304,
+              "attention_kv": 2851113,
+              "gelu": 1669464,
+              "other": 84646
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 62320,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 60064
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 150200578,
+        "steps": [
+          {
+            "cycles": 132685723,
+            "commands": 2944,
+            "device_busy_cycles": 635035,
+            "configuration_cycles": 170752,
+            "finish_to_clear_cycles": 128613,
+            "read_beats": 440320,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "1": 2944
+            },
+            "exclusive_cycles": {
+              "device_busy": 635035,
+              "driver_config": 170752,
+              "driver_finish": 128613,
+              "driver_other": 129536,
+              "linear_cpu": 23900787,
+              "norm": 7958425,
+              "attention_kv": 60648205,
+              "gelu": 37892287,
+              "other": 1222083
+            }
+          },
+          {
+            "cycles": 8677758,
+            "commands": 184,
+            "device_busy_cycles": 40569,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8055,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40569,
+              "driver_config": 10672,
+              "driver_finish": 8055,
+              "driver_other": 8096,
+              "linear_cpu": 1363558,
+              "norm": 414041,
+              "attention_kv": 5149719,
+              "gelu": 1598309,
+              "other": 84739
+            }
+          },
+          {
+            "cycles": 8835987,
+            "commands": 184,
+            "device_busy_cycles": 40594,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8030,
+            "read_beats": 28160,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 40594,
+              "driver_config": 10672,
+              "driver_finish": 8030,
+              "driver_other": 8096,
+              "linear_cpu": 1367073,
+              "norm": 410916,
+              "attention_kv": 5349868,
+              "gelu": 1555636,
+              "other": 85102
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 62320,
+        "peak_stack_bytes": 1840,
+        "static_plus_peak_stack_bytes": 60064
+      }
+    ],
+    "combined": [
+      {
+        "prompt": "Type",
+        "tokens": [
+          115,
+          32,
+          105
+        ],
+        "logits_sha256": "618d9b23982bbc6e221c3d0933ebdf174bcda7575d8b6a198a2d714c8b51276c",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 22900755,
+        "steps": [
+          {
+            "cycles": 13756244,
+            "commands": 472,
+            "device_busy_cycles": 69753,
+            "configuration_cycles": 28000,
+            "finish_to_clear_cycles": 21634,
+            "read_beats": 30464,
+            "write_beats": 2176,
+            "rows_per_command": {
+              "4": 24,
+              "1": 448
+            },
+            "exclusive_cycles": {
+              "device_busy": 69753,
+              "driver_config": 28000,
+              "driver_finish": 21634,
+              "driver_other": 21152,
+              "linear_cpu": 4261788,
+              "norm": 1388881,
+              "attention_kv": 1821173,
+              "gelu": 5866605,
+              "other": 277258
+            }
+          },
+          {
+            "cycles": 4501040,
+            "commands": 184,
+            "device_busy_cycles": 27015,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8353,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27015,
+              "driver_config": 10672,
+              "driver_finish": 8353,
+              "driver_other": 8096,
+              "linear_cpu": 1363474,
+              "norm": 409289,
+              "attention_kv": 974246,
+              "gelu": 1614224,
+              "other": 85671
+            }
+          },
+          {
+            "cycles": 4642361,
+            "commands": 184,
+            "device_busy_cycles": 27021,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8267,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27021,
+              "driver_config": 10672,
+              "driver_finish": 8267,
+              "driver_other": 8096,
+              "linear_cpu": 1360514,
+              "norm": 413048,
+              "attention_kv": 1182958,
+              "gelu": 1547147,
+              "other": 84638
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 3072,
+        "linked_writable_bytes": 64048,
+        "peak_stack_bytes": 2000,
+        "static_plus_peak_stack_bytes": 61952
+      },
+      {
+        "prompt": "Return value",
+        "tokens": [
+          32,
+          116,
+          104
+        ],
+        "logits_sha256": "7473850f94379649eeb6b8349442b3477420c87baff7707c330d61d4c1c69456",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 63278102,
+        "steps": [
+          {
+            "cycles": 50671553,
+            "commands": 1288,
+            "device_busy_cycles": 189621,
+            "configuration_cycles": 76576,
+            "finish_to_clear_cycles": 59027,
+            "read_beats": 83200,
+            "write_beats": 6016,
+            "rows_per_command": {
+              "4": 72,
+              "1": 1216
+            },
+            "exclusive_cycles": {
+              "device_busy": 189621,
+              "driver_config": 76576,
+              "driver_finish": 59027,
+              "driver_other": 57824,
+              "linear_cpu": 12016192,
+              "norm": 4010973,
+              "attention_kv": 15339159,
+              "gelu": 18159971,
+              "other": 762210
+            }
+          },
+          {
+            "cycles": 6171504,
+            "commands": 184,
+            "device_busy_cycles": 27005,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8235,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27005,
+              "driver_config": 10672,
+              "driver_finish": 8235,
+              "driver_other": 8096,
+              "linear_cpu": 1362541,
+              "norm": 411934,
+              "attention_kv": 2635013,
+              "gelu": 1623379,
+              "other": 84629
+            }
+          },
+          {
+            "cycles": 6433935,
+            "commands": 184,
+            "device_busy_cycles": 27021,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8251,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27021,
+              "driver_config": 10672,
+              "driver_finish": 8251,
+              "driver_other": 8096,
+              "linear_cpu": 1363397,
+              "norm": 410304,
+              "attention_kv": 2851435,
+              "gelu": 1669944,
+              "other": 84815
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 7168,
+        "linked_writable_bytes": 64048,
+        "peak_stack_bytes": 2000,
+        "static_plus_peak_stack_bytes": 61952
+      },
+      {
+        "prompt": "The result of this call ",
+        "tokens": [
+          116,
+          104,
+          101
+        ],
+        "logits_sha256": "7295318c555995c8e089f77de28042b66e5e1f3e45f46a6fa59ff52d833729ba",
+        "max_abs_error": 1.9073486328125e-06,
+        "request_cycles": 149865588,
+        "steps": [
+          {
+            "cycles": 132380226,
+            "commands": 2512,
+            "device_busy_cycles": 369456,
+            "configuration_cycles": 149440,
+            "finish_to_clear_cycles": 115729,
+            "read_beats": 162304,
+            "write_beats": 11776,
+            "rows_per_command": {
+              "4": 144,
+              "1": 2368
+            },
+            "exclusive_cycles": {
+              "device_busy": 369456,
+              "driver_config": 149440,
+              "driver_finish": 115729,
+              "driver_other": 112832,
+              "linear_cpu": 23626020,
+              "norm": 7958425,
+              "attention_kv": 60655357,
+              "gelu": 37903807,
+              "other": 1489160
+            }
+          },
+          {
+            "cycles": 8662931,
+            "commands": 184,
+            "device_busy_cycles": 27022,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8298,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27022,
+              "driver_config": 10672,
+              "driver_finish": 8298,
+              "driver_other": 8096,
+              "linear_cpu": 1360888,
+              "norm": 414041,
+              "attention_kv": 5150217,
+              "gelu": 1598789,
+              "other": 84908
+            }
+          },
+          {
+            "cycles": 8821321,
+            "commands": 184,
+            "device_busy_cycles": 27031,
+            "configuration_cycles": 10672,
+            "finish_to_clear_cycles": 8529,
+            "read_beats": 11264,
+            "write_beats": 736,
+            "rows_per_command": {
+              "1": 184
+            },
+            "exclusive_cycles": {
+              "device_busy": 27031,
+              "driver_config": 10672,
+              "driver_finish": 8529,
+              "driver_other": 8096,
+              "linear_cpu": 1364308,
+              "norm": 410916,
+              "attention_kv": 5350382,
+              "gelu": 1556116,
+              "other": 85271
+            }
+          }
+        ],
+        "valid_kv_peak_bytes": 13312,
+        "linked_writable_bytes": 64048,
+        "peak_stack_bytes": 2000,
+        "static_plus_peak_stack_bytes": 61952
+      }
+    ]
+  }
+}

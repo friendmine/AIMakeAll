@@ -6,6 +6,9 @@ module generation_soc (
     output logic [3:0] mem_wstrb, input logic [31:0] mem_rdata,
     output logic trap, bus_error, tile_start, tile_finish, mmio_write,
     output logic dma_valid, dma_write, output logic [31:0] dma_addr, dma_wdata,
+`ifdef VERILATOR
+    output logic [31:0] trace_sp,
+`endif
     input logic dma_ready, input logic [31:0] dma_rdata
 );
     wire valid;
@@ -23,6 +26,9 @@ module generation_soc (
         .mem_addr, .mem_wdata, .mem_wstrb, .mem_rdata(io_select ? io_rdata : mem_rdata),
         .irq(32'b0), .pcpi_wr(1'b0), .pcpi_rd(32'b0), .pcpi_wait(1'b0), .pcpi_ready(1'b0)
     );
+`ifdef VERILATOR
+    assign trace_sp = cpu.cpuregs[2];
+`endif
     projection_mmio device (
         .clk, .rst_n, .access(valid && io_select && (mem_wstrb == 0 || mem_wstrb == 4'hf)),
         .write_en(|mem_wstrb), .offset(mem_addr[11:0]), .wdata(mem_wdata), .rdata(io_rdata),

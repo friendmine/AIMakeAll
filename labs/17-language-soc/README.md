@@ -17,3 +17,7 @@
 ## 迁移练习
 
 换一个两字节提示，逐步对照 logits、整数摘要、下一字节及 MMIO 轨迹。
+
+## 快速整机回归
+
+`make language-ci` 使用仓库内冻结的实验 15 量化包，在本机从当前 C 和 RTL 源码重建固件与电路，无需 PyTorch、QEMU 或重新训练。两条路径实际处理 `Th`，每次比较 768 个分数与宿主参考、三个整数摘要和三个输出字节；CPU 命令数为零，NPU 三步为 304 / 184 / 184。完整的训练、重新导出及 QEMU 四路径对照仍用 `make lab17`。完成实验 15 后可用 `python3 labs/17-language-soc/freeze_ci.py` 重建小型回归输入。[工作流](../../.github/workflows/ci.yml) · [xPack 工具链版本与校验值](https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/blob/v15.2.0-1.1/package.json)

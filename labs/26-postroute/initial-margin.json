@@ -1,0 +1,222 @@
+{
+  "baseline": {
+    "input_hashes": {
+      "timing.sdc": "d976aeafb366524e275a1e7e8d1df5d3972c2ffa328275738bac5c4583e8ffc0",
+      "config.json": "7f3287b9ce34b081ae45c7ace6fd0647cf00fa76514380032d5ebb852093b250",
+      "mac_int8.sv": "0a7f13eb2e9bd075cac9734d141b15e3d1dc40cb36f45320cf6df692e12f57f9",
+      "projection_mmio.sv": "0a3b9cec2b8387d238a8fd6098225680ab783e00771ae92d39687b2756e9b5ef",
+      "projection_stream.sv": "18186fb293dcc9ba566b563e20aeda1bcacaef57bac9c73d5e4be5396575925f"
+    },
+    "librelane": "3.0.17",
+    "pdk": {
+      "open_pdks": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+      "magic": "6e83cbe2d3348971c6b4d95b6a28eb28d446a8d2"
+    },
+    "liberty_sha256": {
+      "sky130_fd_sc_hd__tt_025C_1v80.lib": "8e78e14442062dba34d414fca6490b2f6b96038d4510d1438ca44fee31487135",
+      "sky130_fd_sc_hd__ss_100C_1v60.lib": "9b24f0db3967ac67b4cae1f74bb480fd47922d18d0ed577e3c121739b412c361",
+      "sky130_fd_sc_hd__ff_n40C_1v95.lib": "fb61d91c55a7f85b1989e8149d040b13ba5e7f5478f5bf0c3c16c5da30720139"
+    },
+    "clock_ns": 50,
+    "die_um2": 422500,
+    "stdcell_um2": 144403,
+    "wire_um": 449657,
+    "congestion": {
+      "li1": {
+        "resource": 0,
+        "demand": 0,
+        "usage_percent": 0.0,
+        "overflow": 0
+      },
+      "met1": {
+        "resource": 83813,
+        "demand": 28781,
+        "usage_percent": 34.34,
+        "overflow": 0
+      },
+      "met2": {
+        "resource": 84860,
+        "demand": 28661,
+        "usage_percent": 33.77,
+        "overflow": 0
+      },
+      "met3": {
+        "resource": 60175,
+        "demand": 2520,
+        "usage_percent": 4.19,
+        "overflow": 0
+      },
+      "met4": {
+        "resource": 38244,
+        "demand": 2620,
+        "usage_percent": 6.85,
+        "overflow": 0
+      },
+      "met5": {
+        "resource": 8649,
+        "demand": 0,
+        "usage_percent": 0.0,
+        "overflow": 0
+      },
+      "Total": {
+        "resource": 275741,
+        "demand": 62582,
+        "usage_percent": 22.7,
+        "overflow": 0
+      }
+    },
+    "detailed_route_errors": 0,
+    "timing": {
+      "setup": {
+        "corners_ns": {
+          "nom_tt_025C_1v80": 40.024074076746835,
+          "nom_ss_100C_1v60": 29.930625935987425,
+          "nom_ff_n40C_1v95": 43.49255301231826,
+          "min_tt_025C_1v80": 40.20827162806106,
+          "min_ss_100C_1v60": 30.261674911368118,
+          "min_ff_n40C_1v95": 43.58201389799426,
+          "max_tt_025C_1v80": 39.861452156214156,
+          "max_ss_100C_1v60": 29.646437255355412,
+          "max_ff_n40C_1v95": 43.38029080960685
+        },
+        "worst_corner": "max_ss_100C_1v60",
+        "path": {
+          "start": "_22001_ (rising edge-triggered flip-flop clocked by clk)",
+          "end": "_22462_ (rising edge-triggered flip-flop clocked by clk)",
+          "slack_ns": 29.646437
+        }
+      },
+      "hold": {
+        "corners_ns": {
+          "nom_tt_025C_1v80": 0.16614160517603752,
+          "nom_ss_100C_1v60": 0.07320344537741422,
+          "nom_ff_n40C_1v95": 0.21299501654176842,
+          "min_tt_025C_1v80": 0.18799579092235,
+          "min_ss_100C_1v60": 0.10586709586409715,
+          "min_ff_n40C_1v95": 0.2174933072978625,
+          "max_tt_025C_1v80": 0.1327276104369405,
+          "max_ss_100C_1v60": 0.028312353263206465,
+          "max_ff_n40C_1v95": 0.1832110071066488
+        },
+        "worst_corner": "max_ss_100C_1v60",
+        "path": {
+          "start": "wdata[16] (input port clocked by clk)",
+          "end": "_22703_ (rising edge-triggered flip-flop clocked by clk)",
+          "slack_ns": 0.028312
+        }
+      }
+    },
+    "max_cap_violations": 57,
+    "max_slew_violations": 1926
+  },
+  "word_dma": {
+    "input_hashes": {
+      "timing.sdc": "d976aeafb366524e275a1e7e8d1df5d3972c2ffa328275738bac5c4583e8ffc0",
+      "config.json": "7f3287b9ce34b081ae45c7ace6fd0647cf00fa76514380032d5ebb852093b250",
+      "mac_int8.sv": "0a7f13eb2e9bd075cac9734d141b15e3d1dc40cb36f45320cf6df692e12f57f9",
+      "projection_mmio.sv": "277193be7939762444677e505baf0da86cf35f048d3187139e6739b7ac2f7bca",
+      "projection_stream.sv": "18186fb293dcc9ba566b563e20aeda1bcacaef57bac9c73d5e4be5396575925f"
+    },
+    "librelane": "3.0.17",
+    "pdk": {
+      "open_pdks": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+      "magic": "6e83cbe2d3348971c6b4d95b6a28eb28d446a8d2"
+    },
+    "liberty_sha256": {
+      "sky130_fd_sc_hd__tt_025C_1v80.lib": "8e78e14442062dba34d414fca6490b2f6b96038d4510d1438ca44fee31487135",
+      "sky130_fd_sc_hd__ss_100C_1v60.lib": "9b24f0db3967ac67b4cae1f74bb480fd47922d18d0ed577e3c121739b412c361",
+      "sky130_fd_sc_hd__ff_n40C_1v95.lib": "fb61d91c55a7f85b1989e8149d040b13ba5e7f5478f5bf0c3c16c5da30720139"
+    },
+    "clock_ns": 50,
+    "die_um2": 422500,
+    "stdcell_um2": 145346,
+    "wire_um": 453202,
+    "congestion": {
+      "li1": {
+        "resource": 0,
+        "demand": 0,
+        "usage_percent": 0.0,
+        "overflow": 0
+      },
+      "met1": {
+        "resource": 83650,
+        "demand": 27971,
+        "usage_percent": 33.44,
+        "overflow": 0
+      },
+      "met2": {
+        "resource": 84860,
+        "demand": 30347,
+        "usage_percent": 35.76,
+        "overflow": 0
+      },
+      "met3": {
+        "resource": 60175,
+        "demand": 2615,
+        "usage_percent": 4.35,
+        "overflow": 0
+      },
+      "met4": {
+        "resource": 38244,
+        "demand": 2140,
+        "usage_percent": 5.6,
+        "overflow": 0
+      },
+      "met5": {
+        "resource": 8649,
+        "demand": 0,
+        "usage_percent": 0.0,
+        "overflow": 0
+      },
+      "Total": {
+        "resource": 275578,
+        "demand": 63073,
+        "usage_percent": 22.89,
+        "overflow": 0
+      }
+    },
+    "detailed_route_errors": 0,
+    "timing": {
+      "setup": {
+        "corners_ns": {
+          "nom_tt_025C_1v80": 39.75519759250351,
+          "nom_ss_100C_1v60": 30.0191311416568,
+          "nom_ff_n40C_1v95": 43.07210354739581,
+          "min_tt_025C_1v80": 39.95081356590434,
+          "min_ss_100C_1v60": 30.18907875800235,
+          "min_ff_n40C_1v95": 43.20467661478335,
+          "max_tt_025C_1v80": 39.53341232940451,
+          "max_ss_100C_1v60": 29.779182629361248,
+          "max_ff_n40C_1v95": 42.91650534200477
+        },
+        "worst_corner": "max_ss_100C_1v60",
+        "path": {
+          "start": "_22104_ (rising edge-triggered flip-flop clocked by clk)",
+          "end": "_22512_ (rising edge-triggered flip-flop clocked by clk)",
+          "slack_ns": 29.779182
+        }
+      },
+      "hold": {
+        "corners_ns": {
+          "nom_tt_025C_1v80": 0.16106805234346439,
+          "nom_ss_100C_1v60": -0.027861269635543747,
+          "nom_ff_n40C_1v95": 0.21203173150720883,
+          "min_tt_025C_1v80": 0.1800213917778435,
+          "min_ss_100C_1v60": 0.011256551565031482,
+          "min_ff_n40C_1v95": 0.21556629313952094,
+          "max_tt_025C_1v80": 0.13345480653863648,
+          "max_ss_100C_1v60": -0.08280998343658223,
+          "max_ff_n40C_1v95": 0.19016683210840574
+        },
+        "worst_corner": "max_ss_100C_1v60",
+        "path": {
+          "start": "rst_n (input port clocked by clk)",
+          "end": "_22750_ (removal check against rising-edge clock clk)",
+          "slack_ns": -0.08281
+        }
+      }
+    },
+    "max_cap_violations": 47,
+    "max_slew_violations": 1654
+  }
+}

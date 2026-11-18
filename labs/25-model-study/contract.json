@@ -1,0 +1,33 @@
+{
+  "source_commit": "9fafc3649f7cc092d82589ab4ef7825b8a03e704",
+  "validation": [
+    "AI_COMPILATION",
+    "DIGITAL_DESIGN_TIMING",
+    "ENGINEERING_BRIDGES",
+    "OSTEP_FOUNDATIONS"
+  ],
+  "test": [
+    "ARCHITECTURE",
+    "CXL_MEMORY_FOUNDATIONS",
+    "NETWORKING_FOUNDATIONS",
+    "SYSTEMATIC_VERIFICATION"
+  ],
+  "seeds": [
+    251,
+    252,
+    253
+  ],
+  "steps": 600,
+  "batch": 16,
+  "window": 48,
+  "width": 48,
+  "lr": 0.003,
+  "weights": {
+    "uniform": 1.0,
+    "ascii_x2": 2.0
+  },
+  "hypothesis": "Doubling ASCII target loss will lower held-out ASCII byte NLL, possibly at the cost of Chinese UTF-8 prediction.",
+  "selection": "Lowest three-seed mean validation ASCII NLL among methods with mean validation overall PPL within 5% of uniform. Break ties in favor of uniform. Then report both methods on test.",
+  "deployment_seed": 251,
+  "source_sha256": "24d043aaa22ae9cc5dde46cff072241204c27580889f0ab395bdf3f3ba393353"
+}

@@ -4,7 +4,6 @@ import argparse
 import fcntl
 import hashlib
 import json
-import os
 from pathlib import Path
 import struct
 import subprocess
@@ -12,6 +11,7 @@ import sys
 
 import torch
 
+from build_guest import build
 from trace_checks import LOGIT_TOLERANCE, check_counters, check_mmio, check_uart
 
 HERE = Path(__file__).resolve().parent
@@ -93,49 +93,6 @@ def export(model, q, prompt, folder):
     )
     (folder / "model.h").write_text("\n".join(lines) + "\n")
     return sha(tensor_bytes)
-
-
-def build(folder, source=HERE / "generate.c", extra_cflags=()):
-    gcc = os.environ.get("RISCV_CC", "riscv64-unknown-elf-gcc")
-    objcopy = (
-        os.environ.get("RISCV_OBJCOPY")
-        or subprocess.check_output([gcc, "-print-prog-name=objcopy"], text=True).strip()
-    )
-    elf, image = folder / "generation.elf", folder / "generation.bin"
-    lab01 = HERE.parent / "01-linear257"
-    subprocess.run(
-        [
-            gcc,
-            "-march=rv32im",
-            "-mabi=ilp32",
-            "-mcmodel=medany",
-            "-msmall-data-limit=0",
-            "-mno-relax",
-            "-ffreestanding",
-            "-nostdlib",
-            "-ffp-contract=off",
-            "-fno-math-errno",
-            "-O2",
-            "-I",
-            folder,
-            "-T",
-            lab01 / "guest.ld",
-            lab01 / "start.S",
-            *extra_cflags,
-            source,
-            "-Wl,--gc-sections,--start-group",
-            "-lm",
-            "-lc",
-            "-lgcc",
-            "-lnosys",
-            "-Wl,--end-group",
-            "-o",
-            elf,
-        ],
-        check=True,
-    )
-    subprocess.run([objcopy, "-O", "binary", elf, image], check=True)
-    return elf, image
 
 
 def reference(model, q, prompt):

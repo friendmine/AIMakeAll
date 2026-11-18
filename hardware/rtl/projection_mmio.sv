@@ -111,9 +111,20 @@ module projection_mmio (
                     lane <= 0; depth_idx <= 0; rhs <= 0; packed_word <= 0;
                 end
                 FETCH: if (dma_ready) begin
+`ifdef AIM_WORD_DMA
+                    // Four packed RHS lanes share this aligned little-endian RAM word.
+                    // Tails and unaligned bases retain the original byte path.
+                    if (rhs && n == 4 && b[1:0] == 0) begin
+                        packed_word <= dma_rdata;
+                        state <= FEED;
+                    end else begin
+`endif
                     packed_word[lane*8 +: 8] <= dma_rdata[dma_addr[1:0]*8 +: 8];
                     if (idx+1 == (rhs ? n : m)) state <= FEED;
                     else lane <= lane + 1'b1;
+`ifdef AIM_WORD_DMA
+                    end
+`endif
                 end
                 FEED: if (in_ready) begin
                     rhs <= !rhs;

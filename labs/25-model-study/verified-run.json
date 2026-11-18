@@ -1,0 +1,860 @@
+{
+  "torch_version": "2.14.1",
+  "contract_sha256": "428b5898f2cd514a86ae49565a6c9e8c6e3d85995b8b1a3bf1ecf6e066095885",
+  "source_sha256": "24d043aaa22ae9cc5dde46cff072241204c27580889f0ab395bdf3f3ba393353",
+  "splits": {
+    "train": [
+      "ALGORITHMS_FOUNDATIONS",
+      "CHIP_AI_COMPLETENESS",
+      "CHIP_MODEL_PLAN",
+      "COMPANY_TRAINING",
+      "CSAPP_FOUNDATIONS",
+      "CURRICULUM",
+      "EDA_TOOLCHAIN_CONSOLIDATION",
+      "EXPERIMENTS_09_23",
+      "KNOWLEDGE_COVERAGE",
+      "LFS_FOUNDATIONS",
+      "LOCAL_EDA_ENVIRONMENT",
+      "MINIMIND_INTEGRATION",
+      "OPEN_SOURCE",
+      "PCIE_IO_FOUNDATIONS",
+      "PROJECT_MAP",
+      "ROADMAP",
+      "SIMULATION_CREDIBILITY",
+      "SIMULATION_FIRST",
+      "UDL_FOUNDATIONS",
+      "VALIDATION"
+    ],
+    "validation": [
+      "AI_COMPILATION",
+      "DIGITAL_DESIGN_TIMING",
+      "ENGINEERING_BRIDGES",
+      "OSTEP_FOUNDATIONS"
+    ],
+    "test": [
+      "ARCHITECTURE",
+      "CXL_MEMORY_FOUNDATIONS",
+      "NETWORKING_FOUNDATIONS",
+      "SYSTEMATIC_VERIFICATION"
+    ]
+  },
+  "target_bytes_per_run": 460800,
+  "records": [
+    {
+      "seed": 251,
+      "method": "uniform",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.4748528003692627,
+          "unweighted_nll": 3.4748528003692627
+        },
+        {
+          "step": 200,
+          "objective": 2.900608777999878,
+          "unweighted_nll": 2.900608777999878
+        },
+        {
+          "step": 300,
+          "objective": 2.6937897205352783,
+          "unweighted_nll": 2.6937897205352783
+        },
+        {
+          "step": 400,
+          "objective": 2.6452932357788086,
+          "unweighted_nll": 2.6452932357788086
+        },
+        {
+          "step": 500,
+          "objective": 2.589611291885376,
+          "unweighted_nll": 2.589611291885376
+        },
+        {
+          "step": 600,
+          "objective": 2.3922555446624756,
+          "unweighted_nll": 2.3922555446624756
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.5319118173194703,
+          "ascii": 3.371991976124517,
+          "continuation": 2.6060642412407606,
+          "lead": 2.0649170189816424
+        },
+        "ppl": 12.577529103565395,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.521472829590194,
+          "ascii": 3.172871583337573,
+          "continuation": 2.5987400711218975,
+          "lead": 2.0641479639229057
+        },
+        "ppl": 12.446915355352447,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 10
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      }
+    },
+    {
+      "seed": 251,
+      "method": "ascii_x2",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.5549755096435547,
+          "unweighted_nll": 3.4863860607147217
+        },
+        {
+          "step": 200,
+          "objective": 2.9827663898468018,
+          "unweighted_nll": 2.9580163955688477
+        },
+        {
+          "step": 300,
+          "objective": 2.822260618209839,
+          "unweighted_nll": 2.7413384914398193
+        },
+        {
+          "step": 400,
+          "objective": 2.8137786388397217,
+          "unweighted_nll": 2.6729438304901123
+        },
+        {
+          "step": 500,
+          "objective": 2.632345676422119,
+          "unweighted_nll": 2.6078262329101562
+        },
+        {
+          "step": 600,
+          "objective": 2.4457156658172607,
+          "unweighted_nll": 2.417696714401245
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.5639718186270968,
+          "ascii": 3.1505582545747917,
+          "continuation": 2.649581923212055,
+          "lead": 2.1702309823080235
+        },
+        "ppl": 12.987298204412975,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.5528925006309438,
+          "ascii": 2.964768320475378,
+          "continuation": 2.6474945550480062,
+          "lead": 2.1721842391665307
+        },
+        "ppl": 12.84420196582871,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 10
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      }
+    },
+    {
+      "seed": 252,
+      "method": "uniform",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.505187749862671,
+          "unweighted_nll": 3.505187749862671
+        },
+        {
+          "step": 200,
+          "objective": 3.082148313522339,
+          "unweighted_nll": 3.082148313522339
+        },
+        {
+          "step": 300,
+          "objective": 2.707163095474243,
+          "unweighted_nll": 2.707163095474243
+        },
+        {
+          "step": 400,
+          "objective": 2.6057426929473877,
+          "unweighted_nll": 2.6057426929473877
+        },
+        {
+          "step": 500,
+          "objective": 2.490647315979004,
+          "unweighted_nll": 2.490647315979004
+        },
+        {
+          "step": 600,
+          "objective": 2.4515435695648193,
+          "unweighted_nll": 2.4515435695648193
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.552054610240798,
+          "ascii": 3.3671738233738178,
+          "continuation": 2.644535561859919,
+          "lead": 2.0578747731984155
+        },
+        "ppl": 12.833444439875628,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.536856167152819,
+          "ascii": 3.203604962712844,
+          "continuation": 2.6270340710309323,
+          "lead": 2.0465623222993563
+        },
+        "ppl": 12.639870800067433,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 10
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      }
+    },
+    {
+      "seed": 252,
+      "method": "ascii_x2",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.5994620323181152,
+          "unweighted_nll": 3.4938290119171143
+        },
+        {
+          "step": 200,
+          "objective": 3.1423380374908447,
+          "unweighted_nll": 3.1143391132354736
+        },
+        {
+          "step": 300,
+          "objective": 2.8120205402374268,
+          "unweighted_nll": 2.74664306640625
+        },
+        {
+          "step": 400,
+          "objective": 2.6417317390441895,
+          "unweighted_nll": 2.611809492111206
+        },
+        {
+          "step": 500,
+          "objective": 2.5797998905181885,
+          "unweighted_nll": 2.5114376544952393
+        },
+        {
+          "step": 600,
+          "objective": 2.499277114868164,
+          "unweighted_nll": 2.458519697189331
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.5720613170422113,
+          "ascii": 3.1554498554294588,
+          "continuation": 2.6751956883318835,
+          "lead": 2.144487620907502
+        },
+        "ppl": 13.092785025134683,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.5527096085775374,
+          "ascii": 2.9829967555028474,
+          "continuation": 2.6612829637708426,
+          "lead": 2.1354873257179636
+        },
+        "ppl": 12.841853078159804,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 10
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 77
+          }
+        ]
+      }
+    },
+    {
+      "seed": 253,
+      "method": "uniform",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.513821840286255,
+          "unweighted_nll": 3.513821840286255
+        },
+        {
+          "step": 200,
+          "objective": 3.2322638034820557,
+          "unweighted_nll": 3.2322638034820557
+        },
+        {
+          "step": 300,
+          "objective": 2.7482588291168213,
+          "unweighted_nll": 2.7482588291168213
+        },
+        {
+          "step": 400,
+          "objective": 2.6363935470581055,
+          "unweighted_nll": 2.6363935470581055
+        },
+        {
+          "step": 500,
+          "objective": 2.557433843612671,
+          "unweighted_nll": 2.557433843612671
+        },
+        {
+          "step": 600,
+          "objective": 2.455320358276367,
+          "unweighted_nll": 2.455320358276367
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.547756714829109,
+          "ascii": 3.375992751244302,
+          "continuation": 2.614244898062408,
+          "lead": 2.1005826034001176
+        },
+        "ppl": 12.77840599735815,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.5393071139114483,
+          "ascii": 3.205572146681063,
+          "continuation": 2.6102565934698845,
+          "lead": 2.087716556467252
+        },
+        "ppl": 12.670888446206709,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 229
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      }
+    },
+    {
+      "seed": 253,
+      "method": "ascii_x2",
+      "training_curve": [
+        {
+          "step": 100,
+          "objective": 3.6122641563415527,
+          "unweighted_nll": 3.581984758377075
+        },
+        {
+          "step": 200,
+          "objective": 3.3113348484039307,
+          "unweighted_nll": 3.2456328868865967
+        },
+        {
+          "step": 300,
+          "objective": 2.8542490005493164,
+          "unweighted_nll": 2.8156473636627197
+        },
+        {
+          "step": 400,
+          "objective": 2.6954383850097656,
+          "unweighted_nll": 2.6732559204101562
+        },
+        {
+          "step": 500,
+          "objective": 2.679880380630493,
+          "unweighted_nll": 2.5923430919647217
+        },
+        {
+          "step": 600,
+          "objective": 2.5394349098205566,
+          "unweighted_nll": 2.4994208812713623
+        }
+      ],
+      "validation": {
+        "bytes": {
+          "all": 23783,
+          "ascii": 2670,
+          "continuation": 14075,
+          "lead": 7038
+        },
+        "nll": {
+          "all": 2.5886029032554787,
+          "ascii": 3.132589118913765,
+          "continuation": 2.6664845527274963,
+          "lead": 2.226479087949104
+        },
+        "ppl": 13.311161625680274,
+        "examples": [
+          {
+            "document": "AI_COMPILATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "DIGITAL_DESIGN_TIMING",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "ENGINEERING_BRIDGES",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "OSTEP_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      },
+      "test": {
+        "bytes": {
+          "all": 24642,
+          "ascii": 3304,
+          "continuation": 14228,
+          "lead": 7110
+        },
+        "nll": {
+          "all": 2.5687687295833714,
+          "ascii": 2.9743503730148797,
+          "continuation": 2.6535237344312717,
+          "lead": 2.2106905356489657
+        },
+        "ppl": 13.049746777838223,
+        "examples": [
+          {
+            "document": "ARCHITECTURE",
+            "offset": 40,
+            "context": "总体学习依赖见 全景规划图。",
+            "expected": 67,
+            "predicted": 10
+          },
+          {
+            "document": "CXL_MEMORY_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "NETWORKING_FOUNDATIONS",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          },
+          {
+            "document": "SYSTEMATIC_VERIFICATION",
+            "offset": 9,
+            "context": "更新：",
+            "expected": 50,
+            "predicted": 229
+          }
+        ]
+      }
+    }
+  ],
+  "validation_means": {
+    "uniform": {
+      "ascii_nll": 3.3717195169142125,
+      "ppl": 12.729793180266391
+    },
+    "ascii_x2": {
+      "ascii_nll": 3.1461990763060053,
+      "ppl": 13.130414951742644
+    }
+  },
+  "selected": "ascii_x2",
+  "paired_test": {
+    "top1_changes": {
+      "gain": 676,
+      "loss": 836
+    },
+    "first_printable_examples": {
+      "loss": {
+        "document": "ARCHITECTURE",
+        "offset": 41,
+        "context_hex": "e680bbe4bd93e5ada6e4b9a0e4be9de8b596e8a78120e585a8e699afe8a784e58892e59bbee3808243",
+        "target": 83,
+        "baseline": 83,
+        "weighted": 32
+      },
+      "gain": {
+        "document": "ARCHITECTURE",
+        "offset": 812,
+        "context_hex": "84e5b7a5e7a88be5ae9ee9aa8ce380820ae59ca8e5ae9ee9aa8c203031e4b8adefbc8ce5aebfe4b8bb205079",
+        "target": 116,
+        "baseline": 32,
+        "weighted": 116
+      }
+    }
+  },
+  "deployment": {
+    "seed": 251,
+    "sha256": "4723007481995c5387c04b04d60ea5ca08c857ff7c884f8644c9597248154b93",
+    "test_ppl": 12.854702616366403,
+    "prompt_hex": "e697b6e5ba8f",
+    "tokens": [
+      230,
+      156,
+      137
+    ],
+    "scores_checked": 768,
+    "commands": {
+      "cpu": [
+        0,
+        0,
+        0
+      ],
+      "npu": [
+        784,
+        184,
+        184
+      ]
+    },
+    "max_abs_error": 9.5367431640625e-07
+  }
+}

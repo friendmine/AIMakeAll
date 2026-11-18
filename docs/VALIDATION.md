@@ -1,5 +1,17 @@
 # 项目验证记录
 
+## 实验 24–26 的本机验收
+
+| 证据 | 已核对 |
+| --- | --- |
+| [24 整机报告](../labs/24-design-challenge/verified-run.json) · [DMA 检查](../labs/24-design-challenge/verified-dma.json) | 四个候选、三档长度、冻结后确认、额外尾行、逐项分数、DMA 和真实栈峰值；192 组形状与对齐组合、读时复位 |
+| [25 模型研究](../labs/25-model-study/verified-run.json) | 六次等预算训练、文档留出、配对误差与一次真实量化模型部署 |
+| [26 布线后报告](../labs/26-postroute/verified-run.json) · [初版余量](../labs/26-postroute/initial-margin.json) | 两版电路的相同约束、拥塞与布线、提取寄生后的九角时序、电气违规单列 |
+| [整机快速回归](../labs/17-language-soc/README.md#快速整机回归) | 本机从源构建 CPU 与 NPU 两条路径并对照冻结参考；远端工作流状态以对应提交的 Actions 运行为准 |
+| [独立考核](../labs/24-design-challenge/exam.md) | 作者已用两条开发提示冻结选择，随后单独揭晓第三条提示并通过确认；改变已冻结预算会被拒绝。独立真人试读待登记 |
+
+同步复跑了 28 个基础测试、INT8 MAC 的全输入对、实验 03、07，以及 17 的 QEMU/RTL 四路径。17 的逐步输出、命令数和同机周期与原归档一致；本轮重构后本机生成的 ELF 摘要已记录在实验 24 中。
+
 ## 实验 09–23 的本机验收
 
 2026-11-18，macOS arm64。15 个实验各自保存可执行入口、验收条件与 JSON 报告，覆盖宽度 32 的结构化任务、前馈宽度 48 / 40 的自然语言模型、RV32 后端、流式阵列、工具选择、Linux PCIe、双客体 TCP 和 QEMU CXL Type 3。本轮重跑 28 项 Python 回归、单 MAC RTL、00 的算术示例、01 的预算设计、02 的冻结张量回放，以及 03–08 的默认整机验证，均通过。实验 19 的作者迁移和独立学习者试读分别登记，后者仍待执行。[逐实验验证记录](EXPERIMENTS_09_23.md) · [课程状态](CURRICULUM.md)

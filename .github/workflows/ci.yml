@@ -17,3 +17,20 @@ jobs:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y verilator
       - run: make rtl-test linear-rtl projection-rtl generation-rtl
+  rv32-inference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y verilator
+      - name: Install the RV32IM compiler and math library
+        working-directory: ${{ runner.temp }}
+        run: |
+          url=https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack/releases/download/v15.2.0-1
+          curl --fail --location --retry 3 "$url/xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz" -o rv32.tar.gz
+          echo 'aaaa8060c914851a3e5ee1ba82cc3d6f80972f90638a05c6e823a37557a33758  rv32.tar.gz' | sha256sum --check
+          mkdir rv32-toolchain
+          tar -xzf rv32.tar.gz --strip-components=1 -C rv32-toolchain
+          echo "RISCV_CC=$PWD/rv32-toolchain/bin/riscv-none-elf-gcc" >> "$GITHUB_ENV"
+      - name: Run whole-model inference and DMA boundary cases
+        run: make language-ci word-dma-test

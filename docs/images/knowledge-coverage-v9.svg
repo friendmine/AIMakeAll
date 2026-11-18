@@ -86,9 +86,10 @@
 <text x="210" y="969" font-size="20" font-weight="400" fill="#172b3a">改变阻抗、采样相位与衰减，观察眼图开口</text>
 <text x="52" y="1011" font-size="20" font-weight="650" fill="#086a68">人机协作</text>
 <text x="210" y="1011" font-size="20" font-weight="400" fill="#172b3a">复核助手引用、纠正预算、确认或接管终止</text>
-<rect x="48" y="1056" width="1024" height="221" rx="8" fill="#f4ebd9"/>
-<text x="69" y="1095" font-size="25" font-weight="700" fill="#86531a">实验 02–23　从一个投影到自然语言整机与系统接口</text>
+<rect x="48" y="1056" width="1024" height="245" rx="8" fill="#f4ebd9"/>
+<text x="69" y="1095" font-size="25" font-weight="700" fill="#86531a">实验 02–26　从一个投影到模型、整机和布线后验证</text>
 <text x="69" y="1132" font-size="19" font-weight="400" fill="#172b3a">02–09　微型模型、数字阵列与词表投影　｜　量化、缓存、64 条回复和逐步周期</text>
 <text x="69" y="1168" font-size="19" font-weight="400" fill="#172b3a">10–16　两层四头模型、共享 DMA 队列与执行计划　｜　训练、时序、面积和 KV 容量</text>
 <text x="69" y="1203" font-size="18" font-weight="400" fill="#172b3a">17–19　同一固件跑 QEMU 与 PicoRV32　｜　两种模型 × 两种电路，在新预算下复验</text>
-<text x="69" y="1243" font-size="18" font-weight="400" fill="#86531a">20–23　工具选择、Linux PCIe、双虚拟机 TCP 与 CXL Type 3 内存放置</text></g></svg>
+<text x="69" y="1240" font-size="18" font-weight="400" fill="#86531a">20–23　工具选择、Linux PCIe、双虚拟机 TCP 与 CXL Type 3 内存放置</text>
+<text x="69" y="1278" font-size="18" font-weight="400" fill="#86531a">24–26　整机瓶颈归因、中文语料消融与九角布线后时序　｜　独立毕业题待试读</text></g></svg>

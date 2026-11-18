@@ -1,0 +1,14 @@
+{
+  "model_width": 48,
+  "steps": 3,
+  "development": ["Type", "Return value", "The result of this call "],
+  "confirmation": ["Next", "Read a value", "A sequence of arguments "],
+  "max_validation_byte_ppl": 8.0,
+  "max_payload_bytes": 75000,
+  "max_allocated_kv_bytes": 49152,
+  "max_firmware_writable_bytes_including_stack": 98304,
+  "max_reference_abs_error": 0.0001,
+  "objective": "Among feasible candidates, minimize sum of uninstrumented complete request cycles across the three equally weighted development requests. Freeze selection before confirmation.",
+  "prediction": "Longer prefill exposes repeated one-row QKV submissions. Four-row QKV should reduce prompt commands and preserve decode work. Reading four aligned, adjacent weight bytes per DMA beat should lower stalls and request cycles; other CPU work limits both gains.",
+  "candidates": ["baseline", "qkv4", "word_dma", "combined"]
+}

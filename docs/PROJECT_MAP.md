@@ -18,6 +18,11 @@ flowchart LR
     Run -->|硬件瓶颈| Chip
     Run -->|质量或形状取舍| Model
     Run -->|执行计划调整| Infer
+    Run --> Select["24 · 四个设计与留出请求"]
+    Model --> Study["25 · 三种子等预算训练与 RV32 部署"]
+    Select --> Route["26 · 两版 RTL 布线与九角时序"]
+    Route --> Exam["独立毕业题 · 待试读"]
+    Study --> Exam
 ```
 
 一个人沿图提交三份可复查的产物：可综合的 NPU、自训练的模型检查点、可生成结果的推理程序。给定新输入或更紧的内存预算后，用实验判断应该改哪一层。[个人毕业任务](CHIP_MODEL_PLAN.md#个人毕业任务)

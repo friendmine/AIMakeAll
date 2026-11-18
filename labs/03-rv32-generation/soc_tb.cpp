@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #include "Vgeneration_soc.h"
 #include <cstdint>
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -78,7 +79,13 @@ int main(int argc, char **argv) {
         }
         Vgeneration_soc dut;
         uint64_t dma_beats = 0, began = 0, reads = 0, writes = 0, stalls = 0;
-        for (uint64_t cycle = 0; cycle < 150000000; ++cycle) {
+        const char *stack = std::getenv("AIM_RTL_STACK_TOP");
+        const uint32_t top = stack ? std::stoul(stack, nullptr, 0) : 0;
+        uint32_t lowest_sp = top;
+        bool tracking_stack = false;
+        const char *limit = std::getenv("AIM_RTL_CYCLE_LIMIT");
+        const uint64_t cycle_limit = limit ? std::stoull(limit) : 150000000;
+        for (uint64_t cycle = 0; cycle < cycle_limit; ++cycle) {
             dut.rst_n = cycle >= 4;
             dut.clk = 0;
             // A periodic wait exercises the actual ready/valid DMA interface.
@@ -94,6 +101,10 @@ int main(int argc, char **argv) {
             else if (benchmark && dut.mem_addr == backend_port)
                 dut.mem_rdata = backend;
             dut.eval();
+            if (top) {
+                if (dut.trace_sp == top) tracking_stack = true;
+                if (tracking_stack && dut.trace_sp < lowest_sp) lowest_sp = dut.trace_sp;
+            }
             if (dut.trap || dut.bus_error) throw std::runtime_error("CPU trap or unsupported MMIO");
             if (benchmark && backend == 0 && dut.dma_valid)
                 throw std::runtime_error("unexpected DMA on the CPU-only path");
@@ -133,6 +144,10 @@ int main(int argc, char **argv) {
                     if (ch == 'S' || ch == 'T') counts << ch << ' ' << cycle << '\n';
                     std::cout.put(ch);
                 } else if (addr == 0x00100000 && dut.mem_wstrb == 15) {
+                    if (top) {
+                        if (!tracking_stack) throw std::runtime_error("stack was never initialized");
+                        counts << "stack_used " << top - lowest_sp << '\n';
+                    }
                     counts << "finish " << cycle;
                     if (package_run) counts << ' ' << dma_beats;
                     counts << '\n';

@@ -207,3 +207,33 @@ lab23: lab15 course-linux-qemu
 	$(PYTHON) labs/23-cxl-placement/run.py
 
 labs09-23: lab09 lab10 lab11 lab12 lab13 lab14 lab15 lab16 lab17 lab18 lab19 lab20 lab21 lab22 lab23
+
+WORD_SOC := build/design-challenge/soc/Vgeneration_soc
+$(WORD_SOC): $(GEN_RTL) hardware/rtl/projection_stream.sv $(GEN_LAB)/soc_tb.cpp
+	mkdir -p $(@D)
+	$(VERILATOR) --cc --exe --build --timescale 1ns/1ps -DAIM_STREAM_SOC -DAIM_WORD_DMA --top-module generation_soc --Mdir $(@D) $(GEN_RTL) hardware/rtl/projection_stream.sv $(CURDIR)/$(GEN_LAB)/soc_tb.cpp
+
+.PHONY: language-ci lab24 lab25 lab26 labs24-26
+language-ci: $(GEN_SOC)
+	$(PYTHON) labs/17-language-soc/ci_smoke.py
+
+lab24: lab15 $(STREAM_SOC) $(WORD_SOC) word-dma-test
+	$(PYTHON) labs/24-design-challenge/challenge.py
+
+lab25: $(GEN_SOC)
+	$(PYTHON) labs/25-model-study/study.py
+
+lab26:
+	$(PYTHON) labs/26-postroute/route.py baseline
+	$(PYTHON) labs/26-postroute/route.py word_dma
+	$(PYTHON) labs/26-postroute/summarize.py
+
+labs24-26: lab24 lab25 lab26
+
+WORD_DMA_TEST := build/design-challenge/dma-test/Vprojection_mmio
+$(WORD_DMA_TEST): hardware/rtl/projection_mmio.sv hardware/rtl/projection_stream.sv hardware/rtl/mac_int8.sv labs/24-design-challenge/dma_tb.cpp
+	mkdir -p $(@D)
+	$(VERILATOR) --cc --exe --build --top-module projection_mmio -DAIM_STREAM_SOC -DAIM_WORD_DMA --Mdir $(@D) $(filter %.sv,$^) $(abspath $(filter %.cpp,$^))
+.PHONY: word-dma-test
+word-dma-test: $(WORD_DMA_TEST)
+	$(WORD_DMA_TEST) > build/design-challenge/dma-check.json

@@ -1,0 +1,245 @@
+{
+  "top": "projection_mmio",
+  "selected_configuration": "combined",
+  "selected_rtl": "word_dma",
+  "variants": {
+    "baseline": {
+      "input_hashes": {
+        "timing.sdc": "d976aeafb366524e275a1e7e8d1df5d3972c2ffa328275738bac5c4583e8ffc0",
+        "config.json": "98d97389e3420a1244f2076cba7ac985871b6a8877e939008d7c9030004e37dd",
+        "mac_int8.sv": "0a7f13eb2e9bd075cac9734d141b15e3d1dc40cb36f45320cf6df692e12f57f9",
+        "projection_mmio.sv": "6156a47e221f31a4db26f863126a10258fb40029df5b22e52c852d991885a504",
+        "projection_stream.sv": "18186fb293dcc9ba566b563e20aeda1bcacaef57bac9c73d5e4be5396575925f"
+      },
+      "librelane": "3.0.17",
+      "pdk": {
+        "open_pdks": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+        "magic": "6e83cbe2d3348971c6b4d95b6a28eb28d446a8d2"
+      },
+      "liberty_sha256": {
+        "sky130_fd_sc_hd__tt_025C_1v80.lib": "8e78e14442062dba34d414fca6490b2f6b96038d4510d1438ca44fee31487135",
+        "sky130_fd_sc_hd__ss_100C_1v60.lib": "9b24f0db3967ac67b4cae1f74bb480fd47922d18d0ed577e3c121739b412c361",
+        "sky130_fd_sc_hd__ff_n40C_1v95.lib": "fb61d91c55a7f85b1989e8149d040b13ba5e7f5478f5bf0c3c16c5da30720139"
+      },
+      "clock_ns": 50,
+      "die_um2": 422500,
+      "stdcell_um2": 154546,
+      "wire_um": 462216,
+      "congestion": {
+        "li1": {
+          "resource": 0,
+          "demand": 0,
+          "usage_percent": 0.0,
+          "overflow": 0
+        },
+        "met1": {
+          "resource": 83794,
+          "demand": 29163,
+          "usage_percent": 34.8,
+          "overflow": 0
+        },
+        "met2": {
+          "resource": 84860,
+          "demand": 29281,
+          "usage_percent": 34.51,
+          "overflow": 0
+        },
+        "met3": {
+          "resource": 60175,
+          "demand": 2866,
+          "usage_percent": 4.76,
+          "overflow": 0
+        },
+        "met4": {
+          "resource": 38244,
+          "demand": 2744,
+          "usage_percent": 7.17,
+          "overflow": 0
+        },
+        "met5": {
+          "resource": 8649,
+          "demand": 25,
+          "usage_percent": 0.29,
+          "overflow": 0
+        },
+        "Total": {
+          "resource": 275722,
+          "demand": 64079,
+          "usage_percent": 23.24,
+          "overflow": 0
+        }
+      },
+      "detailed_route_errors": 0,
+      "timing": {
+        "setup": {
+          "corners_ns": {
+            "nom_tt_025C_1v80": 39.505843270477314,
+            "nom_ss_100C_1v60": 28.86344756011275,
+            "nom_ff_n40C_1v95": 43.43919835678106,
+            "min_tt_025C_1v80": 39.70051777472664,
+            "min_ss_100C_1v60": 29.208712719681223,
+            "min_ff_n40C_1v95": 43.56472284003051,
+            "max_tt_025C_1v80": 39.309271617069854,
+            "max_ss_100C_1v60": 28.52328054481754,
+            "max_ff_n40C_1v95": 43.26482761178031
+          },
+          "worst_corner": "max_ss_100C_1v60",
+          "path": {
+            "slack_ns": 28.523281,
+            "start": "_22001_ (rising edge-triggered flip-flop clocked by clk)",
+            "start_q_net": "array4.activation[27]",
+            "end": "_22462_ (rising edge-triggered flip-flop clocked by clk)",
+            "end_q_net": "array4.acc[13][31]"
+          }
+        },
+        "hold": {
+          "corners_ns": {
+            "nom_tt_025C_1v80": 0.4349387084708576,
+            "nom_ss_100C_1v60": 0.5541025572988895,
+            "nom_ff_n40C_1v95": 0.37001291966570293,
+            "min_tt_025C_1v80": 0.44223692626309247,
+            "min_ss_100C_1v60": 0.560921658331297,
+            "min_ff_n40C_1v95": 0.3842161697548816,
+            "max_tt_025C_1v80": 0.4097269306473633,
+            "max_ss_100C_1v60": 0.5302348710181711,
+            "max_ff_n40C_1v95": 0.34686682286024767
+          },
+          "worst_corner": "max_ff_n40C_1v95",
+          "path": {
+            "slack_ns": 0.346867,
+            "start": "access (input port clocked by clk)",
+            "end": "_21968_ (rising edge-triggered flip-flop clocked by clk)",
+            "end_q_net": "error_code[1]"
+          }
+        }
+      },
+      "hold_repair_margin_ns": {
+        "PL_RESIZER_HOLD_SLACK_MARGIN": 0.4,
+        "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.45
+      },
+      "electrical_limits_met": false,
+      "max_cap_violations": 50,
+      "max_slew_violations": 1850,
+      "route_and_timing_met": true
+    },
+    "word_dma": {
+      "input_hashes": {
+        "timing.sdc": "d976aeafb366524e275a1e7e8d1df5d3972c2ffa328275738bac5c4583e8ffc0",
+        "config.json": "98d97389e3420a1244f2076cba7ac985871b6a8877e939008d7c9030004e37dd",
+        "mac_int8.sv": "0a7f13eb2e9bd075cac9734d141b15e3d1dc40cb36f45320cf6df692e12f57f9",
+        "projection_mmio.sv": "277193be7939762444677e505baf0da86cf35f048d3187139e6739b7ac2f7bca",
+        "projection_stream.sv": "18186fb293dcc9ba566b563e20aeda1bcacaef57bac9c73d5e4be5396575925f"
+      },
+      "librelane": "3.0.17",
+      "pdk": {
+        "open_pdks": "8afc8346a57fe1ab7934ba5a6056ea8b43078e71",
+        "magic": "6e83cbe2d3348971c6b4d95b6a28eb28d446a8d2"
+      },
+      "liberty_sha256": {
+        "sky130_fd_sc_hd__tt_025C_1v80.lib": "8e78e14442062dba34d414fca6490b2f6b96038d4510d1438ca44fee31487135",
+        "sky130_fd_sc_hd__ss_100C_1v60.lib": "9b24f0db3967ac67b4cae1f74bb480fd47922d18d0ed577e3c121739b412c361",
+        "sky130_fd_sc_hd__ff_n40C_1v95.lib": "fb61d91c55a7f85b1989e8149d040b13ba5e7f5478f5bf0c3c16c5da30720139"
+      },
+      "clock_ns": 50,
+      "die_um2": 422500,
+      "stdcell_um2": 155713,
+      "wire_um": 466840,
+      "congestion": {
+        "li1": {
+          "resource": 0,
+          "demand": 0,
+          "usage_percent": 0.0,
+          "overflow": 0
+        },
+        "met1": {
+          "resource": 83612,
+          "demand": 28433,
+          "usage_percent": 34.01,
+          "overflow": 0
+        },
+        "met2": {
+          "resource": 84860,
+          "demand": 31121,
+          "usage_percent": 36.67,
+          "overflow": 0
+        },
+        "met3": {
+          "resource": 60175,
+          "demand": 2853,
+          "usage_percent": 4.74,
+          "overflow": 0
+        },
+        "met4": {
+          "resource": 38244,
+          "demand": 2274,
+          "usage_percent": 5.95,
+          "overflow": 0
+        },
+        "met5": {
+          "resource": 8649,
+          "demand": 0,
+          "usage_percent": 0.0,
+          "overflow": 0
+        },
+        "Total": {
+          "resource": 275540,
+          "demand": 64681,
+          "usage_percent": 23.47,
+          "overflow": 0
+        }
+      },
+      "detailed_route_errors": 0,
+      "timing": {
+        "setup": {
+          "corners_ns": {
+            "nom_tt_025C_1v80": 39.67160934270465,
+            "nom_ss_100C_1v60": 29.245113825063708,
+            "nom_ff_n40C_1v95": 43.063999807265276,
+            "min_tt_025C_1v80": 39.84143971949548,
+            "min_ss_100C_1v60": 29.421863111939683,
+            "min_ff_n40C_1v95": 43.1984629183834,
+            "max_tt_025C_1v80": 39.49937022597147,
+            "max_ss_100C_1v60": 29.064254048345106,
+            "max_ff_n40C_1v95": 42.90560561612994
+          },
+          "worst_corner": "max_ss_100C_1v60",
+          "path": {
+            "slack_ns": 29.064255,
+            "start": "_22104_ (rising edge-triggered flip-flop clocked by clk)",
+            "start_q_net": "array4.activation[16]",
+            "end": "_22511_ (rising edge-triggered flip-flop clocked by clk)",
+            "end_q_net": "array4.acc[11][30]"
+          }
+        },
+        "hold": {
+          "corners_ns": {
+            "nom_tt_025C_1v80": 0.43386356846340357,
+            "nom_ss_100C_1v60": 0.552508388012744,
+            "nom_ff_n40C_1v95": 0.39599230571013255,
+            "min_tt_025C_1v80": 0.44629484704401445,
+            "min_ss_100C_1v60": 0.5627448666339003,
+            "min_ff_n40C_1v95": 0.4066604945666239,
+            "max_tt_025C_1v80": 0.4215485857479112,
+            "max_ss_100C_1v60": 0.5428317948787409,
+            "max_ff_n40C_1v95": 0.3850655459038931
+          },
+          "worst_corner": "max_ff_n40C_1v95",
+          "path": {
+            "slack_ns": 0.385066,
+            "start": "write_en (input port clocked by clk)",
+            "end": "_22876_ (rising edge-triggered flip-flop clocked by clk)",
+            "end_q_net": "state[0]"
+          }
+        }
+      },
+      "hold_repair_margin_ns": {
+        "PL_RESIZER_HOLD_SLACK_MARGIN": 0.4,
+        "GRT_RESIZER_HOLD_SLACK_MARGIN": 0.45
+      },
+      "electrical_limits_met": false,
+      "max_cap_violations": 50,
+      "max_slew_violations": 1714,
+      "route_and_timing_met": true
+    }
+  }
+}
