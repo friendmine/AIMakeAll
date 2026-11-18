@@ -8,7 +8,7 @@
 
 [![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
 
-[按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [实验 05 权重预打包](#实验-05-权重预打包) · [实验 06 连续切换模型](#实验-06-连续切换模型) · [实验 07 融合 Q/K/V](#实验-07-融合-qkv-投影) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
+[按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [实验 05 权重预打包](#实验-05-权重预打包) · [实验 06 连续切换模型](#实验-06-连续切换模型) · [实验 07 融合 Q/K/V](#实验-07-融合-qkv-投影) · [实验 08 字节任务](#实验-08-换一个生成任务) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
 
 ## 从一个乘加到一次生成
 
@@ -25,6 +25,7 @@
 | 与实验 04 相同 | [05 · 权重现场打包与预打包](labs/05-weight-prepack/README.md) · `make prepack` | 在同一份固件上核对首次、重复请求和逐符号周期，计算额外 RAM 与回本次数 |
 | 与实验 04 相同 | [06 · 同一固件切换模型](labs/06-model-switch/README.md) · `make model-switch` | 连续运行宽度 32 和 24 的模型，逐项核对尺度和输出，从总线验证坏包零命令 |
 | 与实验 04 相同 | [07 · 融合 Q/K/V 投影](labs/07-fused-qkv/README.md) · `make fused-qkv` | 比较浮点、整数与阵列三条路径，把量化质量、冷/热首符号和完整生成放在同一份报告中 |
+| 与实验 04 相同 | [08 · 字节任务与受约束选型](labs/08-byte-transfer/README.md) · `make byte-transfer` | 重训两个宽度，先按质量和内存筛选，再用验证编号选型，在留出编号上核对逐字节生成与周期 |
 
 <details>
 <summary><strong>实验环境与常用检查</strong></summary>
@@ -86,6 +87,16 @@
 
 **质量与验收。** A、B 量化后的困惑度分别为 2.208821、2.219613，相对仅前馈量化分别上升 0.0386%、0.0080%，两者的 64 条留出序列均全部生成正确。全留出集完成 H1 阵列重放，两个提示另完成整机逐项核对。三条路径均通过六种坏包零设备命令、零 DMA、零缓存写入及随后恢复的检查。[完整周期、步骤与验收标准](labs/07-fused-qkv/README.md) · [默认报告](labs/07-fused-qkv/verified-sample-0.json) · [第二组提示](labs/07-fused-qkv/verified-sample-1.json)
 
+## 实验 08 换一个生成任务
+
+给同一台 PicoRV32 和 4×4 阵列输入七个字节 `R152=1>`，让模型生成状态词和换行。**选宽度 32 + NPU。** 它在 64 条测试记录上全部答对。宽度 24 的模型包小 704 B，推理也更快，却在这条提示上把 `ok` 生成为 `nk`，浮点与量化均只答对 32/64。
+
+| 宽度 32，默认测试编号 | RV32 浮点 Q/K/V | RV32 INT8 Q/K/V | NPU INT8 Q/K/V |
+| --- | ---: | ---: | ---: |
+| 完整冷请求，两个标志位的平均周期 | 29,556,453.5 | 25,896,846 | **25,727,129** |
+
+三条路径的前馈升维均由 NPU 执行。对 `R152=0>`，Q/K/V 从浮点迁到 NPU 后，提示计算少 **29.68%**，后两个字节合计少 **9.26%**。此时解码计算的 **64.10%** 花在 RV32 的 256 路词表投影上。若把单包预算从 42 KiB 减至 41.5 KiB，六种配置均无法同时满足质量与容量要求。[实验手册与验收](labs/08-byte-transfer/README.md) · [默认成绩单](labs/08-byte-transfer/verified-run.json) · [独立试读任务单](labs/08-byte-transfer/reader-task.md)
+
 ## 个人学习目标
 
 **给你一个新的输入形状，或把可用缓冲空间减半，你能独立决定该改电路、模型还是推理程序，并用实验解释为什么。** 先预测影响，再固定模型比较电路、固定电路比较模型。用波形找出阵列在哪一拍等待数据，用生成记录定位第一个有偏差的输出。最后用同一批输入比较模型质量和投影周期，写下选择理由，再换一组输入复验。[个人毕业任务](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [芯模联合实验](docs/PROJECT_MAP.md#芯模联动的实验与验收)
@@ -104,7 +115,7 @@
 | [Build a Large Language Model (From Scratch) · Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch) | 自己写注意力、组装 GPT、训练和生成时 | [七章与附录的项目映射](models/README.md) |
 | [MiniMind · jingyaogong/minimind](https://github.com/jingyaogong/minimind) | 已能训练小模型，准备对照完整工程的数据、训练、推理和工具调用时 | [源码导读与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md) |
 
-实验 02、03 使用 AIMakeAll 自己训练的符号模型。MiniMind 和下列框架提供工程对照，字节语料 LLM、模型驱动的 Agent 属于后续阶段。[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+实验 02、03 使用 AIMakeAll 自己训练的符号模型，实验 08 使用自训练的结构化字节模型。MiniMind 和下列框架提供工程对照，自然语言 LLM 与模型驱动的 Agent 属于后续阶段。[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
 
 ### 按问题查原始资料
 

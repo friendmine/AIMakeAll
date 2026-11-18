@@ -74,7 +74,7 @@ def evaluate(model, ffn, qkv, test, tile):
     return dict(documents=len(test), predicted_positions=target.numel(), checked_rtl_logits=logits.numel(), **metrics)
 
 
-def generation(model, ffn, qkv, prompt, target, quantized):
+def generation_trace(model, ffn, qkv, prompt, steps, quantized):
     out = {key: [] for key in ("I", "F", "P", "K", "Y", "tokens", "logits")}
 
     def project_qkv(layer, args, y):
@@ -91,7 +91,7 @@ def generation(model, ffn, qkv, prompt, target, quantized):
 
     ids, kv = torch.tensor([prompt]), None
     with model.qkv.register_forward_hook(project_qkv):
-        for _ in range(4):
+        for _ in range(steps):
             logits, kv = model(ids, kv, projection=project_ffn)
             scores = logits[0, -1]
             token = int(scores.argmax())
@@ -99,9 +99,14 @@ def generation(model, ffn, qkv, prompt, target, quantized):
             out["tokens"].append(token)
             ids = torch.tensor([[token]])
     out["K"], out["Y"] = (tensor[0].tolist() for tensor in kv)
-    if out["tokens"] != target:
-        raise ValueError("reference failed held-out generation")
     return out
+
+
+def generation(model, ffn, qkv, prompt, target, quantized):
+    trace = generation_trace(model, ffn, qkv, prompt, len(target), quantized)
+    if trace["tokens"] != target:
+        raise ValueError("reference failed held-out generation")
+    return trace
 
 
 def prepare_model(model, ffn, test, sample, tile):

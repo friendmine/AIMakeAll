@@ -3,14 +3,15 @@
 #define AIM_COPY_FORWARD_H
 #include <math.h>
 #include "model.h"
+#include "../../runtime/copy_shape.h"
 
-enum { D = 16, N = 32, V = 11, CTX = 8 };
+enum { D = 16, N = 32, V = COPY_VOCAB, CTX = COPY_CONTEXT };
 #ifndef COPY_FFN_WIDTH
 #define COPY_FFN_WIDTH N
 #endif
-static float keys[CTX][D], values[CTX][D], residual[5][D];
-static int8_t activation[5][D];
-static float up[5][N];
+static float keys[CTX][D], values[CTX][D], residual[COPY_PROMPT][D];
+static int8_t activation[COPY_PROMPT][D];
+static float up[COPY_PROMPT][N];
 
 static void linear(const float *x, const float *w, const float *b, float *y,
                    unsigned in, unsigned out)
@@ -53,7 +54,7 @@ static int8_t quantize(float v)
     return (int8_t)z;
 }
 
-/* The batched caller projects up to five normalized inputs before running causal
+/* The batched caller projects the normalized prompt before running causal
  * attention row by row. Keep the original scalar schedule for the timed labs. */
 #ifdef COPY_BATCHED_QKV
 static void input_norm(unsigned token, unsigned pos, unsigned row, float h[D])
@@ -116,7 +117,13 @@ static unsigned next_token(unsigned row)
     MODEL_PHASE(FINAL_NORM_HEAD);
     for (unsigned i = 0; i < D; ++i) hidden[i] += residual[row][i];
     norm(hidden, final_norm_weight, final_norm_bias, h);
+#ifdef MEASURE_BYTE_STAGES
+    uint32_t head_begin = cycle_after(0);
+#endif
     linear(h, head_weight, head_bias, logits, D, V);
+#ifdef MEASURE_BYTE_STAGES
+    head_cycles[step_index] = cycle_after(float_bits(logits[0])) - head_begin;
+#endif
     unsigned best = 0;
     for (unsigned j = 0; j < V; ++j) {
         union {float value; uint32_t bits;} score = { .value = logits[j] };

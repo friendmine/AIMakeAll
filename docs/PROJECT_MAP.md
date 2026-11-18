@@ -31,7 +31,7 @@ flowchart LR
 | 用模型比较硬件 | 增加计算单元或提高片上存储带宽，哪项能缓解当前模型层的瓶颈？ | 固定模型、输入、时钟约束和外存假设，每次改变一个硬件参数。比较有效 MAC 占比、停顿周期与跨存储边界的字节数。面积比较使用同一目标库 |
 | 用硬件反馈调整模型 | 如果权重搬运主导逐 token 生成，缩小前馈层宽度是否值得？ | 固定硬件、数据划分和训练预算，重新训练候选宽度的模型并导出。用同一验证集比较困惑度，用同一 RTL 重放新形状，比较周期和字节数。依预先约定的质量门槛决定是否采用 |
 
-**当前可以做到代表层的联合设计。** 实验 01 用固定 Linear 把 RV32/QEMU 和独立单 MAC 的整数结果对齐。实验 02 用随机初始化后训练的两个微型 Transformer 对照两套 4×4 阵列，测量模型质量、局部访存和提示词／生成两种投影的周期。实验 03 已用同一份裸机程序在 QEMU 与 PicoRV32 RTL 生成符号，保留每步模型、总线和设备证据。实验 04 用同一台 PicoRV32 对照纯 CPU 和 NPU，分别量到提示词收益与单行开销。实验 05 追踪权重缓冲的实际写入，用两次重复请求复验预打包的回本点。实验 06 已验证单槽权重缓存随运行时模型切换而重建，坏包在提交前被拒绝。实验 07 已在同一固件比较融合 Q/K/V 的三种后端，并量到包校验、热命中与整步生成的成本。[实验 07](../labs/07-fused-qkv/README.md) · [实验 06](../labs/06-model-switch/README.md) · [实验 05](../labs/05-weight-prepack/README.md) · [实验 04 与试读入口](../labs/04-rv32-performance/README.md) · [实验 01](../labs/01-linear257/README.md) · [实验 02](../labs/02-trained-projection/README.md) · [实施顺序](ROADMAP.md)
+**当前可以做到代表层的联合设计。** 实验 01 用固定 Linear 把 RV32/QEMU 和独立单 MAC 的整数结果对齐。实验 02 用随机初始化后训练的两个微型 Transformer 对照两套 4×4 阵列，测量模型质量、局部访存和提示词／生成两种投影的周期。实验 03 已用同一份裸机程序在 QEMU 与 PicoRV32 RTL 生成符号，保留每步模型、总线和设备证据。实验 04 用同一台 PicoRV32 对照纯 CPU 和 NPU，分别量到提示词收益与单行开销。实验 05 追踪权重缓冲的实际写入，用两次重复请求复验预打包的回本点。实验 06 已验证单槽权重缓存随运行时模型切换而重建，坏包在提交前被拒绝。实验 07 已在同一固件比较融合 Q/K/V 的三种后端，并量到包校验、热命中与整步生成的成本。实验 08 将同一阵列迁移到字节状态生成，从两种宽度、三种后端中选出满足质量与内存门槛的最快配置。[实验 08](../labs/08-byte-transfer/README.md) · [实验 07](../labs/07-fused-qkv/README.md) · [实验 06](../labs/06-model-switch/README.md) · [实验 05](../labs/05-weight-prepack/README.md) · [实验 04 与试读入口](../labs/04-rv32-performance/README.md) · [实验 01](../labs/01-linear257/README.md) · [实验 02](../labs/02-trained-projection/README.md) · [实施顺序](ROADMAP.md)
 
 [实验 03 学生手册](../labs/03-rv32-generation/README.md) · [阶段验收](ROADMAP.md#实验-03-从设备命令追到生成符号)
 
@@ -213,6 +213,7 @@ flowchart TB
     PERF04 --> PACK05[实验 05 · 已运行<br/>预打包的首次成本、每步周期与回本次数]
     PACK05 --> LOAD06[实验 06 · 已运行<br/>同一固件切换模型、核对尺度与拒绝坏包]
     LOAD06 --> QKV07[实验 07 · 已运行<br/>融合 Q/K/V、量化质量与完整请求周期]
+    QKV07 --> BYTE08[实验 08 · 已运行<br/>字节生成、质量与预算筛选、整机瓶颈]
     PROJ --> GEN03
     QEMU -.功能设备.-> GEN03
     SOC -.PicoRV32 微块接口.-> GEN03
@@ -262,7 +263,7 @@ flowchart TB
     PCINPU -.设备后端.-> RT
 
     subgraph MODEL[M3 · 从零 LLM 与 MiniMind]
-        LEARN[自写微型 Transformer 已训练<br/>字节语料小 LLM 与 MiniMind 对照待实施]
+        LEARN[符号与结构化字节任务已训练<br/>自然语言小 LLM 与 MiniMind 对照待实施]
         TRAIN[数据与 tokenizer → 预训练 → SFT<br/>随机权重、独立验证集]
         LEARN --> TRAIN
     end

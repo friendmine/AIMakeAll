@@ -1,0 +1,18 @@
+{
+  "task": "byte-status-v1",
+  "record": "Rddd=f> followed by no or ok and LF",
+  "encoding": "byte value 0..255, LF=10 ends generation",
+  "split_seed": 808,
+  "id_counts_train_validation_test": [192, 32, 32],
+  "flags_per_id": 2,
+  "architecture": {"hidden": 16, "ffn_widths": [32, 24], "heads": 1, "layers": 1, "vocab": 256, "context": 9, "prompt_bytes": 7, "generated_bytes": 3},
+  "training": {"seed": 2708, "steps": 400, "batch": 32, "learning_rate": 0.006, "calibration_documents": 32, "objective": "completion_bytes"},
+  "quality": {"min_exact_of_64": 61, "max_exact_loss_vs_fp32": 1, "max_conditional_ppl_ratio_vs_fp32": 1.01, "must_beat_train_bigram": true, "max_rtl_float_abs_error": 0.0001},
+  "budget": {"one_model_package_bytes": 43008, "linked_writable_bytes_including_stack": 32768, "array_local_bytes": 256},
+  "selection": "Among validation-eligible width/backend pairs choose the lowest mean whole-request cycles on the first paired validation ID; freeze choice before comparing the paired held-out ID.",
+  "predictions": [
+    "RV32 float: the batched input norm plus QKV costs more than the vocabulary head at prefill; the head costs more at each decode step.",
+    "NPU INT8 reduces steady compute cycles versus RV32 float by a larger percentage at prefill than across decode.",
+    "Width 24 on NPU will have the lowest validation mean whole-request cycles among eligible candidates."
+  ]
+}

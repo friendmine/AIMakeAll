@@ -1,0 +1,2476 @@
+{
+  "initial_contract_sha256": "3b89cb5aeb30f90f9df5c6a827af6f387c622f723c463709bb36e66c21690142",
+  "initial_validation": {
+    "32": {
+      "tensor_sha256": "ea07e94092d3f21d7f4761b4ee114cb3cf6db9b7e2717be9cf33ea352a95938b",
+      "exact": 32,
+      "conditional_ppl": 1.2650887966156006,
+      "first_pair": [
+        [
+          110,
+          111,
+          10
+        ],
+        [
+          110,
+          111,
+          10
+        ]
+      ]
+    },
+    "24": {
+      "tensor_sha256": "6e39ec017ad61f741338531d0bec25c98ee2e83e5669e638ada5c7566a90a02e",
+      "exact": 32,
+      "conditional_ppl": 1.2655184268951416,
+      "first_pair": [
+        [
+          110,
+          111,
+          10
+        ],
+        [
+          110,
+          107,
+          10
+        ]
+      ]
+    }
+  },
+  "task": "byte-status-v1",
+  "contract_sha256": "01e66f0a45571f59993eeb4c7d60c219f76f2a0aba65e2c59b859ac076e7de1b",
+  "pair": 1,
+  "models": {
+    "32": {
+      "package_bytes": 42988,
+      "package_sha256": "84f7332dbefde7df71c188e98100614b9745f5f8838b9daa3f73c6915c728e58",
+      "checkpoint_sha256": "81458ab4ce69d58dd11d7ba3660b55e3b255a8b39b96bc0d3feae00cd7d939f1",
+      "tensor_sha256": "762a9adcfc876b80edf2bce5c9912b32e7a75bd8f6c567d74bab3952f1d6069e",
+      "training_history": [
+        [
+          100,
+          0.24040551483631134,
+          0.2231001853942871
+        ],
+        [
+          200,
+          0.00541769340634346,
+          0.005258461460471153
+        ],
+        [
+          300,
+          0.002815684536471963,
+          0.002725466387346387
+        ],
+        [
+          400,
+          0.0018318570218980312,
+          0.0017425132682546973
+        ]
+      ]
+    },
+    "24": {
+      "package_bytes": 42284,
+      "package_sha256": "8d6a71350b2b93cf3b7b8c6c9bc336be0619197178327134ea280dc98c51b1bf",
+      "checkpoint_sha256": "1c20911ca41c12187e68f486247d9906a5dec0b4892c45d713b7f457205eb71e",
+      "tensor_sha256": "0b0d22c4b78262e59b996b9f9dcefdea4e6187aa792ff8a9def45a8b68c17b62",
+      "training_history": [
+        [
+          100,
+          0.25164538621902466,
+          0.24808289110660553
+        ],
+        [
+          200,
+          0.23548360168933868,
+          0.23728913068771362
+        ],
+        [
+          300,
+          0.24809084832668304,
+          0.23928964138031006
+        ],
+        [
+          400,
+          0.22670377790927887,
+          0.23430007696151733
+        ]
+      ]
+    }
+  },
+  "memory": {
+    "sections": {
+      ".data": {
+        "start": 2147504128,
+        "bytes": 292
+      },
+      ".bss": {
+        "start": 2147504420,
+        "bytes": 12168
+      }
+    },
+    "stack_top": 2147520688,
+    "stack_reservation_bytes": 4096,
+    "linked_writable_bytes": 16560,
+    "array_local_bytes": 256,
+    "packed_buffer_bytes": 1280,
+    "kv_cache_bytes": 1152
+  },
+  "elf_sha256": "acdef32047ade950c9c82f263f2ac4174cb3e2ae2d259b2f598da469144ce369",
+  "firmware_sha256": "7d0ae64b3fb08c50eb73568d0229ad0a40ebe85b7b53b2039c628b3c3518e1ac",
+  "rtl_sha256": "d76ddca45e34063608d74962620d2593ec221e7ab885e05640a72bf4ce45db9b",
+  "tile_sha256": "5e849d28473a85e35f2321ec0768dea074e47e0da69dae6b3f3b3e97a885a441",
+  "splits": {
+    "train": {
+      "documents": 384,
+      "sha256": "de3bf283741bb6a4fe203c73e5ce1169bfcdb7952ee3e6357ac9cf582ec44cc4"
+    },
+    "validation": {
+      "documents": 64,
+      "sha256": "8969e7cc98df18f136c08fe62467e447f59e352b24665846d4bd884f20590081"
+    },
+    "test": {
+      "documents": 64,
+      "sha256": "2286ecb308df9f6c57f913bc56d848b0abd0f9a3a34e32bdfc968fb763b102f8"
+    }
+  },
+  "tools": {
+    "python": "3.11.7",
+    "torch": "2.14.1",
+    "gcc": "riscv64-unknown-elf-gcc (g1b306039a) 15.1.0",
+    "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101"
+  },
+  "validation": {
+    "quality": {
+      "32": {
+        "documents": 64,
+        "conditional_targets": 192,
+        "bigram": {
+          "conditional_ppl": 1.601420117664182,
+          "full_ppl": 3.887159981610369,
+          "exact": 32
+        },
+        "fp32": {
+          "conditional_ppl": 1.001744031906128,
+          "full_ppl": 433.6364440917969,
+          "exact": 64
+        },
+        "ffn_int8": {
+          "conditional_ppl": 1.0017441511154175,
+          "full_ppl": 434.54449462890625,
+          "exact": 64
+        },
+        "dual_int8": {
+          "conditional_ppl": 1.0017445087432861,
+          "full_ppl": 432.35614013671875,
+          "exact": 64
+        },
+        "dual_int8_array": {
+          "conditional_ppl": 1.0017445087432861,
+          "full_ppl": 432.35614013671875,
+          "exact": 64
+        },
+        "array_checked_logits": 147456
+      },
+      "24": {
+        "documents": 64,
+        "conditional_targets": 192,
+        "bigram": {
+          "conditional_ppl": 1.601420117664182,
+          "full_ppl": 3.887159981610369,
+          "exact": 32
+        },
+        "fp32": {
+          "conditional_ppl": 1.264023780822754,
+          "full_ppl": 1401.9044189453125,
+          "exact": 32
+        },
+        "ffn_int8": {
+          "conditional_ppl": 1.2640095949172974,
+          "full_ppl": 1402.7362060546875,
+          "exact": 32
+        },
+        "dual_int8": {
+          "conditional_ppl": 1.264007329940796,
+          "full_ppl": 1397.8519287109375,
+          "exact": 32
+        },
+        "dual_int8_array": {
+          "conditional_ppl": 1.264007329940796,
+          "full_ppl": 1397.8519287109375,
+          "exact": 32
+        },
+        "array_checked_logits": 147456
+      }
+    },
+    "prompts": [
+      {
+        "prompt": "R130=0>",
+        "expected": "no\n",
+        "input_sha256": "8e2c9062b1dda8c603a428f11d6aa2755cc1e36043b1ebb6daf62120fd7ef3e5",
+        "modes": {
+          "qkv-fp32": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "5acf92f2f0750e80ab8cf0cfcd0d236cde34c756f20ed8dd143ccd80b94820fa",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 3.5762786865234375e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3933896,
+                    "vocabulary_head": 2668962,
+                    "other": 3488347
+                  },
+                  {
+                    "input_norm_qkv": 564182,
+                    "vocabulary_head": 2672557,
+                    "other": 1287196
+                  },
+                  {
+                    "input_norm_qkv": 564798,
+                    "vocabulary_head": 2685227,
+                    "other": 1436629
+                  }
+                ],
+                "first_token_cycles": 20231345,
+                "step_cycles": [
+                  10091205,
+                  4523935,
+                  4686654
+                ],
+                "request_cycles": 29442198,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  29443424,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "6b76a2c6323981f6cc32b9a47784bb431e4f792da33e40fb6d16b405fc128be0",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 4.76837158203125e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3932005,
+                    "vocabulary_head": 2664305,
+                    "other": 3336960
+                  },
+                  {
+                    "input_norm_qkv": 561811,
+                    "vocabulary_head": 2684293,
+                    "other": 1060532
+                  },
+                  {
+                    "input_norm_qkv": 564298,
+                    "vocabulary_head": 2666309,
+                    "other": 1296804
+                  }
+                ],
+                "first_token_cycles": 19908154,
+                "step_cycles": [
+                  9933270,
+                  4306636,
+                  4527411
+                ],
+                "request_cycles": 28742465,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  30311721,
+                  59054742,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                59889087,
+                69847313,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "247532c2d96cce09951ec5f2e40fded76b26472745d09813c70f0a76a7bc40d1",
+              "counters.txt": "40d2ea89fb84965d225275cfcd5ff5587b9380f6cff580a601bd5bbd71054769",
+              "mmio.txt": "17a8965be30a4885e63c1dc68da05f41cf7e124638aef702a493b174b9b2b8bd",
+              "stores.txt": "62d766bb3332687421ad04e519296da1be7b2c9452b183d539417643c165564b"
+            }
+          },
+          "qkv-int8": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "8960e710e5b00e704449e951f581ef5aa512b67da7b76f3a6042654ee222ce0b",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1091422,
+                    "vocabulary_head": 2669229,
+                    "other": 3489773
+                  },
+                  {
+                    "input_norm_qkv": 156494,
+                    "vocabulary_head": 2672600,
+                    "other": 1287349
+                  },
+                  {
+                    "input_norm_qkv": 157203,
+                    "vocabulary_head": 2685112,
+                    "other": 1455607
+                  }
+                ],
+                "first_token_cycles": 17390564,
+                "step_cycles": [
+                  7250424,
+                  4116443,
+                  4297922
+                ],
+                "request_cycles": 25805193,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  25806419,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "1ec0529d8be19cc0cefa857a460b1206c9aa6b373df2369ddb49a81c08dbee5b",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1092055,
+                    "vocabulary_head": 2663974,
+                    "other": 3336726
+                  },
+                  {
+                    "input_norm_qkv": 156197,
+                    "vocabulary_head": 2684482,
+                    "other": 1060719
+                  },
+                  {
+                    "input_norm_qkv": 156388,
+                    "vocabulary_head": 2666296,
+                    "other": 1297010
+                  }
+                ],
+                "first_token_cycles": 17067639,
+                "step_cycles": [
+                  7092755,
+                  3901398,
+                  4119694
+                ],
+                "request_cycles": 25088995,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  26850562,
+                  51940113,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52950304,
+                62908530,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "a0d62b3072d83636134033e1e8cd8be0d0c06b20f4850bb9add1df0c9e5e2ef9",
+              "counters.txt": "2ee56a355871b333325b8df8c7483373b41958e390e7d021f718f27f50aa2a52",
+              "mmio.txt": "0ee529089dcde4a95101ccb9d609f4ba0b8eb26ad53481e9257f2e86775ed46a",
+              "stores.txt": "0674ae8bf5050b2815846bbd2dd9d5e640d7bb9e6f305d82d1030c317fd96003"
+            }
+          },
+          "qkv-npu": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 32255,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "8960e710e5b00e704449e951f581ef5aa512b67da7b76f3a6042654ee222ce0b",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 940690,
+                    "vocabulary_head": 2669229,
+                    "other": 3489773
+                  },
+                  {
+                    "input_norm_qkv": 137367,
+                    "vocabulary_head": 2672600,
+                    "other": 1287349
+                  },
+                  {
+                    "input_norm_qkv": 138076,
+                    "vocabulary_head": 2685112,
+                    "other": 1455607
+                  }
+                ],
+                "first_token_cycles": 17259101,
+                "step_cycles": [
+                  7099692,
+                  4097316,
+                  4278795
+                ],
+                "request_cycles": 25635476,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 640,
+                "commands": 80,
+                "step_commands": [
+                  40,
+                  20,
+                  20
+                ],
+                "dma_beats": 8720,
+                "rtl_window": [
+                  670,
+                  25636702,
+                  0,
+                  8720
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 29051,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "1ec0529d8be19cc0cefa857a460b1206c9aa6b373df2369ddb49a81c08dbee5b",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 941323,
+                    "vocabulary_head": 2663974,
+                    "other": 3336726
+                  },
+                  {
+                    "input_norm_qkv": 137070,
+                    "vocabulary_head": 2684482,
+                    "other": 1060719
+                  },
+                  {
+                    "input_norm_qkv": 137261,
+                    "vocabulary_head": 2666296,
+                    "other": 1297010
+                  }
+                ],
+                "first_token_cycles": 16936176,
+                "step_cycles": [
+                  6942023,
+                  3882271,
+                  4100567
+                ],
+                "request_cycles": 24919278,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 576,
+                "commands": 72,
+                "step_commands": [
+                  36,
+                  18,
+                  18
+                ],
+                "dma_beats": 7848,
+                "rtl_window": [
+                  26680845,
+                  51600679,
+                  8720,
+                  16568
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52610870,
+                62569096,
+                16568,
+                16568
+              ]
+            },
+            "traces": {
+              "rtl.uart": "a5e9ab3450e965b019e842ed5e9c4e486c3e7aa13d27c027113fc1e6530bd313",
+              "counters.txt": "f1f42b5afcf471deb1287ad315f8a240f9c803cfa2f99a16111320c49d280db8",
+              "mmio.txt": "a1bc0eecca2b0b8c67560bb6e336d153faf2e4f0b4849adfce67bd28fbd44ba0",
+              "stores.txt": "2e0edd42891de2d08ffcee410d2e02dcc4e46ff1e3984cb7d52f718c531f2f60"
+            }
+          }
+        }
+      },
+      {
+        "prompt": "R130=1>",
+        "expected": "ok\n",
+        "input_sha256": "657a35f4f31185663abd4ee90e1a812e79447581d24fc5377aab53450151d390",
+        "modes": {
+          "qkv-fp32": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "06a83aa6409a73de958741bfd961e00d8a10c6a35a5c20bdc20f014b7a36bd72",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 4.76837158203125e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3932144,
+                    "vocabulary_head": 2669644,
+                    "other": 3607313
+                  },
+                  {
+                    "input_norm_qkv": 562212,
+                    "vocabulary_head": 2725107,
+                    "other": 1377825
+                  },
+                  {
+                    "input_norm_qkv": 564534,
+                    "vocabulary_head": 2684940,
+                    "other": 1383854
+                  }
+                ],
+                "first_token_cycles": 20349241,
+                "step_cycles": [
+                  10209101,
+                  4665144,
+                  4633328
+                ],
+                "request_cycles": 29647977,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  29649203,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "689a2af23e4515eb4055fb347f756edddff68a4ca84e501114a00f8d4e49d800",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 4.76837158203125e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3933270,
+                    "vocabulary_head": 2664497,
+                    "other": 3335949
+                  },
+                  {
+                    "input_norm_qkv": 561811,
+                    "vocabulary_head": 2683600,
+                    "other": 1127480
+                  },
+                  {
+                    "input_norm_qkv": 567714,
+                    "vocabulary_head": 2670550,
+                    "other": 1295252
+                  }
+                ],
+                "first_token_cycles": 19908600,
+                "step_cycles": [
+                  9933716,
+                  4372891,
+                  4533516
+                ],
+                "request_cycles": 28815271,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  30517500,
+                  59333327,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                60167672,
+                70125898,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "56d64d1a8bf511803a913846d4927ce15892c1027410ddebc597a7b91687301c",
+              "counters.txt": "1305297b870c203738f9a7534293ae6ac7f3c0ee33c887f2c91cac19ecaec5f6",
+              "mmio.txt": "0574b1994c6400bbd951910c9e2eec0da50f7b37e15be733afe83c89df2c656c",
+              "stores.txt": "112bd6526f235f616cec08c380632c96edb945eff7731229ae963161f4220531"
+            }
+          },
+          "qkv-int8": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "e8558d937ae7f1721ec56c26ecb059242a7c57cf817a884c8a4718b757d245df",
+                "max_abs_error": {
+                  "L": 2.86102294921875e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1090632,
+                    "vocabulary_head": 2669294,
+                    "other": 3608696
+                  },
+                  {
+                    "input_norm_qkv": 155715,
+                    "vocabulary_head": 2724802,
+                    "other": 1377486
+                  },
+                  {
+                    "input_norm_qkv": 157029,
+                    "vocabulary_head": 2685802,
+                    "other": 1384610
+                  }
+                ],
+                "first_token_cycles": 17508762,
+                "step_cycles": [
+                  7368622,
+                  4258003,
+                  4227441
+                ],
+                "request_cycles": 25994470,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  25995696,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "d7e71f269a2936d540a95c03dd57a9686dc00011226154ed91fe0273d793129c",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1092185,
+                    "vocabulary_head": 2664206,
+                    "other": 3335254
+                  },
+                  {
+                    "input_norm_qkv": 156197,
+                    "vocabulary_head": 2682204,
+                    "other": 1127754
+                  },
+                  {
+                    "input_norm_qkv": 157182,
+                    "vocabulary_head": 2670388,
+                    "other": 1295417
+                  }
+                ],
+                "first_token_cycles": 17066529,
+                "step_cycles": [
+                  7091645,
+                  3966155,
+                  4122987
+                ],
+                "request_cycles": 25155935,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  27039839,
+                  52196330,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                53206521,
+                63164747,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "d61f2dbdf7acd31b44a8c8cb093623b9eca61d11175d07577f1dd78fbafbde75",
+              "counters.txt": "ee87b5c0b7d7243a3f05b68724aabc386035821ba328a5f350c1dd121543dd38",
+              "mmio.txt": "353d9ea892ddb566b29d40944ab5cbf20e528afc73a66cbc84a23658cabfab69",
+              "stores.txt": "8aa5f71886d9d0af312c3eedc46bb3355081c5b51350d90f94da46f9eb7006d8"
+            }
+          },
+          "qkv-npu": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 32255,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "e8558d937ae7f1721ec56c26ecb059242a7c57cf817a884c8a4718b757d245df",
+                "max_abs_error": {
+                  "L": 2.86102294921875e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 939900,
+                    "vocabulary_head": 2669294,
+                    "other": 3608696
+                  },
+                  {
+                    "input_norm_qkv": 136588,
+                    "vocabulary_head": 2724802,
+                    "other": 1377486
+                  },
+                  {
+                    "input_norm_qkv": 137902,
+                    "vocabulary_head": 2685802,
+                    "other": 1384610
+                  }
+                ],
+                "first_token_cycles": 17377299,
+                "step_cycles": [
+                  7217890,
+                  4238876,
+                  4208314
+                ],
+                "request_cycles": 25824753,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 640,
+                "commands": 80,
+                "step_commands": [
+                  40,
+                  20,
+                  20
+                ],
+                "dma_beats": 8720,
+                "rtl_window": [
+                  670,
+                  25825979,
+                  0,
+                  8720
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 29051,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "d7e71f269a2936d540a95c03dd57a9686dc00011226154ed91fe0273d793129c",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 941453,
+                    "vocabulary_head": 2664206,
+                    "other": 3335254
+                  },
+                  {
+                    "input_norm_qkv": 137070,
+                    "vocabulary_head": 2682204,
+                    "other": 1127754
+                  },
+                  {
+                    "input_norm_qkv": 138055,
+                    "vocabulary_head": 2670388,
+                    "other": 1295417
+                  }
+                ],
+                "first_token_cycles": 16935066,
+                "step_cycles": [
+                  6940913,
+                  3947028,
+                  4103860
+                ],
+                "request_cycles": 24986218,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 576,
+                "commands": 72,
+                "step_commands": [
+                  36,
+                  18,
+                  18
+                ],
+                "dma_beats": 7848,
+                "rtl_window": [
+                  26870122,
+                  51856896,
+                  8720,
+                  16568
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52867087,
+                62825313,
+                16568,
+                16568
+              ]
+            },
+            "traces": {
+              "rtl.uart": "31e5c4b7d8daf4afa243e39a46b4df976e0446a3f6197012b925549d3df9a6e1",
+              "counters.txt": "86ba936bdfcbd8859e4a21927b00bb623bad5683484a6b593d0a6daef36934fb",
+              "mmio.txt": "f264ddf3593ca84dc4e2bc2b6e036cd1d0b5bc677a649a02090dd691f7fa6561",
+              "stores.txt": "28908dbd00f1d80d714563dd83f0a90e934f0ce2888b315f8d58f6a66e1f86fa"
+            }
+          }
+        }
+      }
+    ],
+    "ranking": [
+      {
+        "width": 32,
+        "mode": "qkv-npu",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 25730114.5,
+        "eligible": true
+      },
+      {
+        "width": 32,
+        "mode": "qkv-int8",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 25899831.5,
+        "eligible": true
+      },
+      {
+        "width": 32,
+        "mode": "qkv-fp32",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 29545087.5,
+        "eligible": true
+      },
+      {
+        "width": 24,
+        "mode": "qkv-npu",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 24952748.0,
+        "eligible": false
+      },
+      {
+        "width": 24,
+        "mode": "qkv-int8",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 25122465.0,
+        "eligible": false
+      },
+      {
+        "width": 24,
+        "mode": "qkv-fp32",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 28778868.0,
+        "eligible": false
+      }
+    ],
+    "stage_comparisons": [
+      {
+        "prompt": "R130=0>",
+        "width": 32,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.29644755011913837,
+        "decode_compute_saved_fraction": 0.09059985197472176,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R130=0>",
+        "width": 24,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.3011341683051,
+        "decode_compute_saved_fraction": 0.09635549822182288,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R130=1>",
+        "width": 32,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.2929945545645988,
+        "decode_compute_saved_fraction": 0.0915507408098879,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R130=1>",
+        "width": 24,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.30127728636494133,
+        "decode_compute_saved_fraction": 0.09605658039207055,
+        "greater_relative_saving_at_prefill": true
+      }
+    ]
+  },
+  "decision": {
+    "width": 32,
+    "mode": "qkv-npu"
+  },
+  "predicted_choice_confirmed": false,
+  "tighter_budget": {
+    "single_package_bytes": 42496,
+    "eligible": []
+  },
+  "test": {
+    "quality": {
+      "32": {
+        "documents": 64,
+        "conditional_targets": 192,
+        "bigram": {
+          "conditional_ppl": 1.601420117664182,
+          "full_ppl": 4.018581128923046,
+          "exact": 32
+        },
+        "fp32": {
+          "conditional_ppl": 1.0017449855804443,
+          "full_ppl": 387.3560791015625,
+          "exact": 64
+        },
+        "ffn_int8": {
+          "conditional_ppl": 1.0017451047897339,
+          "full_ppl": 388.47296142578125,
+          "exact": 64
+        },
+        "dual_int8": {
+          "conditional_ppl": 1.0017454624176025,
+          "full_ppl": 386.3573913574219,
+          "exact": 64
+        },
+        "dual_int8_array": {
+          "conditional_ppl": 1.0017454624176025,
+          "full_ppl": 386.3573913574219,
+          "exact": 64
+        },
+        "array_checked_logits": 147456
+      },
+      "24": {
+        "documents": 64,
+        "conditional_targets": 192,
+        "bigram": {
+          "conditional_ppl": 1.601420117664182,
+          "full_ppl": 4.018581128923046,
+          "exact": 32
+        },
+        "fp32": {
+          "conditional_ppl": 1.2640397548675537,
+          "full_ppl": 1331.736083984375,
+          "exact": 32
+        },
+        "ffn_int8": {
+          "conditional_ppl": 1.2640374898910522,
+          "full_ppl": 1332.7353515625,
+          "exact": 32
+        },
+        "dual_int8": {
+          "conditional_ppl": 1.2640388011932373,
+          "full_ppl": 1329.4417724609375,
+          "exact": 32
+        },
+        "dual_int8_array": {
+          "conditional_ppl": 1.2640388011932373,
+          "full_ppl": 1329.4417724609375,
+          "exact": 32
+        },
+        "array_checked_logits": 147456
+      }
+    },
+    "prompts": [
+      {
+        "prompt": "R027=0>",
+        "expected": "no\n",
+        "input_sha256": "f93098bf9fa83ef3ae5cfce9281822b8a54dceefb04850fd707f00eec3b17929",
+        "modes": {
+          "qkv-fp32": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "9d6e5647e68defa1064f0b386c03572ae29fcba95f205673f4ff4a3482fb63f1",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 4.76837158203125e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3934471,
+                    "vocabulary_head": 2668750,
+                    "other": 3489197
+                  },
+                  {
+                    "input_norm_qkv": 564182,
+                    "vocabulary_head": 2672562,
+                    "other": 1287701
+                  },
+                  {
+                    "input_norm_qkv": 564798,
+                    "vocabulary_head": 2685370,
+                    "other": 1436904
+                  }
+                ],
+                "first_token_cycles": 20232558,
+                "step_cycles": [
+                  10092418,
+                  4524445,
+                  4687072
+                ],
+                "request_cycles": 29444339,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  29445565,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "a3d11f553bb0ec4f61447dbc32d18256e484d2cc0d3333d419b04857d3c818d7",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 7.152557373046875e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 7.152557373046875e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3931311,
+                    "vocabulary_head": 2663507,
+                    "other": 3329957
+                  },
+                  {
+                    "input_norm_qkv": 561811,
+                    "vocabulary_head": 2684943,
+                    "other": 1059529
+                  },
+                  {
+                    "input_norm_qkv": 564298,
+                    "vocabulary_head": 2664590,
+                    "other": 1311832
+                  }
+                ],
+                "first_token_cycles": 19899659,
+                "step_cycles": [
+                  9924775,
+                  4306283,
+                  4540720
+                ],
+                "request_cycles": 28746926,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  30313862,
+                  59061344,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                59895689,
+                69853915,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "ac82280a25f30b5199bf7fe3520a4012abbcfbf34d03a6aae6a43f1274fee637",
+              "counters.txt": "dcea8c9f126797f9576e05de36e4daa58670f9905fc5acf188f5c12f8a362e24",
+              "mmio.txt": "89f51b071f7e138f5d090cc88d3bfa19135c979a97ccb28cf7d5da61031fe1f6",
+              "stores.txt": "a45634f1c4a842c624b374f74e7d694347f391ed58a2a00508b3248741cd4417"
+            }
+          },
+          "qkv-int8": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "72559c5613dcc820d0558fb683c64a33fae9850c101c1c28e13d569e3caccd48",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1093162,
+                    "vocabulary_head": 2668983,
+                    "other": 3489356
+                  },
+                  {
+                    "input_norm_qkv": 156494,
+                    "vocabulary_head": 2672805,
+                    "other": 1287549
+                  },
+                  {
+                    "input_norm_qkv": 157203,
+                    "vocabulary_head": 2685651,
+                    "other": 1455092
+                  }
+                ],
+                "first_token_cycles": 17391641,
+                "step_cycles": [
+                  7251501,
+                  4116848,
+                  4297946
+                ],
+                "request_cycles": 25806699,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  25807925,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "1e49c36a1d600d5c767f363fcf9294c1494b5661030061cd4b7b9206eeba8035",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1092248,
+                    "vocabulary_head": 2663631,
+                    "other": 3330481
+                  },
+                  {
+                    "input_norm_qkv": 156197,
+                    "vocabulary_head": 2684707,
+                    "other": 1059307
+                  },
+                  {
+                    "input_norm_qkv": 156388,
+                    "vocabulary_head": 2664873,
+                    "other": 1312545
+                  }
+                ],
+                "first_token_cycles": 17061244,
+                "step_cycles": [
+                  7086360,
+                  3900211,
+                  4133806
+                ],
+                "request_cycles": 25095525,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  26852068,
+                  51948149,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52958340,
+                62916566,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "20e273d49d90bbe4a6be66bcb536b996db060def75ef8eb7dd2babf1143e0e06",
+              "counters.txt": "eb362819f37798ed4ccf56f8875253ca38592f58c1d2686d34f111cc6739190f",
+              "mmio.txt": "a2011a19407ad4aa74f6c5fac8dc442c36d234c4a8ac6cb776ae778b82c183eb",
+              "stores.txt": "c23344f19f7169e65524eeebaaaad695373ceb04c6ff11cd3897efc31443d6bf"
+            }
+          },
+          "qkv-npu": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 32255,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "72559c5613dcc820d0558fb683c64a33fae9850c101c1c28e13d569e3caccd48",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 942430,
+                    "vocabulary_head": 2668983,
+                    "other": 3489356
+                  },
+                  {
+                    "input_norm_qkv": 137367,
+                    "vocabulary_head": 2672805,
+                    "other": 1287549
+                  },
+                  {
+                    "input_norm_qkv": 138076,
+                    "vocabulary_head": 2685651,
+                    "other": 1455092
+                  }
+                ],
+                "first_token_cycles": 17260178,
+                "step_cycles": [
+                  7100769,
+                  4097721,
+                  4278819
+                ],
+                "request_cycles": 25636982,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 640,
+                "commands": 80,
+                "step_commands": [
+                  40,
+                  20,
+                  20
+                ],
+                "dma_beats": 8720,
+                "rtl_window": [
+                  670,
+                  25638208,
+                  0,
+                  8720
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 29051,
+                "tokens": [
+                  110,
+                  111,
+                  10
+                ],
+                "output_sha256": "1e49c36a1d600d5c767f363fcf9294c1494b5661030061cd4b7b9206eeba8035",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 941516,
+                    "vocabulary_head": 2663631,
+                    "other": 3330481
+                  },
+                  {
+                    "input_norm_qkv": 137070,
+                    "vocabulary_head": 2684707,
+                    "other": 1059307
+                  },
+                  {
+                    "input_norm_qkv": 137261,
+                    "vocabulary_head": 2664873,
+                    "other": 1312545
+                  }
+                ],
+                "first_token_cycles": 16929781,
+                "step_cycles": [
+                  6935628,
+                  3881084,
+                  4114679
+                ],
+                "request_cycles": 24925808,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 576,
+                "commands": 72,
+                "step_commands": [
+                  36,
+                  18,
+                  18
+                ],
+                "dma_beats": 7848,
+                "rtl_window": [
+                  26682351,
+                  51608715,
+                  8720,
+                  16568
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52618906,
+                62577132,
+                16568,
+                16568
+              ]
+            },
+            "traces": {
+              "rtl.uart": "8aec94b6442200a0dbf2f2149511b476391b766511adaf4a823d1efabd9dca69",
+              "counters.txt": "7bb93b14d89a557ead99438e34e1030b1a55fd841fe567e6b1001742c102973a",
+              "mmio.txt": "0ccaf68755c2c85cbbf130f04f9620baf6a62694659f0e06c23eb68fa98a27a5",
+              "stores.txt": "2f65e82da6e0c7eb0890673218132e00aa9f37c28e889b13498f08a71982b0ba"
+            }
+          }
+        }
+      },
+      {
+        "prompt": "R027=1>",
+        "expected": "ok\n",
+        "input_sha256": "9932a80d655dc0d0083e4aeb78a2133bb952bb90c2235038fe5134072e9627a7",
+        "modes": {
+          "qkv-fp32": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "26b87d8d88534b5db8f29c891d26cfd1878e4015f1d1ebdc23fd13874c44a620",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 4.76837158203125e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 4.76837158203125e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3932719,
+                    "vocabulary_head": 2669347,
+                    "other": 3608011
+                  },
+                  {
+                    "input_norm_qkv": 562212,
+                    "vocabulary_head": 2723637,
+                    "other": 1377381
+                  },
+                  {
+                    "input_norm_qkv": 564534,
+                    "vocabulary_head": 2685913,
+                    "other": 1402523
+                  }
+                ],
+                "first_token_cycles": 20350217,
+                "step_cycles": [
+                  10210077,
+                  4663230,
+                  4652970
+                ],
+                "request_cycles": 29666681,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  29667907,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "4de3088287ae9a1c49ec5c3093f0618f03eeecb7697bb1ef97b8c4519eec2319",
+                "max_abs_error": {
+                  "L": 9.5367431640625e-07,
+                  "F": 7.152557373046875e-07,
+                  "K": 4.76837158203125e-07,
+                  "Y": 7.152557373046875e-07
+                },
+                "checked_qkv_int32": 0,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 3932576,
+                    "vocabulary_head": 2663946,
+                    "other": 3329642
+                  },
+                  {
+                    "input_norm_qkv": 561811,
+                    "vocabulary_head": 2682843,
+                    "other": 1126771
+                  },
+                  {
+                    "input_norm_qkv": 567714,
+                    "vocabulary_head": 2669371,
+                    "other": 1274519
+                  }
+                ],
+                "first_token_cycles": 19901048,
+                "step_cycles": [
+                  9926164,
+                  4371425,
+                  4511604
+                ],
+                "request_cycles": 28784341,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  30536204,
+                  59321101,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                60155446,
+                70113672,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "dc3acd69039252d5d2bc3591458d59a891ed6ad768075c9b6068c27d4a7fc82b",
+              "counters.txt": "e934b830b81fcffb593743746594b06419dc3f65df086754559e64883d663b99",
+              "mmio.txt": "fa67b8f136bd153716e12393c41766d03e8842485435bd56b26ad3a76e67c5b6",
+              "stores.txt": "3f3c696b5da19cce355d6e2424060153a644fdb1950c1962571e4e942cf02967"
+            }
+          },
+          "qkv-int8": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 12986,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "c37ee5500aa4509ade94558887d4c8ed66f26f908a401e6499c0977fb3ce4971",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1092372,
+                    "vocabulary_head": 2669442,
+                    "other": 3607164
+                  },
+                  {
+                    "input_norm_qkv": 155715,
+                    "vocabulary_head": 2723533,
+                    "other": 1379219
+                  },
+                  {
+                    "input_norm_qkv": 157029,
+                    "vocabulary_head": 2685919,
+                    "other": 1402012
+                  }
+                ],
+                "first_token_cycles": 17509118,
+                "step_cycles": [
+                  7368978,
+                  4258467,
+                  4244960
+                ],
+                "request_cycles": 26012809,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 256,
+                "commands": 32,
+                "step_commands": [
+                  16,
+                  8,
+                  8
+                ],
+                "dma_beats": 3488,
+                "rtl_window": [
+                  670,
+                  26014035,
+                  0,
+                  3488
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 9782,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "2ee07afd617190602dc1bc1931b85790af8d0ea9b297e2b040693f3b420d1488",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 1092378,
+                    "vocabulary_head": 2663658,
+                    "other": 3329259
+                  },
+                  {
+                    "input_norm_qkv": 156197,
+                    "vocabulary_head": 2682927,
+                    "other": 1126822
+                  },
+                  {
+                    "input_norm_qkv": 157182,
+                    "vocabulary_head": 2669530,
+                    "other": 1274773
+                  }
+                ],
+                "first_token_cycles": 17060179,
+                "step_cycles": [
+                  7085295,
+                  3965946,
+                  4101485
+                ],
+                "request_cycles": 25127874,
+                "qkv_cache_written_bytes": 0,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 192,
+                "commands": 24,
+                "step_commands": [
+                  12,
+                  6,
+                  6
+                ],
+                "dma_beats": 2616,
+                "rtl_window": [
+                  27058178,
+                  52186608,
+                  3488,
+                  6104
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                53196799,
+                63155025,
+                6104,
+                6104
+              ]
+            },
+            "traces": {
+              "rtl.uart": "616e544c2f549fe6612c4fc21d7d25d4f1a94ef26bc8b5d43e200129cbac1557",
+              "counters.txt": "2e90d3e190d43c6b325b28d7c846ad8488a760f45c7e11a591c00ab0570a0486",
+              "mmio.txt": "4c51597f4fc7d86b06c00d85a082ee7aaf9d6e924db87bc5a6d8c443a8df7479",
+              "stores.txt": "f9ae93d1306317dd1206f5e5de86db742440ce8a5619d86f715d07691f5c41e8"
+            }
+          },
+          "qkv-npu": {
+            "valid": [
+              {
+                "input": "A",
+                "width": 32,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 1,
+                "validation_cycles": 10127040,
+                "selection_cycles": 32255,
+                "tokens": [
+                  111,
+                  107,
+                  10
+                ],
+                "output_sha256": "c37ee5500aa4509ade94558887d4c8ed66f26f908a401e6499c0977fb3ce4971",
+                "max_abs_error": {
+                  "L": 1.9073486328125e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 288,
+                "checked_logits": 768,
+                "checked_scales": 82,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 941640,
+                    "vocabulary_head": 2669442,
+                    "other": 3607164
+                  },
+                  {
+                    "input_norm_qkv": 136588,
+                    "vocabulary_head": 2723533,
+                    "other": 1379219
+                  },
+                  {
+                    "input_norm_qkv": 137902,
+                    "vocabulary_head": 2685919,
+                    "other": 1402012
+                  }
+                ],
+                "first_token_cycles": 17377655,
+                "step_cycles": [
+                  7218246,
+                  4239340,
+                  4225833
+                ],
+                "request_cycles": 25843092,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 512,
+                "mmio_writes": 640,
+                "commands": 80,
+                "step_commands": [
+                  40,
+                  20,
+                  20
+                ],
+                "dma_beats": 8720,
+                "rtl_window": [
+                  670,
+                  25844318,
+                  0,
+                  8720
+                ]
+              },
+              {
+                "input": "B",
+                "width": 24,
+                "status": 0,
+                "cache_hit": false,
+                "cache_generation": 2,
+                "validation_cycles": 9964988,
+                "selection_cycles": 29051,
+                "tokens": [
+                  110,
+                  107,
+                  10
+                ],
+                "output_sha256": "2ee07afd617190602dc1bc1931b85790af8d0ea9b297e2b040693f3b420d1488",
+                "max_abs_error": {
+                  "L": 1.430511474609375e-06,
+                  "F": 0.0,
+                  "K": 0.0,
+                  "Y": 0.0
+                },
+                "checked_qkv_int32": 432,
+                "checked_qkv_floats": 432,
+                "checked_kv_floats": 288,
+                "checked_ffn_int32": 216,
+                "checked_logits": 768,
+                "checked_scales": 74,
+                "stage_cycles": [
+                  {
+                    "input_norm_qkv": 941646,
+                    "vocabulary_head": 2663658,
+                    "other": 3329259
+                  },
+                  {
+                    "input_norm_qkv": 137070,
+                    "vocabulary_head": 2682927,
+                    "other": 1126822
+                  },
+                  {
+                    "input_norm_qkv": 138055,
+                    "vocabulary_head": 2669530,
+                    "other": 1274773
+                  }
+                ],
+                "first_token_cycles": 16928716,
+                "step_cycles": [
+                  6934563,
+                  3946819,
+                  4082358
+                ],
+                "request_cycles": 24958157,
+                "qkv_cache_written_bytes": 768,
+                "ffn_cache_written_bytes": 384,
+                "mmio_writes": 576,
+                "commands": 72,
+                "step_commands": [
+                  36,
+                  18,
+                  18
+                ],
+                "dma_beats": 7848,
+                "rtl_window": [
+                  26888461,
+                  51847174,
+                  8720,
+                  16568
+                ]
+              }
+            ],
+            "rejected": {
+              "input": "wrong-vocab",
+              "width": null,
+              "status": 2,
+              "cache_hit": null,
+              "cache_generation": 2,
+              "validation_cycles": 9957810,
+              "selection_cycles": 10,
+              "qkv_cache_written_bytes": 0,
+              "ffn_cache_written_bytes": 0,
+              "mmio_writes": 0,
+              "commands": 0,
+              "step_commands": [],
+              "dma_beats": 0,
+              "rtl_window": [
+                52857365,
+                62815591,
+                16568,
+                16568
+              ]
+            },
+            "traces": {
+              "rtl.uart": "19ec4a84d88d861ce42207abd550d3e9dd0c7cf42a97c55aac9a011f76dc1735",
+              "counters.txt": "29cf0a0b666505c3b508ff3fabf25521ec3a30a20bf2f0a3fbd257aced79a100",
+              "mmio.txt": "92dbc10da4ea6dfe44c9e368e139c727c7d12ccd5c235e9a53d155ac8c0567e2",
+              "stores.txt": "7c0d24a41e6302392bbac8e76e59810734c4432a20245b0d7944794c299371c1"
+            }
+          }
+        }
+      }
+    ],
+    "ranking": [
+      {
+        "width": 32,
+        "mode": "qkv-npu",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 25740037.0,
+        "eligible": true
+      },
+      {
+        "width": 32,
+        "mode": "qkv-int8",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 25909754.0,
+        "eligible": true
+      },
+      {
+        "width": 32,
+        "mode": "qkv-fp32",
+        "quality_pass": true,
+        "memory_pass": true,
+        "mean_request_cycles": 29555510.0,
+        "eligible": true
+      },
+      {
+        "width": 24,
+        "mode": "qkv-npu",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 24941982.5,
+        "eligible": false
+      },
+      {
+        "width": 24,
+        "mode": "qkv-int8",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 25111699.5,
+        "eligible": false
+      },
+      {
+        "width": 24,
+        "mode": "qkv-fp32",
+        "quality_pass": false,
+        "memory_pass": true,
+        "mean_request_cycles": 28765633.5,
+        "eligible": false
+      }
+    ],
+    "stage_comparisons": [
+      {
+        "prompt": "R027=0>",
+        "width": 32,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.2964253957773053,
+        "decode_compute_saved_fraction": 0.09064489594927738,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R027=0>",
+        "width": 24,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.3011803290250913,
+        "decode_compute_saved_fraction": 0.09621789435360195,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R027=1>",
+        "width": 32,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.2930272709990336,
+        "decode_compute_saved_fraction": 0.091349155234967,
+        "greater_relative_saving_at_prefill": true
+      },
+      {
+        "prompt": "R027=1>",
+        "width": 24,
+        "prefill_qkv_exceeds_head": true,
+        "each_decode_head_exceeds_qkv": true,
+        "prefill_compute_saved_fraction": 0.3013854093081678,
+        "decode_compute_saved_fraction": 0.09612171704043748,
+        "greater_relative_saving_at_prefill": true
+      }
+    ]
+  },
+  "test_confirmation": {
+    "width": 32,
+    "mode": "qkv-npu",
+    "quality_pass": true,
+    "memory_pass": true,
+    "mean_request_cycles": 25740037.0,
+    "eligible": true,
+    "fastest_on_test": true
+  }
+}

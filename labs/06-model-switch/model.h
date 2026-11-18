@@ -3,6 +3,7 @@
 #define AIM_SWITCH_MODEL_H
 #include <stdint.h>
 #include <string.h>
+#include "../../runtime/copy_shape.h"
 
 struct package_header {
     uint32_t magic, version, width, payload_bytes, crc32;
@@ -10,10 +11,10 @@ struct package_header {
 
 /* Ordered FP32 tensors whose shapes are common to both checkpoints. */
 struct shared_tensors {
-    float tokens[11*16], positions[8*16], attn_gain[16], attn_bias[16];
+    float tokens[COPY_VOCAB*16], positions[COPY_CONTEXT*16], attn_gain[16], attn_bias[16];
     float qkv[48*16], qkv_b[48], out[16*16], out_b[16];
     float ffn_gain[16], ffn_bias[16], down_b[16], final_gain[16], final_bias[16];
-    float head[11*16], head_b[11];
+    float head[COPY_VOCAB*16], head_b[COPY_VOCAB];
 };
 
 struct model_view {

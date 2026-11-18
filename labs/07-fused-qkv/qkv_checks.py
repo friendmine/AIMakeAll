@@ -13,7 +13,7 @@ def scalar(bits):
     return struct.unpack("<f", struct.pack("<I", bits))[0]
 
 
-def check_numbers(trace, mode, model, width):
+def check_numbers(trace, mode, model, width, *, profile=False):
     ref = model["fp32" if mode == "qkv-fp32" else "int8"]
     for tag, key in (("X", "qkv_scales"), ("W", "ffn_scales")):
         for i, word in enumerate(model[key]):
@@ -38,11 +38,19 @@ def check_numbers(trace, mode, model, width):
         digest.update(struct.pack(f"<{len(words)}I", *words))
 
     intervals, tokens = [], []
-    for s in range(4):
+    measured = []
+    for s in range(len(ref["tokens"])):
         intervals.append((trace.word("U", "step start"), trace.word("E", "token cycle")))
         tokens.append(trace.word("J", "selected token", ref["tokens"][s]))
+        if profile:
+            qkv = trace.word("Q", "normalization and QKV cycles")
+            head = trace.word("D", "vocabulary head cycles")
+            elapsed = intervals[-1][1] - intervals[-1][0]
+            require(0 < qkv and 0 < head and qkv + head < elapsed, "invalid stage timing")
+            measured.append(dict(input_norm_qkv=qkv, vocabulary_head=head, other=elapsed-qkv-head))
         read_floats("L", ref["logits"][s], s)
-    for r in range(8):
+    positions = len(ref["F"])
+    for r in range(positions):
         if mode != "qkv-fp32":
             read_ints("I", ref["I"][r], r)
         fused = read_floats("F", ref["F"][r], r)
@@ -51,17 +59,18 @@ def check_numbers(trace, mode, model, width):
         require(k == fused[16:32] and v == fused[32:48], "KV differs from the actual projected K/V")
         read_ints("P", ref["P"][r], r)
     return intervals, dict(tokens=tokens, output_sha256=digest.hexdigest(), max_abs_error=errors,
-                           checked_qkv_int32=384 if mode != "qkv-fp32" else 0,
-                           checked_qkv_floats=384, checked_kv_floats=256, checked_ffn_int32=8*width,
-                           checked_logits=44, checked_scales=49+1+width)
+                           checked_qkv_int32=positions*48 if mode != "qkv-fp32" else 0,
+                           checked_qkv_floats=positions*48, checked_kv_floats=positions*32, checked_ffn_int32=positions*width,
+                           checked_logits=sum(map(len, ref["logits"])), checked_scales=49+1+width,
+                           **({"stage_cycles": measured} if profile else {}))
 
 
-def check_device(mode, width, symbols, intervals, tiles, mmio):
+def check_device(mode, width, symbols, intervals, tiles, mmio, prompt_length=5):
     """The QKV and FFN descriptor order, buffers and tile geometry come from the model shapes."""
     commands = []
     dma_beats = 0
     for s, (begin, end) in enumerate(intervals):
-        rows = 5 if s == 0 else 1
+        rows = prompt_length if s == 0 else 1
         layers = [("activation", width, 768)]
         if mode == "qkv-npu":
             layers.insert(0, ("qkv_input", 48, 0))
@@ -93,7 +102,7 @@ def check_device(mode, width, symbols, intervals, tiles, mmio):
     return commands, dma_beats
 
 
-def verify(mode, cases, golden, symbols, raw, counters, bus, stores):
+def verify(mode, cases, golden, symbols, raw, counters, bus, stores, *, prompt_length=5, profile=False):
     trace = Trace(raw, mode)
     trace.word("M", "backend", MODES[mode])
     events = deque(row.split() for row in counters.read_text().splitlines())
@@ -130,7 +139,7 @@ def verify(mode, cases, golden, symbols, raw, counters, bus, stores):
             model = golden[width]
             trace.word("H", "cache hit", hit)
             trace.word("N", "active width", width)
-            intervals, numbers = check_numbers(trace, mode, model, width)
+            intervals, numbers = check_numbers(trace, mode, model, width, profile=profile)
             previous = ready
             for left, right in intervals:
                 require(previous < left < right < end, "generation timing outside request")
@@ -156,7 +165,7 @@ def verify(mode, cases, golden, symbols, raw, counters, bus, stores):
         req["ffn_cache_written_bytes"] = check_cache(ffn, want_ffn, ready)
         mmio = deque(within(registers, begin, end))
         req["mmio_writes"] = len(mmio)
-        commands, beats = check_device(mode, width, symbols, intervals, tiles, mmio)
+        commands, beats = check_device(mode, width, symbols, intervals, tiles, mmio, prompt_length)
         require(after-before == beats, "unaccounted DMA handshakes")
         req.update(commands=sum(commands), step_commands=commands, dma_beats=beats,
                    rtl_window=[begin, end, before, after])

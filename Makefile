@@ -120,3 +120,17 @@ QKV_BUILD ?= build/fused-qkv
 .PHONY: fused-qkv
 fused-qkv: $(GEN_SOC) $(PROJ_BANKED) $(GEN_CHECKPOINT) $(SWITCH_CHECKPOINT_B)
 	$(PYTHON) labs/07-fused-qkv/run_qkv.py --model-a $(GEN_CHECKPOINT) --model-b $(SWITCH_CHECKPOINT_B) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --tile $(PROJ_BANKED) --output $(QKV_BUILD)/sample-$(GEN_SAMPLE)
+
+BYTE_LAB := labs/08-byte-transfer
+BYTE_BUILD ?= build/byte-transfer
+BYTE_MODELS ?= $(BYTE_BUILD)/models
+BYTE_PAIR ?= 0
+$(BYTE_MODELS)/byte-%.pt: $(BYTE_LAB)/train_byte.py $(BYTE_LAB)/corpus.py $(BYTE_LAB)/contract.json models/tiny_copy.py
+	$(PYTHON) $(BYTE_LAB)/train_byte.py --width $* --output $@
+
+$(BYTE_MODELS)/baseline/byte-%.pt: $(BYTE_LAB)/train_byte.py $(BYTE_LAB)/corpus.py $(BYTE_LAB)/initial-contract.json models/tiny_copy.py
+	$(PYTHON) $(BYTE_LAB)/train_byte.py --width $* --contract $(BYTE_LAB)/initial-contract.json --output $@
+
+.PHONY: byte-transfer
+byte-transfer: $(GEN_SOC) $(PROJ_BANKED) $(BYTE_MODELS)/byte-32.pt $(BYTE_MODELS)/byte-24.pt $(BYTE_MODELS)/baseline/byte-32.pt $(BYTE_MODELS)/baseline/byte-24.pt
+	$(PYTHON) $(BYTE_LAB)/run_byte.py --models $(BYTE_MODELS) --rtl $(GEN_SOC) --tile $(PROJ_BANKED) --pair $(BYTE_PAIR) --output $(BYTE_BUILD)/pair-$(BYTE_PAIR)

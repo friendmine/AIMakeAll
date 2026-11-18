@@ -2,9 +2,14 @@
 #include "../../runtime/rv32_console.h"
 #include "../../runtime/rv32_cycle.h"
 
-enum { STEPS = 4, CHANNELS = 48, QKV_BYTES = 768, QKV_SCALES = 49 };
+#include "../../runtime/copy_shape.h"
+
+enum { STEPS = COPY_STEPS, CHANNELS = 48, QKV_BYTES = 768, QKV_SCALES = 49 };
 enum backend { FP32 = 3, CPU_INT8, NPU_INT8 };
-static uint32_t logits[STEPS][11], step_index;
+static uint32_t logits[STEPS][COPY_VOCAB], step_index;
+#ifdef MEASURE_BYTE_STAGES
+static uint32_t qkv_cycles[STEPS], head_cycles[STEPS];
+#endif
 static inline void record_logit(unsigned index, uint32_t value) { logits[step_index][index] = value; }
 #define COPY_BATCHED_QKV
 #define MODEL_PHASE(name) ((void)0)
@@ -28,9 +33,16 @@ static struct {
 
 static enum load_status inspect_fused(const uint8_t *data, unsigned bytes, struct fused_model *next)
 {
-    const unsigned tail_size = 4*QKV_SCALES + QKV_BYTES;
-    enum load_status status = inspect_format(data, bytes, &next->base, 2, tail_size);
+    unsigned tail_size = 4*QKV_SCALES + QKV_BYTES;
+#if FUSED_PACKAGE_VERSION == 3
+    const uint32_t expected[] = {COPY_VOCAB, COPY_CONTEXT, COPY_PROMPT, COPY_STEPS};
+    tail_size += sizeof expected;
+#endif
+    enum load_status status = inspect_format(data, bytes, &next->base, FUSED_PACKAGE_VERSION, tail_size);
     if (status != LOAD_OK) return status;
+#if FUSED_PACKAGE_VERSION == 3
+    if (memcmp(data + bytes - sizeof expected, expected, sizeof expected)) return BAD_HEADER;
+#endif
     const float *scales = (const float *)(data + bytes - tail_size);
     for (unsigned i = 0; i < QKV_SCALES; ++i) {
         uint32_t bits = float_bits(scales[i]);
@@ -64,7 +76,7 @@ static unsigned select_model(const struct fused_model *next, enum backend mode)
     return hit;
 }
 
-static int8_t qkv_input[5][D] __attribute__((aligned(4)));
+static int8_t qkv_input[COPY_PROMPT][D] __attribute__((aligned(4)));
 static volatile uint32_t tile_c[16];
 static int32_t qkv_sums[CTX][CHANNELS], ffn_sums[CTX][N];
 static float fused[CTX][CHANNELS];
@@ -113,10 +125,13 @@ static void infer(enum backend mode, const uint8_t *prompt)
 {
     unsigned pos = 0, token = 0;
     for (unsigned s = 0; s < STEPS; ++s) {
-        unsigned rows = s == 0 ? 5 : 1;
+        unsigned rows = s == 0 ? COPY_PROMPT : 1;
         step_index = s;
         step_start[s] = cycle_after(token);
         project_qkv(mode, prompt, pos, rows, token);
+#ifdef MEASURE_BYTE_STAGES
+        qkv_cycles[s] = cycle_after(mode) - step_start[s];
+#endif
         for (unsigned r = 0; r < rows; ++r) attend(fused[pos+r], pos+r, r);
         tiled(&activation[0][0], packed.ffn, rows, active.width, &ffn_sums[pos][0], N);
         for (unsigned r = 0; r < rows; ++r)
@@ -141,6 +156,10 @@ static void dump(enum backend mode)
         word('U', step_start[s]);
         word('E', step_end[s]);
         word('J', tokens[s]);
+#ifdef MEASURE_BYTE_STAGES
+        word('Q', qkv_cycles[s]);
+        word('D', head_cycles[s]);
+#endif
         for (unsigned j = 0; j < V; ++j) word('L', logits[s][j]);
     }
     for (unsigned r = 0; r < CTX; ++r) {
@@ -161,15 +180,18 @@ void guest_main(void)
     const uint32_t *region = (const uint32_t *)0x80100000u;
     uint32_t length = *region;
     const uint8_t *input = (const uint8_t *)(region+1);
-    if (length < 8) stop(20);
-    unsigned count = input[5], table_end = 8+8*count;
+    const unsigned header = (COPY_PROMPT+1+3) & ~3u;
+    if (length < header) stop(20);
+    unsigned count = input[COPY_PROMPT], table_end = header+8*count;
     if (!count || table_end > length) stop(20);
-    for (unsigned i = 0; i < 5; ++i) if (input[i] >= V) stop(20);
+#if COPY_VOCAB < 256
+    for (unsigned i = 0; i < COPY_PROMPT; ++i) if (input[i] >= V) stop(20);
+#endif
     for (unsigned i = 0; i < count; ++i) {
         word('R', i);
         uint32_t start = cycle_after(i);
         uint32_t span[2];
-        memcpy(span, input+8+8*i, sizeof span);
+        memcpy(span, input+header+8*i, sizeof span);
         struct fused_model next;
         enum load_status status = BAD_LENGTH;
         if (span[0] >= table_end && span[0] <= length && span[1] <= length-span[0])

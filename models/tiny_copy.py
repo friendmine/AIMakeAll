@@ -12,10 +12,10 @@ CONTEXT = 8
 
 
 class CopyTransformer(nn.Module):
-    def __init__(self, width):
+    def __init__(self, width, *, vocab=VOCAB, context=CONTEXT):
         super().__init__()
-        self.tokens = nn.Embedding(VOCAB, DIM)
-        self.positions = nn.Embedding(CONTEXT, DIM)
+        self.tokens = nn.Embedding(vocab, DIM)
+        self.positions = nn.Embedding(context, DIM)
         self.attn_norm = nn.LayerNorm(DIM)
         self.qkv = nn.Linear(DIM, 3 * DIM)
         self.attn_out = nn.Linear(DIM, DIM)
@@ -23,7 +23,7 @@ class CopyTransformer(nn.Module):
         self.up = nn.Linear(DIM, width)
         self.down = nn.Linear(width, DIM)
         self.final_norm = nn.LayerNorm(DIM)
-        self.head = nn.Linear(DIM, VOCAB)
+        self.head = nn.Linear(DIM, vocab)
 
     def features(self, ids, cache=None):
         """Return the residual, the real input to the FFN up projection, and KV."""

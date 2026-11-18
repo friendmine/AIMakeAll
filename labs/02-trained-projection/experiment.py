@@ -37,7 +37,7 @@ def bigram_ppl(train, evaluation):
 
 
 def loss(logits, labels):
-    return F.cross_entropy(logits.reshape(-1, VOCAB), labels.reshape(-1))
+    return F.cross_entropy(logits.reshape(-1, logits.shape[-1]), labels.reshape(-1))
 
 
 def train_model(width, train, validation, steps, resume, output):
@@ -118,13 +118,13 @@ class QuantizedProjection:
         return y.reshape(*x.shape[:-1], -1)
 
 
-def greedy(model, prefix, projection=None):
+def greedy(model, prefix, projection=None, steps=4):
     logits, cache = model(prefix, projection=projection)
     suffix = []
-    for index in range(4):
+    for index in range(steps):
         token = logits[:, -1].argmax(-1, keepdim=True)
         suffix.append(token)
-        if index < 3:
+        if index + 1 < steps:
             logits, cache = model(token, cache, projection)
     return torch.cat(suffix, dim=1)
 

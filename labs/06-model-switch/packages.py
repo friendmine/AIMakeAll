@@ -47,7 +47,13 @@ def make_inputs(prompt, a, b, *, version=1, extra_invalid=()):
     for name, blob, status in extra_invalid:
         blobs[name] = blob
         cases.insert(-1, (name, None, status, None))
-    inputs = bytearray(struct.pack("<5BB2x", *prompt, len(cases)))
+    return encode_requests(prompt, cases, blobs), cases
+
+
+def encode_requests(prompt, cases, blobs):
+    inputs = bytearray([*prompt, len(cases)])
+    inputs.extend(bytes(-len(inputs) % 4))
+    header = len(inputs)
     inputs.extend(bytes(8 * len(cases)))
     spans = {}
     for name, blob in blobs.items():
@@ -55,5 +61,5 @@ def make_inputs(prompt, a, b, *, version=1, extra_invalid=()):
         spans[name] = len(inputs), len(blob)
         inputs.extend(blob)
     for i, (name, *_) in enumerate(cases):
-        struct.pack_into("<II", inputs, 8+8*i, *spans[name])
-    return inputs, cases
+        struct.pack_into("<II", inputs, header+8*i, *spans[name])
+    return inputs
