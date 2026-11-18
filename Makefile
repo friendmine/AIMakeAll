@@ -104,3 +104,14 @@ PREPACK_BUILD ?= build/prepack
 .PHONY: prepack
 prepack: $(GEN_SOC) $(GEN_CHECKPOINT)
 	$(PYTHON) labs/05-weight-prepack/compare.py --checkpoint $(GEN_CHECKPOINT) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(PREPACK_BUILD)/sample-$(GEN_SAMPLE)
+
+SWITCH_BUILD ?= build/model-switch
+SWITCH_CHECKPOINT_B ?= $(PROJ_BUILD)/copy-24.pt
+
+# The Lab 02 training invocation creates both widths. Recover a missing B on its own too.
+$(PROJ_BUILD)/copy-24.pt: | $(PROJ_BUILD)/copy-32.pt
+	@test -f $@ || $(PYTHON) $(PROJ_LAB)/experiment.py --train-only --train-width 24 --output $(PROJ_BUILD)
+
+.PHONY: model-switch
+model-switch: $(GEN_SOC) $(GEN_CHECKPOINT) $(SWITCH_CHECKPOINT_B)
+	$(PYTHON) labs/06-model-switch/run_switch.py --model-a $(GEN_CHECKPOINT) --model-b $(SWITCH_CHECKPOINT_B) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(SWITCH_BUILD)/sample-$(GEN_SAMPLE)

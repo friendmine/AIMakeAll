@@ -27,8 +27,8 @@ struct Ram {
 
 int main(int argc, char **argv) {
     try {
-        if (argc != 4 && argc != 5 && argc != 7)
-            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu|prepacked [weight_base stores.txt]]");
+        if (argc != 4 && argc != 5 && argc != 7 && argc != 8)
+            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu|prepacked [weight_base stores.txt [models.bin]]]");
         const bool benchmark = argc >= 5;
         unsigned backend = 0;
         if (benchmark) {
@@ -48,7 +48,20 @@ int main(int argc, char **argv) {
         std::ofstream counts(argv[2]);
         std::ofstream mmio(argv[3]);
         if (!counts || !mmio) throw std::runtime_error("cannot open trace files");
-        const bool watch_weights = argc == 7;
+        // An optional read-only RAM region holds request data independently of the ELF.
+        const bool package_run = argc == 8;
+        constexpr uint32_t input_offset = 1u << 20;
+        if (package_run) {
+            std::ifstream inputs(argv[7], std::ios::binary | std::ios::ate);
+            auto length = inputs.tellg();
+            if (!inputs || length < 1 || length > size - input_offset - 4 || bytes > input_offset)
+                throw std::runtime_error("bad model input region");
+            ram.write(base + input_offset, uint32_t(length), 15);
+            inputs.seekg(0);
+            if (!inputs.read(reinterpret_cast<char *>(ram.data.data() + input_offset + 4), length))
+                throw std::runtime_error("incomplete model inputs");
+        }
+        const bool watch_weights = argc >= 7;
         uint32_t weight_base = 0;
         std::ofstream stores;
         if (watch_weights) {
@@ -60,7 +73,7 @@ int main(int argc, char **argv) {
             if (!stores) throw std::runtime_error("cannot open weight store trace");
         }
         Vgeneration_soc dut;
-        uint64_t began = 0, reads = 0, writes = 0, stalls = 0;
+        uint64_t dma_beats = 0, began = 0, reads = 0, writes = 0, stalls = 0;
         for (uint64_t cycle = 0; cycle < 150000000; ++cycle) {
             dut.rst_n = cycle >= 4;
             dut.clk = 0;
@@ -80,9 +93,16 @@ int main(int argc, char **argv) {
             if (dut.trap || dut.bus_error) throw std::runtime_error("CPU trap or unsupported MMIO");
             if (benchmark && backend == 0 && dut.dma_valid)
                 throw std::runtime_error("unexpected DMA on the CPU-only path");
-            if (dut.mmio_write) mmio << std::hex << dut.mem_addr << ' ' << dut.mem_wdata << '\n';
+            if (dut.mmio_write) {
+                mmio << std::hex << dut.mem_addr << ' ' << dut.mem_wdata;
+                if (package_run) mmio << ' ' << std::dec << cycle;
+                mmio << '\n';
+            }
             if (dut.tile_start) { began = cycle; reads = writes = stalls = 0; }
             if (dut.dma_valid) {
+                if (dut.dma_ready) ++dma_beats;
+                if (package_run && dut.dma_write && dut.dma_addr >= base + input_offset)
+                    throw std::runtime_error("DMA write to read-only model inputs");
                 if (!dut.dma_ready) ++stalls;
                 else if (dut.dma_write) { ram.write(dut.dma_addr, dut.dma_wdata, 15); ++writes; }
                 else ++reads;
@@ -94,6 +114,8 @@ int main(int argc, char **argv) {
                 auto addr = dut.mem_addr, value = dut.mem_wdata;
                 if (ram.contains(addr)) {
                     if (dut.mem_wstrb) {
+                        if (package_run && addr >= base + input_offset)
+                            throw std::runtime_error("CPU write to read-only model inputs");
                         ram.write(addr, value, dut.mem_wstrb);
                         uint32_t offset = (addr & ~3u) - weight_base;
                         if (watch_weights && offset < 512)
@@ -102,10 +124,14 @@ int main(int argc, char **argv) {
                     }
                 } else if (addr == 0x10000000 && dut.mem_wstrb == 1) {
                     char ch = char(value & 255);
+                    if (package_run && (ch == 'R' || ch == 'Z'))
+                        counts << ch << ' ' << cycle << ' ' << dma_beats << '\n';
                     if (ch == 'S' || ch == 'T') counts << ch << ' ' << cycle << '\n';
                     std::cout.put(ch);
                 } else if (addr == 0x00100000 && dut.mem_wstrb == 15) {
-                    counts << "finish " << cycle << '\n';
+                    counts << "finish " << cycle;
+                    if (package_run) counts << ' ' << dma_beats;
+                    counts << '\n';
                     dut.final();
                     if (value != 0x5555) throw std::runtime_error("guest failure " + std::to_string(value >> 16));
                     return 0;

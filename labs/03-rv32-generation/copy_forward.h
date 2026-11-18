@@ -5,6 +5,9 @@
 #include "model.h"
 
 enum { D = 16, N = 32, V = 11, CTX = 8 };
+#ifndef COPY_FFN_WIDTH
+#define COPY_FFN_WIDTH N
+#endif
 static float keys[CTX][D], values[CTX][D], residual[5][D];
 static int8_t activation[5][D];
 static float up[5][N];
@@ -82,12 +85,12 @@ static void features(unsigned token, unsigned pos, unsigned row)
 static unsigned next_token(unsigned row)
 {
     float hidden[D], h[D], logits[V];
-    for (unsigned j = 0; j < N; ++j) {
+    for (unsigned j = 0; j < COPY_FFN_WIDTH; ++j) {
         float x = up[row][j];
         up[row][j] = 0.5f*x*(1 + erff(x*0.7071067811865475f));
     }
     MODEL_PHASE(DOWN);
-    linear(up[row], down_weight, down_bias, hidden, N, D);
+    linear(up[row], down_weight, down_bias, hidden, COPY_FFN_WIDTH, D);
     MODEL_PHASE(FINAL_NORM_HEAD);
     for (unsigned i = 0; i < D; ++i) hidden[i] += residual[row][i];
     norm(hidden, final_norm_weight, final_norm_bias, h);

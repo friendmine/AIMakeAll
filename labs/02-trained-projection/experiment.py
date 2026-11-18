@@ -192,10 +192,14 @@ def main():
         action="store_true",
         help="save checkpoints without accessing the test set or RTL",
     )
+    parser.add_argument("--train-width", type=int, choices=WIDTHS,
+                        help="with --train-only, regenerate just this checkpoint")
     parser.add_argument("--output", required=True, type=Path)
     parser.add_argument("--steps", default=STEPS, type=int)
     parser.add_argument("--resume", action="store_true")
     args = parser.parse_args()
+    if args.train_width is not None and not args.train_only:
+        parser.error("--train-width requires --train-only")
     if args.steps < 1:
         parser.error("steps must be positive")
     if not args.train_only and (args.shared is None or args.banked is None):
@@ -206,7 +210,8 @@ def main():
     train, validation, test = dataset()
     models = []
     metrics = []
-    for width in WIDTHS:
+    widths = WIDTHS if args.train_width is None else (args.train_width,)
+    for width in widths:
         model, history = train_model(
             width, train, validation, args.steps, args.resume, args.output
         )

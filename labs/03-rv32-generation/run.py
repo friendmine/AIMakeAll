@@ -31,16 +31,18 @@ def digest(values):
     return value
 
 
-def load_model(checkpoint):
+def load_model(checkpoint, width=32):
+    if width not in (24, 32):
+        raise ValueError(f"unsupported Lab 02 width {width}")
     state = torch.load(checkpoint, map_location="cpu", weights_only=True)
     if (state["task"], state["width"], state["step"], state["seed"]) != (
         "copy-three-v1",
-        32,
+        width,
         STEPS,
         SEED,
     ):
-        raise ValueError("expected the completed Lab 02 width-32 checkpoint")
-    model = CopyTransformer(32).eval()
+        raise ValueError(f"expected the completed Lab 02 width-{width} checkpoint")
+    model = CopyTransformer(width).eval()
     model.load_state_dict(state["model"])
     train, _, test = dataset()
     q = QuantizedProjection(model, train[:32])
@@ -48,7 +50,7 @@ def load_model(checkpoint):
     archived = json.loads((LAB02 / "verified-run.json").read_text())
     if sha(payload) != archived["fixture_sha256"]:
         raise ValueError("Lab 02 fixture digest differs from its published report")
-    fixture = next(m for m in json.loads(payload)["models"] if m["width"] == 32)
+    fixture = next(m for m in json.loads(payload)["models"] if m["width"] == width)
     if (q.wq.tolist(), q.sx.item(), q.sw.tolist(), q.bias.tolist()) != (
         fixture["weight_i8"],
         fixture["activation_scale"],
