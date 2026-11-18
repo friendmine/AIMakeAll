@@ -4,13 +4,7 @@
 enum phase { INPUT_NORM, QKV, ATTENTION, ATTN_OUT, FFN_NORM, CPU_DOT, PACK,
              DRIVER, GATHER, RESCALE, GELU, DOWN, FINAL_NORM_HEAD, PHASE_COUNT };
 
-static inline uint32_t cycle_after(unsigned dependency)
-{
-    uint32_t cycle;
-    // Order memory accesses and the greedy decision before the boundary.
-    __asm__ volatile("rdcycle %0" : "=r"(cycle) : "r"(dependency) : "memory");
-    return cycle;
-}
+#include "../../runtime/rv32_cycle.h"
 
 #ifdef PROFILE_PHASES
 static uint32_t phase_cycles[4][PHASE_COUNT], last_cycle;
@@ -38,40 +32,7 @@ static int8_t tile_a[4*D], tile_b[D*4];
 static volatile uint32_t tile_c[16];
 static uint32_t logits[4][V], elapsed[4], generated[4];
 
-static void project_cpu(unsigned rows, int32_t result[][N])
-{
-    MODEL_PHASE(CPU_DOT);
-    for (unsigned r = 0; r < rows; ++r)
-        for (unsigned j = 0; j < N; ++j) {
-            int32_t acc = 0;
-            for (unsigned k = 0; k < D; ++k)
-                acc += (int32_t)activation[r][k] * weight_i8[j*D+k];
-            result[r][j] = acc;
-        }
-}
-
-static void project_npu(unsigned rows, int32_t result[][N])
-{
-    for (unsigned r = 0; r < rows; r += 4) {
-        unsigned m = rows-r < 4 ? rows-r : 4;
-        for (unsigned j = 0; j < N; j += 4) {
-            MODEL_PHASE(PACK);
-            for (unsigned i = 0; i < m; ++i)
-                for (unsigned k = 0; k < D; ++k) tile_a[i*D+k] = activation[r+i][k];
-            for (unsigned k = 0; k < D; ++k)
-                for (unsigned n = 0; n < 4; ++n) tile_b[k*4+n] = weight_i8[(j+n)*D+k];
-
-            MODEL_PHASE(DRIVER);
-            unsigned error = npu_gemm(tile_a, tile_b, tile_c, m, 4, D);
-            if (error) stop(error);
-
-            MODEL_PHASE(GATHER);
-            for (unsigned i = 0; i < m; ++i)
-                for (unsigned n = 0; n < 4; ++n)
-                    result[r+i][j+n] = (int32_t)tile_c[4*i+n];
-        }
-    }
-}
+#include "projection_kernels.h"
 
 void guest_main(void)
 {

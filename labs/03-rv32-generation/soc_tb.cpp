@@ -27,12 +27,16 @@ struct Ram {
 
 int main(int argc, char **argv) {
     try {
-        if (argc != 4 && argc != 5)
-            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu]");
-        const bool benchmark = argc == 5;
-        const bool use_npu = benchmark && std::string(argv[4]) == "npu";
-        if (benchmark && !use_npu && std::string(argv[4]) != "cpu")
-            throw std::runtime_error("unknown projection backend");
+        if (argc != 4 && argc != 5 && argc != 7)
+            throw std::runtime_error("usage: Vgeneration_soc guest.bin counters.txt mmio.txt [cpu|npu|prepacked [weight_base stores.txt]]");
+        const bool benchmark = argc >= 5;
+        unsigned backend = 0;
+        if (benchmark) {
+            const std::string name(argv[4]);
+            if (name == "npu") backend = 1;
+            else if (name == "prepacked") backend = 2;
+            else if (name != "cpu") throw std::runtime_error("unknown projection backend");
+        }
         constexpr uint32_t backend_port = 0x10001000;
         Ram ram;
         std::ifstream image(argv[1], std::ios::binary | std::ios::ate);
@@ -44,6 +48,17 @@ int main(int argc, char **argv) {
         std::ofstream counts(argv[2]);
         std::ofstream mmio(argv[3]);
         if (!counts || !mmio) throw std::runtime_error("cannot open trace files");
+        const bool watch_weights = argc == 7;
+        uint32_t weight_base = 0;
+        std::ofstream stores;
+        if (watch_weights) {
+            auto addr = std::stoull(argv[5], nullptr, 0);
+            if (addr < base || addr > base + size - 512 || (addr & 3))
+                throw std::runtime_error("weight buffer outside aligned guest RAM");
+            weight_base = uint32_t(addr);
+            stores.open(argv[6]);
+            if (!stores) throw std::runtime_error("cannot open weight store trace");
+        }
         Vgeneration_soc dut;
         uint64_t began = 0, reads = 0, writes = 0, stalls = 0;
         for (uint64_t cycle = 0; cycle < 150000000; ++cycle) {
@@ -60,10 +75,10 @@ int main(int argc, char **argv) {
             else if (dut.mem_addr == 0x10000004)
                 dut.mem_rdata = 0x2000;  // UART LSR[5] in byte lane 1.
             else if (benchmark && dut.mem_addr == backend_port)
-                dut.mem_rdata = use_npu;
+                dut.mem_rdata = backend;
             dut.eval();
             if (dut.trap || dut.bus_error) throw std::runtime_error("CPU trap or unsupported MMIO");
-            if (benchmark && !use_npu && dut.dma_valid)
+            if (benchmark && backend == 0 && dut.dma_valid)
                 throw std::runtime_error("unexpected DMA on the CPU-only path");
             if (dut.mmio_write) mmio << std::hex << dut.mem_addr << ' ' << dut.mem_wdata << '\n';
             if (dut.tile_start) { began = cycle; reads = writes = stalls = 0; }
@@ -78,7 +93,13 @@ int main(int argc, char **argv) {
             if (dut.mem_valid) {
                 auto addr = dut.mem_addr, value = dut.mem_wdata;
                 if (ram.contains(addr)) {
-                    if (dut.mem_wstrb) ram.write(addr, value, dut.mem_wstrb);
+                    if (dut.mem_wstrb) {
+                        ram.write(addr, value, dut.mem_wstrb);
+                        uint32_t offset = (addr & ~3u) - weight_base;
+                        if (watch_weights && offset < 512)
+                            stores << cycle << ' ' << offset << ' ' << unsigned(dut.mem_wstrb)
+                                   << ' ' << value << '\n';
+                    }
                 } else if (addr == 0x10000000 && dut.mem_wstrb == 1) {
                     char ch = char(value & 255);
                     if (ch == 'S' || ch == 'T') counts << ch << ' ' << cycle << '\n';

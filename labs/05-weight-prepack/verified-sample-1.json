@@ -1,0 +1,499 @@
+{
+  "task": "copy-three-v1",
+  "sample": 1,
+  "prompt": [
+    8,
+    0,
+    4,
+    1,
+    9
+  ],
+  "tools": {
+    "python": "3.11.7",
+    "torch": "2.14.1",
+    "gcc": "riscv64-unknown-elf-gcc (g1b306039a) 15.1.0",
+    "verilator": "Verilator 5.044 2026-01-01 rev vUNKNOWN-built20260101"
+  },
+  "model_tensor_sha256": "49e2c3907c1b8b6e0e449ee31c56cde3eabe964e77741b2dea1a07f26950f87b",
+  "checkpoint_sha256": "da9723cfbf5fa4d85afdf8a242c3d27e00f0d67a4f1649d6b4a221d095ad64dd",
+  "elf_sha256": "4a7e373aa06f49a954f3f1b0784e8aae6954b754eaeeb99021650389fa2b4840",
+  "image_sha256": "e44a87a962ca4dc3a08723797c2e2052d39d18b6b983184b91e608a60d31039f",
+  "rtl_simulator_sha256": "f07961dd9c896c8e4a6f760116d0f9d3199ca5e7a9f98e5a4bff736dced0e00a",
+  "packed_bytes_sha256": "b5a34f16e05459353fb8feb883644beafb47311b733d46d952ff430723bdd201",
+  "configuration": {
+    "isa": "RV32IM",
+    "npu": "H1-4x4",
+    "ram_mib": 32,
+    "dma_wait_period_cycles": 7,
+    "width": 32,
+    "hidden": 16
+  },
+  "logit_absolute_tolerance": 0.0001,
+  "storage": {
+    "elf_symbols": {
+      "weight_i8": {
+        "address": 2147500992,
+        "bytes": 512,
+        "section_type": "r"
+      },
+      "weight_workspace": {
+        "address": 2147514036,
+        "bytes": 512,
+        "section_type": "b"
+      }
+    },
+    "source_bytes": 512,
+    "onsite_scratch_bytes": 64,
+    "prepacked_cache_bytes": 512,
+    "extra_live_ram_bytes": 448
+  },
+  "modes": {
+    "cpu": {
+      "requests": [
+        {
+          "index": 0,
+          "setup_cycles": 0,
+          "first_token_cycles": 5583458,
+          "request_cycles": 11716103,
+          "step_cycles": [
+            5583339,
+            1904548,
+            1982098,
+            2245514
+          ],
+          "commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_read_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_write_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 0
+        },
+        {
+          "index": 1,
+          "setup_cycles": 0,
+          "first_token_cycles": 5583458,
+          "request_cycles": 11716103,
+          "step_cycles": [
+            5583339,
+            1904548,
+            1982098,
+            2245514
+          ],
+          "commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_read_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_write_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 0
+        },
+        {
+          "index": 2,
+          "setup_cycles": 0,
+          "first_token_cycles": 5583458,
+          "request_cycles": 11716103,
+          "step_cycles": [
+            5583339,
+            1904548,
+            1982098,
+            2245514
+          ],
+          "commands": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_read_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "dma_write_bytes": [
+            0,
+            0,
+            0,
+            0
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 0
+        }
+      ],
+      "distinct_b_addresses": 0,
+      "trace_sha256": {
+        "uart": "d6ba79f312971f152703f0b5a159b676a0a2b4f598f8f3f9e8fd1f50067199a8",
+        "mmio": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "counters": "34e061cbeb1906c6448434f6455cb256be40843705ee70177e7cba5db6b80c8e",
+        "weight_stores": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    "onsite": {
+      "requests": [
+        {
+          "index": 0,
+          "setup_cycles": 0,
+          "first_token_cycles": 5541902,
+          "request_cycles": 11676755,
+          "step_cycles": [
+            5541783,
+            1905284,
+            1982834,
+            2246250
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 2560
+        },
+        {
+          "index": 1,
+          "setup_cycles": 0,
+          "first_token_cycles": 5541902,
+          "request_cycles": 11676755,
+          "step_cycles": [
+            5541783,
+            1905284,
+            1982834,
+            2246250
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 2560
+        },
+        {
+          "index": 2,
+          "setup_cycles": 0,
+          "first_token_cycles": 5541902,
+          "request_cycles": 11676755,
+          "step_cycles": [
+            5541783,
+            1905284,
+            1982834,
+            2246250
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 2560
+        }
+      ],
+      "distinct_b_addresses": 1,
+      "trace_sha256": {
+        "uart": "9c894dcfb58fcb92ea5662f0e8874c00c6af039d8d3ed0714867b95ff47a6f67",
+        "mmio": "0a6060ed0cc846d9997503a9a7886a978396341cb595a95d702d7d5331f24934",
+        "counters": "7e6d485833ef1be5c498b3a9c174f9bd0e4e7609dc7aec94640ee0e9fd4236ca",
+        "weight_stores": "50c6e849bfd1ddd11f670ad77c83dd2509f008d2a78361a722dfb5ac8f423fda"
+      }
+    },
+    "prepacked": {
+      "requests": [
+        {
+          "index": 0,
+          "setup_cycles": 14381,
+          "first_token_cycles": 5531020,
+          "request_cycles": 11627992,
+          "step_cycles": [
+            5516496,
+            1892657,
+            1970207,
+            2233623
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 512
+        },
+        {
+          "index": 1,
+          "setup_cycles": 0,
+          "first_token_cycles": 5516616,
+          "request_cycles": 11613588,
+          "step_cycles": [
+            5516496,
+            1892657,
+            1970207,
+            2233623
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 0
+        },
+        {
+          "index": 2,
+          "setup_cycles": 0,
+          "first_token_cycles": 5516616,
+          "request_cycles": 11613588,
+          "step_cycles": [
+            5516496,
+            1892657,
+            1970207,
+            2233623
+          ],
+          "commands": [
+            16,
+            8,
+            8,
+            8
+          ],
+          "dma_read_bytes": [
+            1664,
+            640,
+            640,
+            640
+          ],
+          "dma_write_bytes": [
+            640,
+            128,
+            128,
+            128
+          ],
+          "checked_integers": 256,
+          "checked_logits": 44,
+          "max_logit_error": 1.9073486328125e-06,
+          "tokens": [
+            0,
+            4,
+            1,
+            10
+          ],
+          "cpu_weight_store_bytes": 0
+        }
+      ],
+      "distinct_b_addresses": 8,
+      "trace_sha256": {
+        "uart": "e74f215c8bb536b65d93d59e46d8ea90df5b8f8757fd49c5c8fafd9687e4fcc1",
+        "mmio": "d1757a69b5adf823fa81b9aa717e0c25a52c1f80af549bbd8b687941ab33bfb0",
+        "counters": "bc36c35325015fb1a003aa11961d56404c31c2c1b8628e9b46d51703a434c456",
+        "weight_stores": "121c1637fba2b3c39ef23e835968f74e8cba386cedd9b6dea2584bb1b8189cb6"
+      }
+    }
+  },
+  "amortization": {
+    "onsite_minus_prepacked_cycles": [
+      48763,
+      63167,
+      63167
+    ],
+    "cumulative_saved_cycles": [
+      48763,
+      111930,
+      175097
+    ],
+    "observed_first_nonloss_request": 1,
+    "min_warm_saving": 63167,
+    "setup_payback_requests": 1,
+    "cold_adjusted_payback_requests": 1
+  },
+  "decode_vs_cpu": [
+    {
+      "onsite": [
+        736,
+        736,
+        736
+      ],
+      "prepacked": [
+        -11891,
+        -11891,
+        -11891
+      ]
+    },
+    {
+      "onsite": [
+        736,
+        736,
+        736
+      ],
+      "prepacked": [
+        -11891,
+        -11891,
+        -11891
+      ]
+    },
+    {
+      "onsite": [
+        736,
+        736,
+        736
+      ],
+      "prepacked": [
+        -11891,
+        -11891,
+        -11891
+      ]
+    }
+  ]
+}

@@ -99,3 +99,8 @@ PERF_BUILD ?= build/performance
 .PHONY: performance
 performance: $(GEN_SOC) $(GEN_CHECKPOINT)
 	$(PYTHON) $(PERF_LAB)/compare.py --checkpoint $(GEN_CHECKPOINT) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(PERF_BUILD)/sample-$(GEN_SAMPLE)
+
+PREPACK_BUILD ?= build/prepack
+.PHONY: prepack
+prepack: $(GEN_SOC) $(GEN_CHECKPOINT)
+	$(PYTHON) labs/05-weight-prepack/compare.py --checkpoint $(GEN_CHECKPOINT) --sample $(GEN_SAMPLE) --rtl $(GEN_SOC) --output $(PREPACK_BUILD)/sample-$(GEN_SAMPLE)
