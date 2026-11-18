@@ -1,111 +1,121 @@
-# AIMakeAll：数字 NPU 设计、模型研发与推理部署个人实训
+# AIMakeAll · 从数字 NPU 到模型推理
 
-本项目培养能够独立跨越三层工作的工程师：用 SystemVerilog 设计可综合的数字 NPU，从随机权重训练小型 Transformer，把模型部署到自己设计的加速器上。面对新负载，学习者要能定位误差或性能瓶颈，动手修改电路、模型或执行计划，并用同一任务复验。[个人培养规划与毕业标准](docs/CHIP_MODEL_PLAN.md#个人毕业任务)
+用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再让同一份 RISC-V 固件调用阵列完成生成。这是一套面向个人的中文实训，硬件设计、模型训练和系统仿真都能在电脑上完成。
 
-例如，Transformer 的前馈层宽度同时影响模型容量、权重字节数和矩阵形状。课程先用模型的真实张量选择阵列和片上存储，再用 RTL 仿真记录访存与停顿，回到模型端比较宽度或量化方案。最终用同一组任务的模型质量和硬件代价说明取舍。[芯模联动的实验与验收](docs/PROJECT_MAP.md#芯模联动的实验与验收)
+[开始实验](#从一个乘加到一次生成) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [个人培养规划](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [验证记录](docs/VALIDATION.md)
 
-项目仓库：[friendmine/AIMakeAll](https://github.com/friendmine/AIMakeAll)。教材以中文原创讲解为主，引用上游原始资料；实验优先支持普通电脑，不要求购买 FPGA 或 GPU。
+[![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
 
-**默认采用仿真与数字电路设计路线**：硬件模块交付可综合 RTL、测试台、波形与综合结果；系统功能通过 QEMU/Linux 和虚拟网络验证。核心课程不依赖板卡或流片，高速 PHY/SerDes 使用接口模型，详见 [仿真优先与数字电路交付原则](docs/SIMULATION_FIRST.md)。
+给模型输入「开始、2、5、6、分隔」，可以顺着一次设备提交，找到第一块返回的整数 **−18069**，再追到模型自己选出的下一个符号 **2**。实验 03 的两条路径各执行了 40 条投影命令，得到的 256 个整数都与参考实现逐项一致。前馈升维投影在设备上执行，注意力、KV 缓存和符号选择在 RV32 上执行。[实测报告](labs/03-rv32-generation/verified-run.json) · [逐步串口记录](labs/03-rv32-generation/sample-0.uart)
 
-## 一个人从哪里开始
+## 从一个乘加到一次生成
 
-先做[实验 00](labs/00-int8-matmul/README.md)，用纸笔解释一个乘加，再做[实验 01 · 从第 257 项追到乘加器](labs/01-linear257/README.md)。后者从同一层权重出发，依次检查布局、分块、设备调用、整数输出和量化误差。只需 Python 即可开始，随后逐步加入 C、Verilator 和专用 QEMU。
+第一次来，在仓库根目录运行 `make demo`。只需 Python 3.10+ 和 make。输出矩阵的第一个元素应为 **11**，用 `1 × 2 + (−2) × (−3) + 3 × 1 = 11` 就能手算核对。
 
-[实验 02 · 给自己训练的模型设计一块乘加阵列](labs/02-trained-projection/README.md)将三项能力放进同一个任务。先训练能复述三个符号的 Transformer，把前馈层接入 4×4 阵列，再用测试困惑度和投影周期回答两个问题：电路要不要增加同时读取激活与权重的能力？模型能不能少用八个前馈通道？
+| 实验 | 动手解决的问题 | 运行入口 |
+| --- | --- | --- |
+| [00 · 从 INT8 到单个 MAC](labs/00-int8-matmul/README.md) | 怎样表示负数、累加部分和，并观察溢出、保持和复位？ | `make demo`，电路仿真用 `make rtl-test` |
+| [01 · 找到第 257 个乘积](labs/01-linear257/README.md) | 如何把一个线性层拆成多条设备命令？把内存预算减半，35 个输出应如何还原？ | `make linear`，设备对照用 `make design-trial` |
+| [02 · 给训练出的模型设计阵列](labs/02-trained-projection/README.md) | 固定权重改存储端口，再固定电路改前馈宽度。模型质量、周期和读取量各变多少？ | `make projection-rtl` 重放，`make projection-train` 重训 |
+| [03 · 用同一固件追踪生成](labs/03-rv32-generation/README.md) | 同一提示词在 QEMU 与 PicoRV32 上能否逐块、逐符号对齐？ | `make generation`，换提示用 `make generation GEN_SAMPLE=1` |
 
-| 想回答的问题 | 在仓库根目录运行 |
-| --- | --- |
-| 把一个模型层拆成两次设备命令，数值会改变吗？ | `make linear` |
-| 同一层的训练比推理多保存什么？信号传输和助手纠错又如何验证？ | `make connections` |
-| 一半内存还能完成原任务吗？ | 按[说明](simulator/qemu-v0/README.md)构建 QEMU 后运行 `make device-test design-trial` |
-| 怎样复核真实训练权重在两种电路上的数值、访存和周期？ | `make projection-rtl`，可直接重放配套张量 |
-| 改小模型后，留出集质量和推理开销如何变化？ | `make projection-train` 从零训练并接回 RTL，`make projection-synth` 检查电路结构 |
+<details>
+<summary><strong>实验环境与常用检查</strong></summary>
 
-## 三项核心能力与应用扩展
+- **软件起步**　`make test` 运行 Python 回归，部分用例需要宿主 C 编译器。`make connections` 运行梯度核对、编码、链路与助手纠错练习。[实验 01 手册](labs/01-linear257/README.md)
+- **仿真与综合**　RTL 仿真需要 Verilator 和 C++ 编译器。`make projection-synth` 用 Yosys 综合两种局部存储配置。`make eda-doctor` 可盘点已有工具。[本地 EDA 环境](docs/LOCAL_EDA_ENVIRONMENT.md) · [重复工具的统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md)
+- **训练与裸机生成**　实验 02 从头训练需要 CPU 版 PyTorch。实验 03 还需要 RV32IM 交叉工具链及带教学 NPU 的 QEMU 9.2.4。可先运行 `make device-test` 检查设备协议。[QEMU 构建说明](simulator/qemu-v0/README.md) · [实验 03 依赖与命令](labs/03-rv32-generation/README.md)
+- **计时口径**　QEMU 核验设备行为和命令顺序。RTL 报告分别给出阵列周期和含软件浮点、轮询、串口诊断的整步周期。整机加速比仍待同口径纯 CPU 对照。[仿真原则](docs/SIMULATION_FIRST.md) · [系统架构](docs/ARCHITECTURE.md)
 
-数字 NPU 与模型是共同设计的两个对象。RISC-V 负责控制和提交任务，QEMU 提供驱动与功能验证环境，AI 编译与运行时负责将模型算子映射到电路支持的操作。完成整模型推理后，可用 Agent 作为扩展负载，观察推理优化对整个任务的影响。
+</details>
 
-| 阶段 | 要回答的问题 | 交付物 | 当前状态 |
-| --- | --- | --- | --- |
-| 1. RISC-V + NPU | CPU 如何把矩阵计算交给专用硬件？ | 开源 CPU 集成、INT8 NPU RTL、驱动、验证 | 单 MAC、含 16 个 MAC 的 4×4 阵列及两种局部存储已仿真、阵列已综合。RTL SoC 与 MMIO 待集成 |
-| 2. QEMU Simulator | 软件如何在虚拟的加速器上运行？ | RISC-V 虚拟平台、NPU 设备模型、运行时、性能报告 | RV32 裸机已通过 MMIO 提交单层任务，完成两种预算与异常/复位检查 |
-| 3. 从零训练 LLM | token 如何变成预测，模型如何映射到硬件？ | 自实现小型 Transformer、训练记录、量化导出、NPU 推理 | 已从零训练两种宽度的微型 Transformer，在复制任务上验证单投影 RTL 推理。字节语料小 LLM 及整机部署待实现 |
-| 应用选修：Agent | 模型如何可靠调用工具完成任务？ | 工具协议、执行循环、评测集、端到端演示 | 已有基于真实运行报告的规则助手纠错练习，模型决策与独立任务评测待实现 |
+## 参考材料
 
-这里的“从零”是自己实现并训练模型，从随机权重开始，不以下载预训练权重作为主线。教学模型首先追求可解释、可复现，不承诺达到通用商业助手水平。
+### 主线教材与开源实现
+
+| 资料 | 什么时候读 | AIMakeAll 学习入口 |
+| --- | --- | --- |
+| [《深入理解计算机系统》· CS:APP 第三版](https://csapp.cs.cmu.edu/3e/) | 第一次在 C、汇编、地址和字节之间追踪同一块数据时 | [12 章系统基础](docs/CSAPP_FOUNDATIONS.md) |
+| [MIT 6.006 · Introduction to Algorithms](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/) | 需要为依赖图选择执行顺序、估算分块或调度的复杂度时 | [算法与数据结构](docs/ALGORITHMS_FOUNDATIONS.md) |
+| [Operating Systems: Three Easy Pieces · OSTEP](https://pages.cs.wisc.edu/~remzi/OSTEP/) | 需要解释地址空间、并发、设备所有权和持久状态时 | [操作系统原理](docs/OSTEP_FOUNDATIONS.md) |
+| [Linux From Scratch · 13.1-systemd](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/) | 从裸机路线扩展到 Linux，开始构建工具链和根文件系统时 | [LFS 章节与阶段](docs/LFS_FOUNDATIONS.md) |
+| [Understanding Deep Learning · Simon J. D. Prince](https://udlbook.github.io/udlbook/) | 需要推导损失、梯度、优化，或解释模型的泛化与量化误差时 | [21 章与数学附录](docs/UDL_FOUNDATIONS.md) |
+| [Build a Large Language Model (From Scratch) · Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch) | 自己写注意力、组装 GPT、训练和生成时 | [七章与附录的项目映射](models/README.md) |
+| [MiniMind · jingyaogong/minimind](https://github.com/jingyaogong/minimind) | 已能训练小模型，准备对照完整工程的数据、训练、推理和工具调用时 | [源码导读与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md) |
+
+实验 02、03 使用 AIMakeAll 自己训练的符号模型。MiniMind 和下列框架提供工程对照，字节语料 LLM、模型驱动的 Agent 属于后续阶段。[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+
+### 按问题查原始资料
+
+<details>
+<summary><strong>数字电路与芯片设计</strong>　乘加结构、开源 CPU、验证、物理实现</summary>
+
+- **从器件到算术电路**　先看 MOS 器件与门，再推导乘法器、流水线和时钟约束。[MIT 6.002 电路与电子学](https://ocw.mit.edu/courses/6-002-circuits-and-electronics-spring-2007/) · [6.012 微电子器件与电路](https://ocw.mit.edu/courses/6-012-microelectronic-devices-and-circuits-fall-2009/) · [6.004 算术结构与设计取舍](https://ocw.mit.edu/courses/6-004-computation-structures-spring-2017/pages/c8/c8s1/) · [6.374 数字集成电路](https://ocw.mit.edu/courses/6-374-analysis-and-design-of-digital-integrated-circuits-fall-2003/) · [ngspice 手册](https://ngspice.sourceforge.io/docs.html)
+- **处理器与加速器**　实验 03 使用固定版本的 PicoRV32。Ibex 是后续集成路线，Gemmini 用来对照加速器、系统软件和 SoC 的协同设计。[RV32I 指令集](https://docs.riscv.org/reference/isa/unpriv/rv32.html) · [PicoRV32 固定提交](https://github.com/YosysHQ/picorv32/tree/ef203c2b0a3fb793280f5114941416c425c5b461) · [Ibex](https://github.com/lowRISC/ibex) · [Gemmini 源码](https://github.com/ucb-bar/gemmini) · [Gemmini 原论文](https://slice.eecs.berkeley.edu/papers/gemmini-enabling-systematic-deep-learning-architecture-evaluation-via-full-stack-integration/) · [MIT 6.823 体系结构](https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/)及[教学大纲](https://ocw.mit.edu/courses/6-823-computer-system-architecture-fall-2005/pages/syllabus/) · [NVIDIA SIMT 执行模型](https://docs.nvidia.com/cuda/cuda-programming-guide/03-advanced/advanced-kernel-programming.html)
+- **RTL 仿真与综合**　从波形里的握手信号追到综合后的逻辑单元。[Verilator 使用指南](https://verilator.org/guide/latest/overview.html)与[源码](https://github.com/verilator/verilator) · [Yosys 入门](https://yosyshq.readthedocs.io/projects/yosys/en/latest/introduction.html)、[完整手册](https://yosyshq.readthedocs.io/projects/yosys/en/latest/)与[源码](https://github.com/YosysHQ/yosys) · [cocotb 支持的仿真器](https://docs.cocotb.org/en/stable/simulator_support.html)
+- **验证与数据完整性**　为溢出、复位和数据损坏建立独立参考与检查。[OpenTitan 验证方法](https://opentitan.org/book/doc/contributing/dv/methodology/index.html) · [SBY 的 FIFO 形式验证示例](https://yosyshq.readthedocs.io/projects/sby/en/latest/quickstart.html) · [OpenTitan ECC 生成工具](https://opentitan.org/book/util/design/index.html#ecc-generator-tool) · [OTBN 数据完整性设计](https://opentitan.org/book/hw/ip/otbn/doc/theory_of_operation.html#data-integrity-protection)
+- **时序、物理实现与功耗**　了解综合、静态时序、布线和 PDK 各提供什么证据。[OpenSTA](https://github.com/parallaxsw/OpenSTA)及[VCD 功耗示例](https://openroad.readthedocs.io/en/latest/main/src/sta/doc/Examples.html#power-analysis) · [OpenROAD](https://openroad.readthedocs.io/en/latest/main/README.html) · [LibreLane 安装](https://librelane.readthedocs.io/en/stable/installation/index.html)及[手动配置](https://librelane.readthedocs.io/en/latest/installation/manual_installation/index.html) · [SKY130 PDK](https://skywater-pdk.readthedocs.io/en/main/)及[项目状态](https://skywater-pdk.readthedocs.io/en/main/status.html) · [本地环境清单](docs/LOCAL_EDA_ENVIRONMENT.md)
+- **版图、网表与存储宏**　用 Magic 或 KLayout 查看版图，用 Netgen 核对版图提取的网表与原理图，再看 OpenRAM 如何生成 SRAM 宏。[Magic](https://github.com/RTimothyEdwards/magic) · [KLayout](https://www.klayout.de/) · [Netgen](https://github.com/RTimothyEdwards/netgen) · [OpenRAM](https://github.com/VLSIDA/OpenRAM)
+- **芯片生命周期**　读懂上电、复位和可信启动的先后关系。[OpenTitan 电源管理](https://opentitan.org/book/hw/top_earlgrey/ip_autogen/pwrmgr/doc/theory_of_operation.html) · [安全启动设计](https://opentitan.org/book/doc/security/specs/secure_boot/)
+
+**项目内对应课程**　[数字设计与时序](docs/DIGITAL_DESIGN_TIMING.md) · [算术电路](docs/DIGITAL_DESIGN_TIMING.md#dd01dd02dd07-深化计算机算术与算术电路结构) · [系统化验证](docs/SYSTEMATIC_VERIFICATION.md) · [硬件数据完整性](docs/ARCHITECTURE.md#领域-04-与-17-深化硬件数据完整性与故障处置)
+
+</details>
+
+<details>
+<summary><strong>模型研发与 AI</strong>　教材配套代码、训练、评测、经典 AI 与 Agent</summary>
+
+- **Understanding Deep Learning**　从一章的推导回到对应 notebook，再检查实验假设。[MIT Press 书目](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) · [官方目录 PDF](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf) · [配套 notebooks](https://github.com/udlbook/udlbook) · [资源许可](https://github.com/udlbook/udlbook/blob/main/LICENSE)
+- **从零实现 LLM**　按模型定义、预训练、指令微调的顺序对照代码。[作者书页](https://sebastianraschka.com/llms-from-scratch/) · [配套仓库](https://github.com/rasbt/LLMs-from-scratch) · [第 4 章 GPT 实现](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch04/01_main-chapter-code/gpt.py) · [第 5 章训练](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch05/README.md) · [第 7 章微调](https://github.com/rasbt/LLMs-from-scratch/blob/main/ch07/README.md) · [代码许可与书稿范围](https://github.com/rasbt/LLMs-from-scratch/blob/main/LICENSE.txt)
+- **MiniMind 的数据与训练**　沿固定快照从词表读到模型权重。[数据说明](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/dataset/dataset.md) · [分词器训练](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_tokenizer.py) · [分词器配置](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/model/tokenizer_config.json) · [数据管线](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/dataset/lm_dataset.py) · [模型](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/model/model_minimind.py) · [预训练](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_pretrain.py) · [指令微调](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_full_sft.py) · [训练工具](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/trainer_utils.py)
+- **MiniMind 的推理与工具调用**　追踪一次生成如何进入服务、训练循环与工具评测。[模型转换](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/convert_model.py) · [推理服务](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/serve_openai_api.py) · [轨迹采样](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/rollout_engine.py) · [Agent 训练](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/trainer/train_agent.py) · [工具调用评测](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/scripts/eval_toolcall.py) · [固定版本说明](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/README.md) · [上游依赖](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/requirements.txt) · [上游许可](https://github.com/jingyaogong/minimind/blob/233d00fa068ec2b8c0d4f07b703934d6391a5a73/LICENSE) · [快照与各文件 SHA-256](models/minimind/source-lock.json)
+- **训练实现与精度**　从自动求导，读到混合精度的数值取舍和多设备通信。[PyTorch](https://github.com/pytorch/pytorch) · [llm.c](https://github.com/karpathy/llm.c) · [Mixed Precision Training 原论文](https://arxiv.org/abs/1710.03740) · [PyTorch 分布式教程](https://docs.pytorch.org/tutorials/distributed.html)
+- **经典 AI 与学习评估**　为神经网络选择简单基线，检查分类概率、聚类和规划结果。[Berkeley CS188 教材](https://inst.eecs.berkeley.edu/~cs188/textbook/) · [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/) · [scikit-learn 监督学习](https://scikit-learn.org/stable/supervised_learning.html)、[聚类](https://scikit-learn.org/stable/modules/clustering.html)与[概率校准](https://scikit-learn.org/stable/modules/calibration.html)
+- **多模态、因果与控制**　从图文配对进入表示学习，从状态估计进入控制。因果课程解释怎样区分观察与干预。[CLIP 原论文](https://proceedings.mlr.press/v139/radford21a.html) · [Brady Neal 因果推断课程](https://www.bradyneal.com/causal-inference-course) · [MIT Underactuated Robotics](https://underactuated.mit.edu/) · [MIT 6.003 信号与系统](https://ocw.mit.edu/courses/6-003-signals-and-systems-fall-2011/)
+- **检索与 Agent**　分别评价检索排序、模型选取的动作和任务结果。[Stanford 信息检索教材 · 排序评价](https://nlp.stanford.edu/IR-book/html/htmledition/evaluation-of-ranked-retrieval-results-1.html) · [ReAct 原论文](https://arxiv.org/abs/2210.03629) · [本项目 Agent 课程](agents/README.md)
+
+</details>
+
+<details>
+<summary><strong>推理部署与系统软件</strong>　裸机固件、QEMU、编译器、性能与操作系统</summary>
+
+- **跑通实验 03**　用裸机工具链编出 RV32IM 固件，观察 QEMU 上的内存映射设备和 RTL 上的同一条命令。[RISC-V GNU 工具链](https://github.com/riscv-collab/riscv-gnu-toolchain) · [Newlib](https://sourceware.org/newlib/) · [QEMU RISC-V 系统模型](https://www.qemu.org/docs/master/system/target-riscv.html)及[virt 平台](https://www.qemu.org/docs/master/system/riscv/virt.html) · [QEMU 发布目录](https://download.qemu.org/)与[9.2.4 源码包](https://download.qemu.org/qemu-9.2.4.tar.xz) · [项目设备 ABI](specs/npu-v0.md)
+- **AI 编译与性能**　从表示算子和数值精度，走到缓冲区、向量化与测量范围。[MLIR Toy 教程](https://mlir.llvm.org/docs/Tutorials/Toy/) · [量化](https://mlir.llvm.org/docs/Quantization/) · [Bufferization](https://mlir.llvm.org/docs/Bufferization/) · [LLVM 向量化](https://llvm.org/docs/Vectorizers.html) · [MIT 6.172 性能工程](https://ocw.mit.edu/courses/6-172-performance-engineering-of-software-systems-fall-2018/) · [MLPerf Inference 测量规则](https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc)
+- **系统、算法与正确性**　按需回查数据表示、内存错误、实时调度和持久化。[CS:APP 出版社书目](https://www.pearson.com/en-us/pearsonplus/p/9780138105396)、[前言](https://csapp.cs.cmu.edu/3e/pieces/preface3e.pdf)、[学生资源](https://csapp.cs.cmu.edu/3e/students.html)与[官方 Labs](https://csapp.cs.cmu.edu/3e/labs.html) · [MIT 6.006 课程安排](https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/pages/calendar/) · [MIT 6.045J 可计算性与复杂性](https://ocw.mit.edu/courses/6-045j-automata-computability-and-complexity-spring-2011/) · [CMU 实时系统分析讲义](https://www.cs.cmu.edu/~aldrich/courses/654-sp07/slides/23-realtime.pdf) · [AddressSanitizer](https://clang.llvm.org/docs/AddressSanitizer.html) · [UndefinedBehaviorSanitizer](https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html) · [SQLite 原子提交](https://www.sqlite.org/atomiccommit.html)与[隔离](https://www.sqlite.org/isolation.html)
+- **构建 Linux**　先检查宿主和目标架构，再追踪各阶段工具链。[LFS 项目](https://www.linuxfromscratch.org/lfs/) · [宿主要求](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/chapter02/hostreqs.html) · [架构说明](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/prologue/architecture.html) · [工具链说明](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/partintro/toolchaintechnotes.html) · [本版勘误](https://www.linuxfromscratch.org/lfs/view/13.1-systemd/prologue/errata.html) · [Beyond Linux From Scratch](https://www.linuxfromscratch.org/blfs/) · [法律声明](https://www.linuxfromscratch.org/lfs/view/stable-systemd/legalnotice.html)、[文字许可](https://www.linuxfromscratch.org/lfs/view/stable-systemd/appendices/creat-comm.html)与[指令许可](https://www.linuxfromscratch.org/lfs/view/stable-systemd/appendices/mit.html)
+
+**项目内对应课程**　[AI 编译](docs/AI_COMPILATION.md) · [工程专项](docs/ENGINEERING_BRIDGES.md) · [仿真建模与可信度](docs/SIMULATION_CREDIBILITY.md) · [资源预算与共同交付](docs/ROADMAP.md#四项共同交付的阶段安排)
+
+</details>
+
+<details>
+<summary><strong>存储、网络与互连</strong>　缓存与片上网络、PCIe、CXL 及协议仿真</summary>
+
+- **体系结构与存储建模**　追踪一次请求经过事件队列、缓存一致性协议和片上网络的过程。[gem5 事件教程](https://www.gem5.org/documentation/learning_gem5/part2/events/) · [存储系统教程](https://www.gem5.org/assets/files/ASPLOS2017_gem5_tutorial.pdf) · [MSI 一致性协议](https://www.gem5.org/documentation/learning_gem5/part3/cache-intro/) · [Garnet 片上网络](https://www.gem5.org/documentation/general_docs/ruby/garnet-2/)
+- **网络与分布式通信**　从虚拟网卡、TCP 和 HTTP 进入多节点推理服务，再看 RDMA 的软件接口。[QEMU 网络设备](https://www.qemu.org/docs/master/system/devices/net.html) · [RFC 9293 · TCP](https://www.rfc-editor.org/rfc/rfc9293.html) · [RFC 9110 · HTTP Semantics](https://www.rfc-editor.org/rfc/rfc9110.html) · [rdma-core](https://github.com/linux-rdma/rdma-core) · [cocotbext-eth](https://github.com/alexforencich/cocotbext-eth)
+- **PCIe、DMA 与中断**　从寄存器窗口走到设备驱动、总线事务和内存所有权。[QEMU EDU 设备](https://www.qemu.org/docs/master/specs/edu.html) · [Linux PCI 驱动](https://docs.kernel.org/PCI/pci.html) · [DMA 指南](https://docs.kernel.org/core-api/dma-api-howto.html) · [MSI 中断指南](https://docs.kernel.org/PCI/msi-howto.html) · [cocotbext-pcie](https://github.com/alexforencich/cocotbext-pcie)
+- **CXL 与异构内存**　对照模拟器里的 Type 3 内存设备与内核中的 CXL 对象。[QEMU CXL 模型](https://www.qemu.org/docs/master/system/devices/cxl.html) · [Linux CXL 文档](https://docs.kernel.org/driver-api/cxl/index.html)
+
+**项目内对应课程**　[网络](docs/NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe](docs/PCIE_IO_FOUNDATIONS.md) · [CXL 与异构内存](docs/CXL_MEMORY_FOUNDATIONS.md)
+
+</details>
 
 ## 知识覆盖图
 
-![AIMakeAll 知识覆盖图 V9，十八个领域、已运行的单层实验与下一阶段](docs/images/knowledge-coverage-v9.png)
+[![AIMakeAll 知识覆盖图，含十八个领域及实验 01–03 的联系](docs/images/knowledge-coverage-v9.png)](docs/KNOWLEDGE_COVERAGE.md)
 
-图中并列展示课程范围、已经运行的实验和后续主线。查看 [十八个领域的文字索引](docs/KNOWLEDGE_COVERAGE.md) 或 [全景规划](docs/PROJECT_MAP.md)；点击图片可查看原图。
+**学习目标是独立作出一次设计选择。** 给定新的输入形状或更紧的资源预算，先预测哪一层受影响，再用波形、模型质量和完整生成记录解释选择。图中的十八个领域可以按问题查阅。自然语言模型、更大范围的算子部署、模型驱动的 Agent 各有后续验收。[个人毕业任务](docs/CHIP_MODEL_PLAN.md#个人毕业任务) · [芯模联合实验](docs/PROJECT_MAP.md#芯模联动的实验与验收) · [里程碑](docs/ROADMAP.md)
 
-现有十八个领域内保留十组、60 项待实现深化实验，包括 [计算机算术与算术电路结构 ARITH-E1–E6](docs/DIGITAL_DESIGN_TIMING.md#dd01dd02dd07-深化计算机算术与算术电路结构) 和 [硬件数据完整性与故障处置 RAS-E1–E6](docs/ARCHITECTURE.md#领域-04-与-17-深化硬件数据完整性与故障处置)，从位宽/乘法器推进到 MAC，从校验/ECC 推进到受保护存储和任务处置。保持一级目录与知识领域不变；全部十组的实验、交付物、验收和顺序见 [课程目录](docs/CURRICULUM.md) 与 [里程碑](docs/ROADMAP.md)。
+按计划推进时，可以查看十组深化实验、十条补全路线和六项跨层补强各自的交付物与验收条件。[课程目录](docs/CURRICULUM.md) · [全景规划](docs/PROJECT_MAP.md) · [十条补全路线](docs/CHIP_AI_COMPLETENESS.md) · [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)
 
-另将 [跨层契约、资源预算、共同实验资产和教材学习者验证](docs/ROADMAP.md#四项共同交付的阶段安排) 贯穿现有课程：明确分阶段步骤、交付物和验收，首批从实验 00/FIFO 起步，再接单 Linear、模型和 Agent。实验 01 已生成分块哈希、逐项结果与两档预算记录，独立试读待执行。
+想练习如何从需求反推设计，可以从实时系统、多模态或因果专题选择一个约束，带入综合实验比较候选方案。[三门专题](docs/CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) · [从需求出发的整体设计取舍](docs/CHIP_AI_COMPLETENESS.md#design-从需求出发的整体设计取舍)
 
-已纳入 [芯片与 AI 全景课程的十条路线](docs/CHIP_AI_COMPLETENESS.md)：数学与信号、电路与器件、数字实践、CPU/GPU/DSP、物理实现与产品流程、跨层部署、经典机器学习与 AI、深度学习实证、感知控制与具身、分布式训练与服务。每条包含课程顺序、三个验收节点、交付物和仿真边界，按“全景通识 → 核心实践 → 专题深入”推进；30 个节点含既有实验的贯通验收，不与 60 项深化实验简单相加。DEP 已有固定形状的单层实例，模型级部署和其他路线按节点验收。
+## 目录与许可
 
-现有课程已加入 [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)：SoC 生命周期、硬件到模型信任链、数据变化后的可靠性、不同 AI 方法比较、理论边界、模拟与混合信号角色。各三个分步验收节点，全部待实施，复用既有实验；当前交付状态统一见 [课程状态总表](docs/CURRICULUM.md#课程状态总表)。首个 Linear 的核心路径保持不变，深入专题按需学习。
+| 在仓库里找什么 | 入口 |
+| --- | --- |
+| 课程、实验与证据 | [GitHub 仓库](https://github.com/friendmine/AIMakeAll) · [规划文档](docs/) · [实验手册](labs/) · [验证记录](docs/VALIDATION.md) · [早期 CI 运行记录](https://github.com/friendmine/AIMakeAll/actions/runs/44074780583) |
+| 电路、模型与运行时 | [数字 RTL](hardware/rtl/) · [模型实现](models/) · [仿真设备](simulator/) · [运行时与驱动](runtime/) · [Agent](agents/) |
+| 规范、参考与工具 | [接口规范](specs/) · [数学参考](reference/) · [回归测试](tests/) · [EDA 环境盘点](tools/eda/) |
 
-课程还包括 [实时系统、多模态与表示学习、因果推断](docs/CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程)，各三个节点；新增 [从需求出发的整体设计取舍综合实验](docs/CHIP_AI_COMPLETENESS.md#design-从需求出发的整体设计取舍)，依次冻结需求、列候选、收集证据、做选择并迁移。实验 01 提供 DESIGN 的首个单层预算对照。完整模型、用户任务和三门专题仍按各自的验收标准推进。
-
-## 从这里开始
-
-先看 [整个项目的全景规划图](docs/PROJECT_MAP.md)：算法支撑组织与调度，CSAPP/OSTEP/LFS 分别连接程序、系统原理与构建，UDL/MiniMind 连接理论与训练，AI 编译将模型映射到运行时和 NPU。
-
-1. 阅读 [项目路线与里程碑](docs/ROADMAP.md)。
-2. 阅读 [系统架构与加速边界](docs/ARCHITECTURE.md)。
-3. 完成 [实验 00：INT8 矩阵乘法与 MAC](labs/00-int8-matmul/README.md)。
-4. 按 [课程目录](docs/CURRICULUM.md) 进入芯片设计、模型研发和推理部署课程。
-5. 复用已有芯片开发环境前，阅读 [本地 EDA 软件、依赖与接入分析](docs/LOCAL_EDA_ENVIRONMENT.md)。
-6. 整理重复工具安装时，按 [EDA 工具链统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md) 完成迁移与验收。
-7. 进入模型与 Agent 阶段时，阅读 [MiniMind 学习与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md)，对照完整训练流程。
-   从零实现先参考 [Build a Large Language Model (From Scratch) 的七章及附录映射](models/README.md)，逐步完成文本、注意力、GPT、训练与微调，再对照 MiniMind。
-8. 按阶段学习 [CSAPP 全书知识体系与项目实验](docs/CSAPP_FOUNDATIONS.md)，覆盖数值、处理器、存储、链接、异常、I/O、网络与并发。
-9. 学习 [Understanding Deep Learning 知识体系](docs/UDL_FOUNDATIONS.md)，覆盖 21 章与数学/概率附录，连接从零模型、MiniMind、NPU 部署和 Agent 评估。
-10. 学习 [Linux From Scratch 知识体系](docs/LFS_FOUNDATIONS.md)，从工具链自举到 Linux 启动，再扩展到 RV64 QEMU 与 AI 服务；首版 RV32 裸机主线独立推进。
-11. 补齐 [算法与数据结构](docs/ALGORITHMS_FOUNDATIONS.md)，实现计算图依赖、队列、内存索引和检索排序。
-12. 学习 [OSTEP 操作系统原理](docs/OSTEP_FOUNDATIONS.md)，连接调度、地址空间、并发与持久化。
-13. 完成 [AI 编译学习路线](docs/AI_COMPILATION.md)：有限计算图 → 量化/分块 → 内存规划 → 执行计划 → C/QEMU/RTL 对照。
-14. 按 [四个工程专项](docs/ENGINEERING_BRIDGES.md) 补数值、数据、性能验证和检索可靠性的实验与验收。
-15. 学习 [网络与分布式通信](docs/NETWORKING_FOUNDATIONS.md)，从双节点 CPU 服务进入远程推理与 Agent；不等待 NPU 完成。
-16. 按 [I/O 与 PCIe](docs/PCIE_IO_FOUNDATIONS.md) 从片内 MMIO、EDU 驱动推进到 Linux 虚拟 PCIe NPU。
-17. 进阶学习 [CXL 与异构内存](docs/CXL_MEMORY_FOUNDATIONS.md)，从独立 Type 3 内存实验进入模型内存放置；阶段安排见 [S0–S3 路线](docs/ROADMAP.md)。
-18. 学习 [数字设计与时序](docs/DIGITAL_DESIGN_TIMING.md)，从同步 FIFO、流水线和复位进入综合、时序与按需开展的 CDC 实验。
-19. 按 [系统化验证](docs/SYSTEMATIC_VERIFICATION.md) 建立需求、独立参考、断言、覆盖、形式/等价和故障回归证据。
-20. 学习 [仿真建模与可信度](docs/SIMULATION_CREDIBILITY.md)，为同一实验建立功能/周期模型、确定性重放、校验与敏感性分析；三条课程按 G0–G3 贯穿项目。
-
-```sh
-make test       # Python 3.10+、宿主 C 编译器，使用 Python 标准库
-make demo       # 输出确定性的 INT8 矩阵乘法结果
-make rtl-test   # 可选：需要 Verilator、C++ 编译器和 make
-make eda-doctor # 可选：只读盘点本地芯片开发环境与历史验收状态
-```
-
-## 目录
-
-```text
-docs/               总体路线、架构、课程、开源来源与贡献规范
-hardware/rtl/       有符号 MAC 与带局部存储的 4×4 投影阵列
-simulator/          QEMU v0 设备源码、构建与协议检查
-runtime/            软件运行时路线
-models/             教学 Transformer 实现与后续语言模型路线
-agents/             Agent 协议与评测路线
-specs/              各层共同遵循的接口草案
-reference/          无第三方依赖的数学参考实现
-labs/               可执行实验及讲解
-tests/              参考实现测试与 RTL 测试台
-tools/eda/          本地开源芯片工具链检查；不自动安装或运行外部实验
-```
-
-## 关于“加速”
-
-QEMU 功能模拟本身不保证比宿主机原生推理快。项目要求分别报告客体 RISC-V 软件路径与模拟 NPU 路径的耗时、宿主机原生基线、RTL 周期数。未来可用宿主机优化矩阵库加速设备模拟，但这种加速不能当作真实 NPU 的性能。详见架构文档。
-
-## 开源与复现
-
-项目原创教材和一般代码采用 [MIT License](LICENSE)。QEMU 设备源文件、头文件及集成补丁采用 [GPL-2.0-or-later](simulator/qemu-v0/COPYING)。第三方代码、文档、数据与模型各自保留原许可证，不因本仓库的许可证而改变。依赖候选及核验要求见 [来源清单](docs/OPEN_SOURCE.md)。专用 QEMU 从固定校验和的上游压缩包在本地构建。
-
-后续贡献遵循 [贡献约定](CONTRIBUTING.md)：每个章节必须有原理、实验、预期结果和验收证据；未实现内容必须显式标记。
+本仓库原创教材和一般代码采用 MIT 许可。PicoRV32 核保留 ISC 许可，QEMU 教学设备、头文件与集成补丁采用 GPL-2.0-or-later。外部教材、课件、代码、数据和权重分别遵循各自的许可。[MIT](LICENSE) · [PicoRV32 许可](hardware/ip/picorv32/COPYING) · [QEMU 设备许可](simulator/qemu-v0/COPYING) · [来源与引入规则](docs/OPEN_SOURCE.md) · [贡献约定](CONTRIBUTING.md)

@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="224" viewBox="0 0 920 224" role="img" aria-labelledby="title desc">
+  <title id="title">实验 03 的两条推理路径</title>
+  <desc id="desc">同一份含模型参数的 RV32 固件分别在 QEMU 教学设备、PicoRV32 和 4×4 RTL 阵列上运行。两端依次生成 2、5、6 和结束符。</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1" gradientUnits="objectBoundingBox">
+      <stop stop-color="#102c3a"/><stop offset="1" stop-color="#183e43"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="5" refY="3" markerUnits="userSpaceOnUse" orient="auto">
+      <path d="m0 0 5 3-5 3" fill="none" stroke="#8ed7c1" stroke-width="1.8"/>
+    </marker>
+  </defs>
+  <rect width="920" height="224" rx="16" fill="url(#bg)"/>
+  <g font-family="Inter, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', sans-serif">
+    <text x="32" y="48" fill="#f5faf8" font-size="26" font-weight="650">同一份固件，两条推理路径</text>
+    <text x="888" y="45" fill="#a2d9c9" text-anchor="end" font-size="19">实验 03</text>
+    <path d="M32 66h856" stroke="#416367"/>
+    <g fill="none" stroke="#8ed7c1" stroke-width="2">
+      <path d="M226 138h23q9 0 9-9v-12q0-9 9-9h21" marker-end="url(#arrow)"/>
+      <path d="M249 138q9 0 9 9v12q0 9 9 9h21" marker-end="url(#arrow)"/>
+      <path d="M581 108h18q9 0 9 9v12q0 9 9 9h21" marker-end="url(#arrow)"/>
+      <path d="M581 168h18q9 0 9-9v-12q0-9 9-9"/>
+    </g>
+    <rect x="32" y="91" width="194" height="94" rx="10" fill="#22464f" stroke="#527680"/>
+    <text x="50" y="130" fill="#ffffff" font-size="23" font-weight="650">RV32 固件</text>
+    <text x="50" y="161" fill="#c1d9d7" font-size="18">模型参数与驱动</text>
+    <g fill="#24574f" stroke="#609d8b">
+      <rect x="297" y="84" width="284" height="48" rx="8"/>
+      <rect x="297" y="144" width="284" height="48" rx="8"/>
+    </g>
+    <g fill="#e8fff5" font-size="20" font-weight="550">
+      <text x="314" y="115">QEMU · RV32 与功能设备</text>
+      <text x="314" y="175">PicoRV32 · 4×4 RTL 阵列</text>
+    </g>
+    <rect x="648" y="91" width="240" height="94" rx="10" fill="#f0e6c8"/>
+    <text x="667" y="123" fill="#564627" font-size="17">两端生成的符号</text>
+    <text x="667" y="162" fill="#253830" font-size="21" font-weight="650">2 → 5 → 6 → EOS</text>
+  </g>
+</svg>

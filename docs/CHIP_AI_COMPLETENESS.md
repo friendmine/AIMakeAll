@@ -112,7 +112,7 @@ PRA-1/2 对应 G1，PRA-3 按 M1/G2 分步完成。已有单 MAC 的异步低有
 
 先 CPU，再 guest/QEMU，再 RTL 离线差分，最后模型；不要求实时联仿。小矩阵仅证明路径，不能证明真实 NPU 性能。设备限制以 [NPU v0](../specs/npu-v0.md) 为唯一依据，教学计划不能隐含引入缓存一致性、ECC 或新错误码。
 
-已验证的 DEP 范围包括固定实例的 RV32 功能设备与单 MAC 重放，以及宿主框架调用 4×4 阵列完成已训练模型的前馈投影。通用加载器、设备所有权与超时恢复、同一驱动在 RTL SoC 上的对照仍待实现。[固定层与设备](../labs/01-linear257/README.md) · [训练投影与混合推理](../labs/02-trained-projection/README.md)
+已验证的 DEP 范围包括固定实例的 RV32 功能设备与单 MAC 重放、宿主框架调用 4×4 阵列，以及同一 RV32 固件通过真实 MMIO 运行前馈升维投影并完成符号生成。通用加载器、设备所有权与超时恢复仍待实现。[固定层与设备](../labs/01-linear257/README.md) · [训练投影](../labs/02-trained-projection/README.md) · [同固件整机对照](../labs/03-rv32-generation/README.md)
 
 ## CLA 传统机器学习与经典 AI
 

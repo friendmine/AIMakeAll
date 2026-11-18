@@ -1,4 +1,5 @@
 /* SPDX-License-Identifier: MIT */
+.file "start.S"
 .section .text.start,"ax"
 .globl _start
 _start:

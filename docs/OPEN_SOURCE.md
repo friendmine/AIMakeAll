@@ -1,6 +1,6 @@
 # 开源来源与引入规则
 
-2026-11-17 建立。下表记录参考上游与候选依赖。已实际采用的 QEMU 9.2.4 由学习者下载固定校验和压缩包，本仓库提供教学设备、接入补丁及 GPL 许可文本。其他候选依赖在引入时锁定版本并核对文件级声明。[QEMU 来源、构建与许可](../simulator/qemu-v0/README.md)
+2026-11-17 建立。下表记录参考上游与候选依赖。已实际采用的 QEMU 9.2.4 由学习者下载固定校验和压缩包，本仓库提供教学设备、接入补丁及 GPL 许可文本。实验 03 使用 PicoRV32 的固定提交，其余候选依赖在引入时锁定版本并核对文件级声明。[QEMU 来源、构建与许可](../simulator/qemu-v0/README.md)
 
 网络、PCIe 和 CXL 的新增课程见 [NET](NETWORKING_FOUNDATIONS.md)、[IO](PCIE_IO_FOUNDATIONS.md)、[CX](CXL_MEMORY_FOUNDATIONS.md)。参考 QEMU EDU/网络/CXL、Linux PCI/DMA/CXL 文档、IETF RFC 9293/9110，以及 RDMA 用户态上游；原始链接收录于各课程。当前只纳入原创实验设计与链接，没有引入源码、标准全文或配置好的虚拟机。
 
@@ -10,6 +10,7 @@
 
 | 项目 | 用途 | 许可证概况/核验入口 |
 | --- | --- | --- |
+| [PicoRV32 固定提交](https://github.com/YosysHQ/picorv32/tree/ef203c2b0a3fb793280f5114941416c425c5b461) | 实验 03 实际使用的 RV32IM 裸机 CPU | [原始核](../hardware/ip/picorv32/picorv32.v) SHA-256 为 `0836050971b3c6cdd28ac3b1e5719a67fb645161912bef1e472e63995ceb0622`。保留文件头及[上游 ISC 许可](../hardware/ip/picorv32/COPYING) |
 | [Ibex](https://github.com/lowRISC/ibex) | 首选 RV32 CPU 核 | Apache-2.0；以所选提交的 LICENSE/NOTICE 为准 |
 | [QEMU](https://www.qemu.org/docs/master/system/target-riscv.html) | RISC-V 系统模拟 | 主要 GPL-2.0；各文件与所引入模块分别核验 |
 | [Verilator](https://github.com/verilator/verilator) | RTL 仿真 | 查看上游 LICENSE 与生成代码相关条款 |

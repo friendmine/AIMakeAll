@@ -1,6 +1,6 @@
 # QEMU Simulator 主线
 
-目标：让 RISC-V guest 使用与 RTL 相同的 MMIO 协议运行 NPU 算子。首个裸机后端已经运行。按[固定版本的 QEMU 构建与设备检查](qemu-v0/README.md)构建，再用[实验 01](../labs/01-linear257/README.md)比较与单 MAC 的算术结果。
+目标：让 RISC-V guest 使用与 RTL 相同的 MMIO 协议运行 NPU 算子。实验 03 已用同一份 RV32 固件在 QEMU 功能设备及 PicoRV32 RTL 上验证前馈投影与完整符号生成。[实验 03](../labs/03-rv32-generation/README.md) 按[固定版本的 QEMU 构建与设备检查](qemu-v0/README.md)构建，再用[实验 01](../labs/01-linear257/README.md)比较与单 MAC 的算术结果。
 
 遵循 [仿真优先原则](../docs/SIMULATION_FIRST.md)。QEMU 验证系统软件，Verilator 验证数字 RTL，协议模型提供主机/网口/内存事务；初期通过相同输入与轨迹离线对照。实时联合仿真的时钟、事件、内存与复位桥接是独立后续实现，不作为首个闭环前提。
 

@@ -1,6 +1,6 @@
 # NPU v0：算子语义与设备 ABI 草案
 
-状态更新于 2026-11-18。Python、C 和单 MAC 的算术已对照。[QEMU v0 功能设备](../simulator/qemu-v0/README.md)已在 RV32 裸机上跑通正常任务，错误/状态/复位覆盖范围见设备检查记录。RTL 总线从机与整机集成待验收。
+状态更新于 2026-11-18。Python、C 和单 MAC 的算术已对照。[QEMU v0 功能设备](../simulator/qemu-v0/README.md)已在 RV32 裸机上跑通正常任务，错误/状态/复位覆盖范围见设备检查记录。[实验 03](../labs/03-rv32-generation/README.md)已验证共同微块子集的 MMIO 从机、PicoRV32 与阵列整机生成。该 RTL 单命令支持 M/N 1–4、K 1–32，RAM 范围为 0x80000000–0x81ffffff。驱动负责拆分 M/N。下文的最大维度 256 适用于完整 v0 与 QEMU，其他形状及完整异常语义在 RTL 上单独验收。
 
 ## GEMM 语义
 

@@ -91,4 +91,4 @@
 <text x="69" y="1132" font-size="19" font-weight="400" fill="#172b3a">模型研发　同一复制任务，宽度 32 / 24 从零训练；量化后测试困惑度 2.2080 / 2.2194</text>
 <text x="69" y="1168" font-size="17" font-weight="400" fill="#172b3a">电路设计　16 个 MAC、256 B 局部存储；分库并行读使宽度 32 的提示词投影从 1216 降至 960 拍</text>
 <text x="69" y="1203" font-size="18" font-weight="400" fill="#172b3a">推理部署　RTL 返回整数，CPU 继续运行模型；每种组合的 5632 个输出分数与量化参考相符</text>
-<text x="69" y="1243" font-size="18" font-weight="400" fill="#86531a">下一阶段　RV32 驱动同一阵列 → 自然语言模型与完整推理 → 个人迁移验收</text></g></svg>
+<text x="69" y="1243" font-size="18" font-weight="400" fill="#86531a">实验 03　同一 RV32 固件在 QEMU 与 PicoRV32 阵列上生成，逐块核对 256 个整数</text></g></svg>

@@ -58,7 +58,7 @@ text(69, 1095, '实验 02　训练小模型，把前馈投影接入 4×4 阵列'
 text(69, 1132, '模型研发　同一复制任务，宽度 32 / 24 从零训练；量化后测试困惑度 2.2080 / 2.2194', 19)
 text(69, 1168, '电路设计　16 个 MAC、256 B 局部存储；分库并行读使宽度 32 的提示词投影从 1216 降至 960 拍', 17)
 text(69, 1203, '推理部署　RTL 返回整数，CPU 继续运行模型；每种组合的 5632 个输出分数与量化参考相符', 18)
-text(69, 1243, '下一阶段　RV32 驱动同一阵列 → 自然语言模型与完整推理 → 个人迁移验收', 18, amber)
+text(69, 1243, '实验 03　同一 RV32 固件在 QEMU 与 PicoRV32 阵列上生成，逐块核对 256 个整数', 18, amber)
 const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="1320" viewBox="0 0 1120 1320" role="img" aria-labelledby="title"><title id="title">AIMakeAll 知识覆盖与可运行实验 V9</title><g font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif">${body.join('\n')}</g></svg>\n`
 const base = path.join(__dirname, 'knowledge-coverage-v9')
 fs.writeFileSync(base + '.svg', svg)

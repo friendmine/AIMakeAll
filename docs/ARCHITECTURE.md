@@ -32,9 +32,11 @@ flowchart TD
     I --> K[RTL: RISC-V SoC + NPU]
 ```
 
-在[实验 01](../labs/01-linear257/README.md)中，宿主 Python/C 和 RV32 客体已运行固定单层。客体经 MMIO 驱动 QEMU 功能模型，Verilator 单独用同一分块输入驱动 MAC。两条路径共用数值契约，RTL 地址生成、MMIO 控制与 SoC 仍待集成。
+在[实验 01](../labs/01-linear257/README.md)中，宿主 Python/C 和 RV32 客体已运行固定单层。客体经 MMIO 驱动 QEMU 功能模型，Verilator 单独用同一分块输入驱动 MAC。两条路径共用数值契约，实验 01 的 RTL 路径只覆盖独立 MAC。
 
 [实验 02](../labs/02-trained-projection/README.md)增加一条已运行的宿主调用路径。PyTorch 将训练所得的前馈投影分块，测试台将数据送入 4×4 阵列，再将输出交还模型完成推理。阵列实现 32 位流接口、局部读写与分块内控制。局部访存计数覆盖阵列内存，整机总线和外存流量需在接入 SoC 后测量。
+
+[实验 03](../labs/03-rv32-generation/README.md)把同一固件分别装入 QEMU 和 PicoRV32 教学系统。PicoRV32 的 MMIO 从机从 32 MiB 行为 RAM 取微块、驱动 H1 阵列并写回结果。RV32 执行注意力、KV 缓存及其余算子，独立产生后续 token。RTL 适用形状为 M/N≤4、K≤32。
 
 已有独立芯片实验环境现已作为项目的外部基础设施登记，详见 [本地 EDA 依赖与接入分析](LOCAL_EDA_ENVIRONMENT.md)。这些工具和历史案例尚未组成 AIMakeAll 的 SoC；两套 PDK、不同仿真器版本及 SRAM 交付物必须分别管理。
 
@@ -44,7 +46,7 @@ flowchart TD
 
 | 层 | 默认路线 | 原因与边界 |
 | --- | --- | --- |
-| RISC-V CPU | Ibex RV32IMC，裸机 | CPU 已开源；教学重点放在系统集成。不是 Linux 平台 |
+| RISC-V CPU | 实验 03 采用 PicoRV32 RV32IM 裸机，Ibex RV32IMC 为后续路线 | CPU 已开源；教学重点放在系统集成。不是 Linux 平台 |
 | 教学 NPU | 自实现 SystemVerilog INT8 MAC → 4×4 阵列 | 算术、数据流和带宽可逐层解释 |
 | 硬件验证 | Verilator；后续增加 Yosys 综合 | 软件仿真无需购买板卡；器件适配另做评估 |
 | 软件模拟 | QEMU RISC-V 系统模拟 + 自定义 MMIO 设备 | 固定板级映射，尽量复用裸机驱动 |
