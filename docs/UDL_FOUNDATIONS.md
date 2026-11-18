@@ -1,8 +1,10 @@
 # Understanding Deep Learning 知识体系与项目实验
 
+可先在[实验 01](../labs/01-linear257/README.md)对同一层推导 dX、dW、db，验证一次 SGD 更新，并用前缀编码与有损量化比较码率和失真。之后进入下列正式课程。
+
 更新：2026-11-18。参考 Simon J. D. Prince 的 *Understanding Deep Learning*，以 MIT Press 2023 年版的 **21 章及附录 A–C** 为基准。[出版社介绍](https://mitpress.mit.edu/9780262048644/understanding-deep-learning/) · [官方目录](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/15055/prince_toc_.pdf)
 
-UDL 为 AIMakeAll 提供模型、学习算法和评估方法基础，与 [CSAPP 系统基础](CSAPP_FOUNDATIONS.md) 并行：理解模型为什么能学习，再把计算图交给运行时、QEMU 和 NPU。下文是原创学习组织与实验设计，不是原书翻译或官方习题解答。**当前完成章节级知识映射，新增实验均待实现。**
+UDL 为 AIMakeAll 提供模型、学习算法和评估方法基础，与 [CSAPP 系统基础](CSAPP_FOUNDATIONS.md) 并行：理解模型为什么能学习，再把计算图交给运行时、QEMU 和 NPU。下文是原创学习组织与实验设计，不是原书翻译或官方习题解答。章节级实验按模块验收，单层梯度和 SGD 可从上方练习开始。
 
 [全景补全课程](CHIP_AI_COMPLETENESS.md) 新增 SIG 微分方程/信号系统、CLA 传统机器学习/经典 AI、DLE 推导/独立校验/模型比较及 EMB 感知/估计/控制路线。它们接在现有 MATH、UDL 章节上；DLE 三个节点复用原实验，均待实现。
 

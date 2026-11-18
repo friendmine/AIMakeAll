@@ -1,8 +1,8 @@
 # 硬件主线
 
-当前只有 `rtl/mac_int8.sv`：带 enable 和同步 clear 的有符号 INT8 乘加单元，异步低有效复位，32 位回绕累加。这是 NPU 的基本组件，并非完整 NPU 或 SoC。
+[单 MAC](rtl/mac_int8.sv)执行有符号 INT8 乘加与 32 位回绕累加，支持 enable、同步 clear 和低有效异步复位。[4×4 阵列](rtl/projection_tile.sv)复用 16 个 MAC，以握手接口装载并逐项输出。它提供共享读端口、A/B 分库存储两种等容量实现，每次最多计算 4×4 个输出和 32 个归约项。
 
-运行 `make rtl-test`。下一步依次实现 4×4 阵列、局部存储、分块控制、MMIO 外设以及 Ibex 集成。对照 [算子规范](../specs/npu-v0.md) 和 [里程碑 M1](../docs/ROADMAP.md)。
+运行 `make rtl-test` 检查单 MAC，`make projection-rtl` 重放训练张量并检查阵列握手和复位，`make projection-synth` 比较两种电路结构。下一步把阵列的数据装载、跨块合并与 MMIO 控制接入 RTL SoC，让裸机驱动也能提交这一层。[实验 02](../labs/02-trained-projection/README.md) · [算子规范](../specs/npu-v0.md) · [里程碑 M1](../docs/ROADMAP.md)
 
 并行建立 [DD03 同步 FIFO](../docs/DIGITAL_DESIGN_TIMING.md) 作为数字设计入门，按 [DV](../docs/SYSTEMATIC_VERIFICATION.md) 补独立参考、断言、覆盖/故障与形式性质，再按 [SIM](../docs/SIMULATION_CREDIBILITY.md) 对照周期模型和轨迹。新 FIFO 的同步复位契约不改变现有 MAC；DD06 异步 FIFO 和目标库 STA 按需求后置。新增实验当前只有设计，无 RTL/证明/综合网表产物。
 

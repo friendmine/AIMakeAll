@@ -10,10 +10,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: make test demo
+      - run: make test demo connections
   rtl:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - run: sudo apt-get update && sudo apt-get install -y verilator
-      - run: make rtl-test
+      - run: make rtl-test linear-rtl projection-rtl

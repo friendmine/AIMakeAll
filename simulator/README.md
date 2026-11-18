@@ -1,6 +1,6 @@
-# QEMU Simulator 主线（待实现）
+# QEMU Simulator 主线
 
-目标：让 RISC-V guest 使用与 RTL 相同的 MMIO 协议运行 NPU 算子。当前没有 QEMU 补丁或已验证的 guest 启动命令。
+目标：让 RISC-V guest 使用与 RTL 相同的 MMIO 协议运行 NPU 算子。首个裸机后端已经运行。按[固定版本的 QEMU 构建与设备检查](qemu-v0/README.md)构建，再用[实验 01](../labs/01-linear257/README.md)比较与单 MAC 的算术结果。
 
 遵循 [仿真优先原则](../docs/SIMULATION_FIRST.md)。QEMU 验证系统软件，Verilator 验证数字 RTL，协议模型提供主机/网口/内存事务；初期通过相同输入与轨迹离线对照。实时联合仿真的时钟、事件、内存与复位桥接是独立后续实现，不作为首个闭环前提。
 
@@ -28,4 +28,4 @@ QEMU 内部设备代码沿用对应上游文件的许可要求，不直接套用
 - [S2 / NET01–NET05](../docs/NETWORKING_FOUNDATIONS.md)：回环协议 → 双 guest CPU 服务 → 远程模型/Agent；后端类型和网络配置需可追溯，不要求先完成 NPU。
 - [S3 / CX01–CX05](../docs/CXL_MEMORY_FOUNDATIONS.md)：独立 x86-64 q35 + Type 3 内存实验，记录拓扑、译码与实际可访问区域；不假定 RV64 平台自动具备 CXL。
 
-每条路线固定 QEMU、内核、固件及用户态版本，使用独立配置。功能模拟不证明 PCIe/CXL 链路性能或完整缓存一致性协议正确；本轮没有新增 QEMU 补丁、镜像或运行命令。
+每条路线固定 QEMU、内核、固件及用户态版本，使用独立配置。功能模拟不证明 PCIe/CXL 链路性能或完整缓存一致性协议正确；这些扩展的独立实现与验收仍待推进。

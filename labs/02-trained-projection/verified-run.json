@@ -1,0 +1,299 @@
+{
+  "torch_version": "2.14.1",
+  "steps": 400,
+  "split_sha256": {
+    "train": "1459dfdedb741e473cbf540ee23506edf9d37bea560e105f8437f79156479da8",
+    "validation": "1b8f82564c12da1136ba7d84f0af3903e553fabd3f19ffd4ff1098412f25c85e",
+    "test": "0afa6baa8c4b55c2c1609db7897442cd53a22bc76f448c2ad3d3675165cf0389"
+  },
+  "baseline_bigram_ppl": 9.555967615788212,
+  "fixture_sha256": "068b5f12a7d905f7578dedb03bc7f201f63ad3946cdcd5d3853cd1de5466365e",
+  "model_scores": [
+    {
+      "width": 32,
+      "loss_history": [
+        [
+          50,
+          1.5790038108825684,
+          1.5972944498062134
+        ],
+        [
+          100,
+          1.3184720277786255,
+          1.2863531112670898
+        ],
+        [
+          150,
+          0.8106880784034729,
+          0.8241337537765503
+        ],
+        [
+          200,
+          0.7923093438148499,
+          0.8114059567451477
+        ],
+        [
+          250,
+          0.7897473573684692,
+          0.7944430112838745
+        ],
+        [
+          300,
+          0.7919198274612427,
+          0.7973443269729614
+        ],
+        [
+          350,
+          0.7812482118606567,
+          0.8012802004814148
+        ],
+        [
+          400,
+          0.7864919304847717,
+          0.7940703630447388
+        ]
+      ],
+      "parameters": 2747,
+      "validation_quant_ppl": 2.212308645248413,
+      "float_ppl": 2.208033561706543,
+      "quant_ppl": 2.207967519760132,
+      "max_abs_logit_error": 0.15079069137573242,
+      "matched_hybrid_logits": 5632,
+      "test_documents": 64,
+      "quant_exact_sequences": 64,
+      "sample_prompt": [
+        8,
+        2,
+        5,
+        6,
+        9
+      ],
+      "hybrid_generation": [
+        2,
+        5,
+        6,
+        10
+      ]
+    },
+    {
+      "width": 24,
+      "loss_history": [
+        [
+          50,
+          1.5960121154785156,
+          1.607800841331482
+        ],
+        [
+          100,
+          1.3752894401550293,
+          1.3820865154266357
+        ],
+        [
+          150,
+          0.8261964321136475,
+          0.8487223386764526
+        ],
+        [
+          200,
+          0.7864311933517456,
+          0.8151688575744629
+        ],
+        [
+          250,
+          0.7947126030921936,
+          0.7930225133895874
+        ],
+        [
+          300,
+          0.782829761505127,
+          0.7987622618675232
+        ],
+        [
+          350,
+          0.7774671316146851,
+          0.8062382936477661
+        ],
+        [
+          400,
+          0.7863478660583496,
+          0.7977538108825684
+        ]
+      ],
+      "parameters": 2483,
+      "validation_quant_ppl": 2.2205424308776855,
+      "float_ppl": 2.219356060028076,
+      "quant_ppl": 2.2194361686706543,
+      "max_abs_logit_error": 0.13182413578033447,
+      "matched_hybrid_logits": 5632,
+      "test_documents": 64,
+      "quant_exact_sequences": 64,
+      "sample_prompt": [
+        8,
+        2,
+        5,
+        6,
+        9
+      ],
+      "hybrid_generation": [
+        2,
+        5,
+        6,
+        10
+      ]
+    }
+  ],
+  "hardware": [
+    {
+      "width": 32,
+      "workload": "prefill",
+      "results": {
+        "shared": {
+          "shape_mkn": [
+            5,
+            16,
+            32
+          ],
+          "commands": 16,
+          "cells": 160,
+          "cycles": 1216,
+          "useful_macs": 2560,
+          "mac_edges": 256,
+          "local_read_bytes": 2048,
+          "input_bytes": 2048,
+          "output_bytes": 640,
+          "handshake_wait_cycles": 0
+        },
+        "banked": {
+          "shape_mkn": [
+            5,
+            16,
+            32
+          ],
+          "commands": 16,
+          "cells": 160,
+          "cycles": 960,
+          "useful_macs": 2560,
+          "mac_edges": 256,
+          "local_read_bytes": 2048,
+          "input_bytes": 2048,
+          "output_bytes": 640,
+          "handshake_wait_cycles": 0
+        }
+      }
+    },
+    {
+      "width": 32,
+      "workload": "decode",
+      "results": {
+        "shared": {
+          "shape_mkn": [
+            1,
+            16,
+            32
+          ],
+          "commands": 8,
+          "cells": 32,
+          "cycles": 560,
+          "useful_macs": 512,
+          "mac_edges": 128,
+          "local_read_bytes": 1024,
+          "input_bytes": 1024,
+          "output_bytes": 128,
+          "handshake_wait_cycles": 0
+        },
+        "banked": {
+          "shape_mkn": [
+            1,
+            16,
+            32
+          ],
+          "commands": 8,
+          "cells": 32,
+          "cycles": 432,
+          "useful_macs": 512,
+          "mac_edges": 128,
+          "local_read_bytes": 1024,
+          "input_bytes": 1024,
+          "output_bytes": 128,
+          "handshake_wait_cycles": 0
+        }
+      }
+    },
+    {
+      "width": 24,
+      "workload": "prefill",
+      "results": {
+        "shared": {
+          "shape_mkn": [
+            5,
+            16,
+            24
+          ],
+          "commands": 12,
+          "cells": 120,
+          "cycles": 912,
+          "useful_macs": 1920,
+          "mac_edges": 192,
+          "local_read_bytes": 1536,
+          "input_bytes": 1536,
+          "output_bytes": 480,
+          "handshake_wait_cycles": 0
+        },
+        "banked": {
+          "shape_mkn": [
+            5,
+            16,
+            24
+          ],
+          "commands": 12,
+          "cells": 120,
+          "cycles": 720,
+          "useful_macs": 1920,
+          "mac_edges": 192,
+          "local_read_bytes": 1536,
+          "input_bytes": 1536,
+          "output_bytes": 480,
+          "handshake_wait_cycles": 0
+        }
+      }
+    },
+    {
+      "width": 24,
+      "workload": "decode",
+      "results": {
+        "shared": {
+          "shape_mkn": [
+            1,
+            16,
+            24
+          ],
+          "commands": 6,
+          "cells": 24,
+          "cycles": 420,
+          "useful_macs": 384,
+          "mac_edges": 96,
+          "local_read_bytes": 768,
+          "input_bytes": 768,
+          "output_bytes": 96,
+          "handshake_wait_cycles": 0
+        },
+        "banked": {
+          "shape_mkn": [
+            1,
+            16,
+            24
+          ],
+          "commands": 6,
+          "cells": 24,
+          "cycles": 324,
+          "useful_macs": 384,
+          "mac_edges": 96,
+          "local_read_bytes": 768,
+          "input_bytes": 768,
+          "output_bytes": 96,
+          "handshake_wait_cycles": 0
+        }
+      }
+    }
+  ]
+}
