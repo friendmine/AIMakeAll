@@ -1,18 +1,81 @@
-# AIMakeAll · 从数字 NPU 到模型推理
+# AIMakeAll · 芯片设计、模型研发与推理实验课
 
-在自己的电脑上，用 SystemVerilog 设计一块 4×4 INT8 乘加阵列，从随机权重训练一个小型 Transformer，再用同一份 RISC-V 固件执行两层语言模型。你可以沿着一个生成字节，追到量化权重、设备命令和 RTL 周期，也可以把同一模型的投影接到 Linux PCIe 设备与网络服务。
+在自己的电脑上设计一块 **4×4 INT8 数字 NPU**，从随机权重训练一个小型 Transformer，再让同一份 RISC-V 固件带着模型在 QEMU 和 PicoRV32 上生成。沿着一个输出字节，你可以回查它的预测分数、产生分数的投影，以及电路在哪一拍等待读取权重。
 
-**实验 02 · 同一层投影，从 1216 拍降到 960 拍。** 固定训练好的权重和前馈宽度 32，把激活与权重从分两拍读取改为同拍并行读取。处理同样 5 个提示符号，这一层少用 256 拍，整数输出逐项相同。[两种电路的实测对照](labs/02-trained-projection/README.md#第三步--读懂两次取舍)
+![实验 02 的前馈投影从 1216 拍减到 960 拍；实验 03 的同一份 RV32 固件在 QEMU 与 PicoRV32 加 RTL 阵列上均生成 2、5、6、结束符](docs/images/course-overview.svg)
 
-**实验 03 · 同一份固件，两端都生成 `2 → 5 → 6 → EOS`。** 把实验 02 的模型编入 RV32 固件，分别在带教学 NPU 的 QEMU 和连接 RTL 阵列的 PicoRV32 上运行。两端各执行 40 条投影命令，256 个整数都与参考实现一致。[实测报告](labs/03-rv32-generation/verified-run.json) · [逐步串口记录](labs/03-rv32-generation/sample-0.uart)
+**02 · 1216 → 960 拍**，固定权重，改为同拍读取激活与权重。**03 · `2 → 5 → 6 → EOS`**，两端各执行 40 条投影命令，256 个整数逐项吻合。[投影周期对照](labs/02-trained-projection/README.md#第三步--读懂两次取舍) · [固件执行路径](docs/images/generation-path.svg) · [实测报告](labs/03-rv32-generation/verified-run.json) · [串口原始记录](labs/03-rv32-generation/sample-0.uart)
 
-[![实验 03 的执行路径：同一份 RV32 固件在 QEMU 功能设备与 PicoRV32 加 4×4 RTL 阵列上均生成 2、5、6、结束](docs/images/generation-path.svg)](labs/03-rv32-generation/README.md)
-
-[24–26 · 独立设计与验收](#从需求到独立交付) · [09–23 实验总览与复现](docs/EXPERIMENTS_09_23.md) · [按本机环境选实验](#从一个乘加到一次生成) · [实验 04 整机成绩单](#实验-04-整机成绩单) · [实验 05 权重预打包](#实验-05-权重预打包) · [实验 06 连续切换模型](#实验-06-连续切换模型) · [实验 07 融合 Q/K/V](#实验-07-融合-qkv-投影) · [实验 08 字节任务](#实验-08-换一个生成任务) · [个人学习目标](#个人学习目标) · [参考材料](#参考材料) · [知识覆盖图](#知识覆盖图) · [验证记录](docs/VALIDATION.md)
+[第一课](#从一个乘加到一次生成)　·　[27 个实验怎么学](#课程路线)　·　[知识覆盖图](#知识覆盖图)　·　[按本机环境选入口](#按本机环境选实验)　·　[独立毕业题](labs/24-design-challenge/exam.md)　·　[参考材料](#参考材料)
 
 ## 从一个乘加到一次生成
 
-以下命令都在仓库根目录运行。基础环境只需 **Python 3.10+ 和 make**，表中列出每个入口额外用到的工具。
+会读 Python 循环、会乘矩阵，就可以从实验 00 开始。仓库根目录下只需 Python 3.10+ 和 make。先算输出左上角，再让程序给出整个矩阵。
+
+```sh
+make demo
+```
+
+结果是 `[[11, -15], [7, 8]]`。左上角的 **11** 来自 `1 × 2 + (−2) × (−3) + 3 × 1`。接着在有 C 编译器的环境运行 `make linear`：把点积从 3 项延长到 257 项，设备一次最多接收 256 项。试着在代码里找到两段部分和在哪里相加，以及为什么偏置只加一次。[00 · 带符号乘加](labs/00-int8-matmul/README.md) · [01 · 第 257 项](labs/01-linear257/README.md)
+
+## 课程路线
+
+00–26 均有作者运行记录。第一次学习建议沿 00–19 建立芯片、模型、推理三项基础。20–23 是系统与应用选修；准备做综合设计时可从 19 直接进入 24。24 与 25 可并行，26 使用 24 选出的 RTL。[课程状态总表](docs/CURRICULUM.md#课程状态总表) · [实施顺序](docs/ROADMAP.md)
+
+| 单元 | 要解决的问题 | 实验与阶段交付 |
+| --- | --- | --- |
+| 算术与第一层投影 · 00–03 | 一个点积怎样变成时钟沿上的乘加？第五行输入怎样放进四行阵列？ | [00 乘加](labs/00-int8-matmul/README.md) → [01 分块](labs/01-linear257/README.md) → [02 训练与阵列](labs/02-trained-projection/README.md) → [03 固件生成](labs/03-rv32-generation/README.md)。交一段读数波形和两端相同的生成记录。 |
+| 推理运行时 · 04–07 | 为什么首符号更快，后续符号反而多花 907 拍？哪些权重可以复用，何时必须重新打包？ | [04 同机计时](labs/04-rv32-performance/README.md) → [05 预打包](labs/05-weight-prepack/README.md) → [06 模型切换](labs/06-model-switch/README.md) → [07 融合 Q/K/V](labs/07-fused-qkv/README.md)。交冷、热请求周期和坏包零命令记录。 |
+| 训练与质量 · 08–11 | 怎样判断模型学会了任务？缩窄前馈层或量化词表输出会损失什么？ | [08 字节任务](labs/08-byte-transfer/README.md) → [09 词表投影](labs/09-vocabulary-head/README.md) → [10 自然语言训练](labs/10-language-model/README.md) → [11 宽度对照](labs/11-model-width/README.md)。交数据划分、训练曲线、留出集成绩与选择理由。 |
+| 阵列与数据搬运 · 12–14 | 行列尾块怎样算对？当接收端暂停时，怎样保证请求既不丢失也不重复？ | [12 矩阵分块](labs/12-matrix-tiles/README.md) → [13 DMA 仲裁与队列](labs/13-dma-fifo/README.md) → [14 流式阵列](labs/14-streaming-array/README.md)。交整数对照、背压波形及同库同约束的面积和时序。 |
+| 编译与整机推理 · 15–19 | 怎样把一个检查点变成设备识别的九个投影？换一档内存预算，原先的方案还合适吗？ | [15 执行计划](labs/15-execution-plan/README.md) → [16 KV 缓存](labs/16-kv-cache/README.md) → [17 整机生成](labs/17-language-soc/README.md) → [18 联合选型](labs/18-joint-selection/README.md) → [19 迁移诊断](labs/19-transfer/README.md)。交模型包、逐步分数和首处分歧的位置。 |
+| 系统与应用 · 20–23 | 模型如何选择工具？同一投影经过 Linux 驱动、网络或扩展内存后，多了哪些开销？ | [20 单次工具调用](labs/20-tool-agent/README.md) · [21 Linux PCIe 驱动](labs/21-linux-driver/README.md) · [22 双虚拟机 TCP](labs/22-network-pcie/README.md) · [23 CXL Type 3 放置](labs/23-cxl-placement/README.md)。交工具返回值、往返计时或权重与 KV 的搬运字节数。 |
+| 独立设计 · 24–26 | 访存少了，整机能快多少？改变训练目标后谁受益？胜出电路布线后还满足约束吗？ | [24 整机瓶颈](labs/24-design-challenge/README.md) · [25 中文语料消融](labs/25-model-study/README.md) · [26 布线后时序](labs/26-postroute/README.md)。交开发集上冻结的设计选择、确认结果与物理代价。 |
+
+## 样课 · 第五个符号值多少拍
+
+实验 02 的输入有 **5 行 × 16 项**，前馈层有 **32 个输出通道**。4×4 阵列一次最多计算 4 行、4 个通道。先试着在纸上圈出第 5 行，再算并行读取能省多少拍。
+
+1. **从张量算命令。** 5 行要分成 `4 + 1` 两个行块，32 个通道分成 8 个列块，因此一层共发 `2 × 8 = 16` 条命令。第五个符号独占最后一组 8 个块。
+2. **从命令算周期。** 每块都沿 16 项做归约。共享端口分两拍读激活和权重，分库存储能在同一拍各读一个字，每块省 16 拍。保持模型、装载量和输出相同，整层恰好省下 `16 × 16 = 256` 拍。
+3. **用波形检查推导。** 运行 `make projection-rtl`，在首块 VCD 中找到同拍的 `read_a` 和 `read_b`，再找到随后的 `mac_fire`。然后把提示截成 4 行，先预测命令数，再用实验手册中的迁移命令验证。[推导、波形与四行迁移题](labs/02-trained-projection/README.md)
+
+**怎样把整数接回模型？** 阵列为每个输出返回一个 INT32 点积。CPU 将它乘以激活尺度和该输出通道的权重尺度，加一次偏置后送入 GELU。逐项比较整数可以查出阵列计算错误；在留出集上比较困惑度和整段生成，可以判断量化的代价。沿着这两项检查，就能把电路波形和模型质量联系起来。[实验 02 的量化与生成记录](labs/02-trained-projection/verified-run.json)
+
+## 知识覆盖图
+
+下面四个方向都有已运行的实验。完整知识图还收录了十八个领域的先修课和进阶规划，各专题的教材、实现与试读进度可分别查阅。[可放大的知识全景图](docs/images/knowledge-atlas.svg) · [高清 PNG](docs/images/knowledge-atlas.png) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+
+| 学习方向 | 从实验中掌握的知识 | 遇到问题时查哪门课 |
+| --- | --- | --- |
+| **芯片设计** | INT8 乘法与 INT32 累加、4×4 分块、局部存储端口、DMA 握手、背压与复位。用综合后的面积和布线后的建立／保持余量解释 RTL 选择。 | [数字设计与时序](docs/DIGITAL_DESIGN_TIMING.md) · [系统化验证](docs/SYSTEMATIC_VERIFICATION.md) · [体系结构与存储](docs/ARCHITECTURE.md) |
+| **模型研发** | 按文档划分训练、验证和测试集。用交叉熵训练两层因果模型，再和只看前一字节的 bigram 比较。实验 10 的英文测试集字节困惑度分别为 8.37 和 13.25，越低表示对真实下一字节赋予的概率总体越高。 | [数学与深度学习](docs/UDL_FOUNDATIONS.md) · [从零实现 LLM](models/README.md) · [MiniMind 源码对读](docs/MINIMIND_INTEGRATION.md) |
+| **推理部署** | 把投影打包交给阵列，注意力与归一化留在 CPU。为复用历史位置的键和值，实验 16 每个位置需留出 2（K/V）× 2 层 × 32 维 × 4 B = 512 B，再比较缓存与前缀重算的代价。 | [AI 编译](docs/AI_COMPILATION.md) · [CS:APP 系统基础](docs/CSAPP_FOUNDATIONS.md) · [操作系统原理](docs/OSTEP_FOUNDATIONS.md) |
+| **系统与评测** | 用 QEMU 核对设备行为，用 PicoRV32 RTL 数拍；在虚拟系统中辨认设备提交、网络往返与 CXL 搬运各自的成本。 | [仿真可信度](docs/SIMULATION_CREDIBILITY.md) · [网络](docs/NETWORKING_FOUNDATIONS.md) · [PCIe](docs/PCIE_IO_FOUNDATIONS.md) · [CXL](docs/CXL_MEMORY_FOUNDATIONS.md) |
+
+<details>
+<summary><strong>展开十八个知识领域的全图与专题路线</strong></summary>
+
+[![芯片与 AI 的知识全景，含三项能力的数据流、18 个领域、27 个实验及验收边界](docs/images/knowledge-atlas.png)](docs/images/knowledge-atlas.svg)
+
+图中的十八个领域可以按问题查阅。编号实验已有作者实测；LFS、因果推断、多模态等专题按课程节点逐章交付。[领域索引](docs/KNOWLEDGE_COVERAGE.md) · [单层算术与系统扩展图](docs/images/knowledge-coverage-v9.png) · [实验 09–23](docs/EXPERIMENTS_09_23.md) · [里程碑与毕业题](docs/ROADMAP.md)
+
+按计划推进时，可以查看十组深化实验、十条补全路线和六项跨层补强各自的交付物与验收条件。[课程目录](docs/CURRICULUM.md) · [全景规划](docs/PROJECT_MAP.md) · [十条补全路线](docs/CHIP_AI_COMPLETENESS.md) · [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)
+
+想练习如何从需求反推设计，可以从实时系统、多模态或因果专题选择一个约束，带入综合实验比较候选方案。[三门专题](docs/CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) · [从需求出发的整体设计取舍](docs/CHIP_AI_COMPLETENESS.md#design-从需求出发的整体设计取舍)
+
+</details>
+
+## 按本机环境选实验
+
+- **手边只有 Python 和 make**　从 `make demo` 开始。装有 CPU 版 PyTorch，可以直接用 `make lab10` 训练英文技术文本模型。
+- **想先看电路工作**　有 Verilator 和 C++ 编译器即可运行 `make projection-rtl`，用随仓库提供的张量观察读端口和乘加波形。
+- **想先验一次整机**　在 Verilator 和 C++ 之外准备带 newlib/libm 的 RV32IM 裸机工具链，运行 `make language-ci`。它用冻结模型在 CPU、NPU 两条路径各生成三个字节，逐项核对 768 个输出分数。
+
+<details>
+<summary><strong>展开实验命令、额外依赖与常用检查</strong></summary>
+
+以下命令都在仓库根目录运行。每行在 Python 3.10+ 和 make 之上列出所需工具。
 
 | 本机另需的工具 | 实验入口 | 运行后可以核对什么 |
 | --- | --- | --- |
@@ -26,12 +89,11 @@
 | 与实验 04 相同 | [06 · 同一固件切换模型](labs/06-model-switch/README.md) · `make model-switch` | 连续运行宽度 32 和 24 的模型，逐项核对尺度和输出，从总线验证坏包零命令 |
 | 与实验 04 相同 | [07 · 融合 Q/K/V 投影](labs/07-fused-qkv/README.md) · `make fused-qkv` | 比较浮点、整数与阵列三条路径，把量化质量、冷/热首符号和完整生成放在同一份报告中 |
 | 与实验 04 相同 | [08 · 字节任务与受约束选型](labs/08-byte-transfer/README.md) · `make byte-transfer` | 重训两个宽度，先按质量和内存筛选，再用验证编号选型，在留出编号上核对逐字节生成与周期 |
+| CPU 版 PyTorch | [10 · 从随机权重训练](labs/10-language-model/README.md) · `make lab10` | 用仓库自带的英语技术语料训练两层四头模型，和只看前一个字节的 bigram 基线比较测试困惑度 |
 | Verilator、C++、RV32IM 裸机工具链 | [整机快速回归](labs/17-language-soc/README.md#快速整机回归) · `make language-ci` | 直接用冻结模型比较 CPU 与 NPU 的 768 个分数，无需重训 |
+| CPU 版 PyTorch、Verilator、C++、课程版 QEMU 构建环境；21–22 另需 Go 和 Alpine 镜像 | [21–23 · Linux、网络与 CXL](docs/EXPERIMENTS_09_23.md#复现环境) · `make lab21`、`make lab22`、`make lab23` | 21–22 在 Linux 客体中提交和传输投影；23 用 QEMU qtest 检查内存放置 |
 | 与实验 04 相同 | [24 · 整机设计取舍](labs/24-design-challenge/README.md) · `make lab24` · [25 · 中文模型研究](labs/25-model-study/README.md) · `make lab25` | 在三种提示长度上比较四个设计，再用另一份语料做三种子的等预算消融 |
 | LibreLane 3、OpenROAD、Sky130A PDK 与 HD 单元库 | [26 · 布线后对照](labs/26-postroute/README.md) · `make lab26` | 在同一版图预算下比较两块 NPU 的面积、拥塞和提取寄生后的时序 |
-
-<details>
-<summary><strong>实验环境与常用检查</strong></summary>
 
 - **软件起步**　`make test` 运行 Python 回归，部分用例需要宿主 C 编译器。`make connections` 运行梯度核对、编码、链路与助手纠错练习。[实验 01 手册](labs/01-linear257/README.md)
 - **仿真与综合**　有 Verilator 和 C++ 编译器时，可用 `make rtl-test` 核验实验 00 的单个乘加器。有 Yosys 时，`make projection-synth` 可综合实验 02 的两种局部存储配置。`make eda-doctor` 可盘点已有工具。[本地 EDA 环境](docs/LOCAL_EDA_ENVIRONMENT.md) · [重复工具的统一方案](docs/EDA_TOOLCHAIN_CONSOLIDATION.md)
@@ -40,7 +102,22 @@
 
 </details>
 
-## 实验 04 整机成绩单
+## 从需求到独立交付
+
+做毕业题时，先登记质量与内存预算、短中长三种提示下的周期预测，再在开发集上冻结方案。评审人随后给出未公布的提示和一份故障张量。提交模型、RTL 改动与推理记录，说明落选方案的代价，并找出故障的第一个错误值。作者已演练这套流程，独立真人试读待完成。[无答案任务单与评分表](labs/24-design-challenge/exam.md)
+
+想看设计评审怎样引用数据，可读三份已完成的作者实验。
+
+| 问题 | 作者实测 |
+| --- | --- |
+| 减少访存能让整机快多少？ | 四行 Q/K/V 调度加权重整字读取，使 24 字节开发提示的首步 DMA 读事务从 440,320 降至 162,304；三条新确认请求的完整周期合计从 234,755,553 降至 234,193,381，省 **0.239%**。长提示首步有 45.7% 的周期在 CPU 注意力与 KV 上。[实验 24](labs/24-design-challenge/README.md) |
+| 换一份语料，训练目标怎样选？ | 中文课程语料中，将 ASCII 目标加权后，三种子的平均验证 ASCII NLL 从 3.372 降至 3.146，整体测试 PPL 从 12.586 升至 12.912。同一量化模型在 CPU 和 NPU 均从“时序”续出“有”。[实验 25](labs/25-model-study/README.md) |
+| 胜出电路布完线还满足约束吗？ | 在 SKY130HD 的同一个 650 × 650 µm 区域内布两版 NPU，分别检查详细布线、九个角的建立与保持时序、最大电容和转换时间。保持修复后，整字读取版最差建立 / 保持余量为 **+29.064 / +0.385 ns**；仍有 50 项电容和 1,714 项转换时间违规。[实验 26 与修正结果](labs/26-postroute/README.md) |
+
+<details>
+<summary><strong>展开实验 04–23 的成绩单、计时口径与原始报告</strong></summary>
+
+### 实验 04 整机成绩单
 
 同一个实验 03 检查点、同一份计时固件，只切换前馈升维投影的执行者。两种路径都将默认提示复述为 `2 → 5 → 6 → EOS`。
 
@@ -53,7 +130,7 @@
 
 **验收**要求四次运行各核对 256 个投影整数、44 个输出分数和 4 个生成符号，CPU 路径的设备命令为零。独立读者还需换一个留出提示，先预测、再用周期解释一项设计选择。试读任务已备好，待真人执行。[独立试读任务单](labs/04-rv32-performance/reader-task.md)
 
-## 实验 05 权重预打包
+### 实验 05 权重预打包
 
 把固定权重在 PicoRV32 上提前排好，只改软件布局。默认样本中，相对现场打包，首次完整请求从 **11,658,570 拍降到 11,609,807 拍**，已包含一次准备的 **14,381 拍**。同一模型驻留时，重复请求为 **11,595,403 拍**，每次节省 **63,167 拍（0.54%）**。
 
@@ -63,7 +140,7 @@
 
 每路径每请求须核对 256 个整数、44 个输出分数和 4 个生成符号，分数相对独立参考的绝对误差须 ≤ 0.0001。另须用总线记录证实预打包缓冲在三个请求中分别写入 512、0、0 B。权重工作缓冲从 64 B 增至 512 B，净增 **448 B**；首次请求结束已净省 **48,763 拍**。另一组留出提示复现了同样的收益。[逐步成绩单、存储账本与验收](labs/05-weight-prepack/README.md) · [默认实测报告](labs/05-weight-prepack/verified-sample-0.json)
 
-## 实验 06 连续切换模型
+### 实验 06 连续切换模型
 
 同一份 RV32 固件在 PicoRV32 与 4×4 RTL 阵列上按 **A → A → B → A** 连续生成。A 的前馈宽度为 32，B 为 24。第二次 A 换了地址仍命中缓存；切回 A 时，原来的单槽已被 B 使用，必须重新打包。
 
@@ -75,7 +152,7 @@
 
 **验收**逐项检查了四个请求的 124 个量化尺度、960 个投影整数、176 个 logits 和 16 个生成符号。默认提示的 logits 最大绝对误差为 0.0000028611，低于 0.0001 门槛。四种坏包在各自请求内均为 **零设备命令、零寄存器写入、零 DMA、零缓存写入**。随后合法 A 仍能直接命中并生成。两个留出提示和空目录重建均已通过。[实验步骤与验收](labs/06-model-switch/README.md) · [默认样本](labs/06-model-switch/verified-sample-0.json) · [迁移样本](labs/06-model-switch/verified-sample-1.json)
 
-## 实验 07 融合 Q/K/V 投影
+### 实验 07 融合 Q/K/V 投影
 
 用同一份 PicoRV32 固件加载宽度 32 的 A 和宽度 24 的 B，每条路径都运行 **A → 异址 A → B → A**。下表为默认提示、模型 A 的整机周期。首符号含完整包校验和缓存选择，后三个生成步逐步计时，完整请求量到 EOS。
 
@@ -90,7 +167,7 @@
 
 **质量与验收。** A、B 量化后的困惑度分别为 2.208821、2.219613，相对仅前馈量化分别上升 0.0386%、0.0080%，两者的 64 条留出序列均全部生成正确。全留出集完成 H1 阵列重放，两个提示另完成整机逐项核对。三条路径均通过六种坏包零设备命令、零 DMA、零缓存写入及随后恢复的检查。[完整周期、步骤与验收标准](labs/07-fused-qkv/README.md) · [默认报告](labs/07-fused-qkv/verified-sample-0.json) · [第二组提示](labs/07-fused-qkv/verified-sample-1.json)
 
-## 实验 08 换一个生成任务
+### 实验 08 换一个生成任务
 
 给同一台 PicoRV32 和 4×4 阵列输入七个字节 `R152=1>`，让模型生成状态词和换行。**选宽度 32 + NPU。** 它在 64 条测试记录上全部答对。宽度 24 的模型包小 704 B，推理也更快，却在这条提示上把 `ok` 生成为 `nk`，浮点与量化均只答对 32/64。
 
@@ -100,7 +177,7 @@
 
 三条路径的前馈升维均由 NPU 执行。对 `R152=0>`，Q/K/V 从浮点迁到 NPU 后，提示计算少 **29.68%**，后两个字节合计少 **9.26%**。此时解码计算的 **64.10%** 花在 RV32 的 256 路词表投影上。若把单包预算从 42 KiB 减至 41.5 KiB，六种配置均无法同时满足质量与容量要求。[实验手册与验收](labs/08-byte-transfer/README.md) · [默认成绩单](labs/08-byte-transfer/verified-run.json) · [独立试读任务单](labs/08-byte-transfer/reader-task.md)
 
-## 从词表投影到整机部署
+### 从词表投影到整机部署
 
 | 走到哪一步 | 能亲手验证的结果 |
 | --- | --- |
@@ -111,15 +188,7 @@
 
 配齐工具后运行 `make -j1 labs09-23` 可按顺序重建验收结果。每项实验也有单独命令、验收标准与原始计时口径。[按环境选入口](docs/EXPERIMENTS_09_23.md#复现环境)
 
-## 从需求到独立交付
-
-**先选自己要验证的问题。** 想在新约束下检验独立设计能力，先取无答案任务单，登记周期预测与选择规则。想了解参考实现，则可直接看下面三份报告。正式试读仍待一位未参与开发的学习者完成。[独立毕业题与评分表](labs/24-design-challenge/exam.md)
-
-| 问题 | 作者实测 |
-| --- | --- |
-| 减少访存能让整机快多少？ | 四行 Q/K/V 调度加权重整字读取，使 24 字节开发提示的首步 DMA 读事务从 440,320 降至 162,304；三条新确认请求的完整周期合计从 234,755,553 降至 234,193,381，省 **0.239%**。长提示首步有 45.7% 的周期在 CPU 注意力与 KV 上。[实验 24](labs/24-design-challenge/README.md) |
-| 换一份语料，训练目标怎样选？ | 中文课程语料中，将 ASCII 目标加权后，三种子的平均验证 ASCII NLL 从 3.372 降至 3.146，整体测试 PPL 从 12.586 升至 12.912。同一量化模型在 CPU 和 NPU 均从“时序”续出“有”。[实验 25](labs/25-model-study/README.md) |
-| 胜出电路布完线还满足约束吗？ | 在 SKY130HD 的同一个 650 × 650 µm 区域内布两版 NPU，分别检查详细布线、九个角的建立与保持时序、最大电容和转换时间。保持修复后，整字读取版最差建立 / 保持余量为 **+29.064 / +0.385 ns**；仍有 50 项电容和 1,714 项转换时间违规。[实验 26 与修正结果](labs/26-postroute/README.md) |
+</details>
 
 ## 个人学习目标
 
@@ -139,7 +208,7 @@
 | [Build a Large Language Model (From Scratch) · Sebastian Raschka](https://www.manning.com/books/build-a-large-language-model-from-scratch) | 自己写注意力、组装 GPT、训练和生成时 | [七章与附录的项目映射](models/README.md) |
 | [MiniMind · jingyaogong/minimind](https://github.com/jingyaogong/minimind) | 已能训练小模型，准备对照完整工程的数据、训练、推理和工具调用时 | [源码导读与 NPU 接入方案](docs/MINIMIND_INTEGRATION.md) |
 
-实验 02、03 使用 AIMakeAll 自己训练的符号模型，实验 08 使用自训练的结构化字节模型。MiniMind 和下列框架提供工程对照，实验 10 的自然语言模型和实验 20 的工具选择器使用项目自己的训练配方。技术语料来自 CPython 3.11.7 的帮助主题。[语料来源与许可](labs/10-language-model/README.md) · [两层模型实现](models/byte_lm.py)[模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
+实验 02、03 使用 AIMakeAll 自己训练的符号模型，实验 08 使用自训练的结构化字节模型。MiniMind 和下列框架提供工程对照，实验 10 的自然语言模型和实验 20 的工具选择器使用项目自己的训练配方。技术语料来自 CPython 3.11.7 的帮助主题。[语料来源与许可](labs/10-language-model/README.md) · [两层模型实现](models/byte_lm.py) · [符号模型实现](models/tiny_copy.py) · [课程状态总表](docs/CURRICULUM.md#课程状态总表)
 
 实验 21–22 使用 Alpine 3.22.8 x86_64 的 virt 内核与配套网卡模块。版本、哈希与可执行入口随实验保存。[Alpine 固定镜像目录](https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/x86_64/netboot-3.22.8/) · [系统实验环境](docs/EXPERIMENTS_09_23.md#复现环境)
 
@@ -197,16 +266,6 @@
 **项目内对应课程**　[网络](docs/NETWORKING_FOUNDATIONS.md) · [I/O 与 PCIe](docs/PCIE_IO_FOUNDATIONS.md) · [CXL 与异构内存](docs/CXL_MEMORY_FOUNDATIONS.md)
 
 </details>
-
-## 知识覆盖图
-
-[![AIMakeAll 知识覆盖图，含十八个领域与实验 01–26 的连接](docs/images/knowledge-coverage-v9.png)](docs/KNOWLEDGE_COVERAGE.md)
-
-图中的十八个领域可以按问题查阅。实验主线已连到模型研究、整机性能与布线后时序。[实验 09–23](docs/EXPERIMENTS_09_23.md) · [里程碑与毕业题](docs/ROADMAP.md)
-
-按计划推进时，可以查看十组深化实验、十条补全路线和六项跨层补强各自的交付物与验收条件。[课程目录](docs/CURRICULUM.md) · [全景规划](docs/PROJECT_MAP.md) · [十条补全路线](docs/CHIP_AI_COMPLETENESS.md) · [六项跨层补强](docs/CHIP_AI_COMPLETENESS.md#六项跨层补强)
-
-想练习如何从需求反推设计，可以从实时系统、多模态或因果专题选择一个约束，带入综合实验比较候选方案。[三门专题](docs/CHIP_AI_COMPLETENESS.md#实时-多模态与因果课程) · [从需求出发的整体设计取舍](docs/CHIP_AI_COMPLETENESS.md#design-从需求出发的整体设计取舍)
 
 ## 目录与许可
 

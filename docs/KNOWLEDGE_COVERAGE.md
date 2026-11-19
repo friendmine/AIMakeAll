@@ -2,15 +2,17 @@
 
 十八个技术领域按三项个人能力取用。设计数字 NPU 时进入体系结构、存储、RTL、时序与验证；研发模型时进入数学、算法、训练与评测；部署推理时进入量化、编译、运行时与驱动。三条线通过一个已训练模型层的张量、硬件轨迹和质量结果汇合。[个人能力全景](PROJECT_MAP.md#个人如何贯通三项能力)
 
-更新：2026-11-18。V9 沿用十八个领域、十组深化实验、十条全景路线与六项跨层补强，包括 RT/MM/CAUSE 三门各三个节点及 DESIGN 综合实验四个检查点。节点复用既有实验，不合计为无重叠的实验总数；交付状态见 [课程状态总表](CURRICULUM.md#课程状态总表)。固定形状 Linear 已交付可运行教材和预算迁移任务，独立学习者验证待执行。
+更新：2026-11-19。课程沿用十八个领域、十组深化实验、十条全景路线与六项跨层补强，包括 RT/MM/CAUSE 三门各三个节点及 DESIGN 综合实验四个检查点。节点复用既有实验，不合计为无重叠的实验总数；交付状态见 [课程状态总表](CURRICULUM.md#课程状态总表)。固定形状 Linear 已交付可运行教材和预算迁移任务，独立学习者验证待执行。
 
-![AIMakeAll 知识覆盖图 V9，十八个领域、单层算术、整模型部署和系统扩展](images/knowledge-coverage-v9.png)
+[![芯片与 AI 的知识全景，展示一次生成如何连接模型、固件和阵列，以及 18 个知识领域如何落到 27 个实验](images/knowledge-atlas.png)](images/knowledge-atlas.svg)
+
+图中领域编号对应下表，实测示例旁的编号对应实验 00–26。底部注明了进阶课程、电气验证和独立试读的进度。[矢量原图](images/knowledge-atlas.svg) · [3600 像素宽 PNG](images/knowledge-atlas.png)
 
 实验 24–26 给十八个领域增加三个实测交点：体系结构、数字设计和推理部署共用一份整机周期账本；训练与评测共用同位置的留出错误样本；RTL 与物理实现共用同一份候选逻辑和时序约束。学习者迁移能力通过独立题另行登记。[步骤与验收](ROADMAP.md#从已知算例到独立设计)
 
 ## 十八个领域及阅读入口
 
-V9 上半部索引十八个知识领域，中部展示固定线性层的四条算术路径与两种分块，下部展示四个配套练习、已训练投影的芯模联合实验和实验 03 的整机生成。数字电路、设备接口与系统软件分别使用 RTL 仿真与综合、QEMU 等工具验证。[仿真优先原则](SIMULATION_FIRST.md)
+若想沿一个固定线性层逐步读图，V9 详图保留了四条算术路径、两种分块，以及连接训练、互连和生成的配套练习。[单层算术与系统扩展图](images/knowledge-coverage-v9.png) 数字电路、设备接口与系统软件分别使用 RTL 仿真与综合、QEMU 等工具验证。[仿真优先原则](SIMULATION_FIRST.md)
 
 | 图中编号 | 领域 | 主要学习内容 | 文档入口 |
 | --- | --- | --- | --- |
@@ -143,6 +145,8 @@ DD/DV/SIM 是贯穿各领域的方法课程，按 [G0–G3 门槛](ROADMAP.md) �
 首先打通一个线性层的量化与分块计划、C 运行时、QEMU/RTL 对照，再扩大到完整模型与 Agent。[整体规划](PROJECT_MAP.md) 给出依赖，[里程碑](ROADMAP.md) 给出验收顺序。
 
 ## 图片维护
+
+课程全景图的文字和图形保存在 [SVG 源文件](images/knowledge-atlas.svg) 中。修改后在仓库根目录执行 `rsvg-convert --width 3600 -o docs/images/knowledge-atlas.png docs/images/knowledge-atlas.svg`，即可重新导出高清图。
 
 V9 使用可编辑的 [SVG 图源](images/knowledge-coverage-v9.svg) 和 [生成脚本](images/render-knowledge-coverage-v9.cjs)，导出 [PNG](images/knowledge-coverage-v9.png) 供仓库展示。十八个领域按 01–18 排列，图下方显示单层闭环、原理练习及已运行的芯模与系统路线；图表示范围，不表示完成比例。脚本需 Node.js，PNG 导出另需 Sharp；它们仅用于文档图片维护，不是实验学习依赖。运行 `node docs/images/render-knowledge-coverage-v9.cjs` 生成 SVG，运行时追加 `--png` 同步导出 PNG；已有 Sharp 可通过 `NODE_PATH` 指向，不要求全局安装。
 

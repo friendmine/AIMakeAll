@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="242" viewBox="0 0 960 242" role="img" aria-labelledby="title desc">
+  <title id="title">从前馈投影的周期，到同一固件的生成结果</title>
+  <desc id="desc">实验 02 在宽度 32、5 个符号的投影上，装载与其余开销相同。局部读取从 512 拍降到 256 拍，总周期从 1216 降到 960。实验 03 让同一份 RV32 固件在 QEMU 功能设备和 PicoRV32 加 RTL 阵列上分别执行，两端都生成 2、5、6 和结束符。</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 7 7" refX="6" refY="3.5" markerWidth="7" markerHeight="7" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="m1 1 4 2.5L1 6" fill="none" stroke="#89d9c3" stroke-width="1.4"/>
+    </marker>
+  </defs>
+  <rect width="960" height="242" rx="12" fill="#112e36"/>
+  <path d="M480 21v200" stroke="#385760"/>
+  <g font-family="'PingFang SC','Noto Sans CJK SC','Microsoft YaHei',sans-serif">
+    <g fill="#a8d9cc" font-size="16" font-weight="600">
+      <text x="28" y="35">实验 02　/　前馈投影</text>
+      <text x="507" y="35">实验 03　/　整机生成</text>
+    </g>
+    <g fill="#f6faf6" font-size="26" font-weight="650">
+      <text x="27" y="74">把两次读取合到同一拍</text>
+      <text x="506" y="74">同一份固件在两端生成</text>
+    </g>
+    <g fill="#d4e3e4" font-size="16">
+      <text x="28" y="118">共享端口</text>
+      <text x="28" y="159">分库存储</text>
+    </g>
+    <!-- Both rows use one scale: one drawing unit represents four RTL cycles. -->
+    <g>
+      <path fill="#6895a8" d="M106 102h128v21H106z M106 143h128v21H106z"/>
+      <path fill="#82d6bc" d="M234 102h128v21H234z M234 143h64v21H234z"/>
+      <path fill="#edd0a0" d="M362 102h48v21h-48z M298 143h48v21h-48z"/>
+    </g>
+    <g fill="#f7faf8" font-family="ui-monospace,Menlo,monospace" font-size="17" font-weight="600">
+      <text x="416" y="118">1216</text><text x="353" y="159">960</text>
+    </g>
+    <g fill="#d4e3e4" font-size="15">
+      <rect x="28" y="192" width="10" height="10" rx="2" fill="#6895a8"/><text x="44" y="202">装载</text>
+      <rect x="98" y="192" width="10" height="10" rx="2" fill="#82d6bc"/><text x="114" y="202">局部读取</text>
+      <rect x="200" y="192" width="10" height="10" rx="2" fill="#edd0a0"/><text x="216" y="202">命令、末拍乘加与输出</text>
+    </g>
+    <g fill="none" stroke="#89d9c3" stroke-width="1.7">
+      <path d="M620 136h21v-22h28" marker-end="url(#arrow)"/>
+      <path d="M641 136v22h28" marker-end="url(#arrow)"/>
+    </g>
+    <rect x="507" y="114" width="114" height="44" rx="6" fill="#25434c" stroke="#54717a"/>
+    <g fill="#1b4a47" stroke="#507e72">
+      <rect x="675" y="96" width="249" height="35" rx="5"/>
+      <rect x="675" y="141" width="249" height="35" rx="5"/>
+    </g>
+    <g fill="#eef8f4" font-size="17">
+      <text x="564" y="142" text-anchor="middle">RV32 固件</text>
+      <text x="691" y="120">QEMU 功能设备</text>
+      <text x="691" y="165">PicoRV32 + 4×4 RTL 阵列</text>
+    </g>
+    <text x="507" y="211" fill="#d4e3e4" font-size="17">两端输出</text>
+    <text x="597" y="212" fill="#f5d9a7" font-family="ui-monospace,Menlo,monospace" font-size="23" font-weight="600">2 → 5 → 6 → EOS</text>
+  </g>
+</svg>
